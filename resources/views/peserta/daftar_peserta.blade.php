@@ -9,7 +9,8 @@
                         <h4>Daftar Peserta</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah Data</button>
+                        <button class="btn btn-success" style="margin-right: 5px" id="import-data"><i class="fa fa-upload text-white" aria-hidden="true"></i> Import Data</button>
+                        <button class="btn btn-info" id="tambah-data"><i class="fa fa-plus-square text-white" aria-hidden="true"></i> Tambah Data</button>
                     </div>
                 </div>
             </div>
@@ -167,6 +168,35 @@
                         </ul>
                         <h4 class="text-center pb-2" id="alert-title"></h4>
                         <p class="text-center" id="alert-message"></p>
+                        <button class="btn btn-secondary d-flex m-auto" type="button"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="export" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-toggle-wrapper">
+                        <ul class="modal-img">
+                            <li> <img id="alert-image" src="{{asset("own_assets/icon/download.gif")}}" width="300px"></li>
+                        </ul>
+                        <h4 class="text-center pb-2" id="alert-title">Download Template</h4>
+                        <p class="text-center" id="alert-message"><a href="{{asset('own_assets/document/peserta.xlsx')}}" class="btn btn-info" id="download-template" download><i class="fa fa-download text-white" aria-hidden="true"></i> Download Template</a></p>
+                        <p class="text-center" id="alert-message">Download dan isi data pada file template. <br>Setelah selesai, upload file tersebut ke form di bawah ini.</p>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                              <div class="mb-3">
+                                <label class="form-label" for="peserta">Upload data peserta</label>
+                                <input class="form-control input-air-primary" id="peserta" type="file" disabled>
+                              </div>
+                            </div>
+                        </div>
                         <button class="btn btn-secondary d-flex m-auto" type="button"
                             data-bs-dismiss="modal">Close</button>
                     </div>

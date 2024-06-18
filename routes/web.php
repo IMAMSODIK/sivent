@@ -37,11 +37,15 @@ Route::middleware('auth')->group(function(){
     Route::get("/rapat", [RapatController::class, 'index']);
     Route::get("/meeting", [MeetingController::class, 'index']);
     Route::get("/lembur", [LemburController::class, 'index']);
+    Route::get("/event/edit", [RapatController::class, 'edit']);
+    Route::post("/event/update", [RapatController::class, 'update']);
+    Route::post("/event/delete", [RapatController::class, 'delete']);
     Route::post("/rapat/store", [RapatController::class, 'store']);
 
     Route::get("/data-peserta", [PesertaController::class, 'index']);
     Route::get("/data-peserta/daftar-peserta", [PesertaController::class, 'daftarPeserta']);
     Route::post("/data-peserta/daftar-peserta/store", [PesertaController::class, 'store']);
+    Route::get("/data-peserta/daftar-event", [PesertaController::class, 'daftarEvent']);
 
     Route::get("/data-narasumber", [NarasumberController::class, 'index']);
     Route::get("/data-narasumber/daftar-narasumber", [NarasumberController::class, 'daftarNarasumber']);

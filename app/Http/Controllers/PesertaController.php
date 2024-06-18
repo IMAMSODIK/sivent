@@ -18,6 +18,9 @@ class PesertaController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
+            'count_rapat' => Event::where('kategori', 'rapat')->count(),
+            'count_meeting' => Event::where('kategori', 'meeting')->count(),
+            'count_lembur' => Event::where('kategori', 'lembur')->count(),
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
         ];
         return view('peserta.index', $data);
@@ -121,5 +124,32 @@ class PesertaController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
         ];
         return view('peserta.registrasi', $data);
+    }
+
+    public function daftarEvent(Request $r){
+        try{
+            $tanggalSekarang = Carbon::now();
+            
+            $data = Event::where("kategori", $r->kategori)
+                            ->where('tanggal_kegiatan', '>=', $tanggalSekarang)
+                            ->get();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Tidak ada kegiatan pada kategori ini"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

@@ -9,8 +9,8 @@
                 <div>
                     <div>
                         <a class="logo" href="#">
-                            <img class="img-fluid for-dark" src="{{ asset('assets/images/logo/logo.png') }}" alt="loginpage">
-                            <img class="img-fluid for-light" src="{{ asset('assets/images/logo/logo_dark.png') }}" alt="loginpage">
+                            <img width="150px" class="img-fluid for-dark" src="{{ asset('assets/images/logo/logo.png') }}" alt="loginpage">
+                            <img width="150px" class="img-fluid for-light" src="{{ asset('assets/images/logo/logo_dark.png') }}" alt="loginpage">
                         </a>
                     </div>
                     <div class="login-main"> 

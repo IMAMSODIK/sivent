@@ -1,0 +1,41 @@
+tambah master unit kerja pada saat tambah kegiatan(setelah lokasi kegiatan)
+    fields
+     - uraian unit kerja
+
+text kurang hitam
+
+halaman landing page menunya
+    home
+    Rapat
+        Absensi
+    meeting
+        Registrasi
+        Absensi
+        seminar Kit
+    lembur
+        Absensi
+
+section ke dua landing page
+    table daftar Event
+
+di card daftar kegiatan, tambahkan informasi label (untuk infomasi lokasi rapat)
+
+rapat dan lembur, buang no_rek dan bank
+untuk semua jenis kegiatan, tambahkan field unit kerja
+
+menu narasumber dan kamar dan seminar kit dan rundown hanya untuk meeting
+tambah master jabatan
+
+tambahkan informasi jumlah peserta pada card kegiatan
+
+field untuk narasumber
+    - asal instansi
+
+hapus field kode bank pada master bank
+rundown pilih kegiatan dulu
+
+card Dashboard
+    - today Event => nama kegiatan dan lokasi dan kategori rapat
+
+    - di grafik, statistik tingkat kehadiran dari semua jenis kegiatan
+    

@@ -46,5 +46,75 @@ $("#store").on("click", function(){
         error: function(response){
             alertModal(false, response.message);
         }
-    })  
+    })
+})
+
+function eventCards(kategori){
+    $(".done").empty();
+    $.ajax({
+        url: '/data-peserta/daftar-event',
+        method: 'GET',
+        data: {
+            'kategori': kategori
+        },
+        success: function(response){
+            if(response.status){
+                response.data.forEach(element => {
+                    let card = `
+                            <div class="col-xl-4 xl-50 col-sm-6 box-col-6">
+                                <div class="card">
+                                    <div class="blog-box blog-grid text-center product-box">
+                                    <div class="product-img"><img class="img-fluid top-radius-blog" src="../../storage/flayer/${element.flayer}" alt="" style="width: 350px; height: 350px">
+                                        <div class="product-hover">
+                                        <ul>
+                                            <li><i class="icon-link"></i></li>
+                                            <li><i class="icon-import"></i></li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                    <div class="blog-details-main">
+                                        <ul class="blog-social">
+                                        <li>${element.tanggal_kegiatan}</li>
+                                        <li>${element.waktu_kegiatan}</li>
+                                        <li>${element.lokasi_kegiatan}</li>
+                                        </ul>
+                                        <hr>
+                                        <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
+                                        <p>${element.deskripsi_kegiatan}</p>
+                                        <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    $(".done").append(card);
+                });
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+}
+
+$(".rapat").on("click", function(){
+    eventCards('rapat')
+});
+
+$(".meeting").on("click", function(){
+    eventCards('meeting')
+});
+
+$(".lembur").on("click", function(){
+    eventCards('lembur')
+});
+
+$("#import-data").on("click", function(){
+    $("#export").modal("show");
+})
+
+$("#download-template").on("click", function(){
+    $('#peserta').removeAttr('disabled');
 })

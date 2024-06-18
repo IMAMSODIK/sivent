@@ -2,7 +2,7 @@
 
     <div class="logo-wrapper">
         <a href="index.html">
-            <img class="img-fluid" src="{{ asset('assets/images/logo/logo.png') }}" alt="">
+            <img class="img-fluid" width="40px" src="{{ asset('assets/images/logo/logo.png') }}" alt="">
         </a>
         <div class="back-btn">
             <i class="fa fa-angle-left"> </i>
@@ -43,7 +43,7 @@
                     </div>
                 </li>
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="#">
+                        href="/dashboard">
                         <i class="fa fa-tachometer text-white" aria-hidden="true"></i>
                         </svg><span class="">Dashboard</span></a>
                 </li>
