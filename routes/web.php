@@ -3,12 +3,15 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NarasumberController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\RundownController;
+use App\Http\Controllers\UnitKerjaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,4 +63,13 @@ Route::middleware('auth')->group(function(){
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
     // Route::post("/registrasi-peserta/daftar-peserta/store", [NarasumberController::class, 'store']);
+
+    Route::get("/data-unit-kerja", [UnitKerjaController::class, 'index']);
+    Route::post("/data-unit-kerja/store", [UnitKerjaController::class, 'store']);
+
+    Route::get("/data-pegawai", [PegawaiController::class, 'index']);
+    Route::post("/data-pegawai/store", [PegawaiController::class, 'store']);
+
+    Route::get("/master-jabatan", [JabatanController::class, 'index']);
+    Route::post("/master-jabatan/store", [JabatanController::class, 'store']);
 });

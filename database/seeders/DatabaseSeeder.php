@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('123')
         ]);
+
+        $this->call(UnitKerjaSeeder::class);
+        $this->call(JabatanSeeder::class);
+        $this->call(EventSeeder::class);
     }
 }

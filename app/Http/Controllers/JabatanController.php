@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
-use App\Models\Bank;
+use App\Http\Requests\StoreJabatanRequest;
+use App\Http\Requests\UpdateJabatanRequest;
+use App\Models\Jabatan;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
-class BankController extends Controller
+class JabatanController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
-            'banks' => Bank::all()
+            'jabatan' => Jabatan::all()
         ];
-        return view('bank.index', $data);
+        return view('jabatan.index', $data);
     }
 
     public function store(Request $r){
@@ -28,11 +30,11 @@ class BankController extends Controller
         ];
 
         $data = [
-            'nama_bank' => $r->nama_bank,
+            'nama_jabatan' => $r->nama_jabatan,
         ];
 
         $rules = [
-            'nama_bank' => 'required|string|max:255',
+            'nama_jabatan' => 'required|string|max:255|unique:jabatans',
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -45,11 +47,12 @@ class BankController extends Controller
         }
 
         try{
-            $bank = Bank::create([
-                'nama_bank' => $r->nama_bank,
+            $jabatan = Jabatan::create([
+                'jabatan_id' => Str::random(8),
+                'nama_jabatan' => $r->nama_jabatan,
             ]);
 
-            if($bank){
+            if($jabatan){
                 return response()->json([
                     'status' => true
                 ]);

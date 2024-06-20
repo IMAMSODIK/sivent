@@ -166,7 +166,7 @@
                         <div class="categories pt-0 pb-0">
                           <div class="learning-header"><span class="f-w-600">Development</span></div>
                           <ul>
-                            <li><a href="#">Frontend Development</a><span class="badge badge-primary pull-right">48</span></li>
+                          <li><a href="#">Frontend Development</a><span class="badge badge-primary pull-right">48</span></li>
                             <li><a href="#">Backend Development</a><span class="badge badge-primary pull-right">19</span></li>
                           </ul>
                         </div>
@@ -237,6 +237,18 @@
                 <div class="row">
                   <div class="col">
                     <div class="mb-3">
+                      <label class="form-label" for="unit_kerja">Unit Kerja</label>
+                      <select class="form-control input-air-primary" id="unit_kerja">
+                          @foreach ($unit_kerja as $u)
+                              <option value="{{$u->id}}">{{$u->nama_unit}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
                       <label class="form-label" for="lokasi_kegiatan">Lokasi Kegiatan</label>
                       <input class="form-control input-air-primary" id="lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
                     </div>
@@ -248,10 +260,10 @@
                       <label class="form-label" for="exampleInputPassword16">Waktu Kegiatan</label>
                       <div class="row">
                         <div class="col-sm-6">
-                          <input class="form-control digits" id="tanggal_kegiatan" type="date" value="2018-01-01">
+                          <input class="form-control digits" id="tanggal_kegiatan" type="date">
                         </div>
                         <div class="col-sm-6">
-                          <input class="form-control digits" id="waktu_kegiatan" type="time" value="21:45:00">
+                          <input class="form-control digits" id="waktu_kegiatan" type="time" value="00:00:00">
                         </div>
                       </div>
                     </div>

@@ -32,6 +32,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/vendors/prism.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/vendors/fullcalender.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
 <!-- Plugins css Ends-->
 <!-- Bootstrap css-->
 <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">

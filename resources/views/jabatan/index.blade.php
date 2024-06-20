@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>Daftar Bank</h4>
+                        <h4>Master Jabatan</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-success" id="tambah-data">Tambah Data</button>
@@ -26,18 +26,16 @@
                                     <thead>
                                         <tr>
                                             <th>No. </th>
-                                            <th>Kode Bank</th>
-                                            <th>Nama Bank</th>
+                                            <th>Jabatan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $index = 0; ?>
-                                        @foreach ($banks as $b)
+                                        @foreach ($jabatan as $b)
                                         <tr>
                                             <td>{{++$index}}</td>
-                                            <td>{{$b->kode_bank}}</td>
-                                            <td>{{$b->nama_bank}}</td>
+                                            <td>{{$b->nama_jabatan}}</td>
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit"> <a href="#"><i
@@ -62,7 +60,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Bank</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Jabatan</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -72,8 +70,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama_bank">Nama Bank</label>
-                                            <input class="form-control input-air-primary" id="nama_bank"
+                                            <label class="form-label" for="nama_jabatan">Nama Jabatan</label>
+                                            <input class="form-control input-air-primary" id="nama_jabatan"
                                                 type="text" placeholder="Nama Bank">
                                         </div>
                                     </div>
@@ -111,5 +109,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/bank.js')}}"></script>
+    <script src="{{asset('own_assets/js/jabatan.js')}}"></script>
 @endsection

@@ -21,10 +21,14 @@ $("#store").on("click", function(){
     let formData = new FormData();
 
     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
-    formData.append("nama_bank", $("#nama_bank").val());
+    formData.append("nama", $("#nama").val());
+    formData.append("nip", $("#nip").val());
+    formData.append("jenis_kelamin", $("#jenis_kelamin").val());
+    formData.append("golongan", $("#golongan").val());
+    formData.append("jabatan", $("#jabatan").val());
 
     $.ajax({
-        url: '/data-bank/store',
+        url: '/data-pegawai/store',
         method: 'POST',
         processData: false,
         contentType: false, 

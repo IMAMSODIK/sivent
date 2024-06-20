@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pesertas', function (Blueprint $table) {
+        Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
             $table->string('peserta_id');
-            $table->foreignId('event_id')->nullable();
             $table->string('nama');
             $table->string('nip')->unique();
             $table->string('golongan');
             $table->string('jabatan');
-            $table->string('bank')->nullable();
-            $table->string('no_rek')->unique()->nullable();
             $table->string('jenis_kelamin');
-            $table->boolean('is_narsum');
-            $table->string('asal_instansi')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesertas');
+        Schema::dropIfExists('pegawais');
     }
 };

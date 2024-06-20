@@ -24,6 +24,7 @@ $("#store").on("click", function(){
     formData.append("id_kegiatan", $("#id_kegiatan").val());
     formData.append("nama", $("#nama").val());
     formData.append("nip", $("#nip").val());
+    formData.append("asal_instansi", $("#asal_instansi").val());
     formData.append("golongan", $("#golongan").val());
     formData.append("jabatan", $("#jabatan").val());
     formData.append("bank", $("#bank").val());

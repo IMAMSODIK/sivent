@@ -9658,25 +9658,25 @@ textarea {
   border-color: #E6E9EB;
   background-color: #fff;
   font-size: 14px;
-  color: #898989;
+  color: #4b4b4b;
   padding: 10px;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .theme-form input[type=text]::-webkit-input-placeholder, .theme-form input[type=email]::-webkit-input-placeholder, .theme-form input[type=search]::-webkit-input-placeholder, .theme-form input[type=password]::-webkit-input-placeholder, .theme-form input[type=number]::-webkit-input-placeholder, .theme-form input[type=tel]::-webkit-input-placeholder, .theme-form input[type=date]::-webkit-input-placeholder, .theme-form input[type=datetime-local]::-webkit-input-placeholder, .theme-form input[type=time]::-webkit-input-placeholder, .theme-form input[type=datetime-local]::-webkit-input-placeholder, .theme-form input[type=month]::-webkit-input-placeholder, .theme-form input[type=week]::-webkit-input-placeholder, .theme-form input[type=url]::-webkit-input-placeholder, .theme-form input[type=file]::-webkit-input-placeholder, .theme-form textarea::-webkit-input-placeholder, .theme-form select::-webkit-input-placeholder {
-  color: #898989;
+  color: #4b4b4b;
   font-weight: 500;
 }
 .theme-form input[type=text]::-moz-placeholder, .theme-form input[type=email]::-moz-placeholder, .theme-form input[type=search]::-moz-placeholder, .theme-form input[type=password]::-moz-placeholder, .theme-form input[type=number]::-moz-placeholder, .theme-form input[type=tel]::-moz-placeholder, .theme-form input[type=date]::-moz-placeholder, .theme-form input[type=datetime-local]::-moz-placeholder, .theme-form input[type=time]::-moz-placeholder, .theme-form input[type=datetime-local]::-moz-placeholder, .theme-form input[type=month]::-moz-placeholder, .theme-form input[type=week]::-moz-placeholder, .theme-form input[type=url]::-moz-placeholder, .theme-form input[type=file]::-moz-placeholder, .theme-form textarea::-moz-placeholder, .theme-form select::-moz-placeholder {
-  color: #898989;
+  color: #4b4b4b;
   font-weight: 500;
 }
 .theme-form input[type=text]:-ms-input-placeholder, .theme-form input[type=email]:-ms-input-placeholder, .theme-form input[type=search]:-ms-input-placeholder, .theme-form input[type=password]:-ms-input-placeholder, .theme-form input[type=number]:-ms-input-placeholder, .theme-form input[type=tel]:-ms-input-placeholder, .theme-form input[type=date]:-ms-input-placeholder, .theme-form input[type=datetime-local]:-ms-input-placeholder, .theme-form input[type=time]:-ms-input-placeholder, .theme-form input[type=datetime-local]:-ms-input-placeholder, .theme-form input[type=month]:-ms-input-placeholder, .theme-form input[type=week]:-ms-input-placeholder, .theme-form input[type=url]:-ms-input-placeholder, .theme-form input[type=file]:-ms-input-placeholder, .theme-form textarea:-ms-input-placeholder, .theme-form select:-ms-input-placeholder {
-  color: #898989;
+  color: #4b4b4b;
   font-weight: 500;
 }
 .theme-form input[type=text]::-ms-input-placeholder, .theme-form input[type=email]::-ms-input-placeholder, .theme-form input[type=search]::-ms-input-placeholder, .theme-form input[type=password]::-ms-input-placeholder, .theme-form input[type=number]::-ms-input-placeholder, .theme-form input[type=tel]::-ms-input-placeholder, .theme-form input[type=date]::-ms-input-placeholder, .theme-form input[type=datetime-local]::-ms-input-placeholder, .theme-form input[type=time]::-ms-input-placeholder, .theme-form input[type=datetime-local]::-ms-input-placeholder, .theme-form input[type=month]::-ms-input-placeholder, .theme-form input[type=week]::-ms-input-placeholder, .theme-form input[type=url]::-ms-input-placeholder, .theme-form input[type=file]::-ms-input-placeholder, .theme-form textarea::-ms-input-placeholder, .theme-form select::-ms-input-placeholder {
-  color: #898989;
+  color: #4b4b4b;
   font-weight: 500;
 }
 .theme-form input[type=text]::placeholder,
@@ -9695,7 +9695,7 @@ textarea {
 .theme-form input[type=file]::placeholder,
 .theme-form textarea::placeholder,
 .theme-form select::placeholder {
-  color: #898989;
+  color: #4b4b4b;
   font-weight: 500;
 }
 .theme-form input[type=text]::-webkit-input-placeholder,
@@ -10440,7 +10440,7 @@ textarea {
 }
 
 .icon-first i {
-  color: #898989;
+  color: #4b4b4b;
 }
 .icon-first h6 {
   display: none;

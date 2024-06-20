@@ -65,33 +65,27 @@
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="/data-peserta">
-                        <i class="fa fa-users text-white" aria-hidden="true"></i>
-                        </svg><span class="">Data Peserta</span></a>
-                </li>
-
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="/data-narasumber">
-                        <i class="fa fa-users text-white" aria-hidden="true"></i>
-                        </svg><span class="">Data Narasumber</span></a>
-                </li>
-
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
                         href="/data-bank">
                         <i class="fa fa-bank text-white"></i>
                         </svg><span class="">Data Bank</span></a>
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="#">
-                        <i class="fa fa-bed text-white" aria-hidden="true"></i>
-                        </svg><span class="">Data Kamar</span></a>
+                    href="/data-unit-kerja">
+                    <i class="fa fa-building text-white"></i>
+                    </svg><span class="">Unit Kerja</span></a>
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="/data-rundown">
-                        <i class="fa fa-sitemap text-white" aria-hidden="true"></i>
-                        </svg><span class="">Data Rundown</span></a>
+                    href="/data-pegawai">
+                    <i class="fa fa-users text-white"></i>
+                    </svg><span class="">Data Pegawai</span></a>
+                </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="/master-jabatan">
+                    <i class="fa fa-briefcase text-white"></i>
+                    </svg><span class="">Master Jabatan</span></a>
                 </li>
 
                 <li class="sidebar-main-title">
@@ -101,15 +95,27 @@
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                        href="/registrasi-peserta">
-                        <i class="fa fa-sign-in text-white" aria-hidden="true"></i>
-                        </svg><span class="">Registrasi Peserta</span></a>
+                    href="/data-peserta">
+                    <i class="fa fa-users text-white" aria-hidden="true"></i>
+                    </svg><span class="">Data Peserta</span></a>
                 </li>
 
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                        class="sidebar-link sidebar-title link-nav" href="#">
-                        <i class="fa fa-pencil-square-o text-white" aria-hidden="true"></i>
-                        </svg><span class="">Absensi Peserta</span></a>
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                        href="/data-narasumber">
+                        <i class="fa fa-users text-white" aria-hidden="true"></i>
+                        </svg><span class="">Data Narasumber</span></a>
+                </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="#">
+                    <i class="fa fa-bed text-white" aria-hidden="true"></i>
+                    </svg><span class="">Data Kamar</span></a>
+                </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                        href="/data-rundown">
+                        <i class="fa fa-sitemap text-white" aria-hidden="true"></i>
+                        </svg><span class="">Data Rundown</span></a>
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
@@ -134,6 +140,24 @@
                         class="sidebar-link sidebar-title link-nav" href="#">
                         <i class="fa fa-picture-o text-white" aria-hidden="true"></i>
                         </svg><span class="">Foto Event</span></a>
+                </li>
+
+                <li class="sidebar-main-title">
+                    <div>
+                        <h6 class="">Registrasi & Absensi</h6>
+                    </div>
+                </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="/registrasi-peserta">
+                    <i class="fa fa-sign-in text-white" aria-hidden="true"></i>
+                    </svg><span class="">Registrasi Peserta</span></a>
+                </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
+                        class="sidebar-link sidebar-title link-nav" href="#">
+                        <i class="fa fa-pencil-square-o text-white" aria-hidden="true"></i>
+                        </svg><span class="">Absensi Peserta</span></a>
                 </li>
 
             </ul>

@@ -27,6 +27,7 @@
                                         <tr>
                                             <th>Nama Narasumber</th>
                                             <th>Jenis Kelamin</th>
+                                            <th>Asal Instansi</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
@@ -38,6 +39,7 @@
                                         <tr>
                                             <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
                                             <td>{{$p->jenis_kelamin}}</td>
+                                            <td>{{$p->asal_instansi}}</td>
                                             <td>{{$p->golongan}}</td>
                                             <td>{{$p->jabatan}}</td>
                                             <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
@@ -88,6 +90,15 @@
                                             <label class="form-label" for="nip">NIP Narasumber</label>
                                             <input class="form-control input-air-primary" id="nip"
                                                 type="text" placeholder="NIP Narasumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="asal_instansi">Asal Instansi</label>
+                                            <input class="form-control input-air-primary" id="asal_instansi"
+                                                type="text" placeholder="Asal Instansi">
                                         </div>
                                     </div>
                                 </div>

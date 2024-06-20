@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
-use App\Models\Bank;
+use App\Http\Requests\StorePegawaiRequest;
+use App\Http\Requests\UpdatePegawaiRequest;
+use App\Models\Pegawai;
+use App\Models\Peserta;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
-class BankController extends Controller
+class PegawaiController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
-            'banks' => Bank::all()
+            'pegawai' => Pegawai::all()
         ];
-        return view('bank.index', $data);
+        return view('pegawai.index', $data);
     }
 
     public function store(Request $r){
@@ -28,11 +31,19 @@ class BankController extends Controller
         ];
 
         $data = [
-            'nama_bank' => $r->nama_bank,
+            'nama' => $r->nama,
+            'nip' => $r->nip,
+            'golongan' => $r->golongan,
+            'jabatan' => $r->jabatan,
+            'jenis_kelamin' => $r->jenis_kelamin,
         ];
 
         $rules = [
-            'nama_bank' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'nip' => 'required|string|max:255',
+            'golongan' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|string|max:255',
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -45,11 +56,16 @@ class BankController extends Controller
         }
 
         try{
-            $bank = Bank::create([
-                'nama_bank' => $r->nama_bank,
+            $peserta = Pegawai::create([
+                'peserta_id' => Str::random(8),
+                'nama' => $r->nama,
+                'nip' => $r->nip,
+                'golongan' => $r->golongan,
+                'jabatan' => $r->jabatan,
+                'jenis_kelamin' => $r->jenis_kelamin
             ]);
 
-            if($bank){
+            if($peserta){
                 return response()->json([
                     'status' => true
                 ]);

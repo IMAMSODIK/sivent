@@ -1,5 +1,19 @@
 const FLAYER = '../../storage/flayer/'
 
+function today(){
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, '0'); // Menambahkan 1 karena bulan dimulai dari 0
+    let day = String(today.getDate()).padStart(2, '0');
+
+    let formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+}
+
+$(document).on('ready', function(){
+    $("#tanggal_kegiatan").val(today());
+})
+
 function alertModal(status, message = null){
     if(status){
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
@@ -30,6 +44,7 @@ $("#store").on("click", function(){
     formData.append("deskripsi_kegiatan", $("#deskripsi_kegiatan").val());
     formData.append("no_surat", $("#no_surat").val());
     formData.append("kategori", $("#kategori").val());
+    formData.append("unit_kerja", $("#unit_kerja").val());
     formData.append('flayer', $("#flayer")[0].files[0]);
 
     $.ajax({

@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
-use App\Models\Bank;
+use App\Http\Requests\StoreUnitKerjaRequest;
+use App\Http\Requests\UpdateUnitKerjaRequest;
+use App\Models\UnitKerja;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BankController extends Controller
+class UnitKerjaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
-            'banks' => Bank::all()
+            'unit_kerja' => UnitKerja::all()
         ];
-        return view('bank.index', $data);
+        return view('unit_kerja.index', $data);
     }
 
     public function store(Request $r){
@@ -28,11 +29,13 @@ class BankController extends Controller
         ];
 
         $data = [
-            'nama_bank' => $r->nama_bank,
+            'nama_unit' => $r->nama_unit,
+            'kode_unit' => $r->kode_unit
         ];
 
         $rules = [
-            'nama_bank' => 'required|string|max:255',
+            'nama_unit' => 'required|string|max:255',
+            'kode_unit' => 'required|string|max:255|unique:unit_kerjas',
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -45,11 +48,12 @@ class BankController extends Controller
         }
 
         try{
-            $bank = Bank::create([
-                'nama_bank' => $r->nama_bank,
+            $unit_kerja = UnitKerja::create([
+                'kode_unit' => $r->kode_unit,
+                'nama_unit' => $r->nama_unit,
             ]);
 
-            if($bank){
+            if($unit_kerja){
                 return response()->json([
                     'status' => true
                 ]);

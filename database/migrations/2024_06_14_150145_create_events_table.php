@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('event_id');
             $table->string('nama_kegiatan');
+            $table->foreignId('unit_kerja_id');
             $table->string('lokasi_kegiatan');
             $table->date('tanggal_kegiatan');
             $table->string('waktu_kegiatan');

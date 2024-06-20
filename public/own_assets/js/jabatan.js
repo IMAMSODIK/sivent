@@ -21,10 +21,10 @@ $("#store").on("click", function(){
     let formData = new FormData();
 
     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
-    formData.append("nama_bank", $("#nama_bank").val());
+    formData.append("nama_jabatan", $("#nama_jabatan").val());
 
     $.ajax({
-        url: '/data-bank/store',
+        url: '/master-jabatan/store',
         method: 'POST',
         processData: false,
         contentType: false, 

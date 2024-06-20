@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\UnitKerja;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,7 @@ class RapatController extends Controller
         $data = [
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'rapat')->get(),
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get()
         ];
         return view('event.rapat', $data);
     }
@@ -53,7 +55,8 @@ class RapatController extends Controller
             'tanggal_kegiatan' => $r->tanggal_kegiatan,
             'waktu_kegiatan' => $r->waktu_kegiatan,
             'deskripsi_kegiatan' => $r->deskripsi_kegiatan,
-            'no_surat' => $r->no_surat
+            'no_surat' => $r->no_surat,
+            'unit_kerja' => $r->unit_kerja
         ];
 
         $rules = [
@@ -63,6 +66,7 @@ class RapatController extends Controller
             'waktu_kegiatan' => 'required|string|max:255',
             'deskripsi_kegiatan' => 'required|string',
             'no_surat' => 'required|string|max:255|unique:events',
+            'unit_kerja' => 'required'
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -84,7 +88,8 @@ class RapatController extends Controller
                 'deskripsi_kegiatan' => $r->deskripsi_kegiatan,
                 'no_surat' => $r->no_surat,
                 'flayer' => $flayer,
-                'kategori' => $r->kategori
+                'kategori' => $r->kategori,
+                'unit_kerja_id' => $r->unit_kerja
             ]);
 
             if($rapat){
@@ -177,7 +182,8 @@ class RapatController extends Controller
             'tanggal_kegiatan' => $r->tanggal_kegiatan,
             'waktu_kegiatan' => $r->waktu_kegiatan,
             'deskripsi_kegiatan' => $r->deskripsi_kegiatan,
-            'no_surat' => $r->no_surat
+            'no_surat' => $r->no_surat,
+            'unit_kerja' => $r->unit_kerja
         ];
 
         $rules = [
@@ -187,6 +193,7 @@ class RapatController extends Controller
             'waktu_kegiatan' => 'required|string|max:255',
             'deskripsi_kegiatan' => 'required|string',
             'no_surat' => 'required|string|max:255|unique:events,no_surat,'.$event->id,
+            'unit_kerja' => $r->unit_kerja
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -207,6 +214,7 @@ class RapatController extends Controller
             $event->no_surat = $r->no_surat;
             $event->kategori = $r->kategori;
             $event->flayer = $flayer;
+            $event->unit_kerja_id = $r->unit_kerja;
             $event->save();
 
             if($event){

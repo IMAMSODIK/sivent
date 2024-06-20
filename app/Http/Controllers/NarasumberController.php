@@ -45,6 +45,7 @@ class NarasumberController extends Controller
         $data = [
             'nama' => $r->nama,
             'nip' => $r->nip,
+            'asal_instansi' => $r->asal_instansi,
             'golongan' => $r->golongan,
             'jabatan' => $r->jabatan,
             'bank' => $r->bank,
@@ -60,6 +61,7 @@ class NarasumberController extends Controller
             'bank' => 'required|string',
             'no_rek' => 'required|string|max:255|unique:pesertas',
             'jenis_kelamin' => 'required|string|max:255',
+            'asal_instansi' => 'string|max:255',
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -84,7 +86,8 @@ class NarasumberController extends Controller
                     'bank' => $r->bank,
                     'no_rek' => $r->no_rek,
                     'jenis_kelamin' => $r->jenis_kelamin,
-                    'is_narsum' => 1
+                    'is_narsum' => 1,
+                    'asal_instansi' => $r->asal_instansi
                 ]);
     
                 if($narasumber){

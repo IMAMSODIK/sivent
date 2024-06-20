@@ -1,8 +1,11 @@
 tambah master unit kerja pada saat tambah kegiatan(setelah lokasi kegiatan)
     fields
-     - uraian unit kerja
+     - uraian unit kerja (done)
 
-text kurang hitam
+text kurang hitam (done)
+untuk semua jenis kegiatan, tambahkan field unit kerja (Done)
+rapat dan lembur, buang no_rek dan bank
+tambah master data pegawai => untuk rapat dan lembur karna memang sudah pasti dari pegawai uin (done)
 
 halaman landing page menunya
     home
@@ -20,10 +23,8 @@ section ke dua landing page
 
 di card daftar kegiatan, tambahkan informasi label (untuk infomasi lokasi rapat)
 
-rapat dan lembur, buang no_rek dan bank
-untuk semua jenis kegiatan, tambahkan field unit kerja
-
 menu narasumber dan kamar dan seminar kit dan rundown hanya untuk meeting
+
 tambah master jabatan
 
 tambahkan informasi jumlah peserta pada card kegiatan
@@ -38,4 +39,3 @@ card Dashboard
     - today Event => nama kegiatan dan lokasi dan kategori rapat
 
     - di grafik, statistik tingkat kehadiran dari semua jenis kegiatan
-    
