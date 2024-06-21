@@ -46,3 +46,86 @@ $("#store").on("click", function(){
         }
     })
 })
+
+$(".edit").on("click", function(){
+    let id = $(this).data('id');
+
+    $.ajax({
+        url: '/data-bank/edit',
+        method: 'GET',
+        data: {
+            'id': id
+        },
+        success: function(response){
+            if(response.status){
+                $("#id").val(response.data.id);
+                $("#edit_nama_bank").val(response.data.nama_bank);
+
+                $("#edit-data-modal").modal("show");
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$("#update").on("click", function(){
+    $("#edit-data-modal").modal("hide");
+    $.ajax({
+        url: '/data-bank/update',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),
+            'id': $("#id").val(),
+            'nama_bank': $("#edit_nama_bank").val()
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil mengubah data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                $('.modal-alert').on('hidden.bs.modal', function () {
+                    $("#edit-data-modal").modal("show");
+                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$(".delete").on("click", function(){
+    $("#delete-confirmed").attr("data-id", $(this).data('id'));
+    $("#confirm").modal("show");
+})
+
+$("#delete-confirmed").on("click", function(){
+    $.ajax({
+        url: '/data-bank/delete',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),
+            'id': $(this).data("id"),
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil menghapus data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})

@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(JabatanSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(BankSeeder::class);
+        $this->call(PegawaiSeeder::class);
     }
 }

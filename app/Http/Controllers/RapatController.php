@@ -263,7 +263,11 @@ class RapatController extends Controller
     public function filter(Request $r){
         $today = Carbon::today();
         try{
-            $data = Event::where('kategori', $r->kategori);
+            if($r->kategori){
+                $data = Event::where('kategori', $r->kategori);
+            }else{
+                $data = Event::select('*');
+            }
 
             if($r->unit_kerja){
                 $data = $data->whereIn('unit_kerja_id', $r->unit_kerja);

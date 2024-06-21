@@ -119,7 +119,7 @@
                             <div class="learning-header"><span class="f-w-600">Unit Kerja</span></div>
                             @foreach ($unit_kerja as $u)
                               <label class="d-block" for="chk-ani">
-                                <input class="unit_kerja_filter" id="chk-ani" type="checkbox" value="{{$u->id}}">
+                                <input class="unit_kerja_filter checkbox_animated" id="chk-ani" type="checkbox" value="{{$u->id}}">
                                 {{$u->nama_unit}}
                               </label>
                             @endforeach
@@ -127,15 +127,15 @@
                           <div class="checkbox-animated mt-0">
                             <div class="learning-header"><span class="f-w-600">Status Event</span></div>
                             <label class="d-block" for="chk-ani3">
-                              <input class="status_event_filter" name="status_event_filter" id="chk-ani3" type="radio" value="1">
+                              <input class="status_event_filter radio_animated" name="status_event_filter" id="chk-ani3" type="radio" value="1">
                               Hari ini
                             </label>
                             <label class="d-block" for="chk-ani4">
-                              <input class="status_event_filter" name="status_event_filter" id="chk-ani4" type="radio" value="2">
+                              <input class="status_event_filter radio_animated" name="status_event_filter" id="chk-ani4" type="radio" value="2">
                               Event Mendatang
                             </label>
                             <label class="d-block" for="chk-ani5">
-                              <input class="status_event_filter" name="status_event_filter" id="chk-ani5" type="radio" value="3">
+                              <input class="status_event_filter radio_animated" name="status_event_filter" id="chk-ani5" type="radio" value="3">
                               Event Selesai
                             </label>
                           </div>

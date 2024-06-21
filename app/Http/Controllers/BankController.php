@@ -66,4 +66,99 @@ class BankController extends Controller
             ]);
         }
     }
+
+    public function edit(Request $r){
+        try{
+            $data = Bank::where('id', $r->id)->first();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(Request $r){
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.'
+        ];
+
+        $data = [
+            'nama_bank' => $r->nama_bank,
+        ];
+
+        $rules = [
+            'nama_bank' => 'required|string|max:255',
+        ];
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
+
+        try{
+            $data = Bank::where("id", $r->id)->first();
+
+            if($data){
+                $data->nama_bank = $r->nama_bank;
+                $data->save();
+
+                return response()->json([
+                    'status' => true
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal mengubah data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete(Request $r){
+        try{
+            $data = Bank::where('id', $r->id)->first();
+
+            if($data){
+                $data->delete();
+
+                return response()->json([
+                    'status' => true
+                ]);   
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }

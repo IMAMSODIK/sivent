@@ -25,28 +25,28 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th>No. </th>
-                                            <th>Peserta</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Golongan</th>
-                                            <th>Jabatan</th>
-                                            <th>Action</th>
+                                            <th style="width: 5%; font-size: 18px" class="text-center">No. </th>
+                                            <th style="width: 40%; font-size: 18px" class="text-center">Peserta</th>
+                                            <th style="width: 10%; font-size: 18px" class="text-center">Jenis Kelamin</th>
+                                            <th style="width: 5%; font-size: 18px" class="text-center">Golongan</th>
+                                            <th style="width: 30%; font-size: 18px" class="text-center">Jabatan</th>
+                                            <th style="width: 10%; font-size: 18px" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $index = 0; ?>
                                         @foreach ($pegawai as $b)
                                         <tr>
-                                            <td>{{++$index}}</td>
-                                            <td>{{$b->nama}} <br><small>{{$b->nip}}</small></td>
-                                            <td>{{$b->jenis_kelamin}}</td>
-                                            <td>{{$b->golongan}}</td>
-                                            <td>{{$b->jabatan}}</td>
-                                            <td>
+                                            <td style="font-size: 18px" class="text-center">{{++$index}}</td>
+                                            <td style="font-size: 18px">{{$b->nama}} <br><small>{{$b->nip}}</small></td>
+                                            <td style="font-size: 18px" class="text-center">{{$b->jenis_kelamin}}</td>
+                                            <td style="font-size: 18px" class="text-center">{{$b->golongan}}</td>
+                                            <td style="font-size: 18px">{{$b->jabatan->nama_jabatan}}</td>
+                                            <td class="text-center">
                                                 <ul class="action">
-                                                    <li class="edit"> <a href="#"><i
-                                                                class="icon-pencil-alt"></i></a></li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                    <li class="edit" data-id="{{$b->id}}"> <a href="#"><i
+                                                                class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
+                                                    <li class="delete" data-id="{{$b->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -118,8 +118,11 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="jabatan">Jabatan Peserta</label>
-                                            <input class="form-control input-air-primary" id="jabatan"
-                                                type="text" placeholder="Jabatan Peserta">
+                                            <select class="form-control input-air-primary" id="jabatan">
+                                                @foreach ($jabatan as $j)
+                                                    <option value="{{$j->id}}">{{$j->nama_jabatan}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +138,85 @@
         </div>
     </div>
 
-    <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
+    <div class="modal fade bd-example-modal-lg" id="edit-data-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myExtraLargeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Pegawai</h4>
+                    <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body dark-modal">
+                    <div class="card">
+                        <form class="form theme-form dark-inputs">
+                            <input type="hidden" name="" id="id">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_nama">Nama Pegawai</label>
+                                            <input class="form-control input-air-primary" id="edit_nama"
+                                                type="text" placeholder="Nama Pegawai">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_nip">NIP Pegawai</label>
+                                            <input class="form-control input-air-primary" id="edit_nip"
+                                                type="text" placeholder="NIP Pegawai">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_jenis_kelamin">Jenis Kelamin</label>
+                                            <select name="" class="form-control input-air-primary" id="edit_jenis_kelamin">
+                                                <option value="Laki-laki">Laki-laki</option>
+                                                <option value="Perempuan">Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_golongan">Golongan</label>
+                                            <select name="" class="form-control input-air-primary" id="edit_golongan">
+                                                <option value="I">I</option>
+                                                <option value="II">II</option>
+                                                <option value="III">III</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_jabatan">Jabatan Peserta</label>
+                                            <select class="form-control input-air-primary" id="edit_jabatan">
+                                                @foreach ($jabatan as $j)
+                                                    <option value="{{$j->id}}">{{$j->nama_jabatan}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <button class="btn btn-primary me-3" type="button" id="update">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -151,6 +232,30 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body"> 
+              <div class="modal-toggle-wrapper">  
+                <ul class="modal-img">
+                  <li> <img id="alert-image" src="{{asset('own_assets/icon/confirm.gif')}}" width="300px"></li>
+                </ul>
+                <h4 class="text-center pb-2" id="alert-title">Hapus Data</h4>
+                <p class="text-center" id="alert-message">Apakah anda yakin ingin menghapus data?</p>
+                <div class="row">
+                  <div class="col-md-6 d-flex justify-content-end">
+                    <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+                  <div class="col-md-6 d-flex justify-content-start">
+                    <button class="btn btn-danger" id="delete-confirmed" type="button" data-bs-dismiss="modal">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 @endsection

@@ -57,6 +57,9 @@ Route::middleware('auth')->group(function(){
 
     Route::get("/data-bank", [BankController::class, 'index']);
     Route::post("/data-bank/store", [BankController::class, 'store']);
+    Route::get("/data-bank/edit", [BankController::class, 'edit']);
+    Route::post("/data-bank/update", [BankController::class, 'update']);
+    Route::post("/data-bank/delete", [BankController::class, 'delete']);
 
     Route::get("/data-rundown", [RundownController::class, 'index']);
     Route::post("/data-rundown/store", [RundownController::class, 'store']);
@@ -67,10 +70,19 @@ Route::middleware('auth')->group(function(){
 
     Route::get("/data-unit-kerja", [UnitKerjaController::class, 'index']);
     Route::post("/data-unit-kerja/store", [UnitKerjaController::class, 'store']);
+    Route::get("/data-unit-kerja/edit", [UnitKerjaController::class, 'edit']);
+    Route::post("/data-unit-kerja/update", [UnitKerjaController::class, 'update']);
+    Route::post("/data-unit-kerja/delete", [UnitKerjaController::class, 'delete']);
 
     Route::get("/data-pegawai", [PegawaiController::class, 'index']);
     Route::post("/data-pegawai/store", [PegawaiController::class, 'store']);
+    Route::get("/data-pegawai/edit", [PegawaiController::class, 'edit']);
+    Route::post("/data-pegawai/update", [PegawaiController::class, 'update']);
+    Route::post("/data-pegawai/delete", [PegawaiController::class, 'delete']);
 
     Route::get("/master-jabatan", [JabatanController::class, 'index']);
     Route::post("/master-jabatan/store", [JabatanController::class, 'store']);
+    Route::get("/data-jabatan/edit", [JabatanController::class, 'edit']);
+    Route::post("/data-jabatan/update", [JabatanController::class, 'update']);
+    Route::post("/data-jabatan/delete", [JabatanController::class, 'delete']);
 });

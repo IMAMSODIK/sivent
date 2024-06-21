@@ -23,7 +23,6 @@ class JabatanController extends Controller
     public function store(Request $r){
         $messages = [
             'required' => 'Kolom :attribute harus diisi.',
-            'numeric' => 'Kolom :attribute harus berupa angka.',
             'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
             'string' => 'Kolom :attribute harus berupa teks.',
             'unique' => 'Kolom :attribute sudah digunakan.'
@@ -61,6 +60,102 @@ class JabatanController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Gagal menambahkan data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function edit(Request $r){
+        try{
+            $data = Jabatan::where('id', $r->id)->first();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(Request $r){
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.',
+            'unique' => 'Kolom :attribute sudah digunakan.'
+        ];
+
+        $data = [
+            'nama_jabatan' => $r->nama_jabatan,
+        ];
+
+        $rules = [
+            'nama_jabatan' => 'required|string|max:255|unique:jabatans,nama_jabatan,' . $r->id,
+        ];
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
+
+        try{
+            $data = Jabatan::where("id", $r->id)->first();
+
+            if($data){
+                $data->nama_jabatan = $r->nama_jabatan;
+                $data->save();
+
+                return response()->json([
+                    'status' => true
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal mengubah data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete(Request $r){
+        try{
+            $data = Jabatan::where('id', $r->id)->first();
+
+            if($data){
+                $data->delete();
+
+                return response()->json([
+                    'status' => true
+                ]);   
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
             ]);
         }catch(Exception $e){
             return response()->json([

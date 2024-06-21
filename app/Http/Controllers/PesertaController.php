@@ -6,6 +6,7 @@ use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
 use App\Models\Event;
 use App\Models\Peserta;
+use App\Models\UnitKerja;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ class PesertaController extends Controller
             'count_meeting' => Event::where('kategori', 'meeting')->count(),
             'count_lembur' => Event::where('kategori', 'lembur')->count(),
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('peserta.index', $data);
     }
@@ -130,9 +133,7 @@ class PesertaController extends Controller
         try{
             $tanggalSekarang = Carbon::now();
             
-            $data = Event::where("kategori", $r->kategori)
-                            ->where('tanggal_kegiatan', '>=', $tanggalSekarang)
-                            ->get();
+            $data = Event::where("kategori", $r->kategori)->get();
 
             if($data){
                 return response()->json([

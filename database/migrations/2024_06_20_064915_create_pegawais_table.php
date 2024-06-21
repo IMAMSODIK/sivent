@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nip')->unique();
             $table->string('golongan');
-            $table->string('jabatan');
+            $table->foreignId('jabatan_id');
             $table->string('jenis_kelamin');
             $table->timestamps();
         });
