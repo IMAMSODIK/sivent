@@ -48,10 +48,9 @@ to do
 menu event
 - hapus field setelah berhasil tambah event (done)
 - buka modal form kembali jika terjadi kesalahan (done)
-- filter event 
-- sesuaikan dengan note diatas
-- copy ke meeting dan lembur
-- update data event setelah update berhasil
+- filter event (done)
+- delete event (done)
+- update data event setelah update berhasil (done)
 
 menu bank
 - setelah tambah data, refresh halaman
@@ -76,3 +75,12 @@ ubah tampilan daftar even jadi sama dengan menu event diatas
 - data rundown
 - dokumen event
 - foto event
+
+
+
+to do
+
+menu event
+- sesuaikan dengan note diatas
+- copy ke meeting dan lembur
+

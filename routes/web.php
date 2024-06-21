@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/event/edit", [RapatController::class, 'edit']);
     Route::post("/event/update", [RapatController::class, 'update']);
     Route::post("/event/delete", [RapatController::class, 'delete']);
+    Route::get("/event/filter", [RapatController::class, 'filter']);
     Route::post("/rapat/store", [RapatController::class, 'store']);
 
     Route::get("/data-peserta", [PesertaController::class, 'index']);

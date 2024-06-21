@@ -25,24 +25,22 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th>No. </th>
-                                            <th>Kode Bank</th>
+                                            <th style="width: 100px" class="text-center">No. </th>
                                             <th>Nama Bank</th>
-                                            <th>Action</th>
+                                            <th style="width: 100px" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $index = 0; ?>
                                         @foreach ($banks as $b)
                                         <tr>
-                                            <td>{{++$index}}</td>
-                                            <td>{{$b->kode_bank}}</td>
-                                            <td>{{$b->nama_bank}}</td>
-                                            <td>
+                                            <td style="font-size: 20px" class="text-center">{{++$index}}</td>
+                                            <td style="font-size: 20px">{{$b->nama_bank}}</td>
+                                            <td class="text-center">
                                                 <ul class="action">
                                                     <li class="edit"> <a href="#"><i
-                                                                class="icon-pencil-alt"></i></a></li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                                class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
+                                                    <li class="delete"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>

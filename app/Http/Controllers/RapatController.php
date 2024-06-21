@@ -166,6 +166,7 @@ class RapatController extends Controller
 
             $flayer = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
             $file->storePubliclyAs('flayer', $flayer, 'public');
+            $event->flayer = $flayer;
         }
         
         $messages = [
@@ -193,7 +194,7 @@ class RapatController extends Controller
             'waktu_kegiatan' => 'required|string|max:255',
             'deskripsi_kegiatan' => 'required|string',
             'no_surat' => 'required|string|max:255|unique:events,no_surat,'.$event->id,
-            'unit_kerja' => $r->unit_kerja
+            'unit_kerja' => 'required'
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -213,7 +214,6 @@ class RapatController extends Controller
             $event->deskripsi_kegiatan = $r->deskripsi_kegiatan;
             $event->no_surat = $r->no_surat;
             $event->kategori = $r->kategori;
-            $event->flayer = $flayer;
             $event->unit_kerja_id = $r->unit_kerja;
             $event->save();
 
@@ -244,7 +244,51 @@ class RapatController extends Controller
 
                 return response()->json([
                     'status' => true,
-                ]);    
+                    'data' => $data->event_id,
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function filter(Request $r){
+        $today = Carbon::today();
+        try{
+            $data = Event::where('kategori', $r->kategori);
+
+            if($r->unit_kerja){
+                $data = $data->whereIn('unit_kerja_id', $r->unit_kerja);
+            }
+            if($r->status_event){
+                switch($r->status_event){
+                    case "1":
+                        $data = $data->where('tanggal_kegiatan', $today);
+                        break;
+                    case "2":
+                        $data = $data->where('tanggal_kegiatan', '>', $today);
+                        break;
+                    case "3":
+                        $data = $data->where('tanggal_kegiatan', '<', $today);
+                        break;
+                }
+            }
+
+            $data = $data->get();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);
             }
 
             return response()->json([

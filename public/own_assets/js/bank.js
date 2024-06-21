@@ -1,3 +1,5 @@
+let table = $("#basic-1").DataTable();
+
 function alertModal(status, message = null){
     if(status){
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
@@ -31,7 +33,10 @@ $("#store").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true)
+                alertModal(true);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }

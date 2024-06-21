@@ -13,7 +13,7 @@ class BankController extends Controller
 {
     public function index(){
         $data = [
-            'banks' => Bank::all()
+            'banks' => Bank::orderBy('created_at', 'DESC')->get()
         ];
         return view('bank.index', $data);
     }

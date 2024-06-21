@@ -18,20 +18,20 @@
           <div class="row">
             <div class="incoming">
               @foreach ($event_incoming as $done)
-                <div class="col-xl-12">
+                <div class="col-xl-12 incoming-card" data-id="{{$done->event_id}}">
                   <div class="card">
                     <div class="blog-box blog-list row">
-                      <div class="col-sm-5"><img class="img-fluid sm-100-w" src="{{asset('storage/flayer') . '/' . $done->flayer}}" alt="" style="width: 600px; height: 350px"></div>
+                      <div class="col-sm-5"><img class="img-fluid sm-100-w flayer-incoming" src="{{asset('storage/flayer') . '/' . $done->flayer}}" alt="" style="width: 600px; height: 350px"></div>
                       <div class="col-sm-7">
                         <div class="blog-details">
-                          <div class="blog-date"><span>{{$done->nama_kegiatan}}</span></div>
-                          <h6>{{$done->lokasi_kegiatan}} </h6>
+                          <div class="blog-date"><span class="nama-incoming">{{$done->nama_kegiatan}}</span></div>
+                          <h6 class="lokasi-incoming">{{$done->lokasi_kegiatan}} </h6>
 
                           <div class="row">
                             <div class="blog-bottom-content col-md-10 d-flex align-items-center">
                               <ul class="blog-social">
-                                <li>{{$done->tanggal_kegiatan}}, {{$done->waktu_kegiatan}}</li>
-                                <li>{{$done->no_surat}} </li>
+                                <li class="tanggal-incoming">{{$done->tanggal_kegiatan}}, {{$done->waktu_kegiatan}}</li>
+                                <li class="no_surat-incoming">{{$done->no_surat}} </li>
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
@@ -40,7 +40,7 @@
                             </div>
                           </div>
                           <hr>
-                          <p class="mt-0">{{$done->deskripsi_kegiatan}}</p>
+                          <p class="mt-0 deskripsi-incoming">{{$done->deskripsi_kegiatan}}</p>
                         </div>
                       </div>
                     </div>
@@ -64,7 +64,7 @@
                 <div class="col-xl-4 xl-50 col-sm-6 box-col-6">
                   <div class="card">
                     <div class="blog-box blog-grid text-center product-box">
-                      <div class="product-img"><img class="img-fluid top-radius-blog" src="{{asset('storage/flayer') . '/' . $d->flayer}}" alt="" style="height: 250px">
+                      <div class="product-img"><img class="img-fluid top-radius-blog" src="{{asset('storage/flayer') . '/' . $d->flayer}}" alt="" style="height: 300px">
                         <div class="product-hover">
                           <ul>
                             <li class="bg-danger"><i class="fa fa-trash text-white"></i></li>
@@ -114,6 +114,7 @@
                               <input class="form-control" type="text" placeholder="Search.."><i class="search-icon" data-feather="search"></i>
                             </div>
                           </div>
+                          <input type="hidden" id="kategori_filter" value="rapat">
                           <div class="checkbox-animated">
                             <div class="learning-header"><span class="f-w-600">Unit Kerja</span></div>
                             @foreach ($unit_kerja as $u)
@@ -126,15 +127,15 @@
                           <div class="checkbox-animated mt-0">
                             <div class="learning-header"><span class="f-w-600">Status Event</span></div>
                             <label class="d-block" for="chk-ani3">
-                              <input class="status_event_filter" id="chk-ani3" type="checkbox" value="1">
+                              <input class="status_event_filter" name="status_event_filter" id="chk-ani3" type="radio" value="1">
                               Hari ini
                             </label>
                             <label class="d-block" for="chk-ani4">
-                              <input class="status_event_filter" id="chk-ani4" type="checkbox" value="2">
+                              <input class="status_event_filter" name="status_event_filter" id="chk-ani4" type="radio" value="2">
                               Event Mendatang
                             </label>
                             <label class="d-block" for="chk-ani5">
-                              <input class="status_event_filter" id="chk-ani5" type="checkbox" value="3">
+                              <input class="status_event_filter" name="status_event_filter" id="chk-ani5" type="radio" value="3">
                               Event Selesai
                             </label>
                           </div>
@@ -278,7 +279,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="no_surat">Nomor Surat Undangan</label>
-                      <input class="form-control input-air-primary" id="no_surat" type="text" placeholder="Lokasi Kegiatan">
+                      <input class="form-control input-air-primary" id="no_surat" type="text" placeholder="Nomor Surat Undangan">
                     </div>
                   </div>
                 </div>
@@ -326,6 +327,18 @@
                 <div class="row">
                   <div class="col">
                     <div class="mb-3">
+                      <label class="form-label" for="edit_unit_kerja">Unit Kerja</label>
+                      <select class="form-control input-air-primary" id="edit_unit_kerja">
+                          @foreach ($unit_kerja as $u)
+                              <option value="{{$u->id}}">{{$u->nama_unit}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
                       <label class="form-label" for="edit_lokasi_kegiatan">Lokasi Kegiatan</label>
                       <input class="form-control input-air-primary" id="edit_lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
                     </div>
@@ -358,7 +371,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_no_surat">Nomor Surat Undangan</label>
-                      <input class="form-control input-air-primary" id="edit_no_surat" type="text" placeholder="Lokasi Kegiatan">
+                      <input class="form-control input-air-primary" id="edit_no_surat" type="text" placeholder="Nomor Surat Undangan">
                     </div>
                   </div>
                 </div>
