@@ -39,3 +39,32 @@ card Dashboard
     - today Event => nama kegiatan dan lokasi dan kategori rapat
 
     - di grafik, statistik tingkat kehadiran dari semua jenis kegiatan
+
+
+
+
+to do
+
+menu event
+- hapus field setelah berhasil tambah event
+- buka modal form kembali jika terjadi kesalahan
+- filter event
+- sesuaikan dengan note diatas
+- copy ke meeting dan lembur
+- update data event setelah update berhasil
+
+menu bank
+- setelah tambah data, refresh halaman
+- tambah menu delete dan update
+
+menu unit kerja
+- setelah tambah data, refresh halaman
+- tambah menu delete dan update
+
+menu data pegawai
+- setelah tambah data, refresh halaman
+- tambah menu delete dan update
+
+menu master jabatan
+- setelah tambah data, refresh halaman
+- tambah menu delete dan update
