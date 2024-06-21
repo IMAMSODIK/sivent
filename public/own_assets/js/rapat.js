@@ -90,6 +90,15 @@ $("#store").on("click", function(){
                         </div>
                     `;
                     $(".incoming").prepend(event);
+
+                    $("#nama_kegiatan").val("");
+                    $("#lokasi_kegiatan").val("");
+                    $("#tanggal_kegiatan").val(today());
+                    $("#waktu_kegiatan").val("00:00:00");
+                    $("#deskripsi_kegiatan").val("");
+                    $("#no_surat").val("");
+                    $("#unit_kerja").prop("selectedIndex", 0);
+                    $("#flayer").val("");
                 }else{
                     let event = `
                             <div class="col-xl-4 xl-50 col-sm-6 box-col-6">
@@ -121,6 +130,9 @@ $("#store").on("click", function(){
 
                 alertModal(true, "Berhasil menambahkan data");
             }else{
+                $('.modal-alert').on('hidden.bs.modal', function () {
+                    $("#tambah-rapat-modal").modal("show");
+                });
                 alertModal(false, response.message);
             }
         },
@@ -291,4 +303,20 @@ $(document).on("click", "#delete-confirmed", function(){
 $(".close-modal").on("click", function(){
     $("#edit-rapat-modal").modal("hide");
     $("#tambah-rapat-modal").modal("hide");
+})
+
+$("#submit-filter").on("click", function(){
+    var unitKerjaSelected = [];
+    var statusEventSelected = [];
+
+    $('.unit_kerja_filter:checked').each(function() {
+        unitKerjaSelected.push($(this).val());
+    });
+    
+    $('.status_event_filter:checked').each(function() {
+        statusEventSelected.push($(this).val());
+    });
+
+    console.log('Unit Kerja Selected: ', unitKerjaSelected);
+    console.log('Status Event Selected: ', statusEventSelected);
 })

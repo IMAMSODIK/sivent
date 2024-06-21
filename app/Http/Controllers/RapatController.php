@@ -18,7 +18,7 @@ class RapatController extends Controller
         $data = [
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'rapat')->get(),
-            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get()
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('event.rapat', $data);
     }

@@ -46,9 +46,9 @@ card Dashboard
 to do
 
 menu event
-- hapus field setelah berhasil tambah event
-- buka modal form kembali jika terjadi kesalahan
-- filter event
+- hapus field setelah berhasil tambah event (done)
+- buka modal form kembali jika terjadi kesalahan (done)
+- filter event 
 - sesuaikan dengan note diatas
 - copy ke meeting dan lembur
 - update data event setelah update berhasil
@@ -68,3 +68,11 @@ menu data pegawai
 menu master jabatan
 - setelah tambah data, refresh halaman
 - tambah menu delete dan update
+
+data peserta
+ubah tampilan daftar even jadi sama dengan menu event diatas
+
+- data narasumber
+- data rundown
+- dokumen event
+- foto event

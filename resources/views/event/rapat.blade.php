@@ -116,32 +116,29 @@
                           </div>
                           <div class="checkbox-animated">
                             <div class="learning-header"><span class="f-w-600">Unit Kerja</span></div>
-                            <label class="d-block" for="chk-ani">
-                              <input class="checkbox_animated" id="chk-ani" type="checkbox">                      Accounting
-                            </label>
-                            <label class="d-block" for="chk-ani0">
-                              <input class="checkbox_animated" id="chk-ani0" type="checkbox">                            Design
-                            </label>
-                            <label class="d-block" for="chk-ani1">
-                              <input class="checkbox_animated" id="chk-ani1" type="checkbox">                            Development
-                            </label>
-                            <label class="d-block" for="chk-ani2">
-                              <input class="checkbox_animated" id="chk-ani2" type="checkbox">                            Management
-                            </label>
+                            @foreach ($unit_kerja as $u)
+                              <label class="d-block" for="chk-ani">
+                                <input class="unit_kerja_filter" id="chk-ani" type="checkbox" value="{{$u->id}}">
+                                {{$u->nama_unit}}
+                              </label>
+                            @endforeach
                           </div>
                           <div class="checkbox-animated mt-0">
                             <div class="learning-header"><span class="f-w-600">Status Event</span></div>
                             <label class="d-block" for="chk-ani3">
-                              <input class="checkbox_animated" id="chk-ani3" type="checkbox">                            Registration
+                              <input class="status_event_filter" id="chk-ani3" type="checkbox" value="1">
+                              Hari ini
                             </label>
                             <label class="d-block" for="chk-ani4">
-                              <input class="checkbox_animated" id="chk-ani4" type="checkbox">                            Progress
+                              <input class="status_event_filter" id="chk-ani4" type="checkbox" value="2">
+                              Event Mendatang
                             </label>
                             <label class="d-block" for="chk-ani5">
-                              <input class="checkbox_animated" id="chk-ani5" type="checkbox">                            Completed
+                              <input class="status_event_filter" id="chk-ani5" type="checkbox" value="3">
+                              Event Selesai
                             </label>
                           </div>
-                          <button class="btn btn-primary text-center" type="button">Filter</button>
+                          <button class="btn btn-primary text-center" id="submit-filter" type="button">Filter</button>
                         </div>
                       </div>
                     </div>
@@ -393,7 +390,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+  <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-body"> 
