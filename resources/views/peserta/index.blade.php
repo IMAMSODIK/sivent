@@ -164,7 +164,7 @@
                       <div class="product-img"><img class="img-fluid top-radius-blog" src="{{asset('storage/flayer') . '/' . $d->flayer}}" alt="" style="height: 300px">
                         <div class="product-hover">
                           <ul>
-                            <li class="bg-danger"><i class="fa fa-trash text-white"></i></li>
+                            <li class="detail-flayer" data-path="{{$d->flayer}}"><i class="fa fa-eye"></i></li>
                             {{-- <li class="bg-info"><i class="fa fa-pencil text-white"></i></li> --}}
                           </ul>
                         </div>
@@ -178,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Peserta</button></a>
                       </div>
                     </div>
                   </div>
@@ -277,84 +277,24 @@
     <!-- Container-fluid Ends-->
   </div>
 
-  {{-- <div class="modal fade bd-example-modal-lg" id="tambah-rapat-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModal" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="detail-flayer-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myExtraLargeModal">Tambah Meeting</h4>
+          <h4 class="modal-title" id="myExtraLargeModal">Flayer Kegiatan</h4>
           <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body dark-modal"> 
           <div class="card">
-            <form class="form theme-form dark-inputs">
-                <input type="hidden" id="kategori" value="meeting">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="nama_kegiatan">Nama Kegiatan</label>
-                      <input class="form-control input-air-primary" id="nama_kegiatan" type="text" placeholder="Nama Kegiatan">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="lokasi_kegiatan">Lokasi Kegiatan</label>
-                      <input class="form-control input-air-primary" id="lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="exampleInputPassword16">Waktu Kegiatan</label>
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <input class="form-control digits" id="tanggal_kegiatan" type="date" value="2018-01-01">
-                        </div>
-                        <div class="col-sm-6">
-                          <input class="form-control digits" id="waktu_kegiatan" type="time" value="21:45:00">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="deskripsi_kegiatan">Deskripsi Kegiatan</label>
-                      <textarea class="form-control input-air-primary" id="deskripsi_kegiatan" rows="3"></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="no_surat">Nomor Surat Undangan</label>
-                      <input class="form-control input-air-primary" id="no_surat" type="text" placeholder="Lokasi Kegiatan">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3">
-                      <label class="form-label" for="flayer">File Flayer Kegiatan</label>
-                      <input class="form-control input-air-primary" id="flayer" type="file">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer text-end">
-                <input class="btn btn-light" type="reset" value="Cancel">
-                <button class="btn btn-primary me-3" type="button" id="store">Submit</button>
-              </div>
-            </form>
+            <img id="detail-flayer-image" alt="" style="width: 100%">
+          </div>
+          <div class="card-footer text-end">
+            <input class="btn btn-primary close-modal" type="reset" value="Tutup">
           </div>
         </div>
       </div>
     </div>
-  </div> --}}
+  </div>
 
   {{-- <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

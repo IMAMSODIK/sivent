@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-narasumber", [NarasumberController::class, 'index']);
     Route::get("/data-narasumber/daftar-narasumber", [NarasumberController::class, 'daftarNarasumber']);
     Route::post("/data-narasumber/daftar-narasumber/store", [NarasumberController::class, 'store']);
+    Route::get("/data-narasumber/daftar-narasumber/edit", [NarasumberController::class, 'edit']);
+    Route::post("/data-narasumber/daftar-narasumber/update", [NarasumberController::class, 'update']);
+    Route::post("/data-narasumber/daftar-narasumber/delete", [NarasumberController::class, 'delete']);
 
     Route::get("/data-bank", [BankController::class, 'index']);
     Route::post("/data-bank/store", [BankController::class, 'store']);

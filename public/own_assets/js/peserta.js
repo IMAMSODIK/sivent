@@ -254,3 +254,8 @@ $("#submit-filter").on("click", function(){
         }
     })
 })
+
+$(".detail-flayer").on("click", function(){
+    $("#detail-flayer-image").attr("src", `../../storage/flayer/${$(this).data('path')}`);
+    $("#detail-flayer-modal").modal("show");
+})

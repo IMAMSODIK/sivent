@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNarasumberRequest;
 use App\Http\Requests\UpdateNarasumberRequest;
+use App\Models\Bank;
 use App\Models\Event;
+use App\Models\Jabatan;
 use App\Models\Narasumber;
 use App\Models\Peserta;
+use App\Models\UnitKerja;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,7 +22,12 @@ class NarasumberController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
+            // 'count_rapat' => Event::where('kategori', 'rapat')->count(),
+            // 'count_meeting' => Event::where('kategori', 'meeting')->count(),
+            // 'count_lembur' => Event::where('kategori', 'lembur')->count(),
+            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('narasumber.index', $data);
     }
@@ -28,7 +36,9 @@ class NarasumberController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'narasumbers' => Peserta::where('event_id', $event->id)->where('is_narsum', 1)->get()
+            'narasumbers' => Peserta::where('event_id', $event->id)->where('is_narsum', 1)->get(),
+            'jabatan' => Jabatan::all(),
+            'bank' => Bank::all(),
         ];
         return view('narasumber.daftar_narasumber', $data);
     }
@@ -100,6 +110,124 @@ class NarasumberController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Gagal menambahkan data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function edit(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(Request $r){
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'numeric' => 'Kolom :attribute harus berupa angka.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.',
+            'unique' => 'Kolom :attribute sudah digunakan.'
+        ];
+
+        $data = [
+            'nama' => $r->nama,
+            'nip' => $r->nip,
+            'asal_instansi' => $r->asal_instansi,
+            'golongan' => $r->golongan,
+            'jabatan' => $r->jabatan,
+            'bank' => $r->bank,
+            'no_rek' => $r->no_rek,
+            'jenis_kelamin' => $r->jenis_kelamin,
+        ];
+
+        $rules = [
+            'nama' => 'required|string|max:255',
+            'nip' => 'required|string|max:255|unique:pesertas,nip,'.$r->id,
+            'golongan' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'bank' => 'required|string',
+            'no_rek' => 'required|string|max:255|unique:pesertas,no_rek,'.$r->id,
+            'jenis_kelamin' => 'required|string|max:255',
+            'asal_instansi' => 'string|max:255',
+        ];
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
+
+        try{
+            $data = Peserta::where("id", $r->id)->first();
+
+            if($data){
+                $data->nama = $r->nama;
+                $data->nip = $r->nip;
+                $data->asal_instansi = $r->asal_instansi;
+                $data->golongan = $r->golongan;
+                $data->jabatan = $r->jabatan;
+                $data->bank = $r->bank;
+                $data->no_rek = $r->no_rek;
+                $data->jenis_kelamin = $r->jenis_kelamin;
+                $data->save();
+
+                return response()->json([
+                    'status' => true
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal mengubah data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                $data->delete();
+
+                return response()->json([
+                    'status' => true
+                ]);   
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
             ]);
         }catch(Exception $e){
             return response()->json([
