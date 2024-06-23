@@ -1,3 +1,5 @@
+let table = $("#basic-1").DataTable();
+
 function alertModal(status, message = null) {
     if (status) {
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('no_rek')->unique()->nullable();
             $table->string('jenis_kelamin');
             $table->boolean('is_narsum');
+            $table->boolean('status_registrasi')->default(false);
+            $table->string('status_absensi')->default("Absen");
             $table->string('asal_instansi')->nullable();
             $table->timestamps();
         });

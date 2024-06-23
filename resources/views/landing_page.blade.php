@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        Document Title
+        =============================================
+        -->
+    <title>Titan | Multipurpose HTML5 Template</title>
+    <!--
+        Favicons
+        =============================================
+        -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('landing_page/images/favicons/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('landing_page/images/favicons/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('landing_page/images/favicons/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('landing_page/images/favicons/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114"
+        href="{{ asset('landing_page/images/favicons/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="{{ asset('landing_page/images/favicons/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144"
+        href="{{ asset('landing_page/images/favicons/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="{{ asset('landing_page/images/favicons/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ asset('landing_page/images/favicons/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('landing_page/images/favicons/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('landing_page/images/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96"
+        href="{{ asset('landing_page/images/favicons/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('landing_page/images/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('landing_page/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('landing_page/images/favicons/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <!--
+        Stylesheets
+        =============================================
+        
+        -->
+    <!-- Default stylesheets-->
+    <link href="{{ asset('landing_page/lib/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Template specific stylesheets-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/animate.css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/et-line-font/et-line-font.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/flexslider/flexslider.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/owl.carousel/dist/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/magnific-popup/dist/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing_page/lib/simple-text-rotator/simpletextrotator.css') }}" rel="stylesheet">
+    <!-- Main stylesheet and color file-->
+    <link href="{{ asset('landing_page/css/style.css') }}" rel="stylesheet">
+    <link id="color-scheme" href="{{ asset('landing_page/css/colors/default.css') }}" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+    <main>
+        <div class="page-loader">
+            <div class="loader">Loading...</div>
+        </div>
+        <nav class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse"
+                        data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span
+                            class="icon-bar"></span><span class="icon-bar"></span><span
+                            class="icon-bar"></span></button><a class="navbar-brand" href="index.html">Titan</a>
+                </div>
+                <div class="collapse navbar-collapse" id="custom-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown"><a class="" href="/">Home</a>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                                data-toggle="dropdown">Rapat</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="documentation.html#contact">Absensi</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                            data-toggle="dropdown">Meeting</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="documentation.html#contact">Registrasi</a></li>
+                                <li><a href="documentation.html#contact">Absensi</a></li>
+                                <li><a href="documentation.html#contact">Seminar Kit</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                            data-toggle="dropdown">Lembur</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="documentation.html#contact">Absensi</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="home-section home-fade home-full-height" id="home">
+            <div class="hero-slider">
+                <ul class="slides">
+                    <li class="bg-dark-30 bg-dark shop-page-header"
+                        style="background-image: url('{{ asset('landing_page/images/shop/slider1.png') }}');">
+                        <div class="titan-caption">
+                            <div class="caption-content">
+                                <div class="font-alt mb-30 titan-title-size-1">This is Titan</div>
+                                <div class="font-alt mb-30 titan-title-size-4"> Summer 2017</div>
+                                <div class="font-alt mb-40 titan-title-size-1">Your online fashion destination</div>
+                                <a class="section-scroll btn btn-border-w btn-round" href="#latest">Learn More</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="bg-dark-30 bg-dark shop-page-header"
+                        style="background-image: url('{{ asset('landing_page/images/shop/slider3.png') }}');">
+                        <div class="titan-caption">
+                            <div class="caption-content">
+                                <div class="font-alt mb-30 titan-title-size-1"> This is Titan</div>
+                                <div class="font-alt mb-40 titan-title-size-4">Exclusive products</div>
+                                <a class="section-scroll btn btn-border-w btn-round" href="#latest">Learn More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="main">
+            <section class="module">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <h2 class="module-title font-alt">Exclusive products</h2>
+                            <div class="module-subtitle font-serif">The languages only differ in their grammar, their
+                                pronunciation and their most common words.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="owl-carousel text-center" data-items="5" data-pagination="false"
+                            data-navigation="false">
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                            <div class="shop-item" style="margin-right: 10px">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module-small">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <h2 class="module-title font-alt">Latest in clothing</h2>
+                        </div>
+                    </div>
+                    <div class="row multi-columns-row">
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-8.jpg') }}"
+                                        alt="Men’s Casual Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Men’s Casual Pack</a></h4>
+                                £12.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-9.jpg') }}"
+                                        alt="Men’s Garb" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Men’s Garb</a></h4>£6.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-10.jpg') }}"
+                                        alt="Cold Garb" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Cold Garb</a></h4>£14.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-11.jpg') }}"
+                                        alt="Accessories Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-12.jpg') }}"
+                                        alt="Men’s Casual Pack" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Men’s Casual Pack</a></h4>
+                                £12.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-13.jpg') }}"
+                                        alt="Men’s Garb" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Men’s Garb</a></h4>£6.00
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3">
+                            <div class="shop-item">
+                                <div class="shop-item-image"><img
+                                        src="{{ asset('landing_page/images/shop/product-14.jpg') }}"
+                                        alt="Cold Garb" />
+                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                class="icon-basket">Add To Cart</span></a></div>
+                                </div>
+                                <h4 class="shop-item-title font-alt"><a href="#">Cold Garb</a></h4>£14.00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-30">
+                        <div class="col-sm-12 align-center"><a class="btn btn-b btn-round" href="#">See all
+                                products</a></div>
+                    </div>
+                </div>
+            </section>
+            <section class="module module-video bg-dark-30" data-background="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <h2 class="module-title font-alt mb-0">Be inspired. Get ahead of trends.</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-player"
+                    data-property="{videoURL:'https://www.youtube.com/watch?v=EMy5krGcoOU', containment:'.module-video', startAt:0, mute:true, autoPlay:true, loop:true, opacity:1, showControls:false, showYTLogo:false, vol:25}">
+                </div>
+            </section>
+            <hr class="divider-w">
+            <section class="module-small">
+                <div class="container">
+                    <div class="row client">
+                        <div class="owl-carousel text-center" data-items="6" data-pagination="false"
+                            data-navigation="false">
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-1.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-2.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-3.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-4.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-5.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-1.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-2.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-3.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                            <div class="owl-item">
+                                <div class="col-sm-12">
+                                    <div class="client-logo"><img
+                                            src="{{ asset('landing_page/images/client-logo-dark-4.png') }}"
+                                            alt="Client Logo" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="module-small bg-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="widget">
+                                <h5 class="widget-title font-alt">About Titan</h5>
+                                <p>The languages only differ in their grammar, their pronunciation and their most common
+                                    words.</p>
+                                <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                                <p>Email:<a href="#">somecompany@example.com</a></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="widget">
+                                <h5 class="widget-title font-alt">Recent Comments</h5>
+                                <ul class="icon-list">
+                                    <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                                    <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                                    <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                                    <li>Jack on <a href="#">Bottle Mockup</a></li>
+                                    <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="widget">
+                                <h5 class="widget-title font-alt">Blog Categories</h5>
+                                <ul class="icon-list">
+                                    <li><a href="#">Photography - 7</a></li>
+                                    <li><a href="#">Web Design - 3</a></li>
+                                    <li><a href="#">Illustration - 12</a></li>
+                                    <li><a href="#">Marketing - 1</a></li>
+                                    <li><a href="#">Wordpress - 16</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="widget">
+                                <h5 class="widget-title font-alt">Popular Posts</h5>
+                                <ul class="widget-posts">
+                                    <li class="clearfix">
+                                        <div class="widget-posts-image"><a href="#"><img
+                                                    src="{{ asset('landing_page/images/rp-1.jpg') }}"
+                                                    alt="Post Thumbnail" /></a></div>
+                                        <div class="widget-posts-body">
+                                            <div class="widget-posts-title"><a href="#">Designer Desk
+                                                    Essentials</a></div>
+                                            <div class="widget-posts-meta">23 January</div>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="widget-posts-image"><a href="#"><img
+                                                    src="{{ asset('landing_page/images/rp-2.jpg') }}"
+                                                    alt="Post Thumbnail" /></a></div>
+                                        <div class="widget-posts-body">
+                                            <div class="widget-posts-title"><a href="#">Realistic Business Card
+                                                    Mockup</a></div>
+                                            <div class="widget-posts-meta">15 February</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="divider-d">
+            <footer class="footer bg-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="copyright font-alt">&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
+                                Reserved</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a
+                                    href="#"><i class="fa fa-twitter"></i></a><a href="#"><i
+                                        class="fa fa-dribbble"></i></a><a href="#"><i
+                                        class="fa fa-skype"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+    </main>
+    <!--
+    JavaScripts
+    =============================================
+    -->
+    <script src="{{ asset('landing_page/lib/jquery/dist/jquery.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/wow/dist/wow.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/isotope/dist/isotope.pkgd.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/imagesloaded/imagesloaded.pkgd.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/flexslider/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/smoothscroll.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/magnific-popup/dist/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ asset('landing_page/lib/simple-text-rotator/jquery.simple-text-rotator.min.js') }}"></script>
+    <script src="{{ asset('landing_page/js/plugins.js') }}"></script>
+    <script src="{{ asset('landing_page/js/main.js') }}"></script>
+</body>
+
+</html>

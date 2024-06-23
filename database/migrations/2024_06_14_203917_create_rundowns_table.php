@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('rundowns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id');
             $table->date("tanggal_kegiatan");
             $table->string("waktu_kegiatan");
             $table->text("keterangan_kegiatan");
+            $table->string("aktor");
             $table->timestamps();
         });
     }

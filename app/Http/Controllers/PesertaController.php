@@ -125,6 +125,8 @@ class PesertaController extends Controller
 
         $data = [
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('peserta.registrasi', $data);
     }
@@ -145,6 +147,102 @@ class PesertaController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Tidak ada kegiatan pada kategori ini"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function detail(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function registered(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                $data->status_registrasi = 1;
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function absensi(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'count_rapat' => Event::where('kategori', 'rapat')->count(),
+            'count_meeting' => Event::where('kategori', 'meeting')->count(),
+            'count_lembur' => Event::where('kategori', 'lembur')->count(),
+            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
+            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+        ];
+        return view('peserta.absensi', $data);
+    }
+
+    public function daftarAbsensiPeserta(Request $r){
+        $event = Event::where("event_id", $r->kegiatan_id)->first();
+        $data = [
+            'id_event' => $r->kegiatan_id,
+            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
+        ];
+        return view('peserta.daftar_absensi_peserta', $data);
+    }
+
+    public function absensiAksi(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                $data->status_absensi = $r->status_absensi;
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
             ]);
         }catch(Exception $e){
             return response()->json([

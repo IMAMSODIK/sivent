@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumentEventController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_page');
 });
 
 Route::middleware('guest')->group(function(){
@@ -65,10 +66,23 @@ Route::middleware('auth')->group(function(){
     Route::post("/data-bank/delete", [BankController::class, 'delete']);
 
     Route::get("/data-rundown", [RundownController::class, 'index']);
-    Route::post("/data-rundown/store", [RundownController::class, 'store']);
+    Route::get("/data-rundown/daftar-rundown", [RundownController::class, 'daftarRundown']);
+    Route::post("/data-rundown/daftar-rundown/store", [RundownController::class, 'store']);
+    Route::get("/data-rundown/daftar-rundown/edit", [RundownController::class, 'edit']);
+    Route::post("/data-rundown/daftar-rundown/update", [RundownController::class, 'update']);
+    Route::post("/data-rundown/daftar-rundown/delete", [RundownController::class, 'delete']);
+
+    Route::get("/document", [DokumentEventController::class, 'index']);
+    Route::get("/document/daftar-document", [DokumentEventController::class, 'daftarDokumen']);
+    Route::post("/document/daftar-document/store", [DokumentEventController::class, 'store']);
+    Route::get("/document/daftar-document/edit", [DokumentEventController::class, 'edit']);
+    Route::post("/document/daftar-document/update", [DokumentEventController::class, 'update']);
+    Route::post("/document/daftar-document/delete", [DokumentEventController::class, 'delete']);
 
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
+    Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
+    Route::post("/registrasi-peserta/daftar-peserta/registrasi", [PesertaController::class, 'registered']);
     // Route::post("/registrasi-peserta/daftar-peserta/store", [NarasumberController::class, 'store']);
 
     Route::get("/data-unit-kerja", [UnitKerjaController::class, 'index']);
@@ -88,4 +102,9 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-jabatan/edit", [JabatanController::class, 'edit']);
     Route::post("/data-jabatan/update", [JabatanController::class, 'update']);
     Route::post("/data-jabatan/delete", [JabatanController::class, 'delete']);
+
+    Route::get("/absensi-peserta", [PesertaController::class, 'absensi']);
+    Route::get("/absensi-peserta/daftar-peserta", [PesertaController::class, 'daftarAbsensiPeserta']);
+    Route::get("/absensi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
+    Route::post("/absensi-peserta/daftar-peserta/absensi", [PesertaController::class, 'absensiAksi']);
 });

@@ -113,7 +113,7 @@
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                        class="sidebar-link sidebar-title link-nav" href="#">
+                        class="sidebar-link sidebar-title link-nav" href="/document">
                         <i class="fa fa-file-text text-white" aria-hidden="true"></i>
                         </svg><span class="">Dokumen Event</span></a>
                 </li>
@@ -161,7 +161,7 @@
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                        class="sidebar-link sidebar-title link-nav" href="#">
+                        class="sidebar-link sidebar-title link-nav" href="/absensi-peserta">
                         <i class="fa fa-pencil-square-o text-white" aria-hidden="true"></i>
                         </svg><span class="">Absensi Peserta</span></a>
                 </li>

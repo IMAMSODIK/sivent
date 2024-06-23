@@ -31,6 +31,7 @@
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
+                                            <th>Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -42,6 +43,7 @@
                                             <td>{{$p->golongan}}</td>
                                             <td>{{$p->jabatan}}</td>
                                             <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                            <td>{{$p->status_absensi}}</td>
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit"> <a href="#"><i

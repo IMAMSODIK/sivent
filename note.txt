@@ -72,21 +72,18 @@ menu master jabatan
 
 to do
 
-- data narasumber sampai selesai
-- data rundown
+menu event
+- sesuaikan dengan note diatas
+- copy ke meeting dan lembur
+
+- data peserta
+    -> kalau meeting, peserta di ambil dari master peserta
+    -> rapat dan lembur, peserta diinputkan / import
+
+- landing page
+
 - dokumen event
 - foto event
 - data kamar
 - kit seminar
 - kunci kamar
-
-menu event
-- sesuaikan dengan note diatas
-- copy ke meeting dan lembur
-
-data peserta
-ubah tampilan daftar even jadi sama dengan menu event diatas
-
-- registrasi peserta
-- absensi peserta
-- 

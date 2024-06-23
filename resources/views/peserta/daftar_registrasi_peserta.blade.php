@@ -8,9 +8,6 @@
                     <div class="col-6">
                         <h4>Daftar Peserta</h4>
                     </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah Data</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -30,6 +27,7 @@
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
+                                            <th>Status Registrasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -41,12 +39,10 @@
                                             <td>{{$p->golongan}}</td>
                                             <td>{{$p->jabatan}}</td>
                                             <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                            <td>{{$p->status_registrasi}}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"> <a href="#"><i
-                                                                class="icon-pencil-alt"></i></a></li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                                    <li class="registrasi" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
+                                                    <li class="registrasi" data-id="{{$p->id}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -61,18 +57,19 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="tambah-data-modal" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="edit-data-modal" tabindex="-1" role="dialog"
         aria-labelledby="myExtraLargeModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Peserta</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Status Registrasi Peserta</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
                     <div class="card">
                         <form class="form theme-form dark-inputs">
                             <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
+                            <input type="hidden" id="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
@@ -116,27 +113,6 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="bank">Bank</label>
-                                            <select name="" class="form-control input-air-primary" id="bank">
-                                                <option value="MEGA">MEGA</option>
-                                                <option value="BRI">BRI</option>
-                                                <option value="BCA">BCA</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="no_rek">Nomor Rekening</label>
-                                            <input class="form-control input-air-primary" id="no_rek"
-                                                type="text" placeholder="Nomor Rekening">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
                                             <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
                                             <select name="" class="form-control input-air-primary" id="jenis_kelamin">
                                                 <option value="Laki-laki">Laki-laki</option>
@@ -148,7 +124,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <input class="btn btn-light" type="reset" value="Cancel">
-                                <button class="btn btn-primary me-3" type="button" id="store">Submit</button>
+                                <button class="btn btn-primary me-3" type="button" id="registered">Registrasi</button>
                             </div>
                         </form>
                     </div>
@@ -157,26 +133,24 @@
         </div>
     </div>
 
-    <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
-        aria-hidden="true">
+    <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-toggle-wrapper">
-                        <ul class="modal-img">
-                            <li> <img id="alert-image"></li>
-                        </ul>
-                        <h4 class="text-center pb-2" id="alert-title"></h4>
-                        <p class="text-center" id="alert-message"></p>
-                        <button class="btn btn-secondary d-flex m-auto" type="button"
-                            data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
+          <div class="modal-content">
+            <div class="modal-body"> 
+              <div class="modal-toggle-wrapper">  
+                <ul class="modal-img">
+                  <li> <img id="alert-image"></li>
+                </ul>
+                <h4 class="text-center pb-2" id="alert-title"></h4>
+                <p class="text-center" id="alert-message"></p>
+                <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Close</button>
+              </div>
             </div>
+          </div>
         </div>
     </div>
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/peserta.js')}}"></script>
+    <script src="{{asset('own_assets/js/registrasi.js')}}"></script>
 @endsection
