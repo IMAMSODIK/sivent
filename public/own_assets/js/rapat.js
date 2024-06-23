@@ -226,7 +226,6 @@ $(document).on("click", ".delete-event", function(){
 
 $("#delete-confirmed").on("click", function(){
     let id = $(this).data('id');
-    alert(id); //saat di alert, event_id yang muncul masih event_id yang telah dihapus sebelumnya
 
     $.ajax({
         url: '/event/delete',
@@ -237,10 +236,13 @@ $("#delete-confirmed").on("click", function(){
         },
         success: function(response){
             if(response.status){
-                console.log(response.data);
                 let incoming_card = $(`.incoming-card[data-id="${response.data}"]`);
                 incoming_card.remove();
                 alertModal(true, "Berhasil menghapus data!");
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -341,7 +343,6 @@ $("#submit-filter").on("click", function(){
                     $(".done").prepend(event);
                     }
                 });
-                console.log(response.data);
             }else{
                 alertModal(false, response.message);
             }
