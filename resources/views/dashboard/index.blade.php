@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-body">
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 20px">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
@@ -36,11 +36,11 @@
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card o-hidden small-widget">
                                     <div class="card-body total-project border-b-primary border-2">
-                                        <span class="f-light f-w-500 f-14">Total Project</span>
+                                        <span class="f-light f-w-500 f-14">Total Event</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">1,523</h2>
-                                                <span class="f-12 f-w-400">(This month)</span>
+                                                <h2 class="f-w-600">{{$event}}</h2>
+                                                <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-primary-light">
                                                 <svg class="invoice-icon">
@@ -67,11 +67,11 @@
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card o-hidden small-widget">
                                     <div class="card-body total-Progress border-b-warning border-2">
-                                        <span class="f-light f-w-500 f-14">In Progress</span>
+                                        <span class="f-light f-w-500 f-14">Event Hari Ini</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">836</h2>
-                                                <span class="f-12 f-w-400">(This month)</span>
+                                                <h2 class="f-w-600">{{$event_today}}</h2>
+                                                <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-warning-light">
                                                 <svg class="invoice-icon">
@@ -98,11 +98,11 @@
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card o-hidden small-widget">
                                     <div class="card-body total-Complete border-b-secondary border-2">
-                                        <span class="f-light f-w-500 f-14">Complete</span>
+                                        <span class="f-light f-w-500 f-14">Event Mendatang</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">475</h2>
-                                                <span class="f-12 f-w-400">(This month)</span>
+                                                <h2 class="f-w-600">{{$event_incoming}}</h2>
+                                                <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-secondary-light">
                                                 <svg class="invoice-icon">
@@ -129,11 +129,11 @@
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card o-hidden small-widget">
                                     <div class="card-body total-upcoming">
-                                        <span class="f-light f-w-500 f-14">Upcoming</span>
+                                        <span class="f-light f-w-500 f-14">Event Selesai</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">189</h2>
-                                                <span class="f-12 f-w-400">(This month)</span>
+                                                <h2 class="f-w-600">{{$event_done}}</h2>
+                                                <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-light-light">
                                                 <svg class="invoice-icon">
@@ -781,10 +781,16 @@
             </div>
             <div class="col-xxl-3 d-xxl-block d-none activity-group box-col-none">
                 <div class="card add-project-link">
-                    <div class="categories"> </div>
+                    <div class="categories"></div>
                     <div class="categories-content"> <span
-                            class="text-truncate col-8 f-12 d-block mb-2">Let’s add work to your
-                            space</span><a href="projectcreate.html">+Add Project </a></div>
+                            class="text-truncate col-8 f-12 d-block mb-2">Tambah Event baru disini
+                            <ul class="mt-2">
+                                <li><a href="/rapat">+ Tambah Rapat </a></li>
+                                <li><a href="/meeting">+ Tambah Meeting </a></li>
+                                <li><a href="/lembur">+ Tambah Lembur </a></li>
+                            </ul>
+                        </span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-12">
@@ -933,360 +939,6 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-md-6">
-                        <div class="card">
-                            <div class="card-header card-no-border total-revenue card-title-underline">
-                                <h4>Message</h4><a href="product.html">+ New Message </a>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="user-message">
-
-                                    <ul>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/39.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-warning"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Maren Ross</a>
-                                                        </h6><span class="f-light f-w-500 f-12 ">Hey,
-                                                            What’s today update ?</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon21"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon21">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/40.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-undefined"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Brooklyn
-                                                                Simmons</a></h6><span
-                                                            class="f-light f-w-500 f-12 ">I know it will
-                                                            work.</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon22"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon22">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/41.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-warning"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Floyd Miles</a>
-                                                        </h6><span class="f-light f-w-500 f-12 ">Sir, Can
-                                                            remove part in des...</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon23"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon23">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/42.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-undefined"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Dianne
-                                                                Russell</a></h6><span
-                                                            class="f-light f-w-500 f-12 ">So, what is my
-                                                            next work ?</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon24"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon24">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/43.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-warning"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Darlene
-                                                                Robertson</a></h6><span
-                                                            class="f-light f-w-500 f-12 ">Can we add that
-                                                            here ?</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon25"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon25">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/44.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-undefined"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Jenny Wilson</a>
-                                                        </h6><span class="f-light f-w-500 f-12 ">Hey,
-                                                            What’s today update ?</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon26"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon26">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/45.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-warning"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Ralph Edwards</a>
-                                                        </h6><span class="f-light f-w-500 f-12 ">ok, send
-                                                            it.</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon28"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon28">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/15.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-warning"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Ronald
-                                                                Richards</a></h6><span
-                                                            class="f-light f-w-500 f-12 ">Thank you
-                                                            !!!</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon29"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon29">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="activity-log"><img
-                                                    class="activity-log-img rounded-circle img-fluid me-2"
-                                                    src="{{ asset('assets/images/user/47.png') }}"
-                                                    alt="user" />
-                                                <div class="status bg-undefined"></div>
-                                                <div class="activity-name">
-                                                    <div>
-                                                        <h6> <a class="f-w-500 f-14"
-                                                                href="user-profile.html">Courtney
-                                                                Henry</a></h6><span
-                                                            class="f-light f-w-500 f-12 ">No, you’ve to do
-                                                            one more variant.</span>
-                                                    </div>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon30"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-vertical') }}">
-                                                                    </use>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon30">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span><span
-                                                                    class="dropdown-item">Last
-                                                                    Week</span><span
-                                                                    class="dropdown-item">Last Day </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="col-xl-12 col-md-6">

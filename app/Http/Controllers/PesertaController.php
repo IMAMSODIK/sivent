@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
 use App\Models\Event;
+use App\Models\Pegawai;
 use App\Models\Peserta;
 use App\Models\UnitKerja;
 use Carbon\Carbon;
@@ -33,6 +34,7 @@ class PesertaController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
+            'kategori_event' => $event->kategori,
             'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
         ];
         return view('peserta.daftar_peserta', $data);
@@ -129,6 +131,29 @@ class PesertaController extends Controller
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('peserta.registrasi', $data);
+    }
+
+    public function selectPeserta(){
+        try{
+            $data = Pegawai::all();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function daftarEvent(Request $r){

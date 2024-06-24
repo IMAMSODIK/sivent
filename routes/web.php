@@ -13,6 +13,8 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\UnitKerjaController;
+use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +29,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('landing_page');
+    $tanggalSekarang = Carbon::now();
+
+    $data = [
+        'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
+        'meeting' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+        'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->get(),
+    ];
+    return view('landing_page', $data);
 });
 
 Route::middleware('guest')->group(function(){
@@ -49,6 +58,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get("/data-peserta", [PesertaController::class, 'index']);
     Route::get("/data-peserta/daftar-peserta", [PesertaController::class, 'daftarPeserta']);
+    Route::get("/data-peserta/select-peserta", [PesertaController::class, 'selectPeserta']);
     Route::post("/data-peserta/daftar-peserta/store", [PesertaController::class, 'store']);
     Route::get("/data-peserta/daftar-event", [PesertaController::class, 'daftarEvent']);
 

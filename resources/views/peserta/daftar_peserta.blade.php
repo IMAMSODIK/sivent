@@ -9,8 +9,8 @@
                         <h4>Daftar Peserta</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" style="margin-right: 5px" id="import-data"><i class="fa fa-upload text-white" aria-hidden="true"></i> Import Data</button>
-                        <button class="btn btn-info" id="tambah-data"><i class="fa fa-plus-square text-white" aria-hidden="true"></i> Tambah Data</button>
+                        {{-- <button class="btn btn-success" style="margin-right: 5px" id="import-data"><i class="fa fa-upload text-white" aria-hidden="true"></i> Import Data</button> --}}
+                        <button class="btn btn-info" id="tambah-data" data-kategori="{{$kategori_event}}"><i class="fa fa-plus-square text-white" aria-hidden="true"></i> Tambah Data</button>
                     </div>
                 </div>
             </div>
@@ -44,11 +44,11 @@
                                             <td>{{$p->jabatan}}</td>
                                             <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
                                             <td>{{$p->status_absensi}}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <ul class="action">
-                                                    <li class="edit"> <a href="#"><i
-                                                                class="icon-pencil-alt"></i></a></li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                    <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
+                                                                class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
+                                                    <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -153,6 +153,39 @@
                                 <button class="btn btn-primary me-3" type="button" id="store">Submit</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" id="select-data-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myExtraLargeModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myExtraLargeModal">Pilih Peserta</h4>
+                    <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body dark-modal">
+                    <div class="card">
+                        <div class="table-responsive custom-scrollbar">
+                            <table class="display" id="select-peserta">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center"><input type="checkbox" name="" id=""></th>
+                                        <th>Nama Peserta</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Golongan</th>
+                                        <th>Jabatan</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

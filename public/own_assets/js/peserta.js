@@ -1,4 +1,5 @@
 let table = $("#basic-1").DataTable();
+let table2 = $("#select-peserta").DataTable();
 
 function alertModal(status, message = null) {
     if (status) {
@@ -15,7 +16,46 @@ function alertModal(status, message = null) {
 }
 
 $("#tambah-data").on("click", function () {
-    $("#tambah-data-modal").modal("show");
+    let kategori = $(this).data('kategori');
+    
+    if(kategori == 'meeting'){
+        $.ajax({
+            url: '/data-peserta/select-peserta',
+            method: 'GET',
+            success: function(response){
+                if(response.status){
+                    response.data.forEach(element => {
+                        let row = `
+                            <tr>
+                                <th class="text-center"><input type="checkbox" name="" id=""></th>
+                                <td>${element.nama} <br> <small>(${element.nip})</small></td>
+                                <td>${element.jenis_kelamin}</td>
+                                <td>${element.golongan}</td>
+                                <td>${element.jabatan}</td>
+                                <td class="text-center">
+                                    <ul class="action">
+                                        <li class="edit" data-id="${element.id}"> <a href="#"><i
+                                                    class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
+                                        <li class="delete" data-id="${element.id}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        `;
+                        $('#select-peserta tbody').append(row);
+                    });
+                }else{
+                    alertModal(false, response.message);
+                }
+            },
+            error: function(){
+                alertModal(false, response.message);
+            }
+        });
+        $("#select-data-modal").modal("show");
+    }else{
+        $("#tambah-data-modal").modal("show");
+    }
+    
 });
 
 $("#store").on("click", function () {

@@ -139,202 +139,67 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <h2 class="module-title font-alt">Exclusive products</h2>
-                            <div class="module-subtitle font-serif">The languages only differ in their grammar, their
-                                pronunciation and their most common words.</div>
+                            <h2 class="module-title font-alt">Daftar Rapat</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="owl-carousel text-center" data-items="5" data-pagination="false"
+                        <div class="owl-carousel text-center" data-pagination="false"
                             data-navigation="false">
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
+                            @foreach ($rapat as $r)
+                                <div class="shop-item" style="margin-right: 10px">
+                                    <div class="shop-item-image"><img
+                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
+                                            alt="Accessories Pack" />
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                    class="icon-basket">Detail</span></a></div>
+                                    </div>
+                                    <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
                                 </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <h2 class="module-title font-alt">Exclusive products</h2>
-                            <div class="module-subtitle font-serif">The languages only differ in their grammar, their
-                                pronunciation and their most common words.</div>
+                            <h2 class="module-title font-alt">Daftar Meeting</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="owl-carousel text-center" data-items="5" data-pagination="false"
+                        <div class="owl-carousel text-center" data-pagination="false"
                             data-navigation="false">
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
+                            @foreach ($meeting as $r)
+                                <div class="shop-item" style="margin-right: 10px">
+                                    <div class="shop-item-image"><img
+                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
+                                            alt="flayer" />
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                    class="icon-info">Detail</span></a></div>
+                                    </div>
+                                    <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
                                 </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <h2 class="module-title font-alt">Exclusive products</h2>
-                            <div class="module-subtitle font-serif">The languages only differ in their grammar, their
-                                pronunciation and their most common words.</div>
+                            <h2 class="module-title font-alt">Daftar Lembur</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="owl-carousel text-center" data-items="5" data-pagination="false"
+                        <div class="owl-carousel text-center" data-pagination="false"
                             data-navigation="false">
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
+                            @foreach ($lembur as $r)
+                                <div class="shop-item" style="margin-right: 10px">
+                                    <div class="shop-item-image"><img
+                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
+                                            alt="flayer" />
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                                    class="icon-info">Detail</span></a></div>
+                                    </div>
+                                    <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
                                 </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
-                            <div class="shop-item" style="margin-right: 10px">
-                                <div class="shop-item-image"><img
-                                        src="{{ asset('landing_page/images/shop/product-7.jpg') }}"
-                                        alt="Accessories Pack" />
-                                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                class="icon-basket">Add To Cart</span></a></div>
-                                </div>
-                                <h4 class="shop-item-title font-alt"><a href="#">Accessories Pack</a></h4>£9.00
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

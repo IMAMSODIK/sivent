@@ -166,6 +166,20 @@
                         </svg><span class="">Absensi Peserta</span></a>
                 </li>
 
+                <li class="sidebar-main-title">
+                    <div>
+                        <h6 class="">General</h6>
+                    </div>
+                </li>
+    
+                @if (session()->get('user')->role == 'super_admin')
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                            href="/data-admin">
+                            <i class="fa fa-users text-white"></i>
+                            </svg><span class="">Data Admin</span></a>
+                    </li>
+                @endif
+
             </ul>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>

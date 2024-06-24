@@ -18,7 +18,7 @@ class EventSeeder extends Seeder
             'event_id' => Str::random(8),
             'nama_kegiatan' => "Kegiatan 1",
             'lokasi_kegiatan' => "Sutomo",
-            'tanggal_kegiatan' => "2024-06-22",
+            'tanggal_kegiatan' => "2024-06-27",
             'waktu_kegiatan' => "12:00:00",
             'deskripsi_kegiatan' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

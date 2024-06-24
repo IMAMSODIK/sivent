@@ -72,10 +72,6 @@ menu master jabatan
 
 to do
 
-menu event
-- sesuaikan dengan note diatas
-- copy ke meeting dan lembur
-
 - data peserta
     -> kalau meeting, peserta di ambil dari master peserta
     -> rapat dan lembur, peserta diinputkan / import
@@ -87,3 +83,14 @@ menu event
 - data kamar
 - kit seminar
 - kunci kamar
+
+
+
+
+upload laporan rapat
+    peserta rapat diambil dari data pegawai, bukan peserta meeting
+    sistem meeting terbalik dengan rapat
+tambah generate qr
+log aktifitas admin
+master admin
+masing-masing admin hanya punya akses ke aksi mereka sendiri

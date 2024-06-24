@@ -17,7 +17,15 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'username' => 'admin',
-            'password' => bcrypt('123')
+            'password' => bcrypt('123'),
+            'role' => 'admin'
+        ]);
+
+        User::create([
+            'name' => 'Super Admin',
+            'username' => 'super_admin',
+            'password' => bcrypt('123'),
+            'role' => 'super_admin'
         ]);
 
         $this->call(UnitKerjaSeeder::class);
