@@ -25,16 +25,15 @@
         <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
             <div> <a class="toggle-sidebar" href="#"> <i class="iconly-Category icli"> </i></a>
                 <div class="d-flex align-items-center gap-2 ">
-                    <h4 class="f-w-600">Welcome Alex</h4><img class="mt-0"
+                    <h4 class="f-w-600">Selamat datang {{session('user')->name}}</h4><img class="mt-0"
                         src="{{ asset('assets/images/hand.gif') }}" alt="hand-gif">
                 </div>
             </div>
-            <div class="welcome-content d-xl-block d-none"><span class="text-truncate col-12">Here’s what’s
-                    happening with your store today. </span></div>
+            <div class="welcome-content d-xl-block d-none"><span class="text-truncate col-12">Manage semua event anda pada aplikasi ini </span></div>
         </div>
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
-                <li class="d-md-block d-none">
+                {{-- <li class="d-md-block d-none">
                     <div class="form search-form mb-0">
                         <div class="input-group"><span class="input-icon">
                                 <svg>
@@ -42,7 +41,7 @@
                                 </svg>
                                 <input class="w-100" type="search" placeholder="Search"></span></div>
                     </div>
-                </li>
+                </li> --}}
                 <li class="d-md-none d-block">
                     <div class="form search-form mb-0">
                         <div class="input-group"> <span class="input-show">
@@ -63,45 +62,30 @@
                         <div class="flip-card">
                             <div class="flip-card-inner">
                                 <div class="front">
-                                    <h6 class="f-18 mb-0 dropdown-title">Bookmark</h6>
+                                    <h6 class="f-18 mb-0 dropdown-title">Shorcut</h6>
                                     <ul class="bookmark-dropdown">
                                         <li>
                                             <div class="row">
                                                 <div class="col-4 text-center">
                                                     <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i
-                                                                data-feather="file-text"></i></div>
-                                                        <span>Forms</span>
+                                                        <div class="bookmark-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
+                                                        <span>Dashboard</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-center">
                                                     <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i data-feather="user"></i>
+                                                        <div class="bookmark-icon"><i class="fa fa-user" aria-hidden="true"></i>
                                                         </div><span>Profile</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-center">
                                                     <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i
-                                                                data-feather="server"></i></div>
-                                                        <span>Tables</span>
+                                                        <div class="bookmark-icon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+                                                        <span>Reset Password</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="text-center"><a class="flip-btn f-w-700" id="flip-btn"
-                                                href="javascript:void(0)">Add New Bookmark</a></li>
-                                    </ul>
-                                </div>
-                                <div class="back">
-                                    <ul>
-                                        <li>
-                                            <div class="bookmark-dropdown flip-back-content">
-                                                <input type="text" placeholder="search...">
-                                            </div>
-                                        </li>
-                                        <li><a class="f-w-700 d-block flip-back" id="flip-back"
-                                                href="javascript:void(0)">Back</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -468,25 +452,21 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li style="padding-left: 40px; padding-right: 40px; padding-top: 40px">
                     <div class="user-nav onhover-dropdown">
                         <div class="user-name media">
                             <div class="user"><img class="img-fluid rounded-circle"
                                     src="{{ asset('assets/  images/dashboard/user.png') }}" alt="">
                                 <ul class="profile-dropdown onhover-show-div p-20">
                                     <li><a href="{{ asset('template/user-profile.html') }}"><i
-                                                data-feather="user"></i>Edit Profile</a></li>
-                                    <li><a href="{{ asset('template/email-application.html') }}"><i
-                                                data-feather="mail"></i>Inbox</a></li>
-                                    <li><a href="{{ asset('template/chat.html') }}"><i
-                                                data-feather="message-square"></i>Chat</a></li>
-                                    <li><a href="{{ asset('template/logout.html') }}"><i
+                                                data-feather="user"></i>Profile</a></li>
+                                    <li><a id="logout"><i
                                                 data-feather="log-out"></i>Log out</a></li>
                                 </ul>
                             </div>
                             <div class="media-body">
-                                <h6>Elana Saint</h6>
-                                <p>Web Designer</p>
+                                <h6>{{session('user')->name}}</h6>
+                                <p>{{(session('user')->role == 'admin') ? "Admin" : "Super Admin"}}</p>
                             </div>
                         </div>
                     </div>

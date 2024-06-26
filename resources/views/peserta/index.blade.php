@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-body">
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-5">
       <div class="page-title">
         <div class="row">
           <div class="col-6">
@@ -178,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Peserta</button></a>
+                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Peserta</button></a>
                       </div>
                     </div>
                   </div>

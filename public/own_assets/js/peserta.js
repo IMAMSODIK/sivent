@@ -1,5 +1,6 @@
 let table = $("#basic-1").DataTable();
 let table2 = $("#select-peserta").DataTable();
+$(".sorting_1").addClass("text-center");
 
 function alertModal(status, message = null) {
     if (status) {
@@ -18,31 +19,31 @@ function alertModal(status, message = null) {
 $("#tambah-data").on("click", function () {
     let kategori = $(this).data('kategori');
     
-    if(kategori == 'meeting'){
+    if(kategori == 'rapat' || kategori == 'lembur'){
         $.ajax({
             url: '/data-peserta/select-peserta',
             method: 'GET',
+            data: {
+                "id_kegiatan": $("#id_kegiatan").val()
+            },
             success: function(response){
                 if(response.status){
+                    table2.clear();
+
+                    let rows = [];
                     response.data.forEach(element => {
-                        let row = `
-                            <tr>
-                                <th class="text-center"><input type="checkbox" name="" id=""></th>
-                                <td>${element.nama} <br> <small>(${element.nip})</small></td>
-                                <td>${element.jenis_kelamin}</td>
-                                <td>${element.golongan}</td>
-                                <td>${element.jabatan}</td>
-                                <td class="text-center">
-                                    <ul class="action">
-                                        <li class="edit" data-id="${element.id}"> <a href="#"><i
-                                                    class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
-                                        <li class="delete" data-id="${element.id}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        `;
-                        $('#select-peserta tbody').append(row);
+                        let row = [
+                            `<input type="checkbox" name="select_pegawai" value="${element.id}">`,
+                            `${element.nama} <br> <small>(${element.nip})</small>`,
+                            element.jenis_kelamin,
+                            element.golongan,
+                            element.jabatan.nama_jabatan
+                        ];
+                        rows.push(row);
                     });
+                    table2.rows.add(rows).draw();
+                    $(".sorting_1").addClass("text-center");
+                    $("#select-data-modal").modal("show");
                 }else{
                     alertModal(false, response.message);
                 }
@@ -51,7 +52,6 @@ $("#tambah-data").on("click", function () {
                 alertModal(false, response.message);
             }
         });
-        $("#select-data-modal").modal("show");
     }else{
         $("#tambah-data-modal").modal("show");
     }
@@ -300,4 +300,35 @@ $("#submit-filter").on("click", function(){
 $(".detail-flayer").on("click", function(){
     $("#detail-flayer-image").attr("src", `../../storage/flayer/${$(this).data('path')}`);
     $("#detail-flayer-modal").modal("show");
+})
+
+$("#selected_peserta").on("click", function(){
+    $("#select-data-modal").modal("hide");
+    var selectedPeserta = [];
+    $('input[name="select_pegawai"]:checked').each(function() {
+        selectedPeserta.push($(this).val());
+    });
+    let formData = new FormData();
+
+    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+    formData.append("id_kegiatan", $("#id_kegiatan").val());
+    formData.append("selected_id", selectedPeserta);
+
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/store',
+        method: 'POST',
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (response) {
+            if (response.status) {
+                alertModal(true)
+            } else {
+                alertModal(false, response.message);
+            }
+        },
+        error: function (response) {
+            alertModal(false, response.message);
+        }
+    })
 })

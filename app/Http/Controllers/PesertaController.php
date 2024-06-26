@@ -32,10 +32,15 @@ class PesertaController extends Controller
 
     public function daftarPeserta(Request $r){
         $event = Event::where("event_id", $r->kegiatan_id)->first();
+        if($event->kategori == "rapat" || $event->kategori == "lembur"){
+            $peserta = Peserta::with('pegawai')->get();
+        }else{
+            $peserta = Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get();
+        }
         $data = [
             'id_event' => $r->kegiatan_id,
             'kategori_event' => $event->kategori,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
+            'pesertas' => $peserta
         ];
         return view('peserta.daftar_peserta', $data);
     }
@@ -50,63 +55,79 @@ class PesertaController extends Controller
     }
 
     public function store(Request $r){
-        $messages = [
-            'required' => 'Kolom :attribute harus diisi.',
-            'numeric' => 'Kolom :attribute harus berupa angka.',
-            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
-            'string' => 'Kolom :attribute harus berupa teks.',
-            'unique' => 'Kolom :attribute sudah digunakan.'
-        ];
-
-        $data = [
-            'nama' => $r->nama,
-            'nip' => $r->nip,
-            'golongan' => $r->golongan,
-            'jabatan' => $r->jabatan,
-            'bank' => $r->bank,
-            'no_rek' => $r->no_rek,
-            'jenis_kelamin' => $r->jenis_kelamin,
-        ];
-
-        $rules = [
-            'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pesertas',
-            'golongan' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'bank' => 'required|string',
-            'no_rek' => 'required|string|max:255|unique:pesertas',
-            'jenis_kelamin' => 'required|string|max:255',
-        ];
-
-        $validator = Validator::make($data, $rules, $messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => implode(', ', $validator->errors()->all())
-            ]);
-        }
-
         try{
             $event = Event::where('event_id', $r->id_kegiatan)->first();
+            
             if($event){
-                $peserta = Peserta::create([
-                    'peserta_id' => Str::random(8),
-                    'event_id' => $event->id,
-                    'nama' => $r->nama,
-                    'nip' => $r->nip,
-                    'golongan' => $r->golongan,
-                    'jabatan' => $r->jabatan,
-                    'bank' => $r->bank,
-                    'no_rek' => $r->no_rek,
-                    'jenis_kelamin' => $r->jenis_kelamin,
-                    'is_narsum' => 0
-                ]);
-    
-                if($peserta){
+                if($event->kategori == 'rapat' || $event->kategori == 'lembur'){
+                    foreach(explode(",", $r->selected_id) as $id){
+                        Peserta::create([
+                            'peserta_id' => Str::random(8),
+                            'pegawai_id' => $id,
+                            'event_id' => $event->id,
+                            'is_narsum' => 0
+                        ]);
+                    }
+
                     return response()->json([
                         'status' => true
                     ]);
+                }else{
+                    $messages = [
+                        'required' => 'Kolom :attribute harus diisi.',
+                        'numeric' => 'Kolom :attribute harus berupa angka.',
+                        'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+                        'string' => 'Kolom :attribute harus berupa teks.',
+                        'unique' => 'Kolom :attribute sudah digunakan.'
+                    ];
+            
+                    $data = [
+                        'nama' => $r->nama,
+                        'nip' => $r->nip,
+                        'golongan' => $r->golongan,
+                        'jabatan' => $r->jabatan,
+                        'bank' => $r->bank,
+                        'no_rek' => $r->no_rek,
+                        'jenis_kelamin' => $r->jenis_kelamin,
+                    ];
+            
+                    $rules = [
+                        'nama' => 'required|string|max:255',
+                        'nip' => 'required|string|max:255|unique:pesertas',
+                        'golongan' => 'required|string|max:255',
+                        'jabatan' => 'required|string|max:255',
+                        'bank' => 'required|string',
+                        'no_rek' => 'required|string|max:255|unique:pesertas',
+                        'jenis_kelamin' => 'required|string|max:255',
+                    ];
+            
+                    $validator = Validator::make($data, $rules, $messages);
+            
+                    if ($validator->fails()) {
+                        return response()->json([
+                            'status' => false,
+                            'message' => implode(', ', $validator->errors()->all())
+                        ]);
+                    }
+
+                    $peserta = Peserta::create([
+                        'peserta_id' => Str::random(8),
+                        'event_id' => $event->id,
+                        'nama' => $r->nama,
+                        'nip' => $r->nip,
+                        'golongan' => $r->golongan,
+                        'jabatan' => $r->jabatan,
+                        'bank' => $r->bank,
+                        'no_rek' => $r->no_rek,
+                        'jenis_kelamin' => $r->jenis_kelamin,
+                        'is_narsum' => 0
+                    ]);
+        
+                    if($peserta){
+                        return response()->json([
+                            'status' => true
+                        ]);
+                    }
                 }
             }
 
@@ -133,9 +154,11 @@ class PesertaController extends Controller
         return view('peserta.registrasi', $data);
     }
 
-    public function selectPeserta(){
+    public function selectPeserta(Request $r){
         try{
-            $data = Pegawai::all();
+            $event = Event::where('event_id', $r->id_kegiatan)->first();
+            $peserta = Peserta::where('event_id', $event->id)->pluck('pegawai_id');
+            $data = Pegawai::with('jabatan')->whereNotIn('id', $peserta)->get();
 
             if($data){
                 return response()->json([
@@ -263,6 +286,47 @@ class PesertaController extends Controller
                 return response()->json([
                     'status' => true,
                 ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function absensiFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
+        ];
+        return view('front.absensi', $data);
+    }
+
+    public function registrasiFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'meeting' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+        ];
+        return view('front.registrasi', $data);
+    }
+
+    public function absensiFrontDaftarPeserta(Request $r){
+        try{
+            $data = Peserta::where('event_id', $r->id)->get();
+
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);
             }
 
             return response()->json([

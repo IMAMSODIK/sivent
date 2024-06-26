@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
@@ -26,32 +26,53 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Peserta</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            <th>Bank</th>
+                                            @if ($kategori_event == 'meeting')
+                                                <th>Bank</th>
+                                            @endif
                                             <th>Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $index = 1; ?>
                                         @foreach ($pesertas as $p)
-                                        <tr>
-                                            <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
-                                            <td>{{$p->jenis_kelamin}}</td>
-                                            <td>{{$p->golongan}}</td>
-                                            <td>{{$p->jabatan}}</td>
-                                            <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
-                                            <td>{{$p->status_absensi}}</td>
-                                            <td class="text-center">
-                                                <ul class="action">
-                                                    <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
-                                                                class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
-                                                    <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
+                                            @if ($kategori_event == 'rapat' || $kategori_event == 'lembur')
+                                                <tr>
+                                                    <td>{{$index++}}</td>
+                                                    <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
+                                                    <td>{{$p->pegawai->jenis_kelamin}}</td>
+                                                    <td>{{$p->pegawai->golongan}}</td>
+                                                    <td>{{$p->pegawai->jabatan->nama_jabatan}}</td>
+                                                    <td>{{$p->status_absensi}}</td>
+                                                    <td class="text-center">
+                                                        <ul class="action">
+                                                            <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            @else
+                                                <tr>
+                                                    <td>{{$index++}}</td>
+                                                    <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
+                                                    <td>{{$p->jenis_kelamin}}</td>
+                                                    <td>{{$p->golongan}}</td>
+                                                    <td>{{$p->jabatan}}</td>
+                                                    <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                                    <td>{{$p->status_absensi}}</td>
+                                                    <td class="text-center">
+                                                        <ul class="action">
+                                                            <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
+                                                                        class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
+                                                            <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -178,7 +199,6 @@
                                         <th>Jenis Kelamin</th>
                                         <th>Golongan</th>
                                         <th>Jabatan</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -187,6 +207,10 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-light" type="reset" value="Cancel">
+                    <button class="btn btn-primary me-3" type="button" id="selected_peserta">Submit</button>
                 </div>
             </div>
         </div>

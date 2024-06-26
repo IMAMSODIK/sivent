@@ -41,6 +41,24 @@
 
 <script>
     new WOW().init();
+
+    $("#logout").on("click", function(){
+        $.ajax({
+        url: '/logout',
+        method: 'POST',
+        data: {
+            "_token": $("meta[name='csrf-token']").attr("content")
+        },
+        success: function(response){
+            if(response.status){
+                location.reload();
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+    })
 </script>
 
 @yield('own_script')

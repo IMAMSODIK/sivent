@@ -13,103 +13,6 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-xl-4 col-sm-6 rapat" style="cursor: pointer">
-                <div class="card o-hidden small-widget">
-                    <div class="card-body total-project border-b-primary border-2">
-                        <span class="f-light f-w-500 f-14">Rapat</span>
-                        <div class="project-details">
-                            <div class="project-counter">
-                                <h2 class="f-w-600">{{$count_rapat}}</h2>
-                                <span class="f-12 f-w-400">(Kegiatan)</span>
-                            </div>
-                            <div class="product-sub bg-primary-light">
-                                <svg class="invoice-icon">
-                                    <use
-                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#color-swatch') }}">
-                                    </use>
-                                </svg>
-                            </div>
-                        </div>
-                        <ul class="bubbles">
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li clPesertaass="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 meeting" style="cursor: pointer">
-                <div class="card o-hidden small-widget">
-                    <div class="card-body total-Progress border-b-warning border-2">
-                        <span class="f-light f-w-500 f-14">Meeting</span>
-                        <div class="project-details">
-                            <div class="project-counter">
-                                <h2 class="f-w-600">{{$count_meeting}}</h2>
-                                <span class="f-12 f-w-400">(Kegiatan)</span>
-                            </div>
-                            <div class="product-sub bg-warning-light">
-                                <svg class="invoice-icon">
-                                    <use
-                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#tick-circle') }}">
-                                    </use>
-                                </svg>
-                            </div>
-                        </div>
-                        <ul class="bubbles">
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 lembur" style="cursor: pointer">
-                <div class="card o-hidden small-widget">
-                    <div class="card-body total-Complete border-b-secondary border-2">
-                        <span class="f-light f-w-500 f-14">Lembur</span>
-                        <div class="project-details">
-                            <div class="project-counter">
-                                <h2 class="f-w-600">{{$count_lembur}}</h2>
-                                <span class="f-12 f-w-400">(Kegiatan)</span>
-                            </div>
-                            <div class="product-sub bg-secondary-light">
-                                <svg class="invoice-icon">
-                                    <use
-                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#add-square') }}">
-                                    </use>
-                                </svg>
-                            </div>
-                        </div>
-                        <ul class="bubbles">
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                            <li class="bubble"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
       <div class="row">
         <div class="col-xl-9 xl-60 order-xl-0 order-1 box-col-12">
 
@@ -133,7 +36,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/document/daftar-document?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Dokumen</button></a>
+                              <a href="/kit-seminar/daftar-kit?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Kit Seminar</button></a>
                             </div>
                           </div>
                           <hr>
@@ -178,7 +81,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/document/daftar-document?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Dokumen</button></a>
+                        <a href="/kit-seminar/daftar-kit?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Kit Seminar</button></a>
                       </div>
                     </div>
                   </div>
@@ -237,7 +140,7 @@
                               <input class="form-control" type="text" placeholder="Search.."><i class="search-icon" data-feather="search"></i>
                             </div>
                           </div>
-                          <input type="hidden" id="kategori_filter">
+                          <input type="hidden" id="kategori_filter" value="meeting">
                           <div class="checkbox-animated">
                             <div class="learning-header"><span class="f-w-600">Unit Kerja</span></div>
                             @foreach ($unit_kerja as $u)
@@ -315,5 +218,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/dokumen.js')}}"></script>
+    <script src="{{asset('own_assets/js/kit_seminar.js')}}"></script>
 @endsection

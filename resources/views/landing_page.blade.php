@@ -70,7 +70,7 @@
         <div class="page-loader">
             <div class="loader">Loading...</div>
         </div>
-        <nav class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
+        <nav class="navbar navbar-custom navbar-fixed-top navbar-transparent" style="padding-top: 40px; padding-bottom: 40px; font-size: 18px" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse"
@@ -82,24 +82,24 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a class="" href="/">Home</a>
                         </li>
-                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                        <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">
-                                <li><a href="documentation.html#contact">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                        <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Meeting</a>
                             <ul class="dropdown-menu">
-                                <li><a href="documentation.html#contact">Registrasi</a></li>
-                                <li><a href="documentation.html#contact">Absensi</a></li>
-                                <li><a href="documentation.html#contact">Seminar Kit</a></li>
+                                <li style="font-size: 15px"><a href="/registrasi-peserta/front">Registrasi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/kit-peserta/front">Seminar Kit</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html"
+                        <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Lembur</a>
                             <ul class="dropdown-menu">
-                                <li><a href="documentation.html#contact">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="documentation.html#contact">Absensi</a></li>
                             </ul>
                         </li>
                     </ul>

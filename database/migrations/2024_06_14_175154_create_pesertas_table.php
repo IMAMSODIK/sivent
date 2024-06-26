@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('pesertas', function (Blueprint $table) {
             $table->id();
-            $table->string('peserta_id');
+            $table->string('peserta_id')->nullable();
             $table->foreignId('event_id')->nullable();
-            $table->string('nama');
-            $table->string('nip')->unique();
-            $table->string('golongan');
-            $table->string('jabatan');
+            $table->foreignId('pegawai_id')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('nip')->unique()->nullable();
+            $table->string('golongan')->nullable();
+            $table->string('jabatan')->nullable();
             $table->string('bank')->nullable();
             $table->string('no_rek')->unique()->nullable();
-            $table->string('jenis_kelamin');
+            $table->string('jenis_kelamin')->nullable();
             $table->boolean('is_narsum');
             $table->boolean('status_registrasi')->default(false);
+            $table->boolean('status_kit')->default(false);
             $table->string('status_absensi')->default("Absen");
             $table->string('asal_instansi')->nullable();
             $table->timestamps();

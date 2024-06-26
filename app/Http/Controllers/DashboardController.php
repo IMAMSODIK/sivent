@@ -12,10 +12,11 @@ class DashboardController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'event' => Event::count(),
-            'event_today' => Event::where('tanggal_kegiatan', '=', $tanggalSekarang)->count(),
-            'event_incoming' => Event::where('tanggal_kegiatan', '>', $tanggalSekarang)->count(),
-            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->count(),
+            'count_event' => Event::count(),
+            'count_event_today' => Event::where('tanggal_kegiatan', '=', $tanggalSekarang)->count(),
+            'count_event_incoming' => Event::where('tanggal_kegiatan', '>', $tanggalSekarang)->count(),
+            'count_event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->count(),
+            'event_today' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
         ];
 
         return view('dashboard.index', $data);

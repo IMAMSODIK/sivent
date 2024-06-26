@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentEventController;
+use App\Http\Controllers\FotoEventController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KitSeminarController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NarasumberController;
@@ -43,6 +45,14 @@ Route::middleware('guest')->group(function(){
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginCheck']);
 });
+
+Route::get("/absensi-peserta/front", [PesertaController::class, 'absensiFront']);
+Route::get("/absensi-peserta/front/daftar-peserta", [PesertaController::class, 'absensiFrontDaftarPeserta']);
+Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
+Route::post("/absensi-peserta/daftar-peserta/absensi", [PesertaController::class, 'absensiAksi']);
+Route::get("/registrasi-peserta/front", [PesertaController::class, 'registrasiFront']);
+Route::post("/registrasi-peserta/daftar-peserta/registrasi", [PesertaController::class, 'registered']);
+Route::get("/kit-peserta/front", [PesertaController::class, 'kitFront']);
 
 Route::middleware('auth')->group(function(){
     Route::get("/dashboard", [DashboardController::class, 'index']);
@@ -89,10 +99,22 @@ Route::middleware('auth')->group(function(){
     Route::post("/document/daftar-document/update", [DokumentEventController::class, 'update']);
     Route::post("/document/daftar-document/delete", [DokumentEventController::class, 'delete']);
 
+    Route::get("/foto-event", [FotoEventController::class, 'index']);
+    Route::get("/foto-event/daftar-foto", [FotoEventController::class, 'daftarFoto']);
+    Route::post("/foto-event/daftar-foto/store", [FotoEventController::class, 'store']);
+    Route::get("/foto-event/daftar-foto/edit", [FotoEventController::class, 'edit']);
+    Route::post("/foto-event/daftar-foto/update", [FotoEventController::class, 'update']);
+    Route::post("/foto-event/daftar-foto/delete", [FotoEventController::class, 'delete']);
+
+    Route::get("/kit-seminar", [KitSeminarController::class, 'index']);
+    Route::get("/kit-seminar/daftar-kit", [KitSeminarController::class, 'daftarKit']);
+    Route::post("/kit-seminar/daftar-kit/store", [KitSeminarController::class, 'store']);
+    Route::get("/kit-seminar/daftar-kit/edit", [KitSeminarController::class, 'edit']);
+    Route::post("/kit-seminar/daftar-kit/update", [KitSeminarController::class, 'update']);
+    Route::post("/kit-seminar/daftar-kit/delete", [KitSeminarController::class, 'delete']);
+
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
-    Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
-    Route::post("/registrasi-peserta/daftar-peserta/registrasi", [PesertaController::class, 'registered']);
     // Route::post("/registrasi-peserta/daftar-peserta/store", [NarasumberController::class, 'store']);
 
     Route::get("/data-unit-kerja", [UnitKerjaController::class, 'index']);
@@ -116,5 +138,6 @@ Route::middleware('auth')->group(function(){
     Route::get("/absensi-peserta", [PesertaController::class, 'absensi']);
     Route::get("/absensi-peserta/daftar-peserta", [PesertaController::class, 'daftarAbsensiPeserta']);
     Route::get("/absensi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
-    Route::post("/absensi-peserta/daftar-peserta/absensi", [PesertaController::class, 'absensiAksi']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-body">
-    <div class="container-fluid" style="margin-top: 20px">
+    <div class="container-fluid" style="margin-top: 50px">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
@@ -17,8 +17,7 @@
                                     </use>
                                 </svg>
                             </a></li>
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Project-Management</li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div>
             </div>
@@ -39,7 +38,7 @@
                                         <span class="f-light f-w-500 f-14">Total Event</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">{{$event}}</h2>
+                                                <h2 class="f-w-600">{{$count_event}}</h2>
                                                 <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-primary-light">
@@ -70,7 +69,7 @@
                                         <span class="f-light f-w-500 f-14">Event Hari Ini</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">{{$event_today}}</h2>
+                                                <h2 class="f-w-600">{{$count_event_today}}</h2>
                                                 <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-warning-light">
@@ -101,7 +100,7 @@
                                         <span class="f-light f-w-500 f-14">Event Mendatang</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">{{$event_incoming}}</h2>
+                                                <h2 class="f-w-600">{{$count_event_incoming}}</h2>
                                                 <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-secondary-light">
@@ -132,7 +131,7 @@
                                         <span class="f-light f-w-500 f-14">Event Selesai</span>
                                         <div class="project-details">
                                             <div class="project-counter">
-                                                <h2 class="f-w-600">{{$event_done}}</h2>
+                                                <h2 class="f-w-600">{{$count_event_done}}</h2>
                                                 <span class="f-12 f-w-400">(Event)</span>
                                             </div>
                                             <div class="product-sub bg-light-light">
@@ -190,116 +189,35 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header card-no-border total-revenue">
-                                <h4>Today Work</h4><a href="product.html">View All </a>
+                                <h4>Today Event</h4><a href="product.html">View All </a>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="today-work-table table-responsive custom-scrollbar">
                                     <table class="today-working-table w-100">
                                         <tbody>
-                                            <tr>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">App
-                                                        Design</span><a class="f-w-500 f-14"
-                                                        href="product.html">NFT Illustration...</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Assigned
-                                                        to</span><a class="f-w-500 f-14"
-                                                        href="product.html">Cody Fisher</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">02</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-primary product-sub badge rounded-pill ">
-                                                        <span>High</span></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">App
-                                                        Design</span><a class="f-w-500 f-14"
-                                                        href="product.html">NFT Illustration...</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Arlene
-                                                        McCoy</span><a class="f-w-500 f-14"
-                                                        href="product.html">Assigned to</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">12</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-primary product-sub badge rounded-pill ">
-                                                        <span>High</span></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Web
-                                                        Design</span><a class="f-w-500 f-14"
-                                                        href="product.html">Appron’s 3D Co...</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Assigned
-                                                        to</span><a class="f-w-500 f-14"
-                                                        href="product.html">Kristin Watson</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">12</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-warning product-sub badge rounded-pill ">
-                                                        <span>Medium</span></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Desktop
-                                                        App</span><a class="f-w-500 f-14"
-                                                        href="product.html">Rental Car</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Assigned
-                                                        to</span><a class="f-w-500 f-14"
-                                                        href="product.html">Darlene Robertson</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">05</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-secondary product-sub badge rounded-pill ">
-                                                        <span>low</span></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Template
-                                                        Design</span><a class="f-w-500 f-14"
-                                                        href="product.html">E-commerce</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Assigned
-                                                        to</span><a class="f-w-500 f-14"
-                                                        href="product.html">Wade Warren</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">31</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-primary product-sub badge rounded-pill ">
-                                                        <span>High</span></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">App
-                                                        Design</span><a class="f-w-500 f-14"
-                                                        href="product.html">Food Delivery</a></td>
-                                                <td> <span
-                                                        class="f-w-500 f-light d-block f-12 mb-1">Assigned
-                                                        to</span><a class="f-w-500 f-14"
-                                                        href="product.html">Smith John</a></td>
-                                                <td><span class="f-w-500 f-light d-block f-12 mb-1">Days
-                                                        Left</span><a class="f-w-500 f-14"
-                                                        href="product.html">20</a></td>
-                                                <td class="text-end">
-                                                    <div
-                                                        class="badge-light-warning product-sub badge rounded-pill ">
-                                                        <span>Medium</span></div>
-                                                </td>
-                                            </tr>
+                                            @foreach ($event_today as $e)
+                                                <tr>
+                                                    <td><span class="f-w-500 f-light d-block f-12 mb-1">Kegiatan</span><a class="f-w-500 f-14"
+                                                            href="product.html">{{$e->nama_kegiatan}}</a></td>
+                                                    <td> <span
+                                                            class="f-w-500 f-light d-block f-12 mb-1">Unit Kerja</span><a class="f-w-500 f-14"
+                                                            href="product.html">{{$e->unit_kerja}}</a></td>
+                                                    <td><span class="f-w-500 f-light d-block f-12 mb-1">Jumlah Peserta</span><a class="f-w-500 f-14"
+                                                            href="product.html">02</a></td>
+                                                    <td class="text-end">
+                                                        @if ($e->kategori === 'rapat')
+                                                            <div class="badge-light-primary product-sub badge rounded-pill ">
+                                                                <span>{{$e->kategori}}</span></div>
+                                                        @elseif($e->kategori === 'meeting')
+                                                            <div class="badge-light-info product-sub badge rounded-pill ">
+                                                                <span>{{$e->kategori}}</span></div>
+                                                        @elseif($e->kategori === 'lembur')
+                                                            <div class="badge-light-danger product-sub badge rounded-pill ">
+                                                                <span>{{$e->kategori}}</span></div>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

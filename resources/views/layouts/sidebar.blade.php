@@ -119,7 +119,7 @@
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                        class="sidebar-link sidebar-title link-nav" href="#">
+                        class="sidebar-link sidebar-title link-nav" href="/foto-event">
                         <i class="fa fa-picture-o text-white" aria-hidden="true"></i>
                         </svg><span class="">Foto Event</span></a>
                 </li>
@@ -130,16 +130,16 @@
                     </div>
                 </li>
 
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
+                    class="sidebar-link sidebar-title link-nav" href="/kit-seminar">
+                    <i class="fa fa-cubes text-white" aria-hidden="true"></i>
+                    </svg><span class="">Kit Seminar</span></a>
+                </li>
+
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
                     href="#">
                     <i class="fa fa-bed text-white" aria-hidden="true"></i>
                     </svg><span class="">Data Kamar</span></a>
-                </li>
-
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                    class="sidebar-link sidebar-title link-nav" href="#">
-                    <i class="fa fa-cubes text-white" aria-hidden="true"></i>
-                    </svg><span class="">Kit Seminar</span></a>
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
@@ -179,6 +179,12 @@
                             </svg><span class="">Data Admin</span></a>
                     </li>
                 @endif
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="/profile">
+                    <i class="fa fa-user text-white"></i>
+                    </svg><span class="">Profile</span></a>
+            </li>
 
             </ul>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

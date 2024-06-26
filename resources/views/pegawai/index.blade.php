@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
@@ -214,7 +214,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>a
 
     <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
         aria-hidden="true">

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>Daftar Narasumber</h4>
+                        <h4>Daftar Rundown</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-success" id="tambah-data">Tambah Data</button>
@@ -125,7 +125,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Edit Narasumber</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Rundown</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">

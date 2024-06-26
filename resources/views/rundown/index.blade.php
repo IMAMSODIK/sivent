@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-body">
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-5">
       <div class="page-title">
         <div class="row">
           <div class="col-6">
@@ -36,7 +36,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/data-rundown/daftar-rundown?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Narasumber</button></a>
+                              <a href="/data-rundown/daftar-rundown?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Rundown</button></a>
                             </div>
                           </div>
                           <hr>
