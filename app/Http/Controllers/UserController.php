@@ -2,39 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRundownRequest;
-use App\Http\Requests\UpdateRundownRequest;
-use App\Models\Event;
-use App\Models\Rundown;
-use App\Models\UnitKerja;
-use Carbon\Carbon;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RundownController extends Controller
+class UserController extends Controller
 {
-    public function index(){
-        $tanggalSekarang = Carbon::now();
-
+    public function index()
+    {
         $data = [
-            'count_rapat' => Event::where('kategori', 'rapat')->count(),
-            'count_meeting' => Event::where('kategori', 'meeting')->count(),
-            'count_lembur' => Event::where('kategori', 'lembur')->count(),
-            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
-            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
-            'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'admin' => User::where('role', 'admin')->get()
         ];
-        return view('rundown.index', $data);
-    }
-
-    public function daftarRundown(Request $r){
-        $event = Event::where("event_id", $r->kegiatan_id)->first();
-        $data = [
-            'id_event' => $r->kegiatan_id,
-            'rundown' => Rundown::where('event_id', $event->id)->get()
-        ];
-        return view('rundown.daftar_rundown', $data);
+        return view('admin.index', $data);
     }
 
     public function store(Request $r){
@@ -47,19 +27,13 @@ class RundownController extends Controller
         ];
 
         $data = [
-            'event_id' => $r->id_kegiatan,
-            'tanggal_kegiatan' => $r->tanggal_kegiatan,
-            'waktu_kegiatan' => $r->waktu_kegiatan,
-            'keterangan_kegiatan' => $r->keterangan,
-            'aktor' => $r->aktor,
+            'name' => $r->name,
+            'username' => $r->username
         ];
 
         $rules = [
-            'event_id' => 'required',
-            'tanggal_kegiatan' => 'required|string|max:255',
-            'waktu_kegiatan' => 'required|string|max:255',
-            'keterangan_kegiatan' => 'required|string|max:255',
-            'aktor' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -72,11 +46,14 @@ class RundownController extends Controller
         }
 
         try{
-            $event = Event::where('event_id', $r->id_kegiatan)->first();
-            $data['event_id'] = $event->id;
-            $rundown = Rundown::create($data);
+            $user = User::create([
+                'name' => $r->name,
+                'username' => $r->username,
+                'password' => bcrypt($r->username),
+                'role' => 'admin'
+            ]);
 
-            if($rundown){
+            if($user){
                 return response()->json([
                     'status' => true
                 ]);
@@ -96,7 +73,7 @@ class RundownController extends Controller
 
     public function edit(Request $r){
         try{
-            $data = Rundown::where('id', $r->id)->first();
+            $data = User::where('id', $r->id)->first();
 
             if($data){
                 return response()->json([
@@ -127,17 +104,13 @@ class RundownController extends Controller
         ];
 
         $data = [
-            'tanggal_kegiatan' => $r->tanggal_kegiatan,
-            'waktu_kegiatan' => $r->waktu_kegiatan,
-            'keterangan_kegiatan' => $r->keterangan,
-            'aktor' => $r->aktor,
+            'name' => $r->name,
+            'username' => $r->username
         ];
 
         $rules = [
-            'tanggal_kegiatan' => 'required|string|max:255',
-            'waktu_kegiatan' => 'required|string|max:255',
-            'keterangan_kegiatan' => 'required|string|max:255',
-            'aktor' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,'.$r->id,
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -150,13 +123,11 @@ class RundownController extends Controller
         }
 
         try{
-            $data = Rundown::where("id", $r->id)->first();
+            $data = User::where("id", $r->id)->first();
 
             if($data){
-                $data->tanggal_kegiatan = $r->tanggal_kegiatan;
-                $data->waktu_kegiatan = $r->waktu_kegiatan;
-                $data->keterangan_kegiatan = $r->keterangan;
-                $data->aktor = $r->aktor;
+                $data->name = $r->name;
+                $data->username = $r->username;
                 $data->save();
 
                 return response()->json([
@@ -178,7 +149,7 @@ class RundownController extends Controller
 
     public function delete(Request $r){
         try{
-            $data = Rundown::where('id', $r->id)->first();
+            $data = User::where('id', $r->id)->first();
 
             if($data){
                 $data->delete();

@@ -6,7 +6,7 @@ function alertModal(status, message = null) {
     if (status) {
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
         $("#alert-message").text("Success");
-        $("#alert-message").text("Berhasil menambahkan data");
+        $("#alert-message").text(message);
     } else {
         $("#alert-image").attr("src", '../../assets/images/gif/danger.gif');
         $("#alert-message").text("Gagal");
@@ -80,12 +80,81 @@ $("#store").on("click", function () {
         data: formData,
         success: function (response) {
             if (response.status) {
-                alertModal(true)
+                alertModal(true, "Berhasil menambahkan data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 alertModal(false, response.message);
             }
         },
         error: function (response) {
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$(".edit").on("click", function(){
+    let id = $(this).data('id');
+
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/detail',
+        method: 'GET',
+        data: {
+            'id': id
+        },
+        success: function(response){
+            if(response.status){
+                $("#id").val(response.data.id);
+                $("#edit_nama").val(response.data.nama);
+                $("#edit_nip").val(response.data.nip);
+                $("#edit_golongan").val(response.data.golongan);
+                $("#edit_jabatan").val(response.data.jabatan);
+                $("#edit_bank").val(response.data.bank);
+                $("#edit_no_rek").val(response.data.no_rek);
+                $("#edit_jenis_kelamin").val(response.data.jenis_kelamin);
+
+                $("#edit-data-modal").modal("show");
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$("#update").on("click", function(){
+    $("#edit-data-modal").modal("hide");
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/update',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),
+            'id': $("#id").val(),
+            'nama': $("#edit_nama").val(),
+            'nip': $("#edit_nip").val(),
+            'golongan': $("#edit_golongan").val(),
+            'jabatan': $("#edit_jabatan").val(),
+            'bank': $("#edit_bank").val(),
+            'no_rek': $("#edit_no_rek").val(),
+            'jenis_kelamin': $("#edit_jenis_kelamin").val(),
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil mengubah data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                $('.modal-alert').on('hidden.bs.modal', function () {
+                    $("#edit-data-modal").modal("show");
+                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
             alertModal(false, response.message);
         }
     })
@@ -322,12 +391,44 @@ $("#selected_peserta").on("click", function(){
         data: formData,
         success: function (response) {
             if (response.status) {
-                alertModal(true)
+                alertModal(true, "Berhasil menambahkan data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 alertModal(false, response.message);
             }
         },
         error: function (response) {
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$(".delete").on("click", function(){
+    $("#delete-confirmed").attr("data-id", $(this).data('id'));
+    $("#confirm").modal("show");
+})
+
+$("#delete-confirmed").on("click", function(){
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/delete',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),
+            'id': $(this).data("id"),
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil menghapus data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
             alertModal(false, response.message);
         }
     })

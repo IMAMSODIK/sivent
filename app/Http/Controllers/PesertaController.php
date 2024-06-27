@@ -29,11 +29,39 @@ class PesertaController extends Controller
         ];
         return view('peserta.index', $data);
     }
+    
+    public function daftarPesertaFront(Request $r){
+        try{
+            $event = Event::where("id", $r->id)->first();
+            if($event){
+                if($event->kategori == "rapat" || $event->kategori == "lembur"){
+                    $peserta = Peserta::with('pegawai')->where('event_id', $event->id)->get();
+                }else{
+                    $peserta = Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get();
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'data' => $peserta
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'message' => "Data tidak ditemukan"
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
     public function daftarPeserta(Request $r){
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         if($event->kategori == "rapat" || $event->kategori == "lembur"){
-            $peserta = Peserta::with('pegawai')->get();
+            $peserta = Peserta::with('pegawai')->where('event_id', $event->id)->get();
         }else{
             $peserta = Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get();
         }
@@ -65,7 +93,8 @@ class PesertaController extends Controller
                             'peserta_id' => Str::random(8),
                             'pegawai_id' => $id,
                             'event_id' => $event->id,
-                            'is_narsum' => 0
+                            'is_narsum' => 0,
+                            'status_registrasi' => 1
                         ]);
                     }
 
@@ -93,11 +122,11 @@ class PesertaController extends Controller
             
                     $rules = [
                         'nama' => 'required|string|max:255',
-                        'nip' => 'required|string|max:255|unique:pesertas',
+                        'nip' => 'required|string|max:255',
                         'golongan' => 'required|string|max:255',
                         'jabatan' => 'required|string|max:255',
                         'bank' => 'required|string',
-                        'no_rek' => 'required|string|max:255|unique:pesertas',
+                        'no_rek' => 'required|string|max:255',
                         'jenis_kelamin' => 'required|string|max:255',
                     ];
             
@@ -129,6 +158,73 @@ class PesertaController extends Controller
                         ]);
                     }
                 }
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal menambahkan data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(Request $r){
+        try{
+            $messages = [
+                'required' => 'Kolom :attribute harus diisi.',
+                'numeric' => 'Kolom :attribute harus berupa angka.',
+                'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+                'string' => 'Kolom :attribute harus berupa teks.',
+                'unique' => 'Kolom :attribute sudah digunakan.'
+            ];
+    
+            $data = [
+                'nama' => $r->nama,
+                'nip' => $r->nip,
+                'golongan' => $r->golongan,
+                'jabatan' => $r->jabatan,
+                'bank' => $r->bank,
+                'no_rek' => $r->no_rek,
+                'jenis_kelamin' => $r->jenis_kelamin,
+            ];
+    
+            $rules = [
+                'nama' => 'required|string|max:255',
+                'nip' => 'required|string|max:255',
+                'golongan' => 'required|string|max:255',
+                'jabatan' => 'required|string|max:255',
+                'bank' => 'required|string',
+                'no_rek' => 'required|string|max:255',
+                'jenis_kelamin' => 'required|string|max:255',
+            ];
+    
+            $validator = Validator::make($data, $rules, $messages);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => implode(', ', $validator->errors()->all())
+                ]);
+            }
+
+            $peserta = Peserta::where('id', $r->id)->first();
+            if($peserta){
+                $peserta->nama = $r->nama;
+                $peserta->nip = $r->nip;
+                $peserta->golongan = $r->golongan;
+                $peserta->jabatan = $r->jabatan;
+                $peserta->bank = $r->bank;
+                $peserta->no_rek = $r->no_rek;
+                $peserta->jenis_kelamin = $r->jenis_kelamin;
+                $peserta->save();
+
+                return response()->json([
+                    'status' => true
+                ]);
             }
 
             return response()->json([
@@ -206,11 +302,17 @@ class PesertaController extends Controller
 
     public function detail(Request $r){
         try{
-            $data = Peserta::where('id', $r->id)->first();
+            $event = Event::where('id', $r->event)->first();
+            if($event->kategori == 'rapat' || $event->kategori == 'lembur'){
+                $data = Peserta::with('pegawai')->where('id', $r->id)->first();
+            }else{
+                $data = Peserta::where('id', $r->id)->first();
+            }
 
             if($data){
                 return response()->json([
                     'status' => true,
+                    'kategori_event' => $event->kategori,
                     'data' => $data
                 ]);    
             }
@@ -278,6 +380,12 @@ class PesertaController extends Controller
     public function absensiAksi(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
+            if(!$data->status_registrasi){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Silahkan Registrasi terlebih dahulu!"
+                ]);
+            }
 
             if($data){
                 $data->status_absensi = $r->status_absensi;
@@ -300,13 +408,40 @@ class PesertaController extends Controller
         }
     }
 
-    public function absensiFront(){
+    public function absensiRapatFront(){
         $tanggalSekarang = Carbon::now();
 
         $data = [
             'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
         ];
-        return view('front.absensi', $data);
+        return view('front.rapat_absensi', $data);
+    }
+
+    public function absensiLemburFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->get(),
+        ];
+        return view('front.lembur_absensi', $data);
+    }
+
+    public function registrasiMeetingFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+        ];
+        return view('front.meeting_registrasi', $data);
+    }
+
+    public function absensiMeetingFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+        ];
+        return view('front.meeting_absensi', $data);
     }
 
     public function registrasiFront(){
@@ -327,6 +462,30 @@ class PesertaController extends Controller
                     'status' => true,
                     'data' => $data
                 ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                $data->delete();
+
+                return response()->json([
+                    'status' => true
+                ]);   
             }
 
             return response()->json([

@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>Daftar Foto</h4>
+                        <h4>Daftar Admin</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-success" id="tambah-data">Tambah Data</button>
@@ -25,26 +25,24 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%; font-size: 18px" class="text-center">No. </th>
-                                            <th style="width: 45%; font-size: 18px" class="text-center">Foto</th>
-                                            <th style="width: 40%; font-size: 18px" class="text-center">Keterangan</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Action</th>
+                                            <th style="width: 100px; font-size: 20px" class="text-center">No. </th>
+                                            <th style="width: 300px; font-size: 20px" class="text-center">Nama</th>
+                                            <th style="font-size: 20px">Username</th>
+                                            <th style="width: 100px; font-size: 20px" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $index = 0; ?>
-                                        @foreach ($fotos as $p)
+                                        @foreach ($admin as $b)
                                         <tr>
-                                            <td style="font-size: 18px" class="text-center">{{++$index}}</td>
-                                            <td class="text-center">
-                                                <img src="{{asset('storage/foto') . '/' . $p->foto}}" alt="" width="200px">
-                                            </td>
-                                            <td style="font-size: 18px" class="text-center">{{$p->keterangan}}</td>
+                                            <td style="font-size: 20px" class="text-center">{{++$index}}</td>
+                                            <td style="font-size: 20px" class="text-center">{{$b->name}}</td>
+                                            <td style="font-size: 20px">{{$b->username}}</td>
                                             <td class="text-center">
                                                 <ul class="action">
-                                                    <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
+                                                    <li class="edit" data-id="{{$b->id}}"> <a href="#"><i
                                                                 class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
-                                                    <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
+                                                    <li class="delete" data-id="{{$b->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -64,27 +62,28 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Foto</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Admin</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
                     <div class="card">
                         <form class="form theme-form dark-inputs">
-                            <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="foto">Upload Foto</label>
-                                            <input class="form-control input-air-primary" id="foto" type="file">
+                                            <label class="form-label" for="nama">Nama Admin</label>
+                                            <input class="form-control input-air-primary" id="nama"
+                                                type="text" placeholder="Nama Admin">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="deskripsi">Deskripsi Dokumen</label>
-                                            <textarea class="form-control input-air-primary" id="deskripsi" cols="30" rows="10" placeholder="Deksripsi Dokumen"></textarea>
+                                            <label class="form-label" for="username">Username Admin</label>
+                                            <input class="form-control input-air-primary" id="username"
+                                                type="text" placeholder="Username Admin">
                                         </div>
                                     </div>
                                 </div>
@@ -105,33 +104,29 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Edit Foto Event</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Admin</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
                     <div class="card">
                         <form class="form theme-form dark-inputs">
-                            <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
-                            <input type="hidden" id="id">
+                            <input type="hidden" name="" id="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="row mb-2">
-                                            <img id="foto_event" width="100%" alt="">
-                                        </div>
-                                        <div class="row">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="edit_foto">Upload Foto</label>
-                                                <input class="form-control input-air-primary" id="edit_foto" type="file">
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_nama">Nama Admin</label>
+                                            <input class="form-control input-air-primary" id="edit_nama"
+                                                type="text" placeholder="Nama Admin">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="edit_keterangan">Deksripsi Dokumen</label>
-                                            <textarea class="form-control input-air-primary" id="edit_keterangan" cols="30" rows="10" placeholder="Deksripsi Dokumen"></textarea>
+                                            <label class="form-label" for="edit_username">Username Admin</label>
+                                            <input class="form-control input-air-primary" id="edit_username"
+                                                type="text" placeholder="Username Admin">
                                         </div>
                                     </div>
                                 </div>
@@ -147,8 +142,8 @@
         </div>
     </div>
 
-    <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby=""
-        aria-hidden="true" style="z-index: 1060;">
+    <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -165,12 +160,12 @@
             </div>
         </div>
     </div>
-    
-      <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body"> 
-              <div class="modal-toggle-wrapper">
+              <div class="modal-toggle-wrapper">  
                 <ul class="modal-img">
                   <li> <img id="alert-image" src="{{asset('own_assets/icon/confirm.gif')}}" width="300px"></li>
                 </ul>
@@ -192,5 +187,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/foto.js')}}"></script>
+    <script src="{{asset('own_assets/js/admin.js')}}"></script>
 @endsection

@@ -85,21 +85,21 @@
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/rapat/front">Absensi</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Meeting</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="/registrasi-peserta/front">Registrasi</a></li>
-                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
-                                <li style="font-size: 15px"><a href="/kit-peserta/front">Seminar Kit</a></li>
+                                <li style="font-size: 15px"><a href="/registrasi-peserta/meeting/front">Registrasi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/meeting/front">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/kit-peserta/meeting/front">Seminar Kit</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Lembur</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="documentation.html#contact">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/lembur/front">Absensi</a></li>
                             </ul>
                         </li>
                     </ul>

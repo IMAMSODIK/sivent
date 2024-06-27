@@ -133,7 +133,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/document/daftar-document?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Dokumen</button></a>
+                              <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Laporan</button></a>
                             </div>
                           </div>
                           <hr>
@@ -178,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/document/daftar-document?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Dokumen</button></a>
+                        <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Laporan</button></a>
                       </div>
                     </div>
                   </div>
@@ -315,5 +315,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/dokumen.js')}}"></script>
+    <script src="{{asset('own_assets/js/laporan.js')}}"></script>
 @endsection

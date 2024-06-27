@@ -74,12 +74,12 @@ class FotoEventController extends Controller
 
         $data = [
             'event_id' => $r->id_kegiatan,
-            'deskripsi' => $r->deskripsi,
+            'keterangan' => $r->deskripsi,
         ];
 
         $rules = [
             'event_id' => 'required',
-            'deskripsi' => 'required|string'
+            'keterangan' => 'required|string'
         ];
 
         $validator = Validator::make($data, $rules, $messages);
@@ -96,7 +96,7 @@ class FotoEventController extends Controller
             if($event){
                 $foto = FotoEvent::create([
                     'event_id' => $event->id,
-                    'deskripsi' => $r->deskripsi,
+                    'keterangan' => $r->deskripsi,
                     'foto' => $foto
                 ]);
     
@@ -142,64 +142,77 @@ class FotoEventController extends Controller
         }
     }
 
-    // public function update(Request $r){
-    //     $messages = [
-    //         'required' => 'Kolom :attribute harus diisi.',
-    //         'numeric' => 'Kolom :attribute harus berupa angka.',
-    //         'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
-    //         'string' => 'Kolom :attribute harus berupa teks.',
-    //         'unique' => 'Kolom :attribute sudah digunakan.'
-    //     ];
+    public function update(Request $r){
+        $foto = null;
 
-    //     $data = [
-    //         'tanggal_kegiatan' => $r->tanggal_kegiatan,
-    //         'waktu_kegiatan' => $r->waktu_kegiatan,
-    //         'keterangan_kegiatan' => $r->keterangan,
-    //         'aktor' => $r->aktor,
-    //     ];
+        if ($r->hasFile('foto')) {
+            $file = $r->file('foto');
+            $fileMimeType = $file->getClientMimeType();
 
-    //     $rules = [
-    //         'tanggal_kegiatan' => 'required|string|max:255',
-    //         'waktu_kegiatan' => 'required|string|max:255',
-    //         'keterangan_kegiatan' => 'required|string|max:255',
-    //         'aktor' => 'required|string|max:255',
-    //     ];
+            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Jenis File Tidak Didukung"
+                ]);
+            }
 
-    //     $validator = Validator::make($data, $rules, $messages);
+            $foto = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+            $file->storePubliclyAs('foto', $foto, 'public');
+        }
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => implode(', ', $validator->errors()->all())
-    //         ]);
-    //     }
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'numeric' => 'Kolom :attribute harus berupa angka.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.',
+            'unique' => 'Kolom :attribute sudah digunakan.'
+        ];
 
-    //     try{
-    //         $data = Rundown::where("id", $r->id)->first();
+        $data = [
+            'id' => $r->id,
+            'keterangan' => $r->keterangan,
+        ];
 
-    //         if($data){
-    //             $data->tanggal_kegiatan = $r->tanggal_kegiatan;
-    //             $data->waktu_kegiatan = $r->waktu_kegiatan;
-    //             $data->keterangan_kegiatan = $r->keterangan;
-    //             $data->aktor = $r->aktor;
-    //             $data->save();
+        $rules = [
+            'id' => 'required',
+            'keterangan' => 'required|string'
+        ];
 
-    //             return response()->json([
-    //                 'status' => true
-    //             ]);
-    //         }
+        $validator = Validator::make($data, $rules, $messages);
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Gagal mengubah data"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
+
+        try{
+            $data = FotoEvent::where("id", $r->id)->first();
+
+            if($data){
+                $data->keterangan = $r->keterangan;
+                if($foto){
+                    $data->foto = $foto;
+                }
+                $data->save();
+
+                return response()->json([
+                    'status' => true
+                ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal mengubah data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
     public function delete(Request $r){
         try{

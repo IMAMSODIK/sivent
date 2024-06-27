@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('event_id')->nullable();
             $table->foreignId('pegawai_id')->nullable();
             $table->string('nama')->nullable();
-            $table->string('nip')->unique()->nullable();
+            $table->string('nip')->nullable();
             $table->string('golongan')->nullable();
             $table->string('jabatan')->nullable();
             $table->string('bank')->nullable();
-            $table->string('no_rek')->unique()->nullable();
+            $table->string('no_rek')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->boolean('is_narsum');
             $table->boolean('status_registrasi')->default(false);

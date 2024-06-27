@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>Daftar Dokumen</h4>
+                        <h4>Daftar Laporan</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-success" id="tambah-data">Tambah Data</button>
@@ -26,21 +26,21 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10%; font-size: 18px" class="text-center">No. </th>
-                                            <th style="width: 25%; font-size: 18px" class="text-center">Nama Dokumen</th>
-                                            <th style="width: 40%; font-size: 18px" class="text-center">Deskripsi Dokumen
+                                            <th style="width: 25%; font-size: 18px" class="text-center">Nama Laporan</th>
+                                            <th style="width: 40%; font-size: 18px" class="text-center">Deskripsi Laporan
                                             </th>
-                                            <th style="width: 15%; font-size: 18px" class="text-center">File Dokumen</th>
+                                            <th style="width: 15%; font-size: 18px" class="text-center">File Laporan</th>
                                             <th style="width: 10%; font-size: 18px" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $index = 0; ?>
-                                        @foreach ($dokumens as $p)
+                                        @foreach ($laporans as $p)
                                             <tr>
                                                 <td style="font-size: 18px" class="text-center">{{ ++$index }}</td>
                                                 <td style="font-size: 18px">{{ $p->nama }}</td>
                                                 <td style="font-size: 18px">{{ $p->deskripsi }}</td>
-                                                <td style="font-size: 18px" class="text-center"><a href="{{asset('storage/dokumen') . '/' . $p->file}}" download>Lihat Dokumen</a></td>
+                                                <td style="font-size: 18px" class="text-center"><a href="{{asset('storage/dokumen') . '/' . $p->file}}" download>Lihat Laporan</a></td>
                                                 <td class="text-center">
                                                     <ul class="action">
                                                         <li class="edit" data-id="{{ $p->id }}"> <a

@@ -106,21 +106,21 @@
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/rapat/front">Absensi</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Meeting</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="/registrasi-peserta/front">Registrasi</a></li>
-                                <li style="font-size: 15px"><a href="/absensi-peserta/front">Absensi</a></li>
-                                <li style="font-size: 15px"><a href="/kit-peserta/front">Seminar Kit</a></li>
+                                <li style="font-size: 15px"><a href="/registrasi-peserta/meeting/front">Registrasi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/meeting/front">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/kit-peserta/meeting/front">Seminar Kit</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" href="#"
                             data-toggle="dropdown">Lembur</a>
                             <ul class="dropdown-menu">
-                                <li style="font-size: 15px"><a href="documentation.html#contact">Absensi</a></li>
+                                <li style="font-size: 15px"><a href="/absensi-peserta/lembur/front">Absensi</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -226,7 +226,6 @@
                             <th class="text-center">Nama Peserta</th>
                             <th class="text-center">Jenis Kelamin</th>
                             <th class="text-center">Golongan</th>
-                            <th class="text-center">Jabatan</th>
                             <th class="text-center">Status Absensi</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -277,12 +276,12 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="jabatan" class="col-sm-4 col-form-label">Jabatan</label>
                     <div class="col-sm-8">
                       <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" readonly>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group row">
                     <label for="jenis_kelamin" class="col-sm-4 col-form-label">Jenis Kelamin</label>
@@ -330,20 +329,20 @@
     <script src="https://cdn.datatables.net/v/dt/dt-2.0.8/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
+    <script>    
 
+        let table = new DataTable('#example', {
+            "columnDefs": [
+                { "className": "text-center", "targets": [2, 4] }
+            ]
+        });
         $(".peserta-event").on("click", function(){
-            let table = new DataTable('#example', {
-                "columnDefs": [
-                    { "className": "text-center", "targets": [2, 4, 5] }
-                ]
-            });
 
             $.ajax({
-                url: '/absensi-peserta/front/daftar-peserta',
+                url: '/absensi-peserta/rapat/front/daftar-peserta',
                 method: 'GET',
                 data: {
-                    id: $(this).data('id')
+                    id: $(this).data('id'),
                 },
                 success: function(response) {
                         if (response.status) {
@@ -352,10 +351,9 @@
                             let rows = [];
                             response.data.forEach(element => {
                                 let row = [
-                                    `${element.nama} <br> <small>(${element.nip})</small>`,
-                                    element.jenis_kelamin,
-                                    element.golongan,
-                                    element.jabatan,
+                                    `${element.pegawai.nama} <br> <small>(${element.pegawai.nip})</small>`,
+                                    element.pegawai.jenis_kelamin,
+                                    element.pegawai.golongan,
                                     element.status_absensi,
                                     `<button class="absensi" data-id="${element.id}" data-event="${element.event_id}"><i class="fa fa-sign-in" style="font-size: 25px"></i></button>`
                                 ];
@@ -392,14 +390,24 @@
                 },
                 success: function(response){
                     if(response.status){
-                        $("#id").val(response.data.id);
-                        $("#id_kegiatan").val(response.data.event_id);
-                        $("#nama").val(response.data.nama);
-                        $("#nip").val(response.data.nip);
-                        $("#golongan").val(response.data.golongan);
-                        $("#jabatan").val(response.data.jabatan);
-                        $("#jenis_kelamin").val(response.data.jenis_kelamin);
-                        $("#status_absensi").val(response.data.status_absensi);
+                        if(response.kategori_event == 'meeting'){
+                            $("#id").val(response.data.id);
+                            $("#id_kegiatan").val(response.data.event_id);
+                            $("#nama").val(response.data.nama);
+                            $("#nip").val(response.data.nip);
+                            $("#golongan").val(response.data.golongan);
+                            $("#jabatan").val(response.data.jabatan);
+                            $("#jenis_kelamin").val(response.data.jenis_kelamin);
+                            $("#status_absensi").val(response.data.status_absensi);
+                        }else{
+                            $("#id").val(response.data.id);
+                            $("#id_kegiatan").val(response.data.event_id);
+                            $("#nama").val(response.data.pegawai.nama);
+                            $("#nip").val(response.data.pegawai.nip);
+                            $("#golongan").val(response.data.pegawai.golongan);
+                            $("#jenis_kelamin").val(response.data.pegawai.jenis_kelamin);
+                            $("#status_absensi").val(response.data.status_absensi);
+                        }
 
                         $("#daftar_peserta").modal("hide");
                         $("#absensi_peserta").modal("show");

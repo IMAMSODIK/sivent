@@ -86,11 +86,23 @@ to do
 
 
 
+log aktifitas admin
+
+
+todo
+
+seminar kit meeting front
 
 upload laporan rapat
-    peserta rapat diambil dari data pegawai, bukan peserta meeting
-    sistem meeting terbalik dengan rapat
-tambah generate qr
-log aktifitas admin
-master admin
 masing-masing admin hanya punya akses ke aksi mereka sendiri
+
+done
+
+absensi rapat front
+absensi meeting front
+absensi lembur front
+
+registrasi meeting front
+
+tambah generate qr
+master admin

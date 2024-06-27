@@ -7,6 +7,7 @@ use App\Http\Controllers\DokumentEventController;
 use App\Http\Controllers\FotoEventController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KitSeminarController;
+use App\Http\Controllers\LaporanEventController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NarasumberController;
@@ -15,7 +16,9 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\UnitKerjaController;
+use App\Http\Controllers\UserController;
 use App\Models\Event;
+use App\Models\LaporanEvent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -46,8 +49,12 @@ Route::middleware('guest')->group(function(){
     Route::post('/login', [AuthController::class, 'loginCheck']);
 });
 
-Route::get("/absensi-peserta/front", [PesertaController::class, 'absensiFront']);
-Route::get("/absensi-peserta/front/daftar-peserta", [PesertaController::class, 'absensiFrontDaftarPeserta']);
+Route::get("/absensi-peserta/rapat/front", [PesertaController::class, 'absensiRapatFront']);
+Route::get("/registrasi-peserta/meeting/front", [PesertaController::class, 'registrasiMeetingFront']);
+Route::get("/absensi-peserta/meeting/front", [PesertaController::class, 'absensiMeetingFront']);
+Route::get("/absensi-peserta/lembur/front", [PesertaController::class, 'absensiLemburFront']);
+
+Route::get("/absensi-peserta/rapat/front/daftar-peserta", [PesertaController::class, 'daftarPesertaFront']);
 Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
 Route::post("/absensi-peserta/daftar-peserta/absensi", [PesertaController::class, 'absensiAksi']);
 Route::get("/registrasi-peserta/front", [PesertaController::class, 'registrasiFront']);
@@ -70,6 +77,9 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-peserta/daftar-peserta", [PesertaController::class, 'daftarPeserta']);
     Route::get("/data-peserta/select-peserta", [PesertaController::class, 'selectPeserta']);
     Route::post("/data-peserta/daftar-peserta/store", [PesertaController::class, 'store']);
+    Route::post("/data-peserta/daftar-peserta/update", [PesertaController::class, 'update']);
+    Route::post("/data-peserta/daftar-peserta/delete", [PesertaController::class, 'delete']);
+    Route::get("/data-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
     Route::get("/data-peserta/daftar-event", [PesertaController::class, 'daftarEvent']);
 
     Route::get("/data-narasumber", [NarasumberController::class, 'index']);
@@ -99,6 +109,13 @@ Route::middleware('auth')->group(function(){
     Route::post("/document/daftar-document/update", [DokumentEventController::class, 'update']);
     Route::post("/document/daftar-document/delete", [DokumentEventController::class, 'delete']);
 
+    Route::get("/laporan-event", [LaporanEventController::class, 'index']);
+    Route::get("/laporan-event/daftar-laporan-event", [LaporanEventController::class, 'daftarLaporan']);
+    Route::post("/laporan-event/daftar-laporan-event/store", [LaporanEventController::class, 'store']);
+    Route::get("/laporan-event/daftar-laporan-event/edit", [LaporanEventController::class, 'edit']);
+    Route::post("/laporan-event/daftar-laporan-event/update", [LaporanEventController::class, 'update']);
+    Route::post("/laporan-event/daftar-laporan-event/delete", [LaporanEventController::class, 'delete']);
+
     Route::get("/foto-event", [FotoEventController::class, 'index']);
     Route::get("/foto-event/daftar-foto", [FotoEventController::class, 'daftarFoto']);
     Route::post("/foto-event/daftar-foto/store", [FotoEventController::class, 'store']);
@@ -122,6 +139,12 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-unit-kerja/edit", [UnitKerjaController::class, 'edit']);
     Route::post("/data-unit-kerja/update", [UnitKerjaController::class, 'update']);
     Route::post("/data-unit-kerja/delete", [UnitKerjaController::class, 'delete']);
+
+    Route::get("/data-admin", [UserController::class, 'index']);
+    Route::post("/data-admin/store", [UserController::class, 'store']);
+    Route::get("/data-admin/edit", [UserController::class, 'edit']);
+    Route::post("/data-admin/update", [UserController::class, 'update']);
+    Route::post("/data-admin/delete", [UserController::class, 'delete']);
 
     Route::get("/data-pegawai", [PegawaiController::class, 'index']);
     Route::post("/data-pegawai/store", [PegawaiController::class, 'store']);
