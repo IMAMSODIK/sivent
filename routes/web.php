@@ -6,13 +6,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentEventController;
 use App\Http\Controllers\FotoEventController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KitSeminarController;
+use App\Http\Controllers\KunciKamarController;
 use App\Http\Controllers\LaporanEventController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NarasumberController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\UnitKerjaController;
@@ -52,7 +55,9 @@ Route::middleware('guest')->group(function(){
 Route::get("/absensi-peserta/rapat/front", [PesertaController::class, 'absensiRapatFront']);
 Route::get("/registrasi-peserta/meeting/front", [PesertaController::class, 'registrasiMeetingFront']);
 Route::get("/absensi-peserta/meeting/front", [PesertaController::class, 'absensiMeetingFront']);
+Route::get("/kit-peserta/meeting/front", [PesertaController::class, 'kitMeetingFront']);
 Route::get("/absensi-peserta/lembur/front", [PesertaController::class, 'absensiLemburFront']);
+Route::post("/kit-peserta/daftar-peserta/kit", [PesertaController::class, 'kitAksi']);
 
 Route::get("/absensi-peserta/rapat/front/daftar-peserta", [PesertaController::class, 'daftarPesertaFront']);
 Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
@@ -72,6 +77,7 @@ Route::middleware('auth')->group(function(){
     Route::post("/event/delete", [RapatController::class, 'delete']);
     Route::get("/event/filter", [RapatController::class, 'filter']);
     Route::post("/rapat/store", [RapatController::class, 'store']);
+    Route::get("/data-event/check-user", [RapatController::class, 'checkUser']);
 
     Route::get("/data-peserta", [PesertaController::class, 'index']);
     Route::get("/data-peserta/daftar-peserta", [PesertaController::class, 'daftarPeserta']);
@@ -125,10 +131,20 @@ Route::middleware('auth')->group(function(){
 
     Route::get("/kit-seminar", [KitSeminarController::class, 'index']);
     Route::get("/kit-seminar/daftar-kit", [KitSeminarController::class, 'daftarKit']);
-    Route::post("/kit-seminar/daftar-kit/store", [KitSeminarController::class, 'store']);
     Route::get("/kit-seminar/daftar-kit/edit", [KitSeminarController::class, 'edit']);
     Route::post("/kit-seminar/daftar-kit/update", [KitSeminarController::class, 'update']);
-    Route::post("/kit-seminar/daftar-kit/delete", [KitSeminarController::class, 'delete']);
+
+    Route::get("/data-kamar", [KamarController::class, 'index']);
+    Route::get("/data-kamar/daftar-peserta", [KamarController::class, 'daftarPeserta']);
+    Route::get("/data-kamar/daftar-peserta/edit", [KamarController::class, 'edit']);
+    Route::post("/data-kamar/daftar-peserta/update", [KamarController::class, 'update']);
+
+    Route::get("/kunci-kamar", [KunciKamarController::class, 'index']);
+    Route::get("/kunci-kamar/daftar-kamar", [KunciKamarController::class, 'daftarKamar']);
+    Route::get("/kunci-kamar/daftar-kamar/peserta", [KunciKamarController::class, 'kunciKamar']);
+    Route::get("/kunci-kamar/daftar-kamar/edit", [KunciKamarController::class, 'edit']);
+    Route::post("/kunci-kamar/daftar-kamar/update", [KunciKamarController::class, 'update']);
+    Route::post("/kunci-kamar/daftar-kamar/store", [KunciKamarController::class, 'store']);
 
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
@@ -161,6 +177,8 @@ Route::middleware('auth')->group(function(){
     Route::get("/absensi-peserta", [PesertaController::class, 'absensi']);
     Route::get("/absensi-peserta/daftar-peserta", [PesertaController::class, 'daftarAbsensiPeserta']);
     Route::get("/absensi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
+
+    Route::get("/profile", [ProfileController::class, 'profile']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

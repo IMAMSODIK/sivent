@@ -76,7 +76,10 @@
                     <button class="navbar-toggle" type="button" data-toggle="collapse"
                         data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span
                             class="icon-bar"></span><span class="icon-bar"></span><span
-                            class="icon-bar"></span></button><a class="navbar-brand" href="index.html">Titan</a>
+                            class="icon-bar"></span></button>
+                            <a class="navbar-brand" style="margin-top:-40px" href="/">
+                                <img src="{{asset('assets/images/logo/logo.png')}}" alt="" width="100px">
+                            </a>
                 </div>
                 <div class="collapse navbar-collapse" id="custom-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -113,10 +116,9 @@
                         style="background-image: url('{{ asset('landing_page/images/shop/slider1.png') }}');">
                         <div class="titan-caption">
                             <div class="caption-content">
-                                <div class="font-alt mb-30 titan-title-size-1">This is Titan</div>
-                                <div class="font-alt mb-30 titan-title-size-4"> Summer 2017</div>
-                                <div class="font-alt mb-40 titan-title-size-1">Your online fashion destination</div>
-                                <a class="section-scroll btn btn-border-w btn-round" href="#latest">Learn More</a>
+                                <div class="font-alt mb-30 titan-title-size-1">Sistem Informasi Event</div>
+                                <div class="font-alt mb-30 titan-title-size-4"> Banner SIVENT</div>
+                                <div class="font-alt mb-40 titan-title-size-1">Letak Banner</div>
                             </div>
                         </div>
                     </li>
@@ -124,9 +126,8 @@
                         style="background-image: url('{{ asset('landing_page/images/shop/slider3.png') }}');">
                         <div class="titan-caption">
                             <div class="caption-content">
-                                <div class="font-alt mb-30 titan-title-size-1"> This is Titan</div>
-                                <div class="font-alt mb-40 titan-title-size-4">Exclusive products</div>
-                                <a class="section-scroll btn btn-border-w btn-round" href="#latest">Learn More</a>
+                                <div class="font-alt mb-30 titan-title-size-4"> Banner SIVENT</div>
+                                <div class="font-alt mb-40 titan-title-size-1">Letak Banner</div>
                             </div>
                         </div>
                     </li>
@@ -151,7 +152,7 @@
                                             src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
                                             alt="Accessories Pack" />
                                         <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
-                                                    class="icon-basket">Detail</span></a></div>
+                                                    class="icon-user">Detail</span></a></div>
                                     </div>
                                     <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
                                 </div>

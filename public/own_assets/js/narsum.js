@@ -15,7 +15,23 @@ function alertModal(status, message = null){
 }
 
 $("#tambah-data").on("click", function(){
-    $("#tambah-data-modal").modal("show");
+    $.ajax({
+        url: '/data-event/check-user',
+        method: 'GET',
+        data: {
+            'event_id': $(this).data('id')
+        },
+        success: function(response){
+            if(response.status){
+                $("#tambah-data-modal").modal("show");
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
 });
 
 $("#store").on("click", function(){
@@ -188,17 +204,17 @@ $("#submit-filter").on("click", function(){
                                     <div class="col-sm-7">
                                         <div class="blog-details">
                                         <div class="blog-date"><span>${element.nama_kegiatan}</span></div>
-                                        <h6>${element.lokasi_kegiatan} </h6>
+                                        <h6><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan} </h6>
 
                                         <div class="row">
                                             <div class="blog-bottom-content col-md-10 d-flex align-items-center">
                                                 <ul class="blog-social">
-                                                    <li>${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
+                                                    <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
                                                     <li>${element.no_surat} </li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                                <a href="/data-narasumber/daftar-narasumber?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Narasumber</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -225,14 +241,14 @@ $("#submit-filter").on("click", function(){
                                     </div>
                                     <div class="blog-details-main">
                                         <ul class="blog-social">
-                                        <li>${element.tanggal_kegiatan}</li>
-                                        <li>${element.waktu_kegiatan}</li>
-                                        <li>${element.lokasi_kegiatan}</li>
+                                        <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}</li>
+                                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> ${element.waktu_kegiatan}</li>
+                                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan}</li>
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                        <a href="/data-narasumber/daftar-narasumber?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex mb-4" type="button">Narasumber</button></a>
                                     </div>
                                     </div>
                                 </div>

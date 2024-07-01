@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_narsum');
             $table->boolean('status_registrasi')->default(false);
             $table->boolean('status_kit')->default(false);
+            $table->string('no_kamar')->default(0);
             $table->string('status_absensi')->default("Absen");
             $table->string('asal_instansi')->nullable();
             $table->timestamps();

@@ -97,7 +97,10 @@
                     <button class="navbar-toggle" type="button" data-toggle="collapse"
                         data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span
                             class="icon-bar"></span><span class="icon-bar"></span><span
-                            class="icon-bar"></span></button><a class="navbar-brand" href="index.html">Titan</a>
+                            class="icon-bar"></span></button>
+                            <a class="navbar-brand" style="margin-top:-40px" href="/">
+                                <img src="{{asset('assets/images/logo/logo.png')}}" alt="" width="100px">
+                            </a>
                 </div>
                 <div class="collapse navbar-collapse" id="custom-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -176,6 +179,7 @@
                                                 <h4 style="color: black"><i class="fa fa-calendar" aria-hidden="true"></i> {{$r->tanggal_kegiatan}}</h4>
                                                 <h4 style="color: black"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$r->waktu_kegiatan}}</h4>
                                                 <h4 style="color: black"><i class="fa fa-map-marker" aria-hidden="true"></i> {{$r->lokasi_kegiatan}}</h4>
+                                                <h4 style="color: black"><i class="fa fa-users" aria-hidden="true"></i> {{$r->peserta_count}}</h4>
                                             </div>
                                             <a class="btn btn-round btn-b peserta-event" style="font-size: 15px" data-id="{{$r->id}}"><i class="fa fa-user" aria-hidden="true"> Peserta</i></a>
                                         </div>

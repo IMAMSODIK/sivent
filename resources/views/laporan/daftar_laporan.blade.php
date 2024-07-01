@@ -40,7 +40,7 @@
                                                 <td style="font-size: 18px" class="text-center">{{ ++$index }}</td>
                                                 <td style="font-size: 18px">{{ $p->nama }}</td>
                                                 <td style="font-size: 18px">{{ $p->deskripsi }}</td>
-                                                <td style="font-size: 18px" class="text-center"><a href="{{asset('storage/dokumen') . '/' . $p->file}}" download>Lihat Laporan</a></td>
+                                                <td style="font-size: 18px" class="text-center"><a href="{{asset('storage/laporan') . '/' . $p->file}}" download>Lihat Laporan</a></td>
                                                 <td class="text-center">
                                                     <ul class="action">
                                                         <li class="edit" data-id="{{ $p->id }}"> <a
@@ -69,7 +69,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Dokumen</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Tambah Laporan</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -80,24 +80,24 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama">Nama Dokumen</label>
+                                            <label class="form-label" for="nama">Nama Laporan</label>
                                             <input class="form-control input-air-primary" id="nama"
-                                                type="text" placeholder="Nama Dokumen">
+                                                type="text" placeholder="Nama Laporan">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="deskripsi">Deksripsi Dokumen</label>
-                                            <textarea class="form-control input-air-primary" id="deskripsi" cols="30" rows="10" placeholder="Deksripsi Dokumen"></textarea>
+                                            <label class="form-label" for="deskripsi">Deskripsi Laporan</label>
+                                            <textarea class="form-control input-air-primary" id="deskripsi" cols="30" rows="10" placeholder="Deksripsi Laporan"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="dokumen">Upload Dokumen</label>
+                                            <label class="form-label" for="dokumen">Upload Laporan</label>
                                             <input class="form-control input-air-primary" id="dokumen" type="file">
                                         </div>
                                     </div>
@@ -225,5 +225,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{ asset('own_assets/js/dokumen.js') }}"></script>
+    <script src="{{ asset('own_assets/js/laporan.js') }}"></script>
 @endsection

@@ -8,7 +8,9 @@ use App\Models\Event;
 use App\Models\LaporanEvent;
 use App\Models\UnitKerja;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LaporanEventController extends Controller
 {
@@ -35,203 +37,203 @@ class LaporanEventController extends Controller
         return view('laporan.daftar_laporan', $data);
     }
 
-    // public function store(Request $r){
-    //     $dokumen = null;
+    public function store(Request $r){
+        $laporan = null;
 
-    //     if ($r->hasFile('dokumen')) {
-    //         $file = $r->file('dokumen');
-    //         $fileMimeType = $file->getClientMimeType();
+        if ($r->hasFile('file')) {
+            $file = $r->file('file');
+            $fileMimeType = $file->getClientMimeType();
 
-    //         if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => "Jenis File Tidak Didukung"
-    //             ]);
-    //         }
+            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Jenis File Tidak Didukung"
+                ]);
+            }
 
-    //         $dokumen = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
-    //         $file->storePubliclyAs('dokumen', $dokumen, 'public');
-    //     }
+            $laporan = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+            $file->storePubliclyAs('laporan', $laporan, 'public');
+        }
 
-    //     $messages = [
-    //         'required' => 'Kolom :attribute harus diisi.',
-    //         'numeric' => 'Kolom :attribute harus berupa angka.',
-    //         'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
-    //         'string' => 'Kolom :attribute harus berupa teks.',
-    //         'unique' => 'Kolom :attribute sudah digunakan.'
-    //     ];
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'numeric' => 'Kolom :attribute harus berupa angka.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.',
+            'unique' => 'Kolom :attribute sudah digunakan.'
+        ];
 
-    //     $data = [
-    //         'event_id' => $r->id_kegiatan,
-    //         'nama' => $r->nama,
-    //         'deskripsi' => $r->deskripsi,
-    //     ];
+        $data = [
+            'event_id' => $r->id_kegiatan,
+            'nama' => $r->nama,
+            'deskripsi' => $r->deskripsi,
+        ];
 
-    //     $rules = [
-    //         'event_id' => 'required',
-    //         'nama' => 'required|string|max:255',
-    //         'deskripsi' => 'required|string'
-    //     ];
+        $rules = [
+            'event_id' => 'required',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string'
+        ];
 
-    //     $validator = Validator::make($data, $rules, $messages);
+        $validator = Validator::make($data, $rules, $messages);
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => implode(', ', $validator->errors()->all())
-    //         ]);
-    //     }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
 
-    //     try{
-    //         $event = Event::where('event_id', $r->id_kegiatan)->first();
-    //         if($event){
-    //             $dokumen = DokumentEvent::create([
-    //                 'event_id' => $event->id,
-    //                 'nama' => $r->nama,
-    //                 'deskripsi' => $r->deskripsi,
-    //                 'file' => $dokumen
-    //             ]);
+        try{
+            $event = Event::where('event_id', $r->id_kegiatan)->first();
+            if($event){
+                $data = LaporanEvent::create([
+                    'event_id' => $event->id,
+                    'nama' => $r->nama,
+                    'deskripsi' => $r->deskripsi,
+                    'file' => $laporan
+                ]);
     
-    //             if($dokumen){
-    //                 return response()->json([
-    //                     'status' => true
-    //                 ]);
-    //             }
-    //         }
+                if($data){
+                    return response()->json([
+                        'status' => true
+                    ]);
+                }
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Gagal menambahkan data"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal menambahkan data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
-    // public function edit(Request $r){
-    //     try{
-    //         $data = DokumentEvent::where('id', $r->id)->first();
+    public function edit(Request $r){
+        try{
+            $data = LaporanEvent::where('id', $r->id)->first();
 
-    //         if($data){
-    //             return response()->json([
-    //                 'status' => true,
-    //                 'data' => $data
-    //             ]);    
-    //         }
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
-    // public function update(Request $r){
-    //     $dokumen = null;
+    public function update(Request $r){
+        $laporan = null;
 
-    //     if ($r->hasFile('dokumen')) {
-    //         $file = $r->file('dokumen');
-    //         $fileMimeType = $file->getClientMimeType();
+        if ($r->hasFile('file')) {
+            $file = $r->file('file');
+            $fileMimeType = $file->getClientMimeType();
 
-    //         if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => "Jenis File Tidak Didukung"
-    //             ]);
-    //         }
+            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Jenis File Tidak Didukung"
+                ]);
+            }
 
-    //         $dokumen = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
-    //         $file->storePubliclyAs('dokumen', $dokumen, 'public');
-    //     }
+            $laporan = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+            $file->storePubliclyAs('laporan', $laporan, 'public');
+        }
 
-    //     $messages = [
-    //         'required' => 'Kolom :attribute harus diisi.',
-    //         'numeric' => 'Kolom :attribute harus berupa angka.',
-    //         'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
-    //         'string' => 'Kolom :attribute harus berupa teks.',
-    //         'unique' => 'Kolom :attribute sudah digunakan.'
-    //     ];
+        $messages = [
+            'required' => 'Kolom :attribute harus diisi.',
+            'numeric' => 'Kolom :attribute harus berupa angka.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'string' => 'Kolom :attribute harus berupa teks.',
+            'unique' => 'Kolom :attribute sudah digunakan.'
+        ];
 
-    //     $data = [
-    //         'id' => $r->id,
-    //         'nama' => $r->nama,
-    //         'deskripsi' => $r->deskripsi,
-    //     ];
+        $data = [
+            'id' => $r->id,
+            'nama' => $r->nama,
+            'deskripsi' => $r->deskripsi,
+        ];
 
-    //     $rules = [
-    //         'id' => 'required',
-    //         'nama' => 'required|string|max:255',
-    //         'deskripsi' => 'required|string'
-    //     ];
+        $rules = [
+            'id' => 'required',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string'
+        ];
 
-    //     $validator = Validator::make($data, $rules, $messages);
+        $validator = Validator::make($data, $rules, $messages);
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => implode(', ', $validator->errors()->all())
-    //         ]);
-    //     }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => implode(', ', $validator->errors()->all())
+            ]);
+        }
 
-    //     try{
-    //         $data = DokumentEvent::where("id", $r->id)->first();
+        try{
+            $data = LaporanEvent::where("id", $r->id)->first();
 
-    //         if($data){
-    //             $data->nama = $r->nama;
-    //             $data->deskripsi = $r->deskripsi;
+            if($data){
+                $data->nama = $r->nama;
+                $data->deskripsi = $r->deskripsi;
 
-    //             if($dokumen){
-    //                 $data->file = $dokumen;
-    //             }
+                if($laporan){
+                    $data->file = $laporan;
+                }
                 
-    //             $data->save();
+                $data->save();
 
-    //             return response()->json([
-    //                 'status' => true
-    //             ]);
-    //         }
+                return response()->json([
+                    'status' => true
+                ]);
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Gagal mengubah data"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal mengubah data"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
-    // public function delete(Request $r){
-    //     try{
-    //         $data = DokumentEvent::where('id', $r->id)->first();
+    public function delete(Request $r){
+        try{
+            $data = LaporanEvent::where('id', $r->id)->first();
 
-    //         if($data){
-    //             $data->delete();
+            if($data){
+                $data->delete();
 
-    //             return response()->json([
-    //                 'status' => true
-    //             ]);   
-    //         }
+                return response()->json([
+                    'status' => true
+                ]);   
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }

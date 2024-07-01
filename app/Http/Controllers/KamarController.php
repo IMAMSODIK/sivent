@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Kamar;
 use App\Models\Peserta;
 use App\Models\UnitKerja;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
-class KitSeminarController extends Controller
+class KamarController extends Controller
 {
     public function index(){
         $tanggalSekarang = Carbon::now();
@@ -19,16 +20,16 @@ class KitSeminarController extends Controller
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
-        return view('kit_seminar.index', $data);
+        return view('kamar.index', $data);
     }
 
-    public function daftarKit(Request $r){
+    public function daftarPeserta(Request $r){
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
             'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
         ];
-        return view('kit_seminar.daftar_kit_seminar', $data);
+        return view('kamar.daftar_kamar', $data);
     }
 
     public function update(Request $r){
@@ -36,7 +37,7 @@ class KitSeminarController extends Controller
             $data = Peserta::where('id', $r->id)->first();
 
             if($data){
-                $data->status_kit = $r->status_kit;
+                $data->no_kamar = $r->nomor_kamar;
                 $data->save();
 
                 return response()->json([
@@ -59,11 +60,14 @@ class KitSeminarController extends Controller
     public function edit(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
+            $event = Event::where('event_id', $r->event)->first();
+            $kamar = Kamar::where('event_id', $event->id)->get();
 
             if($data){
                 return response()->json([
                     'status' => true,
-                    'data' => $data
+                    'data' => $data,
+                    'kamar' => $kamar
                 ]);    
             }
 

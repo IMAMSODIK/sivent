@@ -13,6 +13,7 @@ use App\Models\UnitKerja;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -49,7 +50,6 @@ class NarasumberController extends Controller
             'numeric' => 'Kolom :attribute harus berupa angka.',
             'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
             'string' => 'Kolom :attribute harus berupa teks.',
-            'unique' => 'Kolom :attribute sudah digunakan.'
         ];
 
         $data = [
@@ -65,11 +65,11 @@ class NarasumberController extends Controller
 
         $rules = [
             'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pesertas',
+            'nip' => 'required|string|max:255',
             'golongan' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'bank' => 'required|string',
-            'no_rek' => 'required|string|max:255|unique:pesertas',
+            'no_rek' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
             'asal_instansi' => 'string|max:255',
         ];
@@ -122,6 +122,14 @@ class NarasumberController extends Controller
     public function edit(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
+            // $event = Event::where('id', $data->event_id)->select('id')->first();
+
+            // if(!($event->user_id == Auth::user()->id)){
+            //     return response()->json([
+            //         'status' => false,
+            //         'message' => "Anda tidak dapat memperbaharui Narasumber Event ini"
+            //     ]);
+            // }
 
             if($data){
                 return response()->json([
@@ -164,11 +172,11 @@ class NarasumberController extends Controller
 
         $rules = [
             'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pesertas,nip,'.$r->id,
+            'nip' => 'required|string|max:255',
             'golongan' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'bank' => 'required|string',
-            'no_rek' => 'required|string|max:255|unique:pesertas,no_rek,'.$r->id,
+            'no_rek' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
             'asal_instansi' => 'string|max:255',
         ];

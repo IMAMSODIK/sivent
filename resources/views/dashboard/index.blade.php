@@ -162,7 +162,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header card-no-border total-revenue">
-                                <h4>Project Statistics</h4>
+                                <h4>Event Statistics</h4>
                                 <div class="sales-chart-dropdown-select">
                                     <div class="card-header-right-icon">
                                         <div class="dropdown">
@@ -224,477 +224,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-header card-no-border total-revenue">
-                                <h4>Important Project List</h4>
-                                <a class="d-none d-sm-block" href="{{ asset('product.html') }}">View
-                                    All</a>
-                            </div>
-                            <div class="card-body pt-0 row important-project">
-                                <div class="col-xl-4 col-md-6 box-col-6">
-                                    <div class="projectlist-card">
-                                        <div class="projectlist">
-                                            <div class="project-data">
-                                                <img class="nft-img img-fluid"
-                                                    src="{{ asset('assets/images/dashboard-2/category/1.png') }}"
-                                                    alt="nft">
-                                                <div>
-                                                    <a class="f-14 f-w-500 d-block"
-                                                        href="{{ asset('product.html') }}">Net Banking
-                                                        App</a>
-                                                    <span class="f-light f-12 f-w-500">Client:
-                                                        Jordan</span>
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="badge rounded-pill badge-primary bg-light-primary">7
-                                                Days Left</span>
-                                        </div>
-                                        <div class="project-date">
-                                            <span class="f-light f-12 f-w-500">10 Oct, 2024 </span>
-                                            <span class="f-light f-12 f-w-500">15 Nov, 2024 </span>
-                                        </div>
-                                        <div class="range_4">
-                                            <div class="slider-container">
-                                                <div class="slider-thumb range-slider_thumb"></div>
-                                                <div class="range-slider_line">
-                                                    <div class="slider_line range-slider_line-fill"></div>
-                                                </div>
-                                                <input class="slider_input range-slider_input"
-                                                    type="range" value="50;" min="0"
-                                                    max="100">
-                                            </div>
-                                        </div>
-                                        <div class="project-comment">
-                                            <div class="avatar-showcase">
-                                                <div class="avatars">
-                                                    <div class="customers d-inline-block avatar-group">
-                                                        <ul>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/18.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/15.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/19.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/17.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block">
-                                                                <p class="rounded-circle bg-light">+2 </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="project-comment-icon">
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#messages-2') }}">
-                                                        </use>
-                                                    </svg><span>18 </span>
-                                                </div>
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#paperclip') }}">
-                                                        </use>
-                                                    </svg><span>2 </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="project-meeting-details">
-                                            <div class="project-meeting"><span
-                                                    class="f-light f-12 f-w-500">Last Meeting</span><span
-                                                    class="f-light f-12 f-w-500">Next Meeting </span>
-                                            </div>
-                                            <div class="project-meeting-time"><a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}">2 Nov
-                                                    23,10:00 AM</a><a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}">8 Nov
-                                                    23,09:45 AM</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 box-col-6">
-                                    <div class="projectlist-card">
-                                        <div class="projectlist">
-                                            <div class="project-data"><img class="nft-img img-fluid"
-                                                    src="{{ asset('assets/images/dashboard-2/category/2.png') }}"
-                                                    alt="nft">
-                                                <div><a class="f-14 f-w-500 d-block"
-                                                        href="{{ asset('product.html') }}">NFT
-                                                        Website</a><span
-                                                        class="f-light f-12 f-w-500">Client : Albert
-                                                        Flores</span></div>
-                                            </div><span
-                                                class="badge rounded-pill badge-primary bg-light-primary">24
-                                                Days Left</span>
-                                        </div>
-                                        <div class="project-date"> <span class="f-light f-12 f-w-500">15
-                                                Oct, 2024</span><span class="f-light f-12 f-w-500">01 Dec,
-                                                2024</span></div>
-                                        <div class="range_4">
-                                            <div class="slider-container">
-                                                <div class="slider_thumb range-slider_thumb"> </div>
-                                                <div class="range-slider_line">
-                                                    <div class="slider_line range-slider_line-fill"></div>
-                                                </div>
-                                                <input class="slider_input range-slider_input"
-                                                    type="range" value="78" min="0"
-                                                    max="100">
-                                            </div>
-                                        </div>
-                                        <div class="project-comment">
-                                            <div class="avatar-showcase">
-                                                <div class="avatars">
-                                                    <div class="customers d-inline-block avatar-group">
-                                                        <ul>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/24.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/21.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/23.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/22.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block">
-                                                                <p class="rounded-circle bg-light">+5 </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="project-comment-icon">
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#messages-2') }}">
-                                                        </use>
-                                                    </svg><span>18</span>
-                                                </div>
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#paperclip') }}">
-                                                        </use>
-                                                    </svg><span>2 </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="project-meeting-details">
-                                            <div class="project-meeting"> <span
-                                                    class="f-light f-12 f-w-500">Last Meeting</span><span
-                                                    class="f-light f-12 f-w-500">Next Meeting </span>
-                                            </div>
-                                            <div class="project-meeting-time"><a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}"> 2 Nov
-                                                    23,10:00 AM</a><a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}">8 Nov
-                                                    23,09:45 AM</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 box-col-none marketing-app-card">
-                                    <div class="projectlist-card">
-                                        <div class="projectlist">
-                                            <div class="project-data"> <img class="nft-img img-fluid"
-                                                    src="{{ asset('assets/images/dashboard-2/category/3.png') }}"
-                                                    alt="nft">
-                                                <div><a class="f-14 f-w-500 d-block"
-                                                        href="{{ asset('product.html') }}">Marketing App
-                                                    </a><span class="f-light f-12 f-w-500">Client : Jane
-                                                        Cooper </span></div>
-                                            </div><span
-                                                class="badge rounded-pill badge-primary bg-light-primary">31
-                                                Days Left</span>
-                                        </div>
-                                        <div class="project-date"><span class="f-light f-12 f-w-500">01
-                                                Nov, 2024 </span><span class="f-light f-12 f-w-500">18
-                                                Dec, 2024 </span></div>
-                                        <div class="range_4">
-                                            <div class="slider-container">
-                                                <div class="slider_thumb range-slider_thumb"></div>
-                                                <div class="range-slider_line">
-                                                    <div class="slider_line range-slider_line-fill"></div>
-                                                </div>
-                                                <input class="slider_input range-slider_input"
-                                                    type="range" value="35" min="0"
-                                                    max="100">
-                                            </div>
-                                        </div>
-                                        <div class="project-comment">
-                                            <div class="avatar-showcase">
-                                                <div class="avatars">
-                                                    <div class="customers d-inline-block avatar-group">
-                                                        <ul>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/25.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/26.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"><img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/27.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block"> <img
-                                                                    class="img-25 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/28.png') }}"
-                                                                    alt=""></li>
-                                                            <li class="d-inline-block">
-                                                                <p class="rounded-circle bg-light">+8 </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="project-comment-icon">
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#messages-2') }}">
-                                                        </use>
-                                                    </svg><span class="f-light f-12 f-w-500">20</span>
-                                                </div>
-                                                <div class="project-link">
-                                                    <svg>
-                                                        <use
-                                                            href="{{ asset('assets/svg/icon-sprite.svg#paperclip') }}">
-                                                        </use>
-                                                    </svg><span class="f-light f-12 f-w-500">7</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="project-meeting-details">
-                                            <div class="project-meeting"> <span
-                                                    class="f-light f-12 f-w-500">Last Meeting</span><span
-                                                    class="f-light f-12 f-w-500">Next Meeting </span>
-                                            </div>
-                                            <div class="project-meeting-time"> <a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}">6 Nov
-                                                    23,2:56 PM</a><a class="f-14 f-w-500 "
-                                                    href="{{ asset('calendar-basic.html') }}">10 Nov 23,
-                                                    7:12 AM</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xxl-12">
-                        <div class="card recent-order">
-                            <div class="card-header card-no-border total-revenue">
-                                <h4 class="m-0">All Project Table</h4>
-                                <div class="header-top"></div>
-                                <a href="{{ asset('product.html') }}">View All </a>
-                                <!-- Menggunakan asset Laravel untuk path ke product.html -->
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="project-table table-responsive custom-scrollbar">
-                                    <table class="order-table project-table w-100">
-                                        <thead>
-                                            <tr>
-                                                <th>Project Name</th>
-                                                <th>Client Name</th>
-                                                <th>End Date</th>
-                                                <th>Assigned to</th>
-                                                <th>Status</th>
-                                                <th>Progress</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="project-comment  d-flex gap-2">
-                                                        <div class="radial-chart-wrap">
-                                                            <div class="widgetsChart"
-                                                                id="widgetsChart1"></div>
-                                                        </div>
-                                                        <div>
-                                                            <a class="f-w-500 f-14 "
-                                                                href="{{ asset('product.html') }}">Pet
-                                                                App Design</a>
-                                                            <div class="project-comment-icon">
-                                                                <div class="project-link">
-                                                                    <svg>
-                                                                        <use
-                                                                            href="{{ asset('assets/svg/icon-sprite.svg#messages-2') }}">
-                                                                        </use>
-                                                                        <!-- Menggunakan asset Laravel untuk SVG -->
-                                                                    </svg><span
-                                                                        class="f-w-500 f-light f-12">20</span>
-                                                                </div>
-                                                                <div class="project-link">
-                                                                    <svg>
-                                                                        <use
-                                                                            href="{{ asset('assets/svg/icon-sprite.svg#paperclip') }}">
-                                                                        </use>
-                                                                        <!-- Menggunakan asset Laravel untuk SVG -->
-                                                                    </svg><span
-                                                                        class="f-w-500 f-light f-12">7</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="product-sub"><a class="f-w-500 f-14 "
-                                                            href="{{ asset('product.html') }}">Darrell
-                                                            Steward</a><span
-                                                            class="f-w-500 f-light f-12 d-block">darrells@example.com</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="product-sub"><a class="f-w-500 f-14 "
-                                                            href="{{ asset('product.html') }}">15 Nov,
-                                                            2024</a><span
-                                                            class="f-w-500 f-light f-12 d-block">8 Days
-                                                            Left</span></div>
-                                                </td>
-                                                <td>
-                                                    <div class="product-sub"><a class="f-w-500 f-14 "
-                                                            href="{{ asset('product.html') }}">Team
-                                                            Roha</a><span
-                                                            class="f-w-500 f-light f-12 d-block">12
-                                                            Member</span></div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        class="txt-primary d-flex gap-2 align-items-center justify-content-center">
-                                                        <span class="pending bg-primary"></span><span
-                                                            class="f-w-500 f-13 txt-primary">Active</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="product-sub">
-                                                        <div class="dropdown">
-                                                            <div id="dropdownMenuButtonicon11"
-                                                                data-bs-toggle="dropdown"
-                                                                aria-expanded="false" role="menu">
-                                                                <svg class="invoice-icon">
-                                                                    <use
-                                                                        href="{{ asset('assets/svg/icon-sprite.svg#more-horizontal') }}">
-                                                                    </use>
-                                                                    <!-- Menggunakan asset Laravel untuk SVG -->
-                                                                </svg>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButtonicon11">
-                                                                <span class="dropdown-item">Last
-                                                                    Month</span>
-                                                                <span class="dropdown-item">Last
-                                                                    Week</span>
-                                                                <span class="dropdown-item">Last Day
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!-- Sisipkan baris lainnya dengan pola yang serupa -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-5 box-col-6">
-                        <div class="card recent-order">
-                            <div class="card-header card-no-border total-revenue">
-                                <h4 class="m-0">Top Client List</h4>
-                                <div class="header-top"></div>
-                                <a href="{{ asset('product.html') }}">View All </a>
-                                <!-- Menggunakan asset Laravel untuk path ke product.html -->
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="client-list-table table-responsive custom-scrollbar">
-                                    <table class="order-table w-100">
-                                        <tbody>
-                                            <tr>
-                                                <td class="client-list">
-                                                    <div class="user-id">
-                                                        <div class="avatars me-2">
-                                                            <div class="avatar"><img
-                                                                    class="img-50 rounded-circle"
-                                                                    src="{{ asset('assets/images/user/29.png') }}"
-                                                                    alt="#">
-                                                                <!-- Menggunakan asset Laravel untuk gambar -->
-                                                                <div class="status status-dnd bg-warning">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product-sub"><a
-                                                                class="f-14 f-w-500 "
-                                                                href="{{ asset('user-profile.pug') }}">Jenny
-                                                                Bell</a><span
-                                                                class="d-block f-light f-w-500">India</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-comment w-100">
-                                                        <div class="product-sub"> <a
-                                                                class="f-14 f-w-500 "
-                                                                href="{{ asset('user-profile.pug') }}">jennybell@gmail.com</a><span
-                                                                class="d-block f-light f-w-500">+84 342
-                                                                556 555 </span></div>
-                                                        <div class="product-sub">
-                                                            <svg class="invoice-icon">
-                                                                <use
-                                                                    href="{{ asset('assets/svg/icon-sprite.svg#messages-3') }}">
-                                                                </use>
-                                                                <!-- Menggunakan asset Laravel untuk SVG -->
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!-- Sisipkan baris lainnya dengan pola yang serupa -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-7 box-col-6">
-                        <div class="card">
-                            <div class="card-header card-no-border total-revenue">
-                                <h4>Time Line</h4>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="overflow-auto theme-scrollbar custom-scrollbar">
-                                    <div class="timeline-calendar custom-scrollbar">
-                                        <div class="custom-calendar" id="calendar-container">
-                                            <div class="time-line" id="calendar"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <div class="col-xxl-3 d-xxl-block d-none activity-group box-col-none">
@@ -711,6 +240,101 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                        <div class="card o-hidden small-widget">
+                            <div class="card-body total-project border-b-primary border-2">
+                                <span class="f-light f-w-500 f-14">Laporan Rapat</span>
+                                <div class="project-details">
+                                    <div class="project-counter">
+                                        <h2 class="f-w-600">30%</h2>
+                                        <span class="f-12 f-w-400">(Laporan Event Terkirim)</span>
+                                    </div>
+                                    <div class="product-sub bg-primary-light">
+                                        <svg class="invoice-icon">
+                                            <use
+                                                xlink:href="{{ asset('assets/svg/icon-sprite.svg#color-swatch') }}">
+                                            </use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <ul class="bubbles">
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-sm-12">
+                        <div class="card o-hidden small-widget">
+                            <div class="card-body total-Progress border-b-warning border-2">
+                                <span class="f-light f-w-500 f-14">Laporan Meeting</span>
+                                <div class="project-details">
+                                    <div class="project-counter">
+                                        <h2 class="f-w-600">75%</h2>
+                                        <span class="f-12 f-w-400">(Laporan Meeting Terkirim)</span>
+                                    </div>
+                                    <div class="product-sub bg-warning-light">
+                                        <svg class="invoice-icon">
+                                            <use
+                                                xlink:href="{{ asset('assets/svg/icon-sprite.svg#tick-circle') }}">
+                                            </use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <ul class="bubbles">
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-sm-12">
+                        <div class="card o-hidden small-widget">
+                            <div class="card-body total-Progress border-b-warning border-2">
+                                <span class="f-light f-w-500 f-14">Laporan Lembur</span>
+                                <div class="project-details">
+                                    <div class="project-counter">
+                                        <h2 class="f-w-600">50%</h2>
+                                        <span class="f-12 f-w-400">(Laporan Lembur Terkirim)</span>
+                                    </div>
+                                    <div class="product-sub bg-warning-light">
+                                        <svg class="invoice-icon">
+                                            <use
+                                                xlink:href="{{ asset('assets/svg/icon-sprite.svg#tick-circle') }}">
+                                            </use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <ul class="bubbles">
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                    <li class="bubble"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header card-no-border total-revenue">
@@ -874,7 +498,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

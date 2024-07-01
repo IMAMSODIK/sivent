@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('no_surat');
             $table->string('flayer')->nullable();
             $table->string('kategori');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

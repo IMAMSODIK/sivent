@@ -126,7 +126,7 @@
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
                     class="sidebar-link sidebar-title link-nav" href="/laporan-event">
-                    <i class="fa fa-picture-o text-white" aria-hidden="true"></i>
+                    <i class="fa fa-file text-white" aria-hidden="true"></i>
                     </svg><span class="">Laporan Event</span></a>
             </li>
 
@@ -142,16 +142,16 @@
                     </svg><span class="">Kit Seminar</span></a>
                 </li>
 
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
-                    href="#">
-                    <i class="fa fa-bed text-white" aria-hidden="true"></i>
-                    </svg><span class="">Data Kamar</span></a>
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
+                    class="sidebar-link sidebar-title link-nav" href="/kunci-kamar">
+                    <i class="fa fa-key text-white" aria-hidden="true"></i>
+                    </svg><span class="">Kunci Kamar</span></a>
                 </li>
 
-                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
-                        class="sidebar-link sidebar-title link-nav" href="#">
-                        <i class="fa fa-key text-white" aria-hidden="true"></i>
-                        </svg><span class="">Kunci Kamar</span></a>
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="/data-kamar">
+                    <i class="fa fa-bed text-white" aria-hidden="true"></i>
+                    </svg><span class="">Data Kamar</span></a>
                 </li>
 
                 <li class="sidebar-main-title">

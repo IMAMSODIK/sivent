@@ -27,7 +27,7 @@
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
-                                            <th>Status Pengambilan Kit</th>
+                                            <th>Nomor Kamar</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -39,10 +39,10 @@
                                             <td>{{$p->golongan}}</td>
                                             <td>{{$p->jabatan}}</td>
                                             <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
-                                            <td>{{($p->status_kit) ? "Sudah Diambil" : "Belum Diambil"}}</td>
+                                            <td>{{($p->no_kamar) ? $p->no_kamar : "Belum Diatur"}}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="registrasi" data-id="{{$p->id}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
+                                                    <li class="registrasi" data-id="{{$p->id}}" data-event="{{$id_event}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -62,7 +62,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Status Pengambilan Kit</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Status Kamar</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
@@ -119,11 +119,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="status_kit">Status Kit</label>
-                                            <select name="" class="form-control input-air-primary" id="status_kit">
-                                                <option value="1">Sudah Mengambil</option>
-                                                <option value="0">Belum Mengambil</option>
-                                            </select>
+                                            <label class="form-label" for="nomor_kamar">Nomor Kamar</label>
+                                            <select class="form-control input-air-primary" id="nomor_kamar"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -158,5 +155,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/seminar_kit.js')}}"></script>
+    <script src="{{asset('own_assets/js/kamar.js')}}"></script>
 @endsection

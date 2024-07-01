@@ -27,7 +27,8 @@ class EventSeeder extends Seeder
             'no_surat' => "01/R-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "rapat",
-            'unit_kerja_id' => 2
+            'unit_kerja_id' => 2,
+            'user_id' => 1
         ]);
 
         Event::create([
@@ -43,7 +44,8 @@ class EventSeeder extends Seeder
             'no_surat' => "02/R-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "rapat",
-            'unit_kerja_id' => 1
+            'unit_kerja_id' => 1,
+            'user_id' => 1
         ]);
 
         Event::create([
@@ -59,7 +61,9 @@ class EventSeeder extends Seeder
             'no_surat' => "03/R-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "rapat",
-            'unit_kerja_id' => 3
+            'unit_kerja_id' => 3,
+            'user_id' => 2
+
         ]);
 
         Event::create([
@@ -75,7 +79,8 @@ class EventSeeder extends Seeder
             'no_surat' => "01/M-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "meeting",
-            'unit_kerja_id' => 3
+            'unit_kerja_id' => 3,
+            'user_id' => 2
         ]);
 
         Event::create([
@@ -91,7 +96,8 @@ class EventSeeder extends Seeder
             'no_surat' => "02/M-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "meeting",
-            'unit_kerja_id' => 2
+            'unit_kerja_id' => 2,
+            'user_id' => 1
         ]);
 
         Event::create([
@@ -107,7 +113,8 @@ class EventSeeder extends Seeder
             'no_surat' => "03/M-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "meeting",
-            'unit_kerja_id' => 1
+            'unit_kerja_id' => 1,
+            'user_id' => 2
         ]);
 
         Event::create([
@@ -123,7 +130,8 @@ class EventSeeder extends Seeder
             'no_surat' => "01/L-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "lembur",
-            'unit_kerja_id' => 1
+            'unit_kerja_id' => 1,
+            'user_id' => 1
         ]);
 
         Event::create([
@@ -139,7 +147,8 @@ class EventSeeder extends Seeder
             'no_surat' => "02/L-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "lembur",
-            'unit_kerja_id' => 3
+            'unit_kerja_id' => 3,
+            'user_id' => 2
         ]);
 
         Event::create([
@@ -155,7 +164,8 @@ class EventSeeder extends Seeder
             'no_surat' => "03/L-2024",
             'flayer' => "flayer.jpg",
             'kategori' => "lembur",
-            'unit_kerja_id' => 1
+            'unit_kerja_id' => 1,
+            'user_id' => 1
         ]);
     }
 }

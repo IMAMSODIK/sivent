@@ -123,12 +123,12 @@
                       <div class="col-sm-7">
                         <div class="blog-details">
                           <div class="blog-date"><span class="nama-incoming">{{$incoming->nama_kegiatan}}</span></div>
-                          <h6 class="lokasi-incoming">{{$incoming->lokasi_kegiatan}} </h6>
+                          <h6 class="lokasi-incoming"><i class="fa fa-map-marker" aria-hidden="true"></i> {{$incoming->lokasi_kegiatan}} </h6>
 
                           <div class="row">
                             <div class="blog-bottom-content col-md-10 d-flex align-items-center">
                               <ul class="blog-social">
-                                <li class="tanggal-incoming">{{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
+                                <li class="tanggal-incoming"><i class="fa fa-calendar" aria-hidden="true"></i> {{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
                                 <li class="no_surat-incoming">{{$incoming->no_surat}} </li>
                               </ul>
                             </div>
@@ -171,9 +171,9 @@
                       </div>
                       <div class="blog-details-main">
                         <ul class="blog-social">
-                          <li>{{$d->tanggal_kegiatan}}</li>
-                          <li>{{$d->waktu_kegiatan}}</li>
-                          <li>{{$d->lokasi_kegiatan}}</li>
+                          <li><i class="fa fa-calendar" aria-hidden="true"></i> {{$d->tanggal_kegiatan}}</li>
+                          <li><i class="fa fa-clock-o" aria-hidden="true"></i> {{$d->waktu_kegiatan}}</li>
+                          <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{$d->lokasi_kegiatan}}</li>
                         </ul>
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>

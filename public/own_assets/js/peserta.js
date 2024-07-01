@@ -184,17 +184,17 @@ function eventCards(kategori) {
                                     <div class="col-sm-7">
                                         <div class="blog-details">
                                         <div class="blog-date"><span>${element.nama_kegiatan}</span></div>
-                                        <h6>${element.lokasi_kegiatan} </h6>
+                                        <h6><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan} </h6>
 
                                         <div class="row">
-                                            <div class="blog-bottom-content col-md-10 d-flex align-items-center">
+                                            <div class="blog-bottom-content col-md-9 d-flex align-items-center">
                                                 <ul class="blog-social">
-                                                    <li>${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
+                                                    <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
                                                     <li>${element.no_surat} </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                            <div class="col-md-3 d-flex justify-content-end">
+                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">${element.peserta_count} Peserta</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -221,9 +221,10 @@ function eventCards(kategori) {
                                     </div>
                                     <div class="blog-details-main">
                                         <ul class="blog-social">
-                                        <li>${element.tanggal_kegiatan}</li>
-                                        <li>${element.waktu_kegiatan}</li>
-                                        <li>${element.lokasi_kegiatan}</li>
+                                        <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}</li>
+                                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> ${element.waktu_kegiatan}</li>
+                                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan}</li>
+                                        <li><i class="fa fa-users" aria-hidden="true"></i> ${element.peserta_count}</li>
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
@@ -303,17 +304,17 @@ $("#submit-filter").on("click", function(){
                                     <div class="col-sm-7">
                                         <div class="blog-details">
                                         <div class="blog-date"><span>${element.nama_kegiatan}</span></div>
-                                        <h6>${element.lokasi_kegiatan} </h6>
+                                        <h6><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan} </h6>
 
                                         <div class="row">
-                                            <div class="blog-bottom-content col-md-10 d-flex align-items-center">
+                                            <div class="blog-bottom-content col-md-9 d-flex align-items-center">
                                                 <ul class="blog-social">
-                                                    <li>${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
+                                                    <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}, ${element.waktu_kegiatan}</li>
                                                     <li>${element.no_surat} </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                            <div class="col-md-3 d-flex justify-content-end">
+                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">${element.peserta_count} Peserta</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -340,9 +341,10 @@ $("#submit-filter").on("click", function(){
                                     </div>
                                     <div class="blog-details-main">
                                         <ul class="blog-social">
-                                        <li>${element.tanggal_kegiatan}</li>
-                                        <li>${element.waktu_kegiatan}</li>
-                                        <li>${element.lokasi_kegiatan}</li>
+                                        <li><i class="fa fa-calendar" aria-hidden="true"></i> ${element.tanggal_kegiatan}</li>
+                                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> ${element.waktu_kegiatan}</li>
+                                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> ${element.lokasi_kegiatan}</li>
+                                        <li><i class="fa fa-users" aria-hidden="true"></i> ${element.peserta_count}</li>
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>

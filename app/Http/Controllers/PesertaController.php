@@ -11,6 +11,7 @@ use App\Models\UnitKerja;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -23,8 +24,8 @@ class PesertaController extends Controller
             'count_rapat' => Event::where('kategori', 'rapat')->count(),
             'count_meeting' => Event::where('kategori', 'meeting')->count(),
             'count_lembur' => Event::where('kategori', 'lembur')->count(),
-            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
-            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
+            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->withCount('peserta')->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->withCount('peserta')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
         ];
         return view('peserta.index', $data);
@@ -60,6 +61,7 @@ class PesertaController extends Controller
 
     public function daftarPeserta(Request $r){
         $event = Event::where("event_id", $r->kegiatan_id)->first();
+
         if($event->kategori == "rapat" || $event->kategori == "lembur"){
             $peserta = Peserta::with('pegawai')->where('event_id', $event->id)->get();
         }else{
@@ -212,6 +214,7 @@ class PesertaController extends Controller
             }
 
             $peserta = Peserta::where('id', $r->id)->first();
+            
             if($peserta){
                 $peserta->nama = $r->nama;
                 $peserta->nip = $r->nip;
@@ -253,6 +256,14 @@ class PesertaController extends Controller
     public function selectPeserta(Request $r){
         try{
             $event = Event::where('event_id', $r->id_kegiatan)->first();
+
+            if(!($event->user_id == Auth::user()->id)){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda tidak dapat menambahkan peserta Event ini"
+                ]);
+            }
+
             $peserta = Peserta::where('event_id', $event->id)->pluck('pegawai_id');
             $data = Pegawai::with('jabatan')->whereNotIn('id', $peserta)->get();
 
@@ -279,7 +290,7 @@ class PesertaController extends Controller
         try{
             $tanggalSekarang = Carbon::now();
             
-            $data = Event::where("kategori", $r->kategori)->get();
+            $data = Event::where("kategori", $r->kategori)->withCount('peserta')->get();
 
             if($data){
                 return response()->json([
@@ -302,7 +313,14 @@ class PesertaController extends Controller
 
     public function detail(Request $r){
         try{
-            $event = Event::where('id', $r->event)->first();
+            $event = Event::where('id', $r->id)->first();
+            if(!($event->user_id == Auth::user()->id)){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda tidak dapat memperbaharui peserta Event ini"
+                ]);
+            }
+
             if($event->kategori == 'rapat' || $event->kategori == 'lembur'){
                 $data = Peserta::with('pegawai')->where('id', $r->id)->first();
             }else{
@@ -377,6 +395,37 @@ class PesertaController extends Controller
         return view('peserta.daftar_absensi_peserta', $data);
     }
 
+    public function kitAksi(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+            if(!$data->status_registrasi){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Silahkan Registrasi terlebih dahulu!"
+                ]);
+            }
+
+            if($data){
+                $data->status_kit = $r->status_kit;
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function absensiAksi(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
@@ -412,7 +461,7 @@ class PesertaController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
+            'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->withCount('peserta')->get(),
         ];
         return view('front.rapat_absensi', $data);
     }
@@ -421,7 +470,7 @@ class PesertaController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->get(),
+            'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->withCount('peserta')->get(),
         ];
         return view('front.lembur_absensi', $data);
     }
@@ -430,16 +479,25 @@ class PesertaController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->withCount('peserta')->get(),
         ];
         return view('front.meeting_registrasi', $data);
+    }
+
+    public function kitMeetingFront(){
+        $tanggalSekarang = Carbon::now();
+
+        $data = [
+            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->withCount('peserta')->get(),
+        ];
+        return view('front.kit', $data);
     }
 
     public function absensiMeetingFront(){
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->withCount('peserta')->get(),
         ];
         return view('front.meeting_absensi', $data);
     }
@@ -448,7 +506,7 @@ class PesertaController extends Controller
         $tanggalSekarang = Carbon::now();
 
         $data = [
-            'meeting' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
+            'meeting' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->withCount('peserta')->get(),
         ];
         return view('front.registrasi', $data);
     }
@@ -479,6 +537,14 @@ class PesertaController extends Controller
     public function delete(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
+            $event = Event::where('id', $data->event_id)->select('id')->first();
+
+            if(!($event->user_id == Auth::user()->id)){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda tidak dapat menghapus peserta Event ini"
+                ]);
+            }
 
             if($data){
                 $data->delete();

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Peserta extends Model
 {
@@ -19,5 +20,10 @@ class Peserta extends Model
 
     public function pegawai(): BelongsTo{
         return $this->belongsTo(Pegawai::class);
+    }
+
+    public function kamar()
+    {
+        return $this->hasMany(Kamar::class);
     }
 }

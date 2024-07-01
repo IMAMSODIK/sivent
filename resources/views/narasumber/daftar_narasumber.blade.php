@@ -9,7 +9,7 @@
                         <h4>Daftar Narasumber</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah Data</button>
+                        <button class="btn btn-success" id="tambah-data" data-id="{{$id_event}}">Tambah Data</button>
                     </div>
                 </div>
             </div>

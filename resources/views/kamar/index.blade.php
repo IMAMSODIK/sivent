@@ -36,7 +36,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/kit-seminar/daftar-kit?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Kit Seminar</button></a>
+                              <a href="/data-kamar/daftar-peserta?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Data Kamar</button></a>
                             </div>
                           </div>
                           <hr>
@@ -81,7 +81,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/kit-seminar/daftar-kit?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Kit Seminar</button></a>
+                        <a href="/data-kamar/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Data Kamar</button></a>
                       </div>
                     </div>
                   </div>
@@ -218,5 +218,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/kit_seminar.js')}}"></script>
+    <script src="{{asset('own_assets/js/kamar.js')}}"></script>
 @endsection

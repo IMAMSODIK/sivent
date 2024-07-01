@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class RapatController extends Controller
@@ -89,7 +90,8 @@ class RapatController extends Controller
                 'no_surat' => $r->no_surat,
                 'flayer' => $flayer,
                 'kategori' => $r->kategori,
-                'unit_kerja_id' => $r->unit_kerja
+                'unit_kerja_id' => $r->unit_kerja,
+                'user_id' => Auth::user()->id
             ]);
 
             if($rapat){
@@ -114,6 +116,12 @@ class RapatController extends Controller
     public function edit(Request $r){
         try{
             $data = Event::where('event_id', $r->id)->first();
+            if(!($data->user_id == Auth::user()->id)){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda tidak dapat memperbaharui Event ini"
+                ]);
+            }
 
             if($data){
                 return response()->json([
@@ -239,6 +247,13 @@ class RapatController extends Controller
     public function delete(Request $r){
         try{
             $data = Event::where('event_id', $r->id)->first();
+            if(!($data->user_id == Auth::user()->id)){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda tidak dapat menghapus Event ini"
+                ]);
+            }
+
             if($data){
                 $data->delete();
 
@@ -286,13 +301,42 @@ class RapatController extends Controller
                 }
             }
 
-            $data = $data->get();
+            $data = $data->withCount('peserta')->get();
 
             if($data){
                 return response()->json([
                     'status' => true,
                     'data' => $data
                 ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function checkUser(Request $r){
+        try{
+            $data = Event::where('event_id', $r->event_id)->first();
+
+            if($data){
+                if(!($data->user_id == Auth::user()->id)){
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Anda tidak dapat menambahkan Narasumber Event ini"
+                    ]);
+                }else{
+                    return response()->json([
+                        'status' => true
+                    ]);
+                }
             }
 
             return response()->json([

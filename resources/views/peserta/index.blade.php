@@ -123,17 +123,17 @@
                       <div class="col-sm-7">
                         <div class="blog-details">
                           <div class="blog-date"><span class="nama-incoming">{{$incoming->nama_kegiatan}}</span></div>
-                          <h6 class="lokasi-incoming">{{$incoming->lokasi_kegiatan}} </h6>
+                          <h6 class="lokasi-incoming"><i class="fa fa-map-marker" aria-hidden="true"></i> {{$incoming->lokasi_kegiatan}} </h6>
 
                           <div class="row">
-                            <div class="blog-bottom-content col-md-10 d-flex align-items-center">
+                            <div class="blog-bottom-content col-md-9 d-flex align-items-center">
                               <ul class="blog-social">
-                                <li class="tanggal-incoming">{{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
+                                <li class="tanggal-incoming"><i class="fa fa-calendar" aria-hidden="true"></i> {{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
                                 <li class="no_surat-incoming">{{$incoming->no_surat}} </li>
                               </ul>
                             </div>
-                            <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/data-peserta/daftar-peserta?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                            <div class="col-md-3 d-flex justify-content-end">
+                              <a href="/data-peserta/daftar-peserta?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">{{$incoming->peserta_count}} Peserta</button></a>
                             </div>
                           </div>
                           <hr>
@@ -171,14 +171,15 @@
                       </div>
                       <div class="blog-details-main">
                         <ul class="blog-social">
-                          <li>{{$d->tanggal_kegiatan}}</li>
-                          <li>{{$d->waktu_kegiatan}}</li>
-                          <li>{{$d->lokasi_kegiatan}}</li>
+                          <li><i class="fa fa-calendar" aria-hidden="true"></i> {{$d->tanggal_kegiatan}}</li>
+                          <li><i class="fa fa-clock-o" aria-hidden="true"></i> {{$d->waktu_kegiatan}}</li>
+                          <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{$d->lokasi_kegiatan}}</li>
+                          <li><i class="fa fa-users" aria-hidden="true"></i> {{$d->peserta_count}}</li>
                         </ul>
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Peserta</button></a>
+                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Peserta</button></a>
                       </div>
                     </div>
                   </div>
