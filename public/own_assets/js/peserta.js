@@ -16,7 +16,7 @@ function alertModal(status, message = null) {
     $("#alert").modal('show');
 }
 
-$("#tambah-data").on("click", function () {
+$("#pilih-peserta").on("click", function () {
     let kategori = $(this).data('kategori');
     
     if(kategori == 'rapat' || kategori == 'lembur'){
@@ -58,6 +58,10 @@ $("#tambah-data").on("click", function () {
     
 });
 
+$("#tambah-peserta").on("click", function(){
+    $("#tambah-data-modal").modal("show");
+})
+
 $("#store").on("click", function () {
     $("#tambah-data-modal").modal("hide");
     let formData = new FormData();
@@ -71,6 +75,7 @@ $("#store").on("click", function () {
     formData.append("bank", $("#bank").val());
     formData.append("no_rek", $("#no_rek").val());
     formData.append("jenis_kelamin", $("#jenis_kelamin").val());
+    formData.append("tipe", "tambah");
 
     $.ajax({
         url: '/data-peserta/daftar-peserta/store',
@@ -384,6 +389,7 @@ $("#selected_peserta").on("click", function(){
     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
     formData.append("id_kegiatan", $("#id_kegiatan").val());
     formData.append("selected_id", selectedPeserta);
+    formData.append("tipe", "select");
 
     $.ajax({
         url: '/data-peserta/daftar-peserta/store',

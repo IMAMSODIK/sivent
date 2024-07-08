@@ -10,7 +10,9 @@
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         {{-- <button class="btn btn-success" style="margin-right: 5px" id="import-data"><i class="fa fa-upload text-white" aria-hidden="true"></i> Import Data</button> --}}
-                        <button class="btn btn-info" id="tambah-data" data-kategori="{{$kategori_event}}"><i class="fa fa-plus-square text-white" aria-hidden="true"></i> Tambah Data</button>
+                        <button class="btn btn-info" style="margin-right: 5px" id="pilih-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-list-ul text-white" aria-hidden="true"></i> Pilih Peserta</button>
+                        <button class="btn btn-success" style="margin-right: 5px" id="export-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-table text-white" aria-hidden="true"></i> Export Peserta</button>
+                        <button class="btn btn-primary" id="tambah-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-plus text-white" aria-hidden="true"></i> Tambah Peserta</button>
                     </div>
                 </div>
             </div>
@@ -31,9 +33,7 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            @if ($kategori_event == 'meeting')
-                                                <th>Bank</th>
-                                            @endif
+                                            <th>Bank</th>
                                             <th>Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
@@ -41,13 +41,14 @@
                                     <tbody>
                                         <?php $index = 1; ?>
                                         @foreach ($pesertas as $p)
-                                            @if ($kategori_event == 'rapat' || $kategori_event == 'lembur')
+                                            @if ($p->pegawai_id)
                                                 <tr>
                                                     <td>{{$index++}}</td>
                                                     <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
                                                     <td>{{$p->pegawai->jenis_kelamin}}</td>
                                                     <td>{{$p->pegawai->golongan}}</td>
                                                     <td>{{$p->pegawai->jabatan->nama_jabatan}}</td>
+                                                    <td>-</td>
                                                     <td>{{$p->status_absensi}}</td>
                                                     <td class="text-center">
                                                         <ul class="action">
@@ -66,8 +67,6 @@
                                                     <td>{{$p->status_absensi}}</td>
                                                     <td class="text-center">
                                                         <ul class="action">
-                                                            <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
-                                                                        class="icon-pencil-alt" style="font-size: 25px"></i></a></li>
                                                             <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
                                                         </ul>
                                                     </td>
@@ -123,6 +122,7 @@
                                                 <option value="I">I</option>
                                                 <option value="II">II</option>
                                                 <option value="III">III</option>
+                                                <option value="IV">IV</option>
                                             </select>
                                         </div>
                                     </div>

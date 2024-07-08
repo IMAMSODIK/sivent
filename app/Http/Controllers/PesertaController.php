@@ -89,7 +89,7 @@ class PesertaController extends Controller
             $event = Event::where('event_id', $r->id_kegiatan)->first();
             
             if($event){
-                if($event->kategori == 'rapat' || $event->kategori == 'lembur'){
+                if($r->tipe == 'select'){
                     foreach(explode(",", $r->selected_id) as $id){
                         Peserta::create([
                             'peserta_id' => Str::random(8),
@@ -103,7 +103,7 @@ class PesertaController extends Controller
                     return response()->json([
                         'status' => true
                     ]);
-                }else{
+                }elseif($r->tipe == 'tambah'){
                     $messages = [
                         'required' => 'Kolom :attribute harus diisi.',
                         'numeric' => 'Kolom :attribute harus berupa angka.',
@@ -537,7 +537,7 @@ class PesertaController extends Controller
     public function delete(Request $r){
         try{
             $data = Peserta::where('id', $r->id)->first();
-            $event = Event::where('id', $data->event_id)->select('id')->first();
+            $event = Event::where('id', $data->event_id)->select('user_id')->first();
 
             if(!($event->user_id == Auth::user()->id)){
                 return response()->json([
