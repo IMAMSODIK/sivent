@@ -5,6 +5,7 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentEventController;
 use App\Http\Controllers\EventPesertaController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FotoEventController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\JabatanController;
@@ -195,6 +196,8 @@ Route::middleware('auth')->group(function(){
     Route::get("/peserta-page/daftar-event", [EventPesertaController::class, 'index']);
     Route::get("/peserta-page/daftar-event/card", [EventPesertaController::class, 'daftarEvent']);
     Route::get("/peserta-page/daftar-event/filter", [EventPesertaController::class, 'filterEvent']);
+
+    Route::get('/event/export-laporan', [ExportController::class, 'exportLaporan']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

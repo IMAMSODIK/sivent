@@ -67,6 +67,7 @@
                                             <th>Jabatan</th>
                                             <th>Bank</th>
                                             <th>Status Absensi</th>
+                                            <th>Bukti Transfer</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -81,6 +82,7 @@
                                                     <td>{{$p->pegawai->golongan}}</td>
                                                     <td>{{$p->pegawai->jabatan->nama_jabatan}}</td>
                                                     <td>-</td>
+                                                    <td>{{$p->status_absensi}}</td>
                                                     <td>{{$p->status_absensi}}</td>
                                                     <td class="text-center">
                                                         <ul class="action">

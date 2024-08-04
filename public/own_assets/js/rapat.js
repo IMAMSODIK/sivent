@@ -354,7 +354,3 @@ $("#submit-filter").on("click", function(){
         }
     })
 })
-
-$("#download_laporan").on("click", function(){
-    alert($(this).data('id'));
-})
