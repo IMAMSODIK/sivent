@@ -18,14 +18,14 @@ class EventSeeder extends Seeder
             'event_id' => Str::random(8),
             'nama_kegiatan' => "Kegiatan 1",
             'lokasi_kegiatan' => "Sutomo",
-            'tanggal_kegiatan' => "2024-06-30",
-            'waktu_kegiatan' => "12:00:00",
+            'tanggal_kegiatan' => "2024-08-03",
+            'waktu_kegiatan' => "14:00:00",
             'deskripsi_kegiatan' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "01/R-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "rapat",
             'unit_kerja_id' => 2,
             'user_id' => 1
@@ -35,14 +35,14 @@ class EventSeeder extends Seeder
             'event_id' => Str::random(8),
             'nama_kegiatan' => "Kegiatan 2",
             'lokasi_kegiatan' => "Medan Pancing",
-            'tanggal_kegiatan' => "2024-09-22",
+            'tanggal_kegiatan' => "2024-08-03",
             'waktu_kegiatan' => "10:00:00",
             'deskripsi_kegiatan' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "02/R-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "rapat",
             'unit_kerja_id' => 1,
             'user_id' => 1
@@ -59,7 +59,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "03/R-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "rapat",
             'unit_kerja_id' => 3,
             'user_id' => 2
@@ -77,7 +77,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "01/M-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "meeting",
             'unit_kerja_id' => 3,
             'user_id' => 2
@@ -94,7 +94,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "02/M-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "meeting",
             'unit_kerja_id' => 2,
             'user_id' => 1
@@ -111,7 +111,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "03/M-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "meeting",
             'unit_kerja_id' => 1,
             'user_id' => 2
@@ -128,7 +128,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "01/L-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "lembur",
             'unit_kerja_id' => 1,
             'user_id' => 1
@@ -138,14 +138,14 @@ class EventSeeder extends Seeder
             'event_id' => Str::random(8),
             'nama_kegiatan' => "Kegiatan Lembur 2",
             'lokasi_kegiatan' => "Medan Tuntungan",
-            'tanggal_kegiatan' => "2024-12-22",
+            'tanggal_kegiatan' => "2024-08-13",
             'waktu_kegiatan' => "09:00:00",
             'deskripsi_kegiatan' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "02/L-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "lembur",
             'unit_kerja_id' => 3,
             'user_id' => 2
@@ -162,7 +162,7 @@ class EventSeeder extends Seeder
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.",
             'no_surat' => "03/L-2024",
-            'flayer' => "flayer.jpg",
+            'flayer' => "sample_flayer.jpg",
             'kategori' => "lembur",
             'unit_kerja_id' => 1,
             'user_id' => 1

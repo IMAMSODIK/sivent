@@ -47,7 +47,7 @@ $("#store").on("click", function(){
     })
 })
 
-$(".edit").on("click", function(){
+$(".edit").on("click", function(e){
     let id = $(this).data('id');
 
     $.ajax({

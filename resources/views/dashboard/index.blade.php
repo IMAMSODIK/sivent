@@ -158,38 +158,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6">
+                    
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-no-border total-revenue">
-                                <h4>Event Statistics</h4>
-                                <div class="sales-chart-dropdown-select">
-                                    <div class="card-header-right-icon">
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle dropdown-toggle-store"
-                                                id="dropdownMenuButtonStore" data-bs-toggle="dropdown"
-                                                aria-expanded="false">This Week</button>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                aria-labelledby="dropdownMenuButtonStore"><a
-                                                    class="dropdown-item" href="#">This Day</a><a
-                                                    class="dropdown-item" href="#">This
-                                                    Month</a><a class="dropdown-item"
-                                                    href="#">This year</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="statistics">
-                                    <div id="statisticschart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header card-no-border total-revenue">
-                                <h4>Today Event</h4><a href="product.html">View All </a>
+                                <h4>Today Event</h4>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="today-work-table table-responsive custom-scrollbar">
@@ -201,9 +174,14 @@
                                                             href="product.html">{{$e->nama_kegiatan}}</a></td>
                                                     <td> <span
                                                             class="f-w-500 f-light d-block f-12 mb-1">Unit Kerja</span><a class="f-w-500 f-14"
-                                                            href="product.html">{{$e->unit_kerja}}</a></td>
-                                                    <td><span class="f-w-500 f-light d-block f-12 mb-1">Jumlah Peserta</span><a class="f-w-500 f-14"
+                                                            href="product.html">{{$e->unitKerja->nama_unit}}</a></td>
+                                                    <td> <span
+                                                            class="f-w-500 f-light d-block f-12 mb-1">Jumlah Peserta</span><a class="f-w-500 f-14"
                                                             href="product.html">02</a></td>
+
+                                                            <td class="text-center"> <span
+                                                                class="f-w-500 f-light d-block f-12 mb-1">Jumlah Peserta</span><a class="f-w-500 f-14"
+                                                                href="product.html">{{$e->peserta_count}}</a></td>
                                                     <td class="text-end">
                                                         @if ($e->kategori === 'rapat')
                                                             <div class="badge-light-primary product-sub badge rounded-pill ">
@@ -220,6 +198,34 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-no-border total-revenue">
+                                <h4>Event Statistics</h4>
+                                {{-- <div class="sales-chart-dropdown-select">
+                                    <div class="card-header-right-icon">
+                                        <div class="dropdown">
+                                            <button class="btn dropdown-toggle dropdown-toggle-store"
+                                                id="dropdownMenuButtonStore" data-bs-toggle="dropdown"
+                                                aria-expanded="false">This Week</button>
+                                            <div class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="dropdownMenuButtonStore"><a
+                                                    class="dropdown-item" href="#">This Day</a><a
+                                                    class="dropdown-item" href="#">This
+                                                    Month</a><a class="dropdown-item"
+                                                    href="#">This year</a></div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="statistics">
+                                    <div id="statisticschart"></div>
                                 </div>
                             </div>
                         </div>
@@ -504,4 +510,167 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+
+<script src="{{ asset('assets/js/chart/apex-chart/apex-chart.js') }}"></script>
+<script>
+    (function () {
+        // profit chart
+        // project statistics 
+        var arrRapat = [<?php echo '"'.implode('","', $arrRapat).'"' ?>];
+        var arrLembur = [<?php echo '"'.implode('","', $arrLembur).'"' ?>];
+        var arrMeeting = [<?php echo '"'.implode('","', $arrMeeting).'"' ?>];
+        var options = {
+            series: [{
+            name: 'Rapat',
+            data: arrRapat
+        }, {
+            name: 'Meeting',
+            data: arrMeeting
+        }, { 
+            name: 'Lembur',
+            data: arrLembur
+        }],
+            colors:['var(--theme-deafult)' ,'#80B3B3' ,'#CCE0E0'],
+            chart: { 
+            type: 'bar',
+            height: 412, 
+            stacked: true, 
+        
+            toolbar: {
+            show: false,
+            tools: {
+                download: false,
+            }
+            },
+            zoom: {
+            enabled: true 
+            }
+        },
+            responsive: [{
+            breakpoint: 480,
+            options: {
+                legend: {
+                position: 'bottom',
+                offsetY: 2,
+                }
+            } 
+            }], 
+            plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '20%',
+            },
+            },
+            dataLabels: {
+            enabled: false,
+            },
+            xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr','Mei', 'Jun' ,'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
+            axisTicks: {
+                show: false
+            },
+            axisBorder: {
+                show: false
+            },
+            },
+            legend: {
+            position: 'bottom',
+            offsetY: 5
+            },
+            fill: {
+            opacity: 1
+            }
+        };
+        
+        var statisticschart = new ApexCharts(document.querySelector("#statisticschart"), options);
+        statisticschart.render();
+
+        function radialCommonOption(data) {
+            return {
+                series: data.radialYseries,
+                chart: {
+                height: 90,
+                type: 'radialBar',
+                offsetX: -5,
+                offsetY: -15,
+                },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '35%',
+                    },
+                    track: {
+                        background: 'var(--theme-deafult)',
+                        opacity: 0.2,
+                    },
+                    dataLabels: {
+                        value: {
+                            color: "var(--tag-text-color--edit)",
+                            fontSize: "10px",
+                            show: true,
+                            offsetY: -12,
+                        }
+                    }
+                },
+            },
+            colors: ["var(--theme-deafult)"],
+            stroke: {
+                lineCap: "round",
+            },
+            }
+        }
+        
+        const radial1 = {
+            // color: ["var(--theme-deafult)"],
+            radialYseries: [75],
+        };
+        
+        const radialchart1 = document.querySelector('#widgetsChart1');
+        if (radialchart1) {
+            var radialprogessChart1 = new ApexCharts(radialchart1, radialCommonOption(radial1));
+            radialprogessChart1.render();
+        }
+        // radial 2
+        const radial2 = {
+            radialYseries: [50],
+        };
+        const radialchart2 = document.querySelector('#widgetsChart2');
+        if (radialchart2) {
+            var radialprogessChart2 = new ApexCharts(radialchart2, radialCommonOption(radial2));
+            radialprogessChart2.render();
+        }
+        // radial 3
+        const radial3 = {
+            radialYseries: [25],
+        };
+        const radialchart3 = document.querySelector('#widgetsChart3');
+        if (radialchart3) {
+            var radialprogessChart3 = new ApexCharts(radialchart3, radialCommonOption(radial3));
+            radialprogessChart3.render();
+        }
+        // radial 4
+        const radial4 = {
+        
+            radialYseries: [86],
+        };
+        const radialchart4 = document.querySelector('#widgetsChart4');
+        if (radialchart4) {
+            var radialprogessChart4 = new ApexCharts(radialchart4, radialCommonOption(radial4));
+            radialprogessChart4.render();
+        }
+        // radial 5
+        const radial5 = {
+            chart: {
+            offsetY: -50,
+            },
+            radialYseries: [74],
+        };  
+        const radialchart5 = document.querySelector('#widgetsChart5');
+        if (radialchart5) { 
+            var radialprogessChart5 = new ApexCharts(radialchart5, radialCommonOption(radial5));
+            radialprogessChart5.render();
+        }
+
+        })();
+</script>
 @endsection

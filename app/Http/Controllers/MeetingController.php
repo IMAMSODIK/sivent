@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class MeetingController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::today();
 
         $data = [
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),

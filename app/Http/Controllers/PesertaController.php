@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 class PesertaController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::today()->subDay();
 
         $data = [
             'count_rapat' => Event::where('kategori', 'rapat')->count(),

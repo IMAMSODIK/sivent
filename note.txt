@@ -107,25 +107,33 @@ registrasi meeting front
 tambah generate qr
 master admin
 
-Uu3VAzEOSTk}
 
-user dibagi 5 level
-1. super_admin / partners (bos) / semua bisa
-    bos ada 3 orang
-2. spv (supervisor)
-3. senior auditor
-4. junior auditor
-5. guest
 
-untuk nomor indentitas, tambahkan range karakter
-untuk tambahkan pegawai, buat generate password
-menu list client, tambahkan filter dan search
 
-di detail client (saat client baru ditambahkan)
-yang bisa menambahkan anggota tim hanya hanya svp
 
-saat menambahkan anggota di client, yang menjadi ketua tim dan svp dari anggota yang sudah ditambahkan
-tambahkan caraousel
 
-pilihan pemeriksaan/approval (verifikasi/belum verifikasi)
-tambah menu layanan dan profile
+
+
+
+todo 
+
+dashboard 
+today event (done)
+event statistic (done)
+
+data bank
+ambil dari database yang sudah ada (done)
+
+data peserta
+untuk rapat, meeting dan lembur peserta bisa dipilih, export atau tambah
+
+data narasumber, rundown
+bisa export data
+
+foto event
+upload foto event bisa upload lebih dari 1 gambar
+
+lapora event
+tombol untuk download semua data event (data peserta (bukti pembayaran), narasumber, rundown, foto event)
+
+semua peserta bisa login

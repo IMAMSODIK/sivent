@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
 use App\Models\Bank;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +12,7 @@ class BankController extends Controller
 {
     public function index(){
         $data = [
-            'banks' => Bank::orderBy('created_at', 'DESC')->get()
+            "banks" => DB::table('mst_bank')->get()
         ];
         return view('bank.index', $data);
     }
@@ -45,7 +44,7 @@ class BankController extends Controller
         }
 
         try{
-            $bank = Bank::create([
+            $bank = DB::table('mst_bank')->insert([
                 'nama_bank' => $r->nama_bank,
             ]);
 
@@ -69,13 +68,15 @@ class BankController extends Controller
 
     public function edit(Request $r){
         try{
-            $data = Bank::where('id', $r->id)->first();
+            $data = DB::table('mst_bank')
+                        ->where('id', $r->id)
+                        ->first();
 
             if($data){
                 return response()->json([
                     'status' => true,
                     'data' => $data
-                ]);    
+                ]);
             }
 
             return response()->json([
@@ -140,19 +141,12 @@ class BankController extends Controller
 
     public function delete(Request $r){
         try{
-            $data = Bank::where('id', $r->id)->first();
-
-            if($data){
-                $data->delete();
-
-                return response()->json([
-                    'status' => true
-                ]);   
-            }
+            $data = DB::table('mst_bank')
+                        ->where('id', $r->id)
+                        ->delete();
 
             return response()->json([
-                'status' => false,
-                'message' => "Data tidak ditemukan"
+                'status' => true
             ]);
         }catch(Exception $e){
             return response()->json([

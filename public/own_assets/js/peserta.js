@@ -169,6 +169,7 @@ function eventCards(kategori) {
     $(".incoming").empty();
     $(".done").empty();
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
 
     $.ajax({
         url: '/data-peserta/daftar-event',
@@ -440,4 +441,8 @@ $("#delete-confirmed").on("click", function(){
             alertModal(false, response.message);
         }
     })
+})
+
+$("#export-peserta").on("click", function(){
+    $("#export").modal("show");
 })
