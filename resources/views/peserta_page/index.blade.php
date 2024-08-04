@@ -132,12 +132,29 @@
                                 <li class="no_surat-incoming">{{$incoming->no_surat}} </li>
                               </ul>
                             </div>
-                            <div class="col-md-2 d-flex justify-content-end">
+                            {{-- <div class="col-md-2 d-flex justify-content-end">
                               <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Laporan</button></a>
-                            </div>
+                            </div> --}}
                           </div>
                           <hr>
                           <p class="mt-0 deskripsi-incoming">{{$incoming->deskripsi_kegiatan}}</p>
+                          <div class="row">
+                              @if ($incoming->kategori == "meeting")
+                              <div class="col-md-4">
+                                <button class="btn btn-secondary d-flex m-auto mt-4 registrasi" type="button" data-event="{{$incoming->id}}">Registrasi</button>
+                              </div>
+                              @endif
+                            
+                            <div class="col-md-4">
+                              <button class="btn btn-primary d-flex m-auto mt-4 absensi" type="button" data-event="{{$incoming->id}}">Absensi</button>
+                            </div>
+
+                            @if ($incoming->kategori == "meeting")
+                              <div class="col-md-4">
+                                <button class="btn btn-info d-flex m-auto mt-4 seminar-kit" type="button" data-event="{{$incoming->id}}">Seminar Kit</button>
+                              </div>
+                              @endif
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -286,6 +303,23 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade modal-alert" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body"> 
+          <div class="modal-toggle-wrapper">  
+            <ul class="modal-img">
+              <li> <img id="alert-image"></li>
+            </ul>
+            <h4 class="text-center pb-2" id="alert-title"></h4>
+            <p class="text-center" id="alert-message"></p>
+            <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
   {{-- <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

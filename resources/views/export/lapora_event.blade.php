@@ -406,7 +406,7 @@
             </div>
         </div>
 
-        <div class="report-content">
+        {{-- <div class="report-content">
             <div class="report-header">
                 <h3 class="report-name">Data Foto Event</h3>
             </div>
@@ -443,7 +443,7 @@
                     {{ now()->format('l F j, Y h:i A') }}
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </body>
 </html>

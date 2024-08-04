@@ -357,3 +357,75 @@ $("#delete-confirmed").on("click", function(){
         }
     })
 })
+
+$(".registrasi").on("click", function(){
+    $.ajax({
+        url: '/registrasi-peserta/daftar-peserta/registrasi',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),   
+            'event_id': $(this).data('event')
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Registrasi Berhasil");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$(".absensi").on("click", function(){
+    $.ajax({
+        url: '/absensi-peserta/daftar-peserta/absensi',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),   
+            'event_id': $(this).data('event')
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Absen Berhasil");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
+$(".seminar-kit").on("click", function(){
+    $.ajax({
+        url: '/seminar-kit-peserta/daftar-peserta/seminar-kit',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),   
+            'event_id': $(this).data('event')
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Kit Berhasil Diambil");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})

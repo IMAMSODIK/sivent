@@ -83,7 +83,13 @@
                                                     <td>{{$p->pegawai->jabatan->nama_jabatan}}</td>
                                                     <td>-</td>
                                                     <td>{{$p->status_absensi}}</td>
-                                                    <td>{{$p->status_absensi}}</td>
+                                                    <td class="text-center">
+                                                        @if ($p->bukti_transfer)
+                                                            <img style="height: 150px; cursor: pointer" src="{{asset('storage/bukti_transfer') . '/' . $p->bukti_transfer}}" data-path="{{$p->bukti_transfer}}" alt="" class="detail-gambar">
+                                                        @else
+                                                            <i class="fa fa-upload text-info upload-bt" data-id="{{$p->id}}" style="font-size: 25px; cursor: pointer"></i>
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center">
                                                         <ul class="action">
                                                             <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
@@ -99,6 +105,13 @@
                                                     <td>{{$p->jabatan}}</td>
                                                     <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
                                                     <td>{{$p->status_absensi}}</td>
+                                                    <td class="text-center">
+                                                        @if ($p->bukti_transfer)
+                                                        <img style="height: 150px; cursor: pointer" src="{{asset('storage/bukti_transfer') . '/' . $p->bukti_transfer}}" data-path="{{$p->bukti_transfer}}" alt="" class="detail-gambar">
+                                                        @else
+                                                            <i class="fa fa-upload text-info upload-bt" data-id="{{$p->id}}" style="font-size: 25px; cursor: pointer"></i>
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center">
                                                         <ul class="action">
                                                             <li class="delete" data-id="{{$p->id}}"><a href="#"><i class="icon-trash" style="font-size: 25px"></i></a></li>
@@ -423,6 +436,52 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="upload-bt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body modal-body-export">
+                    <div class="modal-toggle-wrapper">
+                        <ul class="modal-img">
+                            <li> <img id="alert-image" src="{{asset("own_assets/icon/download.gif")}}" width="300px"></li>
+                        </ul>
+                        <h4 class="text-center pb-2" id="alert-title">Upload Bukti Transfer</h4>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <input type="hidden" id="id_peserta">
+                                    <input class="form-control input-air-primary" id="bt" type="file">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Container for buttons to align them horizontally -->
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mx-2" id="upload_bt" type="button">Upload</button>
+                            <button class="btn btn-secondary mx-2" type="button" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="detail-flayer-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myExtraLargeModal">Detail Bukti Transfer</h4>
+              <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body dark-modal"> 
+              <div class="card">
+                <img id="detail-flayer-image" alt="" style="width: 100%">
+              </div>
+              <div class="card-footer text-end">
+                <input class="btn btn-primary close-modal-bt" type="reset" value="Tutup">
+              </div>
+            </div>
+          </div>
+        </div>
     
 @endsection
 

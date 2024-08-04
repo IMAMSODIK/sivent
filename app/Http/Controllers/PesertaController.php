@@ -373,7 +373,7 @@ class PesertaController extends Controller
 
     public function registered(Request $r){
         try{
-            $data = Peserta::where('id', $r->id)->first();
+            $data = Peserta::where('nip', Auth::user()->username)->where('event_id', $r->event_id)->first();
 
             if($data){
                 $data->status_registrasi = 1;
@@ -452,7 +452,7 @@ class PesertaController extends Controller
 
     public function absensiAksi(Request $r){
         try{
-            $data = Peserta::where('id', $r->id)->first();
+            $data = Peserta::where('nip', Auth::user()->username)->where('event_id', $r->event_id)->first();
             if(!$data->status_registrasi){
                 return response()->json([
                     'status' => false,
@@ -461,7 +461,38 @@ class PesertaController extends Controller
             }
 
             if($data){
-                $data->status_absensi = $r->status_absensi;
+                $data->status_absensi = "Hadir";
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function seminarKitAksi(Request $r){
+        try{
+            $data = Peserta::where('nip', Auth::user()->username)->where('event_id', $r->event_id)->first();
+            if(!$data->status_registrasi){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Silahkan Registrasi terlebih dahulu!"
+                ]);
+            }
+
+            if($data){
+                $data->status_kit = 1;
                 $data->save();
 
                 return response()->json([
@@ -588,5 +619,41 @@ class PesertaController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+    public function uploadBt(Request $r){
+        $dokumen = null;
+
+        if ($r->hasFile('dokumen')) {
+            $file = $r->file('dokumen');
+            $fileMimeType = $file->getClientMimeType();
+            $fileExtension = $file->getClientOriginalExtension();
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        
+            if (!in_array($fileMimeType, $allowedMimeTypes) || !in_array($fileExtension, $allowedExtensions)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Jenis File Tidak Didukung. Hanya gambar JPEG, PNG, dan GIF yang diperbolehkan."
+                ]);
+            }
+        
+            $dokumen = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+            $file->storePubliclyAs('bukti_transfer', $dokumen, 'public');
+        
+            $peserta = Peserta::where('id', $r->id)->first();
+            $peserta->bukti_transfer = $dokumen;
+            $peserta->save();
+
+            return response()->json([
+                'status' => true,
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Dokumen belum diupload"
+            ]);
+        }
+        
     }
 }

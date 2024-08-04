@@ -85,6 +85,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a class="" href="/">Home</a>
                         </li>
+                        <li class="dropdown"><a class="" href="/login">Login</a>
+                        </li>
                         {{-- <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">

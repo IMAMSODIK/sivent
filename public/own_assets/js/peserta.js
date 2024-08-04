@@ -371,9 +371,13 @@ $("#submit-filter").on("click", function(){
     })
 })
 
-$(".detail-flayer").on("click", function(){
-    $("#detail-flayer-image").attr("src", `../../storage/flayer/${$(this).data('path')}`);
+$(".detail-gambar").on("click", function(){
+    $("#detail-flayer-image").attr("src", `../../storage/bukti_transfer/${$(this).data('path')}`);
     $("#detail-flayer-modal").modal("show");
+})
+
+$(".close-modal-bt").on("click", function(){
+    $("#detail-flayer-modal").modal("hide");
 })
 
 $("#selected_peserta").on("click", function(){
@@ -478,3 +482,44 @@ $("#upload").on("click", function(){
         }
     });
 })
+
+$(".upload-bt").on("click", function(){
+    $("#id_peserta").val($(this).data('id'));
+    $("#upload-bt-modal").modal('show');
+})
+
+$("#upload_bt").on("click", function(){
+    $("#upload-bt-modal").modal('hide');
+    var fileInput = $("#bt")[0];
+    var file = fileInput.files[0];
+    
+    if (!file) {
+        alertModal(false, "Upload file terlebih dahulu");
+    }
+
+    var formData = new FormData();
+    formData.append('_token', $("meta[name='csrf-token']").attr("content"),)
+    formData.append("dokumen", file);
+    formData.append('id', $("#id_peserta").val());
+
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/upload-bt',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if(response.status){
+                fileInput.value = "";
+                alertModal(true, "Berhasil menambahkan bukti transfer");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        },
+        error: function(response) {
+            alertModal(false, response.message);
+        }
+    });
+})
+

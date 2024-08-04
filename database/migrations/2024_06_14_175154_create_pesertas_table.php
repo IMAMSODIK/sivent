@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('no_kamar')->default(0);
             $table->string('status_absensi')->default("Absen");
             $table->string('asal_instansi')->nullable();
+            $table->string('bukti_transfer')->nullable();
             $table->timestamps();
         });
     }
