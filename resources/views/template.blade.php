@@ -3,6 +3,8 @@
 
 <head>
     @include('layouts.head')
+
+    @yield('own_style')
 </head>
 
 <body>

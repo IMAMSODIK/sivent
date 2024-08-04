@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 class NarasumberController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             // 'count_rapat' => Event::where('kategori', 'rapat')->count(),

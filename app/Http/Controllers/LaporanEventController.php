@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 class LaporanEventController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             'count_rapat' => Event::where('kategori', 'rapat')->count(),
@@ -43,16 +43,24 @@ class LaporanEventController extends Controller
         if ($r->hasFile('file')) {
             $file = $r->file('file');
             $fileMimeType = $file->getClientMimeType();
-
-            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+            $fileExtension = $file->getClientOriginalExtension();
+            $allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            $allowedExtensions = ['pdf', 'doc', 'docx'];
+        
+            if (!in_array($fileMimeType, $allowedMimeTypes) || !in_array($fileExtension, $allowedExtensions)) {
                 return response()->json([
                     'status' => false,
-                    'message' => "Jenis File Tidak Didukung"
+                    'message' => "Jenis File Tidak Didukung. Hanya PDF dan Word (DOC, DOCX) yang diperbolehkan."
                 ]);
             }
-
+        
             $laporan = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
             $file->storePubliclyAs('laporan', $laporan, 'public');
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Dokumen belum diupload"
+            ]);
         }
 
         $messages = [
@@ -142,14 +150,17 @@ class LaporanEventController extends Controller
         if ($r->hasFile('file')) {
             $file = $r->file('file');
             $fileMimeType = $file->getClientMimeType();
-
-            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+            $fileExtension = $file->getClientOriginalExtension();
+            $allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            $allowedExtensions = ['pdf', 'doc', 'docx'];
+        
+            if (!in_array($fileMimeType, $allowedMimeTypes) || !in_array($fileExtension, $allowedExtensions)) {
                 return response()->json([
                     'status' => false,
-                    'message' => "Jenis File Tidak Didukung"
+                    'message' => "Jenis File Tidak Didukung. Hanya PDF dan Word (DOC, DOCX) yang diperbolehkan."
                 ]);
             }
-
+        
             $laporan = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
             $file->storePubliclyAs('laporan', $laporan, 'public');
         }

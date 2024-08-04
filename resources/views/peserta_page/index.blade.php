@@ -1,37 +1,5 @@
 @extends('template')
 
-@section('own_style')
-    <style>
-        .modal-body-export {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .d-flex {
-            display: flex;
-        }
-
-        .justify-content-center {
-            justify-content: center;
-        }
-
-        .mx-2 {
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-        }
-
-        .mb-3 {
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            margin: 0.5rem; /* Optional: Add some spacing around the buttons */
-        }
-
-    </style>
-@endsection
-
 @section('content')
 <div class="page-body">
     <div class="container-fluid mt-5">
@@ -45,6 +13,103 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xl-4 col-sm-6 rapat" style="cursor: pointer">
+                <div class="card o-hidden small-widget">
+                    <div class="card-body total-project border-b-primary border-2">
+                        <span class="f-light f-w-500 f-14">Rapat</span>
+                        <div class="project-details">
+                            <div class="project-counter">
+                                <h2 class="f-w-600">{{$count_rapat}}</h2>
+                                <span class="f-12 f-w-400">(Kegiatan)</span>
+                            </div>
+                            <div class="product-sub bg-primary-light">
+                                <svg class="invoice-icon">
+                                    <use
+                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#color-swatch') }}">
+                                    </use>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="bubbles">
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 meeting" style="cursor: pointer">
+                <div class="card o-hidden small-widget">
+                    <div class="card-body total-Progress border-b-warning border-2">
+                        <span class="f-light f-w-500 f-14">Meeting</span>
+                        <div class="project-details">
+                            <div class="project-counter">
+                                <h2 class="f-w-600">{{$count_meeting}}</h2>
+                                <span class="f-12 f-w-400">(Kegiatan)</span>
+                            </div>
+                            <div class="product-sub bg-warning-light">
+                                <svg class="invoice-icon">
+                                    <use
+                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#tick-circle') }}">
+                                    </use>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="bubbles">
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 lembur" style="cursor: pointer">
+                <div class="card o-hidden small-widget">
+                    <div class="card-body total-Complete border-b-secondary border-2">
+                        <span class="f-light f-w-500 f-14">Lembur</span>
+                        <div class="project-details">
+                            <div class="project-counter">
+                                <h2 class="f-w-600">{{$count_lembur}}</h2>
+                                <span class="f-12 f-w-400">(Kegiatan)</span>
+                            </div>
+                            <div class="product-sub bg-secondary-light">
+                                <svg class="invoice-icon">
+                                    <use
+                                        xlink:href="{{ asset('assets/svg/icon-sprite.svg#add-square') }}">
+                                    </use>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="bubbles">
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <div class="row">
         <div class="col-xl-9 xl-60 order-xl-0 order-1 box-col-12">
 
@@ -63,12 +128,12 @@
                           <div class="row">
                             <div class="blog-bottom-content col-md-10 d-flex align-items-center">
                               <ul class="blog-social">
-                                <li class="tanggal-incoming"><i class="fa fa-calendar" aria-hidden="true"></i> {{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
+                                <li class="tanggal-incoming">{{$incoming->tanggal_kegiatan}}, {{$incoming->waktu_kegiatan}}</li>
                                 <li class="no_surat-incoming">{{$incoming->no_surat}} </li>
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/data-narasumber/daftar-narasumber?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Narasumber</button></a>
+                              <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Laporan</button></a>
                             </div>
                           </div>
                           <hr>
@@ -113,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/data-narasumber/daftar-narasumber?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Narasumber</button></a>
+                        <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Laporan</button></a>
                       </div>
                     </div>
                   </div>
@@ -172,16 +237,7 @@
                               <input class="form-control" type="text" placeholder="Search.."><i class="search-icon" data-feather="search"></i>
                             </div>
                           </div>
-                          <input type="hidden" id="kategori_filter" value="meeting">
-                          <div class="checkbox-animated">
-                            <div class="learning-header"><span class="f-w-600">Unit Kerja</span></div>
-                            @foreach ($unit_kerja as $u)
-                              <label class="d-block" for="chk-ani">
-                                <input class="unit_kerja_filter checkbox_animated" id="chk-ani" type="checkbox" value="{{$u->id}}">
-                                {{$u->nama_unit}}
-                              </label>
-                            @endforeach
-                          </div>
+                          <input type="hidden" id="kategori_filter">
                           <div class="checkbox-animated mt-0">
                             <div class="learning-header"><span class="f-w-600">Status Event</span></div>
                             <label class="d-block" for="chk-ani3">
@@ -247,45 +303,8 @@
       </div>
     </div>
   </div> --}}
-
-  <div class="modal fade" id="export" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body modal-body-export">
-                <div class="modal-toggle-wrapper">
-                    <ul class="modal-img">
-                        <li> <img id="alert-image" src="{{asset("own_assets/icon/download.gif")}}" width="300px"></li>
-                    </ul>
-                    <h4 class="text-center pb-2" id="alert-title">Download Template</h4>
-                    <p class="text-center" id="alert-message">
-                        <a href="{{asset('own_assets/document/peserta.xlsx')}}" class="btn btn-info" id="download-template" download>
-                            <i class="fa fa-download text-white" aria-hidden="true"></i> Download Template
-                        </a>
-                    </p>
-                    <p class="text-center" id="alert-message">
-                        Download dan isi data pada file template. <br> Setelah selesai, upload file tersebut ke form di bawah ini.
-                    </p>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="peserta">Upload data peserta</label>
-                                <input class="form-control input-air-primary" id="peserta" type="file">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Container for buttons to align them horizontally -->
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary mx-2" id="upload" type="button">Upload</button>
-                        <button class="btn btn-secondary mx-2" type="button" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/narsum.js')}}"></script>
+    <script src="{{asset('own_assets/js/peserta_page.js')}}"></script>
 @endsection

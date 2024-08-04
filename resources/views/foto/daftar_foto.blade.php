@@ -76,7 +76,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="foto">Upload Foto</label>
-                                            <input class="form-control input-air-primary" id="foto" type="file">
+                                            <input class="form-control input-air-primary" id="foto" type="file" name="foto[]" multiple accept="image/*">
                                         </div>
                                     </div>
                                 </div>

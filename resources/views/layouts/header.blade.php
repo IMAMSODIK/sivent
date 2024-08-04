@@ -95,7 +95,7 @@
                 <li>
                     <div class="mode"><i class="moon" data-feather="moon"> </i></div>
                 </li>
-                <li class="onhover-dropdown notification-down">
+                {{-- <li class="onhover-dropdown notification-down">
                     <div class="notification-box">
                         <svg>
                             <use href="{{ asset('assets/svg/icon-sprite.svg#notification-header') }}"></use>
@@ -451,7 +451,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <li style="padding-left: 40px; padding-right: 40px; padding-top: 40px">
                     <div class="user-nav onhover-dropdown">
                         <div class="user-name media">
@@ -466,7 +466,7 @@
                             </div>
                             <div class="media-body">
                                 <h6>{{session('user')->name}}</h6>
-                                <p>{{(session('user')->role == 'admin') ? "Admin" : "Super Admin"}}</p>
+                                <p>{{(session('user')->role == 'admin') ? "Admin" : ((session('user')->role == 'super_admin') ? "Super Admin" : "Peserta")}}</p>
                             </div>
                         </div>
                     </div>

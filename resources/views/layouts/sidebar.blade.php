@@ -37,11 +37,21 @@
                         <h6>Pinned</h6>
                     </div>
                 </li>
+
+                @if (session()->get('user')->role == 'peserta')
+
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                        href="/peserta-page/daftar-event">
+                        <i class="fa fa-cube text-white" aria-hidden="true"></i>
+                        </svg><span class="">Event Anda</span></a>
+                </li>
+                @else
                 <li class="sidebar-main-title">
                     <div>
                         <h6 class="">Dashboard</h6>
                     </div>
                 </li>
+                
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
                         href="/dashboard">
                         <i class="fa fa-tachometer text-white" aria-hidden="true"></i>
@@ -177,6 +187,7 @@
                         <h6 class="">General</h6>
                     </div>
                 </li>
+                @endif
     
                 @if (session()->get('user')->role == 'super_admin')
                     <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"

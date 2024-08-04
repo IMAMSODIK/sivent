@@ -125,15 +125,24 @@ data bank
 ambil dari database yang sudah ada (done)
 
 data peserta
-untuk rapat, meeting dan lembur peserta bisa dipilih, export atau tambah
+untuk rapat, meeting dan lembur peserta bisa dipilih, export atau tambah (done)
 
 data narasumber, rundown
-bisa export data
+bisa export data (done)
 
 foto event
-upload foto event bisa upload lebih dari 1 gambar
+upload foto event bisa upload lebih dari 1 gambar (done)
 
 lapora event
 tombol untuk download semua data event (data peserta (bukti pembayaran), narasumber, rundown, foto event)
 
 semua peserta bisa login
+
+
+
+
+
+datatable masih error
+select tidak harus centang radio button, row juga bisa select
+fitur search event belum
+ada masalah login dengan nip

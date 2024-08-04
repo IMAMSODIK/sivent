@@ -18,39 +18,81 @@ $("#tambah-data").on("click", function(){
     $("#tambah-data-modal").modal("show");
 });
 
-$("#store").on("click", function(){
-    $("#tambah-data-modal").modal("hide");
-    let formData = new FormData();
+// $("#store").on("click", function(){
+//     $("#tambah-data-modal").modal("hide");
+//     let formData = new FormData();
 
+//     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+//     formData.append("id_kegiatan", $("#id_kegiatan").val());
+//     formData.append("deskripsi", $("#deskripsi").val());
+//     formData.append('foto', $("#foto")[0].files[0]);
+
+//     $.ajax({
+//         url: '/foto-event/daftar-foto/store',
+//         method: 'POST',
+//         processData: false,
+//         contentType: false, 
+//         data: formData,
+//         success: function(response){
+//             if(response.status){
+//                 alertModal(true, "Berhasil menambahkan data");
+//                 setTimeout(() => {
+//                     location.reload();
+//                 }, 2000);
+//             }else{
+//                 $('.modal-alert').on('hidden.bs.modal', function () {
+//                     $("#tambah-data-modal").modal("show");
+//                 });
+//                 alertModal(false, response.message);
+//             }
+//         },
+//         error: function(response){
+//             alertModal(false, response.message);
+//         }
+//     })
+// })
+
+$("#store").on("click", function() {
+    $("#tambah-data-modal").modal("hide");
+
+    let formData = new FormData();
     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
     formData.append("id_kegiatan", $("#id_kegiatan").val());
     formData.append("deskripsi", $("#deskripsi").val());
-    formData.append('foto', $("#foto")[0].files[0]);
+
+    // Ambil file-file yang dipilih
+    let files = $("#foto")[0].files;
+
+    // Tambahkan setiap file ke FormData
+    for (let i = 0; i < files.length; i++) {
+        formData.append('foto[]', files[i]);
+    }
 
     $.ajax({
         url: '/foto-event/daftar-foto/store',
         method: 'POST',
         processData: false,
-        contentType: false, 
+        contentType: false,
         data: formData,
-        success: function(response){
-            if(response.status){
+        success: function(response) {
+            if (response.status) {
                 alertModal(true, "Berhasil menambahkan data");
                 setTimeout(() => {
                     location.reload();
                 }, 2000);
-            }else{
-                $('.modal-alert').on('hidden.bs.modal', function () {
+            } else {
+                $('.modal-alert').on('hidden.bs.modal', function() {
                     $("#tambah-data-modal").modal("show");
                 });
                 alertModal(false, response.message);
             }
         },
-        error: function(response){
+        error: function(response) {
             alertModal(false, response.message);
         }
-    })
-})
+    });
+});
+
 
 $(".edit").on("click", function(){
     let id = $(this).data('id');
@@ -162,6 +204,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
@@ -246,6 +289,7 @@ function eventCards(kategori) {
     $(".incoming").empty();
     $(".done").empty();
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
 
     $.ajax({
         url: '/data-peserta/daftar-event',

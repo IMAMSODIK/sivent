@@ -18,6 +18,11 @@ class AuthController extends Controller
         if(Auth::attempt(['username' => $r->username, 'password' => $r->password])){
             $r->session()->regenerate();
             session()->put('user', Auth::user());
+
+            if(Auth::user()->role == 'peserta'){
+                return redirect('/peserta-page/daftar-event', );    
+            }
+
             return redirect('/dashboard', );
         }else{
             return redirect('/login')->with("error", $r->no_wa);

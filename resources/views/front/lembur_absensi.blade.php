@@ -106,7 +106,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a class="" href="/">Home</a>
                         </li>
-                        <li class="dropdown"><a class="dropdown-toggle" href="#"
+                        {{-- <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">
                                 <li style="font-size: 15px"><a href="/absensi-peserta/rapat/front">Absensi</a></li>
@@ -125,7 +125,7 @@
                             <ul class="dropdown-menu">
                                 <li style="font-size: 15px"><a href="/absensi-peserta/lembur/front">Absensi</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

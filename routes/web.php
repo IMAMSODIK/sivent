@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentEventController;
+use App\Http\Controllers\EventPesertaController;
 use App\Http\Controllers\FotoEventController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KitSeminarController;
@@ -23,6 +25,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Event;
 use App\Models\LaporanEvent;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $tanggalSekarang = Carbon::now();
+    $tanggalSekarang = Carbon::now()->subDay();
 
     $data = [
         'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
@@ -47,17 +50,24 @@ Route::get('/', function () {
     return view('landing_page', $data);
 });
 
+Route::get('/detail', function(Request $r){
+    $data = [
+        'event' => Event::where('event_id', '>=', $r->id)->first()
+    ];
+    return view('detail_event', $data);
+});
+
 Route::middleware('guest')->group(function(){
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginCheck']);
 });
 
-Route::get("/absensi-peserta/rapat/front", [PesertaController::class, 'absensiRapatFront']);
-Route::get("/registrasi-peserta/meeting/front", [PesertaController::class, 'registrasiMeetingFront']);
-Route::get("/absensi-peserta/meeting/front", [PesertaController::class, 'absensiMeetingFront']);
-Route::get("/kit-peserta/meeting/front", [PesertaController::class, 'kitMeetingFront']);
-Route::get("/absensi-peserta/lembur/front", [PesertaController::class, 'absensiLemburFront']);
-Route::post("/kit-peserta/daftar-peserta/kit", [PesertaController::class, 'kitAksi']);
+// Route::get("/absensi-peserta/rapat/front", [PesertaController::class, 'absensiRapatFront']);
+// Route::get("/registrasi-peserta/meeting/front", [PesertaController::class, 'registrasiMeetingFront']);
+// Route::get("/absensi-peserta/meeting/front", [PesertaController::class, 'absensiMeetingFront']);
+// Route::get("/kit-peserta/meeting/front", [PesertaController::class, 'kitMeetingFront']);
+// Route::get("/absensi-peserta/lembur/front", [PesertaController::class, 'absensiLemburFront']);
+// Route::post("/kit-peserta/daftar-peserta/kit", [PesertaController::class, 'kitAksi']);
 
 Route::get("/absensi-peserta/rapat/front/daftar-peserta", [PesertaController::class, 'daftarPesertaFront']);
 Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
@@ -83,6 +93,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-peserta/daftar-peserta", [PesertaController::class, 'daftarPeserta']);
     Route::get("/data-peserta/select-peserta", [PesertaController::class, 'selectPeserta']);
     Route::post("/data-peserta/daftar-peserta/store", [PesertaController::class, 'store']);
+    Route::post("/data-peserta/daftar-peserta/import-peserta", [ImportController::class, 'importPeserta']);
     Route::post("/data-peserta/daftar-peserta/update", [PesertaController::class, 'update']);
     Route::post("/data-peserta/daftar-peserta/delete", [PesertaController::class, 'delete']);
     Route::get("/data-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
@@ -104,6 +115,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-rundown", [RundownController::class, 'index']);
     Route::get("/data-rundown/daftar-rundown", [RundownController::class, 'daftarRundown']);
     Route::post("/data-rundown/daftar-rundown/store", [RundownController::class, 'store']);
+    Route::post("/data-rundown/daftar-rundown/import-rundown", [ImportController::class, 'importRundown']);
     Route::get("/data-rundown/daftar-rundown/edit", [RundownController::class, 'edit']);
     Route::post("/data-rundown/daftar-rundown/update", [RundownController::class, 'update']);
     Route::post("/data-rundown/daftar-rundown/delete", [RundownController::class, 'delete']);
@@ -179,6 +191,10 @@ Route::middleware('auth')->group(function(){
     Route::get("/absensi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
 
     Route::get("/profile", [ProfileController::class, 'profile']);
+
+    Route::get("/peserta-page/daftar-event", [EventPesertaController::class, 'index']);
+    Route::get("/peserta-page/daftar-event/card", [EventPesertaController::class, 'daftarEvent']);
+    Route::get("/peserta-page/daftar-event/filter", [EventPesertaController::class, 'filterEvent']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

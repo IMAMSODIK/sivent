@@ -57,6 +57,7 @@ $("#store").on("click", function(){
             if(response.status){
                 const givenDate = new Date(response.data.tanggal_kegiatan);
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
                 
                 if(givenDate >= currentDate){
                     let event = `
@@ -279,6 +280,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
@@ -351,4 +353,8 @@ $("#submit-filter").on("click", function(){
             alertModal(false, response.message);
         }
     })
+})
+
+$("#download_laporan").on("click", function(){
+    alert($(this).data('id'));
 })

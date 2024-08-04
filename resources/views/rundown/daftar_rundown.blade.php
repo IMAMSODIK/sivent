@@ -1,5 +1,37 @@
 @extends('template')
 
+@section('own_style')
+    <style>
+        .modal-body-export {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .mx-2 {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            margin: 0.5rem; /* Optional: Add some spacing around the buttons */
+        }
+
+    </style>
+@endsection
+
 @section('content')
     <div class="page-body">
         <div class="container-fluid mt-4">
@@ -9,7 +41,8 @@
                         <h4>Daftar Rundown</h4>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-success" id="tambah-data">Tambah Data</button>
+                        <button class="btn btn-info" id="tambah-data">Tambah Data</button>
+                        <button class="btn btn-success" style="margin-right: 5px" id="export-rundown"><i class="fa fa-table text-white" aria-hidden="true"></i> Export Rundown</button>
                     </div>
                 </div>
             </div>
@@ -27,10 +60,9 @@
                                         <tr>
                                             <th style="width: 5%; font-size: 18px" class="text-center">No. </th>
                                             <th style="width: 10%; font-size: 18px" class="text-center">Tanggal</th>
-                                            <th style="width: 10%; font-size: 18px" class="text-center">Hari</th>
                                             <th style="width: 10%; font-size: 18px" class="text-center">Waktu</th>
                                             <th style="width: 40%; font-size: 18px" class="text-center">Keterangan</th>
-                                            <th style="width: 20%; font-size: 18px" class="text-center">Pembaca Acara</th>
+                                            <th style="width: 20%; font-size: 18px" class="text-center">Pembawa Acara</th>
                                             <th style="width: 5%; font-size: 18px" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -40,7 +72,6 @@
                                         <tr>
                                             <td style="font-size: 18px" class="text-center">{{++$index}}</td>
                                             <td style="font-size: 18px" class="text-center">{{$p->tanggal_kegiatan}}</small></td>
-                                            <td style="font-size: 18px" class="text-center">{{$p->tanggal_kegiatan}}</td>
                                             <td style="font-size: 18px" class="text-center">{{$p->waktu_kegiatan}}</td>
                                             <td style="font-size: 18px">{{$p->keterangan_kegiatan}}</td>
                                             <td style="font-size: 18px">{{$p->aktor}}</td>
@@ -216,6 +247,43 @@
               </div>
             </div>
           </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="export" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body modal-body-export">
+                    <div class="modal-toggle-wrapper">
+                        <ul class="modal-img">
+                            <li> <img id="alert-image" src="{{asset("own_assets/icon/download.gif")}}" width="300px"></li>
+                        </ul>
+                        <h4 class="text-center pb-2" id="alert-title">Download Template</h4>
+                        <p class="text-center" id="alert-message">
+                            <a href="{{asset('own_assets/document/rundown.xlsx')}}" class="btn btn-info" id="download-template" download>
+                                <i class="fa fa-download text-white" aria-hidden="true"></i> Download Template
+                            </a>
+                        </p>
+                        <p class="text-center" id="alert-message">
+                            Download dan isi data pada file template. <br> Setelah selesai, upload file tersebut ke form di bawah ini.
+                        </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label" for="rundown">Upload data rundown</label>
+                                    <input class="form-control input-air-primary" id="rundown" type="file">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Container for buttons to align them horizontally -->
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mx-2" id="upload" type="button">Upload</button>
+                            <button class="btn btn-secondary mx-2" type="button" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

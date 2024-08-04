@@ -192,6 +192,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);

@@ -46,42 +46,96 @@ class FotoEventController extends Controller
     //     return view('peserta.daftar_registrasi_peserta', $data);
     // }
 
-    public function store(Request $r){
-        $foto = null;
+    // public function store(Request $r){
+    //     $foto = null;
 
-        if ($r->hasFile('foto')) {
-            $file = $r->file('foto');
-            $fileMimeType = $file->getClientMimeType();
+    //     if ($r->hasFile('foto')) {
+    //         $file = $r->file('foto');
+    //         $fileMimeType = $file->getClientMimeType();
 
-            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
-                return response()->json([
-                    'status' => false,
-                    'message' => "Jenis File Tidak Didukung"
-                ]);
-            }
+    //         if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+    //             return response()->json([
+    //                 'status' => false,
+    //                 'message' => "Jenis File Tidak Didukung"
+    //             ]);
+    //         }
 
-            $foto = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
-            $file->storePubliclyAs('foto', $foto, 'public');
-        }
+    //         $foto = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+    //         $file->storePubliclyAs('foto', $foto, 'public');
+    //     }
 
+    //     $messages = [
+    //         'required' => 'Kolom :attribute harus diisi.',
+    //         'numeric' => 'Kolom :attribute harus berupa angka.',
+    //         'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+    //         'string' => 'Kolom :attribute harus berupa teks.',
+    //         'unique' => 'Kolom :attribute sudah digunakan.'
+    //     ];
+
+    //     $data = [
+    //         'event_id' => $r->id_kegiatan,
+    //         'keterangan' => $r->deskripsi,
+    //     ];
+
+    //     $rules = [
+    //         'event_id' => 'required',
+    //         'keterangan' => 'required|string'
+    //     ];
+
+    //     $validator = Validator::make($data, $rules, $messages);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => implode(', ', $validator->errors()->all())
+    //         ]);
+    //     }
+
+    //     try{
+    //         $event = Event::where('event_id', $r->id_kegiatan)->first();
+    //         if($event){
+    //             $foto = FotoEvent::create([
+    //                 'event_id' => $event->id,
+    //                 'keterangan' => $r->deskripsi,
+    //                 'foto' => $foto
+    //             ]);
+    
+    //             if($foto){
+    //                 return response()->json([
+    //                     'status' => true
+    //                 ]);
+    //             }
+    //         }
+
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => "Gagal menambahkan data"
+    //         ]);
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => $e->getMessage()
+    //         ]);
+    //     }
+    // }
+
+    public function store(Request $r)
+    {
+        // Validasi form input
         $messages = [
             'required' => 'Kolom :attribute harus diisi.',
-            'numeric' => 'Kolom :attribute harus berupa angka.',
-            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
             'string' => 'Kolom :attribute harus berupa teks.',
-            'unique' => 'Kolom :attribute sudah digunakan.'
-        ];
-
-        $data = [
-            'event_id' => $r->id_kegiatan,
-            'keterangan' => $r->deskripsi,
+            'file' => 'Kolom :attribute harus berupa file.',
+            'mimes' => 'Jenis file yang diperbolehkan adalah :values.',
+            'max' => 'Ukuran file tidak boleh lebih dari :max kilobytes.'
         ];
 
         $rules = [
-            'event_id' => 'required',
-            'keterangan' => 'required|string'
+            'deskripsi' => 'required|string',
+            'foto.*' => 'file|mimes:jpg,jpeg,png|max:2048' // Validasi untuk file gambar
         ];
 
+        $data = $r->only(['deskripsi']);
         $validator = Validator::make($data, $rules, $messages);
 
         if ($validator->fails()) {
@@ -91,27 +145,41 @@ class FotoEventController extends Controller
             ]);
         }
 
-        try{
+        try {
             $event = Event::where('event_id', $r->id_kegiatan)->first();
-            if($event){
-                $foto = FotoEvent::create([
-                    'event_id' => $event->id,
-                    'keterangan' => $r->deskripsi,
-                    'foto' => $foto
-                ]);
-    
-                if($foto){
-                    return response()->json([
-                        'status' => true
+
+            if ($event) {
+                $files = $r->file('foto');
+                $uploadedPhotos = [];
+
+                foreach ($files as $file) {
+                    // Menghasilkan nama file unik
+                    $foto = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+                    // Simpan file
+                    $file->storePubliclyAs('foto', $foto, 'public');
+
+                    // Simpan informasi file ke database
+                    FotoEvent::create([
+                        'event_id' => $event->id,
+                        'keterangan' => $r->deskripsi,
+                        'foto' => $foto
                     ]);
+
+                    $uploadedPhotos[] = $foto;
                 }
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Files successfully uploaded',
+                    'files' => $uploadedPhotos
+                ]);
             }
 
             return response()->json([
                 'status' => false,
-                'message' => "Gagal menambahkan data"
+                'message' => "Event not found"
             ]);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => false,
                 'message' => $e->getMessage()

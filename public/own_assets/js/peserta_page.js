@@ -26,10 +26,10 @@ $("#store").on("click", function () {
     formData.append("id_kegiatan", $("#id_kegiatan").val());
     formData.append("nama", $("#nama").val());
     formData.append("deskripsi", $("#deskripsi").val());
-    formData.append('file', $("#dokumen")[0].files[0]);
+    formData.append('dokumen', $("#dokumen")[0].files[0]);
 
     $.ajax({
-        url: '/laporan-event/daftar-laporan-event/store',
+        url: '/document/daftar-document/store',
         method: 'POST',
         processData: false,
         contentType: false,
@@ -57,7 +57,7 @@ $(".edit").on("click", function(){
     let id = $(this).data('id');
 
     $.ajax({
-        url: '/laporan-event/daftar-laporan-event/edit',
+        url: '/document/daftar-document/edit',
         method: 'GET',
         data: {
             'id': id
@@ -67,7 +67,7 @@ $(".edit").on("click", function(){
                 $("#id").val(response.data.id);
                 $("#edit_nama").val(response.data.nama);
                 $("#edit_deskripsi").val(response.data.deskripsi);
-                $("#dokumen_sebelumnya").attr("href", '../../storage/laporan/' + response.data.file);
+                $("#dokumen_sebelumnya").attr("href", '../../storage/dokumen/' + response.data.file);
 
                 $("#edit-data-modal").modal("show");
             }else{
@@ -88,10 +88,10 @@ $("#update").on("click", function(){
     formData.append("id", $("#id").val());
     formData.append("nama", $("#edit_nama").val());
     formData.append("deskripsi", $("#edit_deskripsi").val());
-    formData.append('file', $("#edit_dokumen")[0].files[0]);
+    formData.append('dokumen', $("#edit_dokumen")[0].files[0]);
 
     $.ajax({
-        url: '/laporan-event/daftar-laporan-event/update',
+        url: '/document/daftar-document/update',
         method: 'POST',
         processData: false,
         contentType: false,
@@ -122,7 +122,7 @@ function eventCards(kategori) {
     currentDate.setDate(currentDate.getDate() - 1);
 
     $.ajax({
-        url: '/data-peserta/daftar-event',
+        url: '/peserta-page/daftar-event/card',
         method: 'GET',
         data: {
             'kategori': kategori
@@ -131,6 +131,7 @@ function eventCards(kategori) {
             if (response.status) {
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
+                    
                     if (eventDate >= currentDate) {
                         let event = `
                             <div class="col-xl-12">
@@ -150,7 +151,7 @@ function eventCards(kategori) {
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/laporan-event/daftar-laporan-event?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Laporan</button></a>
+                                                <a href="/document/daftar-document?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Dokumen</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -184,7 +185,7 @@ function eventCards(kategori) {
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/laporan-event/daftar-laporan-event?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Laporan</button></a>
+                                        <a href="/document/daftar-document?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Dokumen</button></a>
                                     </div>
                                     </div>
                                 </div>
@@ -235,7 +236,7 @@ $("#submit-filter").on("click", function(){
     });
 
     $.ajax({
-        url: '/event/filter',
+        url: '/peserta-page/daftar-event/filter',
         method: 'GET',
         data: {
             'unit_kerja': unitKerjaSelected,
@@ -251,7 +252,6 @@ $("#submit-filter").on("click", function(){
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
-                    
                     if(eventDate >= currentDate){
                         let event = `
                             <div class="col-xl-12">
@@ -271,7 +271,7 @@ $("#submit-filter").on("click", function(){
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/laporan-event/daftar-laporan-event?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Laporan</button></a>
+                                                <a href="/document/daftar-document?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Dokumen</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -305,7 +305,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/laporan-event/daftar-laporan-event?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Laporan</button></a>
+                                        <a href="/document/daftar-document?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Dokumen</button></a>
                                     </div>
                                     </div>
                                 </div>
@@ -336,7 +336,7 @@ $(".delete").on("click", function(){
 
 $("#delete-confirmed").on("click", function(){
     $.ajax({
-        url: '/laporan-event/daftar-laporan-event/delete',
+        url: '/document/daftar-document/delete',
         method: 'POST',
         data: {
             '_token': $("meta[name='csrf-token']").attr("content"),

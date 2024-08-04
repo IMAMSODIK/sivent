@@ -119,6 +119,7 @@ function eventCards(kategori) {
     $(".incoming").empty();
     $(".done").empty();
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
 
     $.ajax({
         url: '/data-peserta/daftar-event',
@@ -130,6 +131,7 @@ function eventCards(kategori) {
             if (response.status) {
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
+                    
                     if (eventDate >= currentDate) {
                         let event = `
                             <div class="col-xl-12">
@@ -246,6 +248,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);

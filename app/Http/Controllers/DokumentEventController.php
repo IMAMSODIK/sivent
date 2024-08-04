@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 class DokumentEventController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             'count_rapat' => Event::where('kategori', 'rapat')->count(),
@@ -43,17 +43,26 @@ class DokumentEventController extends Controller
         if ($r->hasFile('dokumen')) {
             $file = $r->file('dokumen');
             $fileMimeType = $file->getClientMimeType();
-
-            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+            $fileExtension = $file->getClientOriginalExtension();
+            $allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            $allowedExtensions = ['pdf', 'doc', 'docx'];
+        
+            if (!in_array($fileMimeType, $allowedMimeTypes) || !in_array($fileExtension, $allowedExtensions)) {
                 return response()->json([
                     'status' => false,
-                    'message' => "Jenis File Tidak Didukung"
+                    'message' => "Jenis File Tidak Didukung. Hanya PDF dan Word (DOC, DOCX) yang diperbolehkan."
                 ]);
             }
-
+        
             $dokumen = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
             $file->storePubliclyAs('dokumen', $dokumen, 'public');
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Dokumen belum diupload"
+            ]);
         }
+        
 
         $messages = [
             'required' => 'Kolom :attribute harus diisi.',
@@ -142,14 +151,17 @@ class DokumentEventController extends Controller
         if ($r->hasFile('dokumen')) {
             $file = $r->file('dokumen');
             $fileMimeType = $file->getClientMimeType();
-
-            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+            $fileExtension = $file->getClientOriginalExtension();
+            $allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            $allowedExtensions = ['pdf', 'doc', 'docx'];
+        
+            if (!in_array($fileMimeType, $allowedMimeTypes) || !in_array($fileExtension, $allowedExtensions)) {
                 return response()->json([
                     'status' => false,
-                    'message' => "Jenis File Tidak Didukung"
+                    'message' => "Jenis File Tidak Didukung. Hanya PDF dan Word (DOC, DOCX) yang diperbolehkan."
                 ]);
             }
-
+        
             $dokumen = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
             $file->storePubliclyAs('dokumen', $dokumen, 'public');
         }

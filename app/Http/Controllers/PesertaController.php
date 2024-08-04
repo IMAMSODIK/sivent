@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Pegawai;
 use App\Models\Peserta;
 use App\Models\UnitKerja;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ use Illuminate\Support\Str;
 class PesertaController extends Controller
 {
     public function index(){
-        $tanggalSekarang = Carbon::today()->subDay();
+        $tanggalSekarang = Carbon::today();
 
         $data = [
             'count_rapat' => Event::where('kategori', 'rapat')->count(),
@@ -98,6 +99,18 @@ class PesertaController extends Controller
                             'is_narsum' => 0,
                             'status_registrasi' => 1
                         ]);
+
+                        $pegawai = Pegawai::where('id', $id)->first();
+                        $user = User::where("username", $pegawai->nip)->first();
+
+                        if(!$user){
+                            User::create([
+                                'name' => $pegawai->nama,
+                                'username' => $pegawai->nip,
+                                'password' => bcrypt($pegawai->nip),
+                                'role' => 'peserta'
+                            ]);
+                        }
                     }
 
                     return response()->json([
@@ -153,6 +166,17 @@ class PesertaController extends Controller
                         'jenis_kelamin' => $r->jenis_kelamin,
                         'is_narsum' => 0
                     ]);
+
+                    $user = User::where("username", $r->nip)->first();
+
+                    if(!$user){
+                        User::create([
+                            'name' => $r->nama,
+                            'username' => $r->nip,
+                            'password' => bcrypt($r->nip),
+                            'role' => 'peserta'
+                        ]);
+                    }
         
                     if($peserta){
                         return response()->json([
@@ -458,7 +482,7 @@ class PesertaController extends Controller
     }
 
     public function absensiRapatFront(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->withCount('peserta')->get(),
@@ -467,7 +491,7 @@ class PesertaController extends Controller
     }
 
     public function absensiLemburFront(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->withCount('peserta')->get(),
@@ -476,7 +500,7 @@ class PesertaController extends Controller
     }
 
     public function registrasiMeetingFront(){
-        $tanggalSekarang = Carbon::now();
+        $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
             'meeting' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->withCount('peserta')->get(),

@@ -85,7 +85,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a class="" href="/">Home</a>
                         </li>
-                        <li class="dropdown"><a class="dropdown-toggle" href="#"
+                        {{-- <li class="dropdown"><a class="dropdown-toggle" href="#"
                                 data-toggle="dropdown">Rapat</a>
                             <ul class="dropdown-menu">
                                 <li style="font-size: 15px"><a href="/absensi-peserta/rapat/front">Absensi</a></li>
@@ -104,7 +104,7 @@
                             <ul class="dropdown-menu">
                                 <li style="font-size: 15px"><a href="/absensi-peserta/lembur/front">Absensi</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                                     <div class="shop-item-image"><img
                                             src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
                                             alt="Accessories Pack" />
-                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-user">Detail</span></a></div>
                                     </div>
                                     <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
@@ -173,7 +173,7 @@
                                     <div class="shop-item-image"><img
                                             src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
                                             alt="flayer" />
-                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-info">Detail</span></a></div>
                                     </div>
                                     <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}
@@ -195,7 +195,7 @@
                                     <div class="shop-item-image"><img
                                             src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
                                             alt="flayer" />
-                                        <div class="shop-item-detail"><a class="btn btn-round btn-b"><span
+                                        <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-info">Detail</span></a></div>
                                     </div>
                                     <h4 class="shop-item-title font-alt"><a href="#">{{$r->nama_kegiatan}}</a></h4>{{$r->tanggal_kegiatan}}, {{$r->waktu_kegiatan}}

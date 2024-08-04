@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-body dark-modal">
                     <div class="card">
-                        <form class="form theme-form dark-inputs">
+                        <form class="form theme-form dark-inputs" enctype="multipart/form-data">
                             <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
                             <div class="card-body">
                                 <div class="row">
@@ -98,7 +98,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="dokumen">Upload Dokumen</label>
-                                            <input class="form-control input-air-primary" id="dokumen" type="file">
+                                            <input class="form-control input-air-primary" id="dokumen" type="file" accept=".pdf, .doc, .docx">
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
                                             <div class="col-md-8">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="edit_dokumen">Upload Dokumen</label>
-                                                    <input class="form-control input-air-primary" id="edit_dokumen" type="file">
+                                                    <input class="form-control input-air-primary" id="edit_dokumen" type="file" accept=".pdf, .doc, .docx">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">

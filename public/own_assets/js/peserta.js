@@ -19,42 +19,38 @@ function alertModal(status, message = null) {
 $("#pilih-peserta").on("click", function () {
     let kategori = $(this).data('kategori');
     
-    if(kategori == 'rapat' || kategori == 'lembur'){
-        $.ajax({
-            url: '/data-peserta/select-peserta',
-            method: 'GET',
-            data: {
-                "id_kegiatan": $("#id_kegiatan").val()
-            },
-            success: function(response){
-                if(response.status){
-                    table2.clear();
+    $.ajax({
+        url: '/data-peserta/select-peserta',
+        method: 'GET',
+        data: {
+            "id_kegiatan": $("#id_kegiatan").val()
+        },
+        success: function(response){
+            if(response.status){
+                table2.clear();
 
-                    let rows = [];
-                    response.data.forEach(element => {
-                        let row = [
-                            `<input type="checkbox" name="select_pegawai" value="${element.id}">`,
-                            `${element.nama} <br> <small>(${element.nip})</small>`,
-                            element.jenis_kelamin,
-                            element.golongan,
-                            element.jabatan.nama_jabatan
-                        ];
-                        rows.push(row);
-                    });
-                    table2.rows.add(rows).draw();
-                    $(".sorting_1").addClass("text-center");
-                    $("#select-data-modal").modal("show");
-                }else{
-                    alertModal(false, response.message);
-                }
-            },
-            error: function(){
+                let rows = [];
+                response.data.forEach(element => {
+                    let row = [
+                        `<input type="checkbox" name="select_pegawai" value="${element.id}">`,
+                        `${element.nama} <br> <small>(${element.nip})</small>`,
+                        element.jenis_kelamin,
+                        element.golongan,
+                        element.jabatan.nama_jabatan
+                    ];
+                    rows.push(row);
+                });
+                table2.rows.add(rows).draw();
+                $(".sorting_1").addClass("text-center");
+                $("#select-data-modal").modal("show");
+            }else{
                 alertModal(false, response.message);
             }
-        });
-    }else{
-        $("#tambah-data-modal").modal("show");
-    }
+        },
+        error: function(){
+            alertModal(false, response.message);
+        }
+    });
     
 });
 
@@ -298,6 +294,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() - 1);
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
@@ -445,4 +442,39 @@ $("#delete-confirmed").on("click", function(){
 
 $("#export-peserta").on("click", function(){
     $("#export").modal("show");
+})
+
+$("#upload").on("click", function(){
+    $("#export").modal("hide");
+    var fileInput = $("#peserta")[0];
+    var file = fileInput.files[0];
+    
+    if (!file) {
+        alertModal(false, "Upload file terlebih dahulu");
+    }
+
+    var formData = new FormData();
+    formData.append('_token', $("meta[name='csrf-token']").attr("content"),)
+    formData.append("file", file);
+    formData.append('id_kegiatan', $("#id_kegiatan").val());
+
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/import-peserta',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if(response.status){
+                fileInput.value = "";
+                alertModal(true, "Berhasil menambahkan peserta");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        },
+        error: function(response) {
+            alertModal(false, response.message);
+        }
+    });
 })

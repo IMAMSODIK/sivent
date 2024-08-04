@@ -259,6 +259,7 @@ function eventCards(kategori) {
             if (response.status) {
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);
+                    currentDate.setDate(currentDate.getDate() - 1);
                     if (eventDate >= currentDate) {
                         let event = `
                             <div class="col-xl-12">
@@ -345,3 +346,42 @@ $(".lembur").on("click", function () {
     eventCards('lembur');
     $("#kategori_filter").val('lembur');
 });
+
+$("#export-rundown").on("click", function(){
+    $("#export").modal("show");
+})
+
+$("#upload").on("click", function(){
+    $("#export").modal("hide");
+    var fileInput = $("#rundown")[0];
+    var file = fileInput.files[0];
+    
+    if (!file) {
+        alertModal(false, "Upload file terlebih dahulu");
+    }
+
+    var formData = new FormData();
+    formData.append('_token', $("meta[name='csrf-token']").attr("content"),)
+    formData.append("file", file);
+    formData.append('id_kegiatan', $("#id_kegiatan").val());
+
+    $.ajax({
+        url: '/data-rundown/daftar-rundown/import-rundown',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if(response.status){
+                fileInput.value = "";
+                alertModal(true, "Berhasil menambahkan peserta");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        },
+        error: function(response) {
+            alertModal(false, response.message);
+        }
+    });
+})
