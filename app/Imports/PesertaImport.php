@@ -9,9 +9,11 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class PesertaImport implements ToModel
 {
     protected $id_event;
+    protected $kategori;
 
-    public function __construct($id_event){
+    public function __construct($id_event, $kategori){
         $this->id_event = $id_event;
+        $this->kategori = $kategori;
     }
 
     /**
@@ -37,16 +39,32 @@ class PesertaImport implements ToModel
             ]);
         }
 
-        return new Peserta([
-            'event_id' => $this->id_event,
-            'nama' => $row[0],
-            'jenis_kelamin' => $row[1],
-            'nip' => $row[2],
-            'golongan' => $row[3],
-            'jabatan' => $row[4],
-            'no_rek' => $row[5],
-            'bank' => $row[6],
-            'is_narsum' => false
-        ]);
+        if($this->kategori != 'meeting'){
+            return new Peserta([
+                'event_id' => $this->id_event,
+                'nama' => $row[0],
+                'jenis_kelamin' => $row[1],
+                'nip' => $row[2],
+                'golongan' => $row[3],
+                'jabatan' => $row[4],
+                'no_rek' => $row[5],
+                'bank' => $row[6],
+                'is_narsum' => false,
+                'status_registrasi' => 1
+            ]);
+        }else{
+            return new Peserta([
+                'event_id' => $this->id_event,
+                'nama' => $row[0],
+                'jenis_kelamin' => $row[1],
+                'nip' => $row[2],
+                'golongan' => $row[3],
+                'jabatan' => $row[4],
+                'no_rek' => $row[5],
+                'bank' => $row[6],
+                'is_narsum' => false,
+                'status_registrasi' => 0
+            ]);
+        }
     }
 }

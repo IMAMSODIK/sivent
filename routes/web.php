@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentEventController;
 use App\Http\Controllers\EventPesertaController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\RapatController;
 use App\Http\Controllers\RundownController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\UserController;
+use App\Models\Banner;
 use App\Models\Event;
 use App\Models\LaporanEvent;
 use Carbon\Carbon;
@@ -47,6 +49,7 @@ Route::get('/', function () {
         'rapat' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'rapat')->get(),
         'meeting' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
         'lembur' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->get(),
+        'banners' => Banner::all()
     ];
     return view('landing_page', $data);
 });
@@ -169,6 +172,12 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-unit-kerja/edit", [UnitKerjaController::class, 'edit']);
     Route::post("/data-unit-kerja/update", [UnitKerjaController::class, 'update']);
     Route::post("/data-unit-kerja/delete", [UnitKerjaController::class, 'delete']);
+
+    Route::get("/banner", [BannerController::class, 'index']);
+    Route::post("/banner/store", [BannerController::class, 'store']);
+    Route::get("/banner/edit", [BannerController::class, 'edit']);
+    Route::post("/banner/update", [BannerController::class, 'update']);
+    Route::post("/banner/delete", [BannerController::class, 'delete']);
 
     Route::get("/data-admin", [UserController::class, 'index']);
     Route::post("/data-admin/store", [UserController::class, 'store']);

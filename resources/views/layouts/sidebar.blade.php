@@ -98,6 +98,12 @@
                     </svg><span class="">Master Jabatan</span></a>
                 </li>
 
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                    href="/banner">
+                    <i class="fa fa-picture-o text-white" aria-hidden="true"></i>
+                    </svg><span class="">Banner</span></a>
+                </li>
+
                 <li class="sidebar-main-title">
                     <div>
                         <h6 class="">Data Event</h6>

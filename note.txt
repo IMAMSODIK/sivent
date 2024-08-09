@@ -133,10 +133,10 @@ bisa export data (done)
 foto event
 upload foto event bisa upload lebih dari 1 gambar (done)
 
+semua peserta bisa logi(done)
+
 lapora event
 tombol untuk download semua data event (data peserta (bukti pembayaran), narasumber, rundown, foto event)
-
-semua peserta bisa login
 
 
 
@@ -146,3 +146,9 @@ datatable masih error
 select tidak harus centang radio button, row juga bisa select
 fitur search event belum
 ada masalah login dengan nip
+
+
+
+
+GOLONGAN SAMPAI 4
+absensi bisa lebih dari satu hari dan simpan data tanggal absensi

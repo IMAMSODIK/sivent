@@ -18,13 +18,13 @@ class ImportController extends Controller
             ]);
     
             $file = $r->file('file');
-            $id_event = Event::where('event_id', $r->id_kegiatan)->value('id');
+            $id_event = Event::where('event_id', $r->id_kegiatan)->first();
 
             if (!$id_event) {
                 return redirect()->back()->with('error', 'ID Event tidak ditemukan.');
             }
 
-            $import = new PesertaImport($id_event);
+            $import = new PesertaImport($id_event->id, $id_event->kategori);
     
             Excel::import($import, $file);
 

@@ -43,7 +43,7 @@
                     <div class="col-6 d-flex justify-content-end">
                         {{-- <button class="btn btn-success" style="margin-right: 5px" id="import-data"><i class="fa fa-upload text-white" aria-hidden="true"></i> Import Data</button> --}}
                         <button class="btn btn-info" style="margin-right: 5px" id="pilih-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-list-ul text-white" aria-hidden="true"></i> Pilih Peserta</button>
-                        <button class="btn btn-success" style="margin-right: 5px" id="export-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-table text-white" aria-hidden="true"></i> Export Peserta</button>
+                        <button class="btn btn-success" style="margin-right: 5px" id="export-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-table text-white" aria-hidden="true"></i> Import Peserta</button>
                         <button class="btn btn-primary" id="tambah-peserta" data-kategori="{{$kategori_event}}"><i class="fa fa-plus text-white" aria-hidden="true"></i> Tambah Peserta</button>
                     </div>
                 </div>

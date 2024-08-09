@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                         <button class="btn btn-info" id="tambah-data">Tambah Data</button>
-                        <button class="btn btn-success" style="margin-right: 5px" id="export-rundown"><i class="fa fa-table text-white" aria-hidden="true"></i> Export Rundown</button>
+                        <button class="btn btn-success" style="margin-right: 5px" id="export-rundown"><i class="fa fa-table text-white" aria-hidden="true"></i> Import Rundown</button>
                     </div>
                 </div>
             </div>

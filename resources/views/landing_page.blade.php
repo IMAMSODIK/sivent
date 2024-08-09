@@ -115,7 +115,7 @@
             <div class="hero-slider">
                 <ul class="slides">
                     <li class="bg-dark-30 bg-dark shop-page-header"
-                        style="background-image: url('{{ asset('landing_page/images/shop/slider1.png') }}');">
+                        style="background-image: url('{{ asset('landing_page/images/banner.jpg') }}');">
                         <div class="titan-caption">
                             <div class="caption-content">
                                 <div class="font-alt mb-30 titan-title-size-1">Sistem Informasi Event</div>
@@ -124,15 +124,17 @@
                             </div>
                         </div>
                     </li>
-                    <li class="bg-dark-30 bg-dark shop-page-header"
-                        style="background-image: url('{{ asset('landing_page/images/shop/slider3.png') }}');">
-                        <div class="titan-caption">
-                            <div class="caption-content">
-                                <div class="font-alt mb-30 titan-title-size-4"> Banner SIVENT</div>
-                                <div class="font-alt mb-40 titan-title-size-1">Letak Banner</div>
+                    @foreach ($banners as $b)
+                        <li class="bg-dark-30 bg-dark shop-page-header"
+                            style="background-image: url('{{ asset('storage/banner') . '/' . $b->file }}');">
+                            <div class="titan-caption">
+                                <div class="caption-content">
+                                    <div class="font-alt mb-30 titan-title-size-4"> Banner SIVENT</div>
+                                    <div class="font-alt mb-40 titan-title-size-1">Letak Banner</div>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </section>
