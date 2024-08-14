@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <input class="btn btn-light" type="button" id="cancel-add" value="Cancel">
                                 <button class="btn btn-primary me-3" type="button" id="store">Submit</button>
                             </div>
                         </form>
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <input class="btn btn-light" type="button" id="cancel-edit" value="Cancel">
                                 <button class="btn btn-primary me-3" type="button" id="update">Update</button>
                             </div>
                         </form>

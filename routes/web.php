@@ -56,7 +56,7 @@ Route::get('/', function () {
 
 Route::get('/detail', function(Request $r){
     $data = [
-        'event' => Event::where('event_id', '>=', $r->id)->first()
+        'event' => Event::where('event_id', $r->id)->first()
     ];
     return view('detail_event', $data);
 });
@@ -98,6 +98,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/data-peserta/select-peserta", [PesertaController::class, 'selectPeserta']);
     Route::post("/data-peserta/daftar-peserta/store", [PesertaController::class, 'store']);
     Route::post("/data-peserta/daftar-peserta/import-peserta", [ImportController::class, 'importPeserta']);
+    Route::get("/data-peserta/daftar-peserta/import-peserta/check", [ImportController::class, 'checkAdmin']);
     Route::post("/data-peserta/daftar-peserta/upload-bt", [PesertaController::class, 'uploadBt']);
     Route::post("/data-peserta/daftar-peserta/update", [PesertaController::class, 'update']);
     Route::post("/data-peserta/daftar-peserta/delete", [PesertaController::class, 'delete']);
@@ -214,4 +215,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/event/export-laporan', [ExportController::class, 'exportLaporan']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::get('/storage-link', function () {
+    $targetStorage = storage_path('app/public');
+    $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+    symlink($targetStorage, $linkFolder);
 });

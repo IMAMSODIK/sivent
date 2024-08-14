@@ -6,9 +6,9 @@
 <meta name="keywords"
     content="admin template, Riho admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="pixelstrap">
-<link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-<title>Riho - Premium Admin Template</title>
+<link rel="icon" href="{{asset('assets/images/logo/logo.png')}}" type="image/x-icon">
+<link rel="shortcut icon" href="{{asset('assets/images/logo/logo.png')}}" type="image/x-icon">
+<title>Sivent FEBI - {{$pageTitle}}</title>
 <!-- Google font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">

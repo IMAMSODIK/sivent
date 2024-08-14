@@ -16,6 +16,7 @@ class LemburController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'lembur')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'lembur')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Lembur"
         ];
         return view('event.lembur', $data);
     }

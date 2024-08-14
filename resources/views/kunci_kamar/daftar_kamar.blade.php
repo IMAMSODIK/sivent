@@ -27,7 +27,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nomor Kamar</th>
-                                            <th>Pemegang Kunci</th>
+                                            <th>Nama Peserta</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="pemegang">Pilih Pemegang Kunci</label>
+                                            <label class="form-label" for="pemegang">Pilih Peserta</label>
                                             <select class="form-control input-air-primary" id="pemegang"></select>
                                         </div>
                                     </div>

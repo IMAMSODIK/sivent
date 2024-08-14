@@ -178,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/document/daftar-document?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Dokumen</button></a>
+                        <a href="/document/daftar-document?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Dokumen</button></a>
                       </div>
                     </div>
                   </div>
@@ -289,7 +289,7 @@
             <img id="detail-flayer-image" alt="" style="width: 100%">
           </div>
           <div class="card-footer text-end">
-            <input class="btn btn-primary close-modal" type="reset" value="Tutup">
+            <input class="btn btn-primary close-modal" type="button" id="close-flayer" value="Tutup">
           </div>
         </div>
       </div>

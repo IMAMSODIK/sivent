@@ -28,8 +28,10 @@ class ExportController extends Controller
             $data['narasumbers'] = Peserta::where('event_id', $event->id)->where('is_narsum', 1)->get();
         }
 
-        ini_set('max_execution_time', 480);
-        $pdf = Pdf::loadView('export.lapora_event', $data);
-        return $pdf->download('laporan_event.pdf');
+        // ini_set('max_execution_time', 480);
+        // $pdf = Pdf::loadView('export.lapora_event', $data);
+        // return $pdf->download('laporan_event.pdf');
+
+        return view('export.lapora_event', $data);
     }
 }

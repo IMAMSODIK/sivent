@@ -2,7 +2,7 @@
 
     <div class="logo-wrapper">
         <a href="index.html">
-            <img class="img-fluid" width="40px" src="{{ asset('assets/images/logo/logo.png') }}" alt="">
+            <img class="img-fluid" width="50px" src="{{ asset('assets/images/logo/logo.png') }}" alt="">
         </a>
         <div class="back-btn">
             <i class="fa fa-angle-left"> </i>
@@ -157,17 +157,17 @@
                     <i class="fa fa-cubes text-white" aria-hidden="true"></i>
                     </svg><span class="">Kit Seminar</span></a>
                 </li>
-
+                
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
                     class="sidebar-link sidebar-title link-nav" href="/kunci-kamar">
-                    <i class="fa fa-key text-white" aria-hidden="true"></i>
-                    </svg><span class="">Kunci Kamar</span></a>
+                    <i class="fa fa-bed text-white" aria-hidden="true"></i>
+                    </svg><span class="">Data Kamar</span></a>
                 </li>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
                     href="/data-kamar">
-                    <i class="fa fa-bed text-white" aria-hidden="true"></i>
-                    </svg><span class="">Data Kamar</span></a>
+                    <i class="fa fa-key text-white" aria-hidden="true"></i>
+                    </svg><span class="">Kunci Kamar</span></a>
                 </li>
 
                 <li class="sidebar-main-title">

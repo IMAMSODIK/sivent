@@ -227,7 +227,8 @@ $("#tambah-data").on("click", function(){
                 response.data.forEach(element => {
                     var newOption = $('<option>', {
                         value: element.nama,
-                        text: element.nama
+                        text: element.nama,
+                        'data-id': element.id
                     });
 
                     $("#pemegang").append(newOption);
@@ -244,6 +245,8 @@ $("#tambah-data").on("click", function(){
 })
 
 $("#store").on("click", function(){
+    var selectedOption = $("#pemegang").find('option:selected');
+    var dataId = selectedOption.data('id');
     $("#tambah-data-modal").modal("hide");
     $.ajax({
         url: '/kunci-kamar/daftar-kamar/store',
@@ -253,6 +256,7 @@ $("#store").on("click", function(){
             "id_event": $("#id_kegiatan").val(),
             "no_kamar": $("#no_kamar").val(),
             "pemegang": $("#pemegang").val(),
+            "pemegang_id": dataId
         },
         success: function(response){
             if(response.status){

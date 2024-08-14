@@ -24,6 +24,7 @@ class DokumentEventController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Dokumen Event"
         ];
         return view('dokumen.index', $data);
     }
@@ -32,7 +33,8 @@ class DokumentEventController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'dokumens' => DokumentEvent::where('event_id', $event->id)->get()
+            'dokumens' => DokumentEvent::where('event_id', $event->id)->get(),
+            'pageTitle' => "Daftar Dokumen"
         ];
         return view('dokumen.daftar_dokumen', $data);
     }

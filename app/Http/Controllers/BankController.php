@@ -12,7 +12,8 @@ class BankController extends Controller
 {
     public function index(){
         $data = [
-            "banks" => DB::table('mst_bank')->get()
+            "banks" => DB::table('mst_bank')->get(),
+            'pageTitle' => "Bank"
         ];
         return view('bank.index', $data);
     }
@@ -116,12 +117,11 @@ class BankController extends Controller
         }
 
         try{
-            $data = Bank::where("id", $r->id)->first();
+            $data = DB::table('mst_bank')->where("id", $r->id)->update([
+                "nama_bank" => $r->nama_bank
+            ]);
 
             if($data){
-                $data->nama_bank = $r->nama_bank;
-                $data->save();
-
                 return response()->json([
                     'status' => true
                 ]);

@@ -62,7 +62,8 @@ class DashboardController extends Controller
             'event_today' => $eventToday,
             'arrRapat' => $eventPerBulanArrayRapat,
             'arrMeeting' => $eventPerBulanArrayMeeting,
-            'arrLembur' => $eventPerBulanArrayLembur
+            'arrLembur' => $eventPerBulanArrayLembur,
+            'pageTitle' => "Dashboard"
         ];
 
         return view('dashboard.index', $data);

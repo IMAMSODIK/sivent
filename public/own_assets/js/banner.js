@@ -1,5 +1,13 @@
 let table = $("#basic-1").DataTable();
 
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
 function alertModal(status, message = null){
     if(status){
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
@@ -47,11 +55,11 @@ $("#store").on("click", function(){
     })
 })
 
-$(".edit").on("click", function(){
+$(document).on("click", ".edit", function(){
     let id = $(this).data('id');
 
     $.ajax({
-        url: '/data-unit-kerja/edit',
+        url: '/banner/edit',
         method: 'GET',
         data: {
             'id': id
@@ -59,8 +67,6 @@ $(".edit").on("click", function(){
         success: function(response){
             if(response.status){
                 $("#id").val(response.data.id);
-                $("#edit_kode_unit").val(response.data.kode_unit);
-                $("#edit_nama_unit").val(response.data.nama_unit);
 
                 $("#edit-data-modal").modal("show");
             }else{
@@ -75,15 +81,17 @@ $(".edit").on("click", function(){
 
 $("#update").on("click", function(){
     $("#edit-data-modal").modal("hide");
+    let formData = new FormData();
+
+    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+    formData.append('banner', $("#edit_file")[0].files[0]);
+    formData.append('id', $("#id").val());
     $.ajax({
-        url: '/data-unit-kerja/update',
+        url: '/banner/update',
         method: 'POST',
-        data: {
-            '_token': $("meta[name='csrf-token']").attr("content"),
-            'id': $("#id").val(),
-            'kode_unit': $("#edit_kode_unit").val(),
-            'nama_unit': $("#edit_nama_unit").val(),
-        },
+        processData: false,
+        contentType: false, 
+        data: formData,
         success: function(response){
             if(response.status){
                 alertModal(true, "Berhasil mengubah data");
@@ -103,14 +111,14 @@ $("#update").on("click", function(){
     })
 })
 
-$(".delete").on("click", function(){
+$(document).on("click", ".delete", function(){
     $("#delete-confirmed").attr("data-id", $(this).data('id'));
     $("#confirm").modal("show");
 })
 
 $("#delete-confirmed").on("click", function(){
     $.ajax({
-        url: '/data-unit-kerja/delete',
+        url: '/banner/delete',
         method: 'POST',
         data: {
             '_token': $("meta[name='csrf-token']").attr("content"),

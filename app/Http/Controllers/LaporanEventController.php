@@ -24,6 +24,7 @@ class LaporanEventController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Laporan Event"
         ];
         return view('laporan.index', $data);
     }
@@ -32,7 +33,8 @@ class LaporanEventController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'laporans' => LaporanEvent::where('event_id', $event->id)->get()
+            'laporans' => LaporanEvent::where('event_id', $event->id)->get(),
+            'pageTitle' => "Daftar Laporan"
         ];
         return view('laporan.daftar_laporan', $data);
     }

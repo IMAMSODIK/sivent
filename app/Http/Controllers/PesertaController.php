@@ -28,6 +28,7 @@ class PesertaController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->withCount('peserta')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->withCount('peserta')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Data Peserta"
         ];
         return view('peserta.index', $data);
     }
@@ -71,7 +72,8 @@ class PesertaController extends Controller
         $data = [
             'id_event' => $r->kegiatan_id,
             'kategori_event' => $event->kategori,
-            'pesertas' => $peserta
+            'pesertas' => $peserta,
+            'pageTitle' => "Daftar Peserta"
         ];
         return view('peserta.daftar_peserta', $data);
     }
@@ -273,6 +275,7 @@ class PesertaController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Registrasi Peserta"
         ];
         return view('peserta.registrasi', $data);
     }
@@ -288,8 +291,8 @@ class PesertaController extends Controller
                 ]);
             }
 
-            $peserta = Peserta::where('event_id', $event->id)->pluck('pegawai_id');
-            $data = Pegawai::with('jabatan')->whereNotIn('id', $peserta)->get();
+            $peserta = Peserta::where('event_id', $event->id)->where('pegawai_id', '!=', null)->pluck('pegawai_id');
+            $data = Pegawai::whereNotIn('id', $peserta)->get();
 
             if($data){
                 return response()->json([
@@ -406,6 +409,7 @@ class PesertaController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Absensi Peserta"
         ];
         return view('peserta.absensi', $data);
     }
@@ -414,7 +418,8 @@ class PesertaController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
+            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get(),
+            'pageTitle' => "Absensi Peserta"
         ];
         return view('peserta.daftar_absensi_peserta', $data);
     }

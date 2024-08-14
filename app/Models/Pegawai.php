@@ -13,10 +13,6 @@ class Pegawai extends Model
 
     protected $guarded = ['id'];
 
-    public function jabatan(): BelongsTo{
-        return $this->belongsTo(Jabatan::class);
-    }
-
     public function event(): HasMany{
         return $this->hasMany(Event::class);
     }

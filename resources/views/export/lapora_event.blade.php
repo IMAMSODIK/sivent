@@ -268,8 +268,8 @@
     </style>
 </head>
 <body>
-    <div class="report-container">
-        <div class="report-content">
+    <div class="report-container" id="content">
+        {{-- <div class="report-content">
             <div class="report-header">
                 <h1 class="report-title">{{ $event->nama_kegiatan }}</h1>
                 <h3 class="report-name">Data Rundown</h3>
@@ -303,10 +303,10 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
         @if ($event->kategori == 'meeting')
-        <div class="report-content">
+        {{-- <div class="report-content">
             <div class="report-header">
                 <h3 class="report-name">Data Narasumber</h3>
             </div>
@@ -343,10 +343,10 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
         @endif
 
-        <div class="report-content">
+        <div class="report-content" style="margin-bottom: 50px">
             <div class="report-header">
                 <h3 class="report-name">Data Peserta</h3>
             </div>
@@ -361,10 +361,6 @@
                             <th style="width:10%;">Golongan</th>
                             <th style="width:20%;">Jabatan</th>
                             <th style="width:20%;">Bank</th>
-                            @if ($event->kategori == 'meeting')
-                                <th style="width:10%;">Registrasi</th>
-                            @endif
-                            <th style="width:10%;">Absensi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -385,25 +381,206 @@
                                     <td>{{ $peserta->jabatan }}</td>
                                     <td class="text-center">{{ $peserta->bank }} <br> <small>{{ $peserta->no_rek }}</small></td>
                                 @endif
-                                @if ($event->kategori == 'meeting')
-                                <td class="text-center">{{ ($peserta->status_registrasi == 0) ? "Belum Registrasi" : "Sudah Registrasi" }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">No Peserta Data Available</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+
+                <hr>
+            </div>
+        </div>
+
+        @if ($event->kategori == 'meeting')
+            <div class="report-content" style="margin-bottom: 50px">
+                <div class="report-header">
+                    <h3 class="report-name">Data Registrasi Peserta</h3>
+                </div>
+
+                <div class="report-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">No</th>
+                                <th>Peserta</th>
+                                <th class="text-center" style="width:10%;">Jenis Kelamin</th>
+                                <th style="width:8%;">Golongan</th>
+                                <th style="width:15%;">Jabatan</th>
+                                {{-- <th style="width:20%;">Bank</th> --}}
+                                <th style="width:10%;">Registrasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($pesertas as $index => $peserta)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    @if (!$peserta->nama)
+                                        <td>{{ $peserta->pegawai->nama }} <br> <small>({{ $peserta->pegawai->nip }})</small></td>
+                                        <td class="text-center">{{ $peserta->pegawai->jenis_kelamin }}</td>
+                                        <td class="text-center">{{ $peserta->pegawai->golongan }}</td>
+                                        <td>{{ $peserta->pegawai->jabatan->nama_jabatan }}</td>
+                                        {{-- <td class="text-center">{{ $peserta->bank }} <br> <small>{{ $peserta->no_rek }}</small></td> --}}
+                                        {{-- <td class="text-center">- <br> <small>-</small></td> --}}
+                                    @else
+                                        <td>{{ $peserta->nama }} <br> <small>({{ $peserta->nip }})</small></td>
+                                        <td class="text-center">{{ $peserta->jenis_kelamin }}</td>
+                                        <td class="text-center">{{ $peserta->golongan }}</td>
+                                        <td>{{ $peserta->jabatan }}</td>
+                                        {{-- <td class="text-center">{{ $peserta->bank }} <br> <small>{{ $peserta->no_rek }}</small></td> --}}
+                                    @endif
+                                    <td class="text-center">{{ ($peserta->status_registrasi == 0) ? "Belum Registrasi" : "Sudah Registrasi" }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">No Peserta Data Available</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+            </div>
+        @endif
+
+        {{-- data absensi --}}
+        
+        <div class="report-content" style="margin-bottom: 50px">
+            <div class="report-header">
+                <h3 class="report-name">Data Absensi Peserta</h3>
+            </div>
+
+            <div class="report-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">No</th>
+                            <th>Peserta</th>
+                            <th class="text-center" style="width:10%;">Jenis Kelamin</th>
+                            <th style="width:8%;">Golongan</th>
+                            <th style="width:15%;">Jabatan</th>
+                            {{-- <th style="width:20%;">Bank</th> --}}
+                            <th style="width:10%;">Absensi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($pesertas as $index => $peserta)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                @if (!$peserta->nama)
+                                    <td>{{ $peserta->pegawai->nama }} <br> <small>({{ $peserta->pegawai->nip }})</small></td>
+                                    <td class="text-center">{{ $peserta->pegawai->jenis_kelamin }}</td>
+                                    <td class="text-center">{{ $peserta->pegawai->golongan }}</td>
+                                    <td>{{ $peserta->pegawai->jabatan->nama_jabatan }}</td>
+                                    {{-- <td class="text-center">{{ $peserta->bank }} <br> <small>{{ $peserta->no_rek }}</small></td> --}}
+                                    {{-- <td class="text-center">- <br> <small>-</small></td> --}}
+                                @else
+                                    <td>{{ $peserta->nama }} <br> <small>({{ $peserta->nip }})</small></td>
+                                    <td class="text-center">{{ $peserta->jenis_kelamin }}</td>
+                                    <td class="text-center">{{ $peserta->golongan }}</td>
+                                    <td>{{ $peserta->jabatan }}</td>
+                                    {{-- <td class="text-center">{{ $peserta->bank }} <br> <small>{{ $peserta->no_rek }}</small></td> --}}
                                 @endif
                                 <td class="text-center">{{ $peserta->status_absensi }}</td>
                             </tr>
                         @empty
-                            @if ($event->kategori == 'meeting')
-                                <tr>
-                                    <td colspan="8" class="text-center">No Peserta Data Available</td>
-                                </tr>
-                            @else
-                                <tr>
-                                    <td colspan="7" class="text-center">No Peserta Data Available</td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td colspan="6" class="text-center">No Peserta Data Available</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
+            <hr>
+        </div>
+
+        {{-- data kit --}}
+
+        @if ($event->kategori == 'meeting')
+            <div class="report-content" style="margin-bottom: 50px">
+                <div class="report-header">
+                    <h3 class="report-name">Data Kit Seminar</h3>
+                </div>
+
+                <div class="report-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">No</th>
+                                <th>Peserta</th>
+                                <th class="text-center" style="width:10%;">Jenis Kelamin</th>
+                                <th style="width:10%;">Golongan</th>
+                                <th style="width:15%;">Jabatan</th>
+                                <th style="width:25%;">Status Kit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($pesertas as $index => $peserta)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    @if (!$peserta->nama)
+                                        <td>{{ $peserta->pegawai->nama }} <br> <small>({{ $peserta->pegawai->nip }})</small></td>
+                                        <td class="text-center">{{ $peserta->pegawai->jenis_kelamin }}</td>
+                                        <td class="text-center">{{ $peserta->pegawai->golongan }}</td>
+                                        <td>{{ $peserta->pegawai->jabatan->nama_jabatan }}</td>
+                                    @else
+                                        <td>{{ $peserta->nama }} <br> <small>({{ $peserta->nip }})</small></td>
+                                        <td class="text-center">{{ $peserta->jenis_kelamin }}</td>
+                                        <td class="text-center">{{ $peserta->golongan }}</td>
+                                        <td>{{ $peserta->jabatan }}</td>
+                                    @endif
+                                    <td class="text-center">{{ ($peserta->status_kit == 0) ? "Belum Mengambil" : "Sudah Mengambil" }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">No Peserta Data Available</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+        @endif
+
+        {{-- data foto --}}
+        
+        <div class="report-content">
+            <div class="report-header" style="margin-bottom: 50px">
+                <h3 class="report-name">Data Foto Kegiatan</h3>
+            </div>
+
+            <div class="report-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">No</th>
+                            <th>Keterangan</th>
+                            <th class="text-center" style="width:60%;">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($fotos as $index => $foto)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td class="text-center">{{ $foto->keterangan }}</td>
+                                <td class="text-center">
+                                    <img src="{{asset('storage/foto') . '/' . $foto->foto}}" width="100%" alt="">
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">No Peserta Data Available</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
         </div>
 
         {{-- <div class="report-content">
@@ -445,5 +622,12 @@
             </div>
         </div> --}}
     </div>
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script> --}}
+    <script>
+         window.addEventListener('load', function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>

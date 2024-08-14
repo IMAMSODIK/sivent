@@ -13,7 +13,8 @@ class BannerController extends Controller
     public function index()
     {
         $data = [
-            'banner' => Banner::all()
+            'banner' => Banner::all(),
+            'pageTitle' => "Banner"
         ];
         return view('banner.index', $data);
     }
@@ -64,101 +65,93 @@ class BannerController extends Controller
         }
     }
 
-    // public function edit(Request $r){
-    //     try{
-    //         $data = UnitKerja::where('id', $r->id)->first();
+    public function edit(Request $r){
+        try{
+            $data = Banner::where('id', $r->id)->first();
 
-    //         if($data){
-    //             return response()->json([
-    //                 'status' => true,
-    //                 'data' => $data
-    //             ]);    
-    //         }
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
-    // public function update(Request $r){
-    //     $messages = [
-    //         'required' => 'Kolom :attribute harus diisi.',
-    //         'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
-    //         'string' => 'Kolom :attribute harus berupa teks.'
-    //     ];
+    public function update(Request $r){
+        $banner = null;
+        if ($r->hasFile('banner')) {
+            $file = $r->file('banner');
+            $fileMimeType = $file->getClientMimeType();
 
-    //     $data = [
-    //         'kode_unit' => $r->kode_unit,
-    //         'nama_unit' => $r->nama_unit,
-    //     ];
+            if ($fileMimeType != 'image/png' && $fileMimeType != 'image/jpg' && $fileMimeType != 'image/jpeg') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Jenis File Tidak Didukung"
+                ]);
+            }
 
-    //     $rules = [
-    //         'kode_unit' => 'required|string|max:5',
-    //         'nama_unit' => 'required|string|max:255',
-    //     ];
+            $banner = bin2hex(random_bytes(10)) . '.' . $file->getClientOriginalExtension();
+            $file->storePubliclyAs('banner', $banner, 'public');
 
-    //     $validator = Validator::make($data, $rules, $messages);
+            if($banner){
+                try{
+                    $data = Banner::where("id", $r->id)->first();
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => implode(', ', $validator->errors()->all())
-    //         ]);
-    //     }
+                    if($data){
+                        $data->file = $banner;
+                        $data->save();
 
-    //     try{
-    //         $data = UnitKerja::where("id", $r->id)->first();
+                        return response()->json([
+                            'status' => true
+                        ]);
+                    }
+                }catch(Exception $e){
+                    return response()->json([
+                        'status' => false,
+                        'message' => $e->getMessage()
+                    ]);
+                }
+            }
 
-    //         if($data){
-    //             $data->kode_unit = $r->kode_unit;
-    //             $data->nama_unit = $r->nama_unit;
-    //             $data->save();
+            return response()->json([
+                'status' => false,
+                'message' => "Banner belum diupload"
+            ]);
+        }
+    }
 
-    //             return response()->json([
-    //                 'status' => true
-    //             ]);
-    //         }
+    public function delete(Request $r){
+        try{
+            $data = Banner::where("id", $r->id)->first();
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Gagal mengubah data"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            if($data){
+                $data->delete();
 
-    // public function delete(Request $r){
-    //     try{
-    //         $data = UnitKerja::where('id', $r->id)->first();
+                return response()->json([
+                    'status' => true
+                ]);   
+            }
 
-    //         if($data){
-    //             $data->delete();
-
-    //             return response()->json([
-    //                 'status' => true
-    //             ]);   
-    //         }
-
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }

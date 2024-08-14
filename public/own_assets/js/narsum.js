@@ -14,6 +14,14 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
 $("#tambah-data").on("click", function(){
     $.ajax({
         url: '/data-event/check-user',
@@ -74,7 +82,7 @@ $("#store").on("click", function(){
     })
 })
 
-$(".edit").on("click", function(){
+$(document).on("click", ".edit", function(){
     let id = $(this).data('id');
 
     $.ajax({
@@ -142,7 +150,7 @@ $("#update").on("click", function(){
     })
 })
 
-$(".delete").on("click", function(){
+$(document).on("click", ".delete", function(){
     $("#delete-confirmed").attr("data-id", $(this).data('id'));
     $("#confirm").modal("show");
 })

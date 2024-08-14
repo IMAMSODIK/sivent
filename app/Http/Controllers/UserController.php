@@ -12,7 +12,8 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            'admin' => User::where('role', 'admin')->get()
+            'admin' => User::where('role', 'admin')->get(),
+            'pageTitle' => "Daftar Admin"
         ];
         return view('admin.index', $data);
     }

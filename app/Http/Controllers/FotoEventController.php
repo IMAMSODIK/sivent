@@ -24,6 +24,7 @@ class FotoEventController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Foto Event"
         ];
         return view('foto.index', $data);
     }
@@ -32,7 +33,8 @@ class FotoEventController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'fotos' => FotoEvent::where('event_id', $event->id)->get()
+            'fotos' => FotoEvent::where('event_id', $event->id)->get(),
+            'pageTitle' => "Daftar Foto"
         ];
         return view('foto.daftar_foto', $data);
     }

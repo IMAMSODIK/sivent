@@ -1,5 +1,13 @@
 let table = $("#basic-1").DataTable();
 
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
 function alertModal(status, message = null){
     if(status){
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
@@ -37,7 +45,10 @@ $("#store").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true)
+                alertModal(true);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -48,7 +59,7 @@ $("#store").on("click", function(){
     })
 })
 
-$(".edit").on("click", function(){
+$(document).on("click", ".edit", function(){
     let id = $(this).data('id');
 
     $.ajax({
@@ -63,7 +74,7 @@ $(".edit").on("click", function(){
                 $("#edit_nama").val(response.data.nama);
                 $("#edit_nip").val(response.data.nip);
                 $("#edit_golongan").val(response.data.golongan);
-                $("#edit_jabatan").val(response.data.jabatan_id);
+                $("#edit_jabatan").val(response.data.jabatan);
                 $("#edit_jenis_kelamin").val(response.data.jenis_kelamin);
 
                 $("#edit-data-modal").modal("show");
@@ -111,7 +122,7 @@ $("#update").on("click", function(){
     })
 })
 
-$(".delete").on("click", function(){
+$(document).on("click", ".delete", function(){
     $("#delete-confirmed").attr("data-id", $(this).data('id'));
     $("#confirm").modal("show");
 })

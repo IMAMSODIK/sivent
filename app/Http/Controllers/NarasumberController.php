@@ -29,6 +29,7 @@ class NarasumberController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Narasumber"
         ];
         return view('narasumber.index', $data);
     }
@@ -40,6 +41,7 @@ class NarasumberController extends Controller
             'narasumbers' => Peserta::where('event_id', $event->id)->where('is_narsum', 1)->get(),
             'jabatan' => Jabatan::all(),
             'bank' => Bank::all(),
+            'pageTitle' => "Daftar Narasumber"
         ];
         return view('narasumber.daftar_narasumber', $data);
     }

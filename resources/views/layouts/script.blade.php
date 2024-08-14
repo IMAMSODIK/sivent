@@ -44,21 +44,25 @@
 
     $("#logout").on("click", function(){
         $.ajax({
-        url: '/logout',
-        method: 'POST',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr("content")
-        },
-        success: function(response){
-            if(response.status){
-                location.reload();
+            url: '/logout',
+            method: 'POST',
+            data: {
+                "_token": $("meta[name='csrf-token']").attr("content")
+            },
+            success: function(response){
+                if(response.status){
+                    location.reload();
+                }
+            },
+            error: function(response){
+                alertModal(false, response.message);
             }
-        },
-        error: function(response){
-            alertModal(false, response.message);
-        }
+        })
     })
-    })
+
+    function closeModal(element){
+        element.modal("hide");
+    }
 </script>
 
 @yield('own_script')

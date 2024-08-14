@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
-            $table->string('peserta_id');
+            $table->string('pegawai_id');
             $table->string('nama');
             $table->string('nip')->unique();
             $table->string('golongan');
-            $table->foreignId('jabatan_id');
+            $table->string('jabatan');
             $table->string('jenis_kelamin');
             $table->timestamps();
         });

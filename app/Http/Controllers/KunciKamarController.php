@@ -19,6 +19,7 @@ class KunciKamarController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Kunci Kamar"
         ];
         return view('kunci_kamar.index', $data);
     }
@@ -27,7 +28,8 @@ class KunciKamarController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'kamars' => Kamar::with('peserta')->where('event_id', $event->id)->get()
+            'kamars' => Kamar::with('peserta')->where('event_id', $event->id)->get(),
+            'pageTitle' => "Daftar Kunci Kamar"
         ];
         return view('kunci_kamar.daftar_kamar', $data);
     }
@@ -66,6 +68,10 @@ class KunciKamarController extends Controller
                     'pemegang' => $r->pemegang,
                     'no_kamar' => $r->no_kamar
                 ]);
+
+                $peserta = Peserta::where('id', $r->pemegang_id)->first();
+                $peserta->no_kamar = $r->no_kamar;
+                $peserta->save();
 
                 return response()->json([
                     'status' => true,

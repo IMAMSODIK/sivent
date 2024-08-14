@@ -17,10 +17,9 @@ class PegawaiController extends Controller
     public function index()
     {
         $data = [
-            'pegawai' => Pegawai::with(['jabatan' => function($query){
-                $query->select('id', 'nama_jabatan');
-            }])->get(),
-            'jabatan' => Jabatan::select('id', 'nama_jabatan')->get()
+            'pegawai' => Pegawai::all(),
+            'jabatan' => Jabatan::select('id', 'nama_jabatan')->get(),
+            'pageTitle' => "Daftar Pegawai"
         ];
         return view('pegawai.index', $data);
     }
@@ -46,7 +45,7 @@ class PegawaiController extends Controller
             'nama' => 'required|string|max:255',
             'nip' => 'required|string|max:255',
             'golongan' => 'required|string|max:10',
-            'jabatan' => 'required',
+            'jabatan' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:20',
         ];
 
@@ -61,7 +60,7 @@ class PegawaiController extends Controller
 
         try{
             $peserta = Pegawai::create([
-                'peserta_id' => Str::random(8),
+                'pegawai_id' => Str::random(8),
                 'nama' => $r->nama,
                 'nip' => $r->nip,
                 'golongan' => $r->golongan,
@@ -131,7 +130,7 @@ class PegawaiController extends Controller
             'nama' => 'required|string|max:255',
             'nip' => 'required|string|max:255',
             'golongan' => 'required|string|max:10',
-            'jabatan' => 'required',
+            'jabatan' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:20',
         ];
 
@@ -151,7 +150,7 @@ class PegawaiController extends Controller
                 $data->nama = $r->nama;
                 $data->nip = $r->nip;
                 $data->golongan = $r->golongan;
-                $data->jabatan_id = $r->jabatan;
+                $data->jabatan = $r->jabatan;
                 $data->jenis_kelamin = $r->jenis_kelamin;
                 $data->save();
 

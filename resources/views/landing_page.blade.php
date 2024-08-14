@@ -9,36 +9,36 @@
         Document Title
         =============================================
         -->
-    <title>Titan | Multipurpose HTML5 Template</title>
+    <title>Sivent FEBI | HOME</title>
     <!--
         Favicons
         =============================================
         -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('landing_page/images/favicons/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('landing_page/images/favicons/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('landing_page/images/favicons/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('landing_page/images/favicons/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/images/logo/logo.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('assets/images/logo/logo.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/images/logo/logo.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="apple-touch-icon" sizes="114x114"
-        href="{{ asset('landing_page/images/favicons/apple-icon-114x114.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ asset('landing_page/images/favicons/apple-icon-120x120.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="apple-touch-icon" sizes="144x144"
-        href="{{ asset('landing_page/images/favicons/apple-icon-144x144.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ asset('landing_page/images/favicons/apple-icon-152x152.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="apple-touch-icon" sizes="180x180"
-        href="{{ asset('landing_page/images/favicons/apple-icon-180x180.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="icon" type="image/png" sizes="192x192"
-        href="{{ asset('landing_page/images/favicons/android-icon-192x192.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('landing_page/images/favicons/favicon-32x32.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="icon" type="image/png" sizes="96x96"
-        href="{{ asset('landing_page/images/favicons/favicon-96x96.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('landing_page/images/favicons/favicon-16x16.png') }}">
+        href="{{asset('assets/images/logo/logo.png')}}">
     <link rel="manifest" href="{{ asset('landing_page/manifest.json') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ asset('landing_page/images/favicons/ms-icon-144x144.png') }}">
+    <meta name="msapplication-TileImage" content="{{asset('assets/images/logo/logo.png')}}">
     <meta name="theme-color" content="#ffffff">
     <!--
         Stylesheets
@@ -78,7 +78,7 @@
                             class="icon-bar"></span><span class="icon-bar"></span><span
                             class="icon-bar"></span></button>
                             <a class="navbar-brand" style="margin-top:-40px" href="/">
-                                <img src="{{asset('assets/images/logo/logo.png')}}" alt="" width="100px">
+                                <img src="{{asset('assets/images/logo/logo.png')}}" alt="" width="150px">
                             </a>
                 </div>
                 <div class="collapse navbar-collapse" id="custom-collapse">
@@ -152,9 +152,12 @@
                             data-navigation="false">
                             @foreach ($rapat as $r)
                                 <div class="shop-item" style="margin-right: 10px">
-                                    <div class="shop-item-image"><img
-                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
-                                            alt="Accessories Pack" />
+                                    @php
+                                        $flayerPath = 'storage/flayer/' . $r->flayer;
+                                        $defaultFlayerPath = 'storage/flayer/sample_flayer.jpg';
+                                    @endphp
+                                    <div class="shop-item-image">
+                                        <img src="{{ file_exists(public_path($flayerPath)) ? asset($flayerPath) : asset($defaultFlayerPath) }}" alt="Flayer">
                                         <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-user">Detail</span></a></div>
                                     </div>

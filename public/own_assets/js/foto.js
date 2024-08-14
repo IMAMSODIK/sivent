@@ -14,8 +14,36 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
+$("#close-flayer").on("click", function(){
+    closeModal($("#detail-flayer-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
 $("#tambah-data").on("click", function(){
-    $("#tambah-data-modal").modal("show");
+    $.ajax({
+        url: '/data-peserta/daftar-peserta/import-peserta/check',
+        type: 'GET',
+        data: {
+            'id_kegiatan': $("#id_kegiatan").val()
+        },
+        success: function(response) {
+            if(response.status){
+                $("#tambah-data-modal").modal("show");
+            }else{
+                alertModal(false, response.message);    
+            }
+        },
+        error: function(response) {
+            alertModal(false, response.message);
+        }
+    });
 });
 
 // $("#store").on("click", function(){
@@ -94,7 +122,7 @@ $("#store").on("click", function() {
 });
 
 
-$(".edit").on("click", function(){
+$(document).on("click", ".edit", function(){
     let id = $(this).data('id');
 
     $.ajax({
@@ -154,7 +182,7 @@ $("#update").on("click", function(){
     })
 })
 
-$(".delete").on("click", function(){
+$(document).on("click", ".delete", function(){
     $("#delete-confirmed").attr("data-id", $(this).data('id'));
     $("#confirm").modal("show");
 })

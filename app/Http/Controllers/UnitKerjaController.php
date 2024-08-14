@@ -14,7 +14,8 @@ class UnitKerjaController extends Controller
     public function index()
     {
         $data = [
-            'unit_kerja' => UnitKerja::all()
+            'unit_kerja' => UnitKerja::all(),
+            'pageTitle' => "Unit Kerja"
         ];
         return view('unit_kerja.index', $data);
     }

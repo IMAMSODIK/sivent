@@ -110,9 +110,19 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="golongan">Golongan</label>
                                             <select name="" class="form-control input-air-primary" id="golongan">
-                                                <option value="I">I</option>
-                                                <option value="II">II</option>
-                                                <option value="III">III</option>
+                                                <option value="II/a">II/A</option>
+                                                <option value="II/b">II/B</option>
+                                                <option value="II/v">II/C</option>
+                                                <option value="II/d">II/D</option>
+                                                <option value="III/a">III/A</option>
+                                                <option value="III/b">III/B</option>
+                                                <option value="III/c">III/C</option>
+                                                <option value="III/d">III/D</option>
+                                                <option value="IV/a">IV/A</option>
+                                                <option value="IV/b">IV/B</option>
+                                                <option value="IV/c">IV/C</option>
+                                                <option value="IV/d">IV/D</option>
+                                                <option value="IV/e">IV/E</option>
                                             </select>
                                         </div>
                                     </div>
@@ -163,7 +173,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <input class="btn btn-light" type="button" id="cancel-add" value="Cancel">
                                 <button class="btn btn-primary me-3" type="button" id="store">Submit</button>
                             </div>
                         </form>
@@ -219,9 +229,19 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="edit_golongan">Golongan</label>
                                             <select name="" class="form-control input-air-primary" id="edit_golongan">
-                                                <option value="I">I</option>
-                                                <option value="II">II</option>
-                                                <option value="III">III</option>
+                                                <option value="II/a">II/A</option>
+                                                <option value="II/b">II/B</option>
+                                                <option value="II/v">II/C</option>
+                                                <option value="II/d">II/D</option>
+                                                <option value="III/a">III/A</option>
+                                                <option value="III/b">III/B</option>
+                                                <option value="III/c">III/C</option>
+                                                <option value="III/d">III/D</option>
+                                                <option value="IV/a">IV/A</option>
+                                                <option value="IV/b">IV/B</option>
+                                                <option value="IV/c">IV/C</option>
+                                                <option value="IV/d">IV/D</option>
+                                                <option value="IV/e">IV/E</option>
                                             </select>
                                         </div>
                                     </div>
@@ -272,7 +292,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <input class="btn btn-light" type="button" id="cancel-edit" value="Cancel">
                                 <button class="btn btn-primary me-3" type="button" id="update">Update</button>
                             </div>
                         </form>

@@ -24,6 +24,7 @@ class RundownController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Rundown"
         ];
         return view('rundown.index', $data);
     }
@@ -32,7 +33,8 @@ class RundownController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'rundown' => Rundown::where('event_id', $event->id)->get()
+            'rundown' => Rundown::where('event_id', $event->id)->get(),
+            'pageTitle' => "Daftar Rundown"
         ];
         return view('rundown.daftar_rundown', $data);
     }

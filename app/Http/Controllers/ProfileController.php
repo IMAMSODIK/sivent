@@ -12,6 +12,7 @@ class ProfileController extends Controller
         $data = [
             'user' => Auth::user(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Pofile"
         ];
         return view('profile.index', $data);
     }

@@ -19,6 +19,7 @@ class KamarController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'pageTitle' => "Kamar"
         ];
         return view('kamar.index', $data);
     }
@@ -27,7 +28,8 @@ class KamarController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
+            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get(),
+            'pageTitle' => "Daftar Kamar"
         ];
         return view('kamar.daftar_kamar', $data);
     }

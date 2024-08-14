@@ -164,7 +164,7 @@
                       <div class="product-img"><img class="img-fluid top-radius-blog" src="{{asset('storage/flayer') . '/' . $d->flayer}}" alt="" style="height: 300px">
                         <div class="product-hover">
                           <ul>
-                            <li class="detail-flayer" data-path="{{$d->flayer}}"><i class="fa fa-eye"></i></li>
+                            <li class="detail-flayer" data-path="{{$d->flayer}}"><a href="/detail?id={{$d->event_id}}"><i class="fa fa-eye"></i></a></li>
                             {{-- <li class="bg-info"><i class="fa fa-pencil text-white"></i></li> --}}
                           </ul>
                         </div>
@@ -179,7 +179,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Peserta</button></a>
+                        <a href="/data-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">{{$d->peserta_count}} Peserta</button></a>
                       </div>
                     </div>
                   </div>

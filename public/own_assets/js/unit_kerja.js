@@ -1,5 +1,13 @@
 let table = $("#basic-1").DataTable();
 
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
 function alertModal(status, message = null){
     if(status){
         $("#alert-image").attr("src", '../../assets/images/gif/dashboard-8/successful.gif');
@@ -34,7 +42,10 @@ $("#store").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true)
+                alertModal(true);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -45,7 +56,7 @@ $("#store").on("click", function(){
     })
 })
 
-$(".edit").on("click", function(){
+$(document).on("click", ".edit", function(){
     let id = $(this).data('id');
 
     $.ajax({
@@ -101,7 +112,7 @@ $("#update").on("click", function(){
     })
 })
 
-$(".delete").on("click", function(){
+$(document).on("click", ".delete", function(){
     $("#delete-confirmed").attr("data-id", $(this).data('id'));
     $("#confirm").modal("show");
 })
