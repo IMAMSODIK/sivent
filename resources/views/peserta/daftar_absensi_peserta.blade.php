@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
@@ -22,27 +22,42 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Peserta</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
-                                            <th>Status Absensi</th>
+                                            <th width="15%">Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $index = 1; ?>
                                         @foreach ($pesertas as $p)
                                         <tr>
-                                            <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
-                                            <td>{{$p->jenis_kelamin}}</td>
-                                            <td>{{$p->golongan}}</td>
-                                            <td>{{$p->jabatan}}</td>
-                                            <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
-                                            <td>{{$p->status_absensi}}</td>
+                                            <td>{{$index++}}</td>
+                                            @if ($p->nama)
+                                                <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
+                                                <td>{{$p->jenis_kelamin}}</td>
+                                                <td>{{$p->golongan}}</td>
+                                                <td>{{$p->jabatan}}</td>
+                                                <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                            @else
+                                                <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
+                                                <td>{{$p->pegawai->jenis_kelamin}}</td>
+                                                <td>{{$p->pegawai->golongan}}</td>
+                                                <td>{{$p->pegawai->jabatan}}</td>
+                                                <td>{{$p->pegawai->no_rek}} <br> <small>({{$p->pegawai->bank}})</small></td>
+                                            @endif
+                                            <td>
+                                                @foreach ($p->absensi as $abs)
+                                                    <p>Hadir <br> ({{$abs->time}})</p>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="absensi" data-id="{{$p->id}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
+                                                    <li><button class="btn btn-primary absensi" data-id="{{$p->id}}"><i class="fa fa-sign-in"></i></button></li>
                                                 </ul>
                                             </td>
                                         </tr>

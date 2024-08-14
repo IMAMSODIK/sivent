@@ -234,7 +234,7 @@
             </div>
             <div class="col-xxl-3 d-xxl-block d-none activity-group box-col-none">
                 <div class="card add-project-link">
-                    <div class="categories"></div>
+                    {{-- <div class="categories"></div> --}}
                     <div class="categories-content"> <span
                             class="text-truncate col-8 f-12 d-block mb-2">Tambah Event baru disini
                             <ul class="mt-2">

@@ -22,6 +22,10 @@ class Peserta extends Model
         return $this->belongsTo(Pegawai::class);
     }
 
+    public function absensi(): HasMany{
+        return $this->hasMany(Absensi::class);
+    }
+
     public function kamar()
     {
         return $this->hasMany(Kamar::class);

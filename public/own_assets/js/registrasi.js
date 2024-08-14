@@ -14,26 +14,22 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
-$(".registrasi").on("click", function(){
+$(document).on("click", ".registrasi", function(){
     let id = $(this).data('id');
 
     $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/detail',
-        method: 'GET',
+        url: '/registrasi-peserta/daftar-peserta/register',
+        method: 'POST',
         data: {
+            "_token": $("meta[name='csrf-token']").attr("content"),
             'id': id
         },
         success: function(response){
             if(response.status){
-                $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#asal_instansi").val(response.data.asal_instansi);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
-
-                $("#edit-data-modal").modal("show");
+                alertModal(true, "Registrasi berhasil");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -44,26 +40,22 @@ $(".registrasi").on("click", function(){
     })
 })
 
-$(".absensi").on("click", function(){
+$(document).on("click", ".absensi", function(){
     let id = $(this).data('id');
 
     $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/detail',
-        method: 'GET',
+        url: '/absensi-peserta/daftar-peserta/absensi-admin',
+        method: 'POST',
         data: {
-            'id': id
+            "_token": $("meta[name='csrf-token']").attr("content"),
+            'id': id,
         },
         success: function(response){
             if(response.status){
-                $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#asal_instansi").val(response.data.asal_instansi);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
-
-                $("#edit-data-modal").modal("show");
+                alertModal(true, "Registrasi berhasil");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -117,7 +109,7 @@ $("#submit-filter").on("click", function(){
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                                <a href="/registrasi-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Registrasi</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -151,7 +143,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/data-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                                        <a href="/registrasi-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Registrasi</button></a>
                                     </div>
                                     </div>
                                 </div>

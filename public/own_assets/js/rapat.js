@@ -101,12 +101,7 @@ $("#store").on("click", function(){
                                 <div class="card">
                                     <div class="blog-box blog-grid text-center product-box">
                                     <div class="product-img"><img class="img-fluid top-radius-blog" src="../../storage/flayer/${response.data.flayer}" alt="" style="height: 300px">
-                                        <div class="product-hover">
-                                        <ul>
-                                            <li><i class="icon-link"></i></li>
-                                            <li><i class="icon-import"></i></li>
-                                        </ul>
-                                        </div>
+                                        
                                     </div>
                                     <div class="blog-details-main">
                                         <ul class="blog-social">
@@ -116,6 +111,7 @@ $("#store").on("click", function(){
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${response.data.nama_kegiatan}</h6>
+                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${response.data.event_id}" class="btn btn-primary mb-4">Download Laporan</button>
                                     </div>
                                     </div>
                                 </div>
@@ -326,12 +322,7 @@ $("#submit-filter").on("click", function(){
                                 <div class="card">
                                     <div class="blog-box blog-grid text-center product-box">
                                     <div class="product-img"><img class="img-fluid top-radius-blog" src="../../storage/flayer/${element.flayer}" alt="" style="height: 300px">
-                                        <div class="product-hover">
-                                        <ul>
-                                            <li><i class="icon-link"></i></li>
-                                            <li><i class="icon-import"></i></li>
-                                        </ul>
-                                        </div>
+                                        
                                     </div>
                                     <div class="blog-details-main">
                                         <ul class="blog-social">
@@ -341,6 +332,7 @@ $("#submit-filter").on("click", function(){
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
+                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${element.event_id}" class="btn btn-primary mb-4">Download Laporan</button>
                                     </div>
                                     </div>
                                 </div>

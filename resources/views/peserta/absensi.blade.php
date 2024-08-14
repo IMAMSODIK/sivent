@@ -133,7 +133,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/absensi-peserta/daftar-peserta?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Peserta</button></a>
+                              <a href="/absensi-peserta/daftar-peserta?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Absensi Peserta</button></a>
                             </div>
                           </div>
                           <hr>
@@ -178,7 +178,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/absensi-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Peserta</button></a>
+                        <a href="/absensi-peserta/daftar-peserta?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Absensi Peserta</button></a>
                       </div>
                     </div>
                   </div>
@@ -315,5 +315,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/peserta.js')}}"></script>
+    <script src="{{asset('own_assets/js/absensi.js')}}"></script>
 @endsection

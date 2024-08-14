@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -82,7 +83,8 @@ class PesertaController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get()
+            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get(),
+            'pageTitle' => 'Registrasi Peserta'
         ];
         return view('peserta.daftar_registrasi_peserta', $data);
     }
@@ -90,6 +92,7 @@ class PesertaController extends Controller
     public function store(Request $r){
         try{
             $event = Event::where('event_id', $r->id_kegiatan)->first();
+            $status_registrasi = ($event->kategori == 'meeting') ? 0 : 1;
             
             if($event){
                 if($r->tipe == 'select'){
@@ -99,7 +102,7 @@ class PesertaController extends Controller
                             'pegawai_id' => $id,
                             'event_id' => $event->id,
                             'is_narsum' => 0,
-                            'status_registrasi' => 1
+                            'status_registrasi' => $status_registrasi
                         ]);
 
                         $pegawai = Pegawai::where('id', $id)->first();
@@ -166,7 +169,8 @@ class PesertaController extends Controller
                         'bank' => $r->bank,
                         'no_rek' => $r->no_rek,
                         'jenis_kelamin' => $r->jenis_kelamin,
-                        'is_narsum' => 0
+                        'is_narsum' => 0,
+                        'status_registrasi' => $status_registrasi
                     ]);
 
                     $user = User::where("username", $r->nip)->first();
@@ -340,7 +344,7 @@ class PesertaController extends Controller
 
     public function detail(Request $r){
         try{
-            $event = Event::where('id', $r->id)->first();
+            $event = Event::where('id', $r->id_kegiatan)->first();
             if(!($event->user_id == Auth::user()->id)){
                 return response()->json([
                     'status' => false,
@@ -359,6 +363,31 @@ class PesertaController extends Controller
                     'status' => true,
                     'kategori_event' => $event->kategori,
                     'data' => $data
+                ]);    
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function register(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
+
+            if($data){
+                $data->status_registrasi = 1;
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
                 ]);    
             }
 
@@ -414,11 +443,47 @@ class PesertaController extends Controller
         return view('peserta.absensi', $data);
     }
 
+    public function absensiAct(Request $r){
+        try{
+            $status_absensi = 1; // Contoh nilai status_absensi
+$peserta_id = $r->id; // ID peserta yang ingin disertakan
+$newTime = Carbon::now(); // Mendapatkan waktu saat ini
+$newDate = $newTime->format('Y-m-d'); // Mengambil tanggal dari waktu saat ini
+
+// Periksa jika ada entri dengan tanggal dan peserta yang sama
+$existing = DB::table('absensis')
+    ->whereRaw('DATE(time) = ?', [$newDate])
+    ->where('peserta_id', $peserta_id)
+    ->orderBy('time', 'desc')
+    ->first();
+
+if ($existing) {
+    // Jika ada, perbarui entri dengan waktu yang lebih baru
+    DB::table('absensis')
+        ->where('id', $existing->id) // Menggunakan ID dari entri yang ada
+        ->update(['status_absensi' => $status_absensi, 'time' => $newTime]);
+} else {
+    // Jika tidak ada, sisipkan data baru
+    DB::table('absensis')
+        ->insert(['status_absensi' => $status_absensi, 'time' => $newTime, 'peserta_id' => $peserta_id]);
+}
+
+            return response()->json([
+                'status' => true,
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function daftarAbsensiPeserta(Request $r){
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get(),
+            'pesertas' => Peserta::with('absensi')->where('event_id', $event->id)->where('is_narsum', 0)->get(),
             'pageTitle' => "Absensi Peserta"
         ];
         return view('peserta.daftar_absensi_peserta', $data);

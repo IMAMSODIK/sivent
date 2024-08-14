@@ -116,7 +116,7 @@ $("#submit-filter").on("click", function(){
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/data-kamar/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Data Kamar</button></a>
+                                                <a href="/data-kamar/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Kunci Kamar</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -150,7 +150,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/data-kamar/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Data Kamar</button></a>
+                                        <a href="/data-kamar/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Kunci Kamar</button></a>
                                     </div>
                                     </div>
                                 </div>

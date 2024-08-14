@@ -257,7 +257,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/data-narasumber/daftar-narasumber?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex mb-4" type="button">Narasumber</button></a>
+                                        <a href="/data-narasumber/daftar-narasumber?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Narasumber</button></a>
                                     </div>
                                     </div>
                                 </div>

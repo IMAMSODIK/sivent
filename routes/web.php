@@ -76,7 +76,6 @@ Route::redirect('/home', '/dashboard');
 // Route::post("/kit-peserta/daftar-peserta/kit", [PesertaController::class, 'kitAksi']);
 
 // Route::get("/absensi-peserta/rapat/front/daftar-peserta", [PesertaController::class, 'daftarPesertaFront']);
-// Route::get("/registrasi-peserta/daftar-peserta/detail", [PesertaController::class, 'detail']);
 // Route::get("/registrasi-peserta/front", [PesertaController::class, 'registrasiFront']);
 
 
@@ -167,6 +166,8 @@ Route::middleware('auth')->group(function(){
 
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
+    Route::post("/registrasi-peserta/daftar-peserta/register", [PesertaController::class, 'register']);
+    Route::post("/absensi-peserta/daftar-peserta/absensi-admin", [PesertaController::class, 'absensiAct']);
     // Route::post("/registrasi-peserta/daftar-peserta/store", [NarasumberController::class, 'store']);
 
     Route::get("/data-unit-kerja", [UnitKerjaController::class, 'index']);
