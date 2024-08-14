@@ -65,12 +65,12 @@
                   <div class="card">
                     <div class="blog-box blog-grid text-center product-box">
                       <div class="product-img"><img class="img-fluid top-radius-blog" src="{{asset('storage/flayer') . '/' . $d->flayer}}" alt="" style="height: 300px">
-                        <div class="product-hover">
+                        {{-- <div class="product-hover">
                           <ul>
                             <li class="bg-danger"><i class="fa fa-trash text-white"></i></li>
                             <li class="bg-info"><i class="fa fa-pencil text-white"></i></li>
                           </ul>
-                        </div>
+                        </div> --}}
                       </div>
                       <div class="blog-details-main">
                         <ul class="blog-social">
@@ -80,7 +80,7 @@
                         </ul>
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
-                        <a href="/event/export-laporan?id={{$d->event_id}}" class="btn btn-primary mb-4">Download Laporan</a>
+                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="{{$d->event_id}}" class="btn btn-primary mb-4">Download Laporan</button>
                       </div>
                     </div>
                   </div>
@@ -444,8 +444,50 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade bd-example-modal-lg" id="laporan-rapat-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myExtraLargeModal">Laporan Rapat</h4>
+          <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body dark-modal"> 
+          <div class="card">
+            <form class="form theme-form dark-inputs">
+              <input type="hidden" id="id_event">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label">Laporan</label>
+                      <textarea class="summernote" name="description" id="laporan"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-end">
+                <input class="btn btn-light close-modal" type="button" id="close-download" value="Cancel">
+                <button class="btn btn-primary" type="button" id="submit-laporan">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('own_script')
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script><script src="{{ asset('dashboard_assets/js/script.bundle.js') }}"></script>
     <script src="{{asset('own_assets/js/rapat.js')}}"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('.summernote').summernote();
+      });
+  </script>
 @endsection

@@ -36,7 +36,7 @@
                               </ul>
                             </div>
                             <div class="col-md-2 d-flex justify-content-end">
-                              <a href="/kunci-kamar/daftar-kamar?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Kunci Kamar</button></a>
+                              <a href="/kunci-kamar/daftar-kamar?kegiatan_id={{$incoming->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Data Kamar</button></a>
                             </div>
                           </div>
                           <hr>
@@ -81,7 +81,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/kunci-kamar/daftar-kamar?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Kunci Kamar</button></a>
+                        <a href="/kunci-kamar/daftar-kamar?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Data Kamar</button></a>
                       </div>
                     </div>
                   </div>
@@ -192,7 +192,7 @@
             <img id="detail-flayer-image" alt="" style="width: 100%">
           </div>
           <div class="card-footer text-end">
-            <input class="btn btn-primary close-modal" type="reset" value="Tutup">
+            <input class="btn btn-primary close-modal" type="button" id="close-flayer" value="Tutup">
           </div>
         </div>
       </div>

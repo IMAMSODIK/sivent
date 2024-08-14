@@ -36,8 +36,8 @@
                                         @foreach ($kamars as $p)
                                         <tr>
                                             <td>{{$index++}}</td>
-                                            <td>{{$p->no_kamar}}</td>
-                                            <td>{{($p->pemegang) ? $p->pemegang : "Belum Diatur"}}</td>
+                                            <td>{{($p->no_kamar) ? $p->no_kamar : "Belum Diatur"}}</td>
+                                            <td>{{($p->nama) ? $p->nama : $p->pegawai->nama}}</td>
                                             <td class="text-center">
                                                 <ul class="action">
                                                     <li class="edit" data-id="{{$p->id}}"> <a href="#"><i
@@ -89,8 +89,51 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <input class="btn btn-light" type="reset" value="Cancel">
+                                <input class="btn btn-light" type="button" id="cancel-add" value="Cancel">
                                 <button class="btn btn-primary me-3" type="button" id="store">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="edit-data-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myExtraLargeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myExtraLargeModal">Edit Kamar</h4>
+                    <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body dark-modal">
+                    <div class="card">
+                        <form class="form theme-form dark-inputs">
+                            <input type="hidden" id="id">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="peserta">Nama Peserta</label>
+                                            <input class="form-control input-air-primary" id="peserta"
+                                                type="text" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="edit_no_kamar">Nomor Kamar</label>
+                                            <input class="form-control input-air-primary" id="edit_no_kamar"
+                                                type="text" placeholder="Nomor Kamar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <input class="btn btn-light" type="button" id="cancel-edit" value="Cancel">
+                                <button class="btn btn-primary me-3" type="button" id="update">Update</button>
                             </div>
                         </form>
                     </div>
@@ -113,6 +156,34 @@
               </div>
             </div>
           </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+        style="z-index: 1070;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-toggle-wrapper">
+                        <ul class="modal-img">
+                            <li> <img id="alert-image" src="{{ asset('own_assets/icon/confirm.gif') }}" width="300px">
+                            </li>
+                        </ul>
+                        <h4 class="text-center pb-2" id="alert-title">Hapus Data</h4>
+                        <p class="text-center" id="alert-message">Apakah anda yakin ingin menghapus data?</p>
+                        <div class="row">
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <button class="btn btn-danger" id="delete-confirmed" type="button"
+                                    data-bs-dismiss="modal">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

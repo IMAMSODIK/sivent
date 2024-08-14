@@ -28,8 +28,8 @@ class KamarController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'pesertas' => Peserta::where('event_id', $event->id)->where('is_narsum', 0)->get(),
-            'pageTitle' => "Daftar Kamar"
+            'pesertas' => Kamar::where('event_id', $event->id)->get(),
+            'pageTitle' => "Kunci Kamar"
         ];
         return view('kamar.daftar_kamar', $data);
     }
@@ -61,16 +61,14 @@ class KamarController extends Controller
 
     public function edit(Request $r){
         try{
-            $data = Peserta::where('id', $r->id)->first();
             $event = Event::where('event_id', $r->event)->first();
-            $kamar = Kamar::where('event_id', $event->id)->get();
+            $peserta = Peserta::with('pegawai')->where('event_id', $event->id)->get();
 
-            if($data){
+            if($peserta){
                 return response()->json([
                     'status' => true,
-                    'data' => $data,
-                    'kamar' => $kamar
-                ]);    
+                    'peserta' => $peserta
+                ]);
             }
 
             return response()->json([

@@ -305,6 +305,11 @@
             </div>
         </div> --}}
 
+        <div style="margin: 20px">
+            {!! $laporans->laporan !!}
+        </div>
+        <hr>
+
         @if ($event->kategori == 'meeting')
         {{-- <div class="report-content">
             <div class="report-header">
@@ -346,7 +351,7 @@
         </div> --}}
         @endif
 
-        <div class="report-content" style="margin-bottom: 50px">
+        <div class="report-content" style="margin-bottom: 50px; margin-top: 50px">
             <div class="report-header">
                 <h3 class="report-name">Data Peserta</h3>
             </div>

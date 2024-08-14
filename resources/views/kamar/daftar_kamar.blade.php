@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>Daftar Peserta</h4>
+                        <h4>Daftar Pemegang Kunci</h4>
                     </div>
                 </div>
             </div>
@@ -22,27 +22,22 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th>Nama Peserta</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Golongan</th>
-                                            <th>Jabatan</th>
-                                            <th>Bank</th>
+                                            <th>No. </th>
                                             <th>Nomor Kamar</th>
+                                            <th>Pemegang Kunci</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $index = 1; ?>
                                         @foreach ($pesertas as $p)
                                         <tr>
-                                            <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
-                                            <td>{{$p->jenis_kelamin}}</td>
-                                            <td>{{$p->golongan}}</td>
-                                            <td>{{$p->jabatan}}</td>
-                                            <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
-                                            <td>{{($p->no_kamar) ? $p->no_kamar : "Belum Diatur"}}</td>
+                                            <td>{{$index++}}</td>
+                                            <td>{{$p->no_kamar}}</td>
+                                            <td>{{($p->pemegang) ? $p->pemegang : "Belum Diatur"}}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="registrasi" data-id="{{$p->id}}" data-event="{{$id_event}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
+                                                    <li class="registrasi" data-id="{{$p->no_kamar}}" data-event="{{$id_event}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -74,8 +69,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nama">Nama Peserta</label>
-                                            <input class="form-control input-air-primary" id="nama"
+                                            <label class="form-label" for="no_kamar">Nomor Kamar</label>
+                                            <input class="form-control input-air-primary" id="no_kamar"
                                                 type="text" placeholder="Nama Peserta" readonly>
                                         </div>
                                     </div>
@@ -83,44 +78,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label" for="nip">NIP Peserta</label>
-                                            <input class="form-control input-air-primary" id="nip"
-                                                type="text" placeholder="NIP Peserta" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="golongan">Golongan</label>
-                                            <input class="form-control input-air-primary" id="golongan"
-                                                type="text" placeholder="Golongan" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="jabatan">Jabatan Peserta</label>
-                                            <input class="form-control input-air-primary" id="jabatan"
-                                                type="text" placeholder="Jabatan Peserta" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                                            <input class="form-control input-air-primary" id="jenis_kelamin"
-                                                type="text" placeholder="Jenis Kelamin" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="nomor_kamar">Nomor Kamar</label>
-                                            <select class="form-control input-air-primary" id="nomor_kamar"></select>
+                                            <label class="form-label" for="nama_peserta">Nama Peserta</label>
+                                            <select class="form-control input-air-primary" id="nama_peserta"></select>
                                         </div>
                                     </div>
                                 </div>

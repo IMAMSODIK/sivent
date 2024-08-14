@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Event extends Model
 {
@@ -23,5 +24,9 @@ class Event extends Model
 
     public function unitKerja(): BelongsTo{
         return $this->belongsTo(UnitKerja::class, 'unit_kerja_id');
+    }
+
+    public function laporanTemplate(): HasOne{
+        return $this->hasOne(LaporanTemplate::class);
     }
 }

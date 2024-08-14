@@ -14,6 +14,22 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
+$("#close-flayer").on("click", function(){
+    closeModal($("#detail-flayer-modal"));
+})
+
+$("#close-flayer-2").on("click", function(){
+    closeModal($("#detail-flayer-modal"));
+})
+
+$("#cancel-add").on("click", function(){
+    closeModal($("#tambah-data-modal"));
+})
+
+$("#cancel-edit").on("click", function(){
+    closeModal($("#edit-data-modal"));
+})
+
 $(".registrasi").on("click", function(){
     let id = $(this).data('id');
     let event = $(this).data('event');
@@ -27,22 +43,24 @@ $(".registrasi").on("click", function(){
         },
         success: function(response){
             if(response.status){
-                response.kamar.forEach(element => {
-                    var newOption = $('<option>', {
-                        value: element.no_kamar,
-                        text: element.no_kamar
-                    });
+                response.peserta.forEach(element => {
+                    var newOption = null;
 
-                    $("#nomor_kamar").append(newOption);
+                    if(element.nama){
+                        newOption = $('<option>', {
+                            value: element.nama,
+                            text: element.nama
+                        }); 
+                    }else{
+                        newOption = $('<option>', {
+                            value: element.pegawai.nama,
+                            text: element.pegawai.nama
+                        }); 
+                    }
+
+                    $("#nama_peserta").append(newOption);
                 });
-                $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#asal_instansi").val(response.data.asal_instansi);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
-                $("#nomor_kamar").val(response.data.no_kamar);
+                $("#no_kamar").val(id);
 
                 $("#edit-data-modal").modal("show");
             }else{
@@ -156,15 +174,49 @@ $(".detail-flayer").on("click", function(){
     $("#detail-flayer-modal").modal("show");
 })
 
+$(document).on("click", ".edit", function(){
+    let id = $(this).data('id');
+
+    $.ajax({
+        url: '/kunci-kamar/daftar-kamar/edit',
+        method: 'GET',
+        data: {
+            'id': id
+        },
+        success: function(response){
+            if(response.status){
+                let nama = (response.data.pegawai == null) ? response.data.nama : response.data.pegawai.nama;
+                if(response.data.no_kamar == 0){
+                    $("#edit_no_kamar").val("Belum diatur");
+                    $("#edit_no_kamar").attr("disabled", true);
+                }else{
+                    $("#edit_no_kamar").val(response.data.no_kamar);
+                    $("#edit_no_kamar").attr("disabled", false);
+                }
+                $("#id").val(response.data.id);
+                $("#peserta").val(nama);
+
+                $("#edit-data-modal").modal("show");
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})
+
 $("#update").on("click", function(){
     $("#edit-data-modal").modal("hide");
     $.ajax({
-        url: '/data-kamar/daftar-peserta/update',
+        url: '/kunci-kamar/daftar-kamar/update',
         method: 'POST',
         data: {
             "_token": $("meta[name='csrf-token']").attr("content"),
-            "id": $("#id").val(),
-            "nomor_kamar": $("#nomor_kamar").val(),
+            "id_event": $("#id_kegiatan").val(),
+            "nomor_kamar": $("#no_kamar").val(),
+            "nama_peserta": $("#nama_peserta").val()
         },
         success: function(response){
             if(response.status){
@@ -224,12 +276,22 @@ $("#tambah-data").on("click", function(){
         },
         success: function(response){
             if(response.status){
+                $("#pemegang").empty();
                 response.data.forEach(element => {
-                    var newOption = $('<option>', {
-                        value: element.nama,
-                        text: element.nama,
-                        'data-id': element.id
-                    });
+                    var newOption = null;
+                    if(element.nama){
+                        newOption = $('<option>', {
+                            value: element.nama,
+                            text: element.nama,
+                            'data-id': element.id
+                        });
+                    }else{
+                        newOption = $('<option>', {
+                            value: element.pegawai.nama,
+                            text: element.pegawai.nama,
+                            'data-id': element.id
+                        });
+                    }
 
                     $("#pemegang").append(newOption);
                 });
@@ -277,3 +339,31 @@ $("#store").on("click", function(){
     })
 })
 
+$(document).on("click", ".delete", function(){
+    $("#delete-confirmed").attr("data-id", $(this).data('id'));
+    $("#confirm").modal("show");
+})
+
+$("#delete-confirmed").on("click", function(){
+    $.ajax({
+        url: '/kunci-kamar/daftar-kamar/delete',
+        method: 'POST',
+        data: {
+            '_token': $("meta[name='csrf-token']").attr("content"),
+            'id': $(this).data("id"),
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil menghapus data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+})

@@ -28,7 +28,7 @@ class KunciKamarController extends Controller
         $event = Event::where("event_id", $r->kegiatan_id)->first();
         $data = [
             'id_event' => $r->kegiatan_id,
-            'kamars' => Kamar::with('peserta')->where('event_id', $event->id)->get(),
+            'kamars' => Peserta::with('pegawai')->where('event_id', $event->id)->get(),
             'pageTitle' => "Daftar Kunci Kamar"
         ];
         return view('kunci_kamar.daftar_kamar', $data);
@@ -37,7 +37,10 @@ class KunciKamarController extends Controller
     public function kunciKamar(Request $r){
         try{
             $event = Event::where("event_id", $r->id_event)->first();
-            $data = Peserta::where('event_id', $event->id)->get();
+            $data = Peserta::with('pegawai')
+                        ->where('event_id', $event->id)
+                        ->where('no_kamar', 0)
+                        ->get();
 
             if($data){
                 return response()->json([
@@ -59,19 +62,43 @@ class KunciKamarController extends Controller
     }
 
     public function store(Request $r){
+        $event = Event::where('event_id', $r->id_event)->first();
+        try{
+            $kamar = Kamar::create([
+                'event_id' => $event->id,
+                'no_kamar' => $r->no_kamar
+            ]);
+
+            $peserta = Peserta::where('id', $r->pemegang_id)->first();
+            $peserta->no_kamar = $r->no_kamar;
+            $peserta->save();
+
+            return response()->json([
+                'status' => true,
+            ]);   
+
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(Request $r){
         try{
             $event = Event::where('event_id', $r->id_event)->first();
+            $data = Kamar::where('event_id', $event->id)
+                        ->where('no_kamar', $r->nomor_kamar)
+                        ->first();
 
-            if($event){
-                $kamar = Kamar::create([
-                    'event_id' => $event->id,
-                    'pemegang' => $r->pemegang,
-                    'no_kamar' => $r->no_kamar
-                ]);
-
-                $peserta = Peserta::where('id', $r->pemegang_id)->first();
-                $peserta->no_kamar = $r->no_kamar;
-                $peserta->save();
+            if($data){
+                $data->pemegang = $r->nama_peserta;
+                $data->save();
 
                 return response()->json([
                     'status' => true,
@@ -90,51 +117,51 @@ class KunciKamarController extends Controller
         }
     }
 
-    // public function update(Request $r){
-    //     try{
-    //         $data = Peserta::where('id', $r->id)->first();
+    public function edit(Request $r){
+        try{
+            $data = Peserta::with('pegawai')->where('id', $r->id)->first();
 
-    //         if($data){
-    //             $data->no_kamar = $r->nomor_kamar;
-    //             $data->save();
+            if($data){
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ]);    
+            }
 
-    //             return response()->json([
-    //                 'status' => true,
-    //             ]);    
-    //         }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+    public function delete(Request $r){
+        try{
+            $data = Peserta::where('id', $r->id)->first();
 
-    // public function edit(Request $r){
-    //     try{
-    //         $data = Peserta::where('id', $r->id)->first();
+            if($data){
+                $data->no_kamar = 0;
+                $data->save();
 
-    //         if($data){
-    //             return response()->json([
-    //                 'status' => true,
-    //                 'data' => $data
-    //             ]);    
-    //         }
+                return response()->json([
+                    'status' => true,
+                ]);    
+            }
 
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => "Data tidak ditemukan"
-    //         ]);
-    //     }catch(Exception $e){
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status' => false,
+                'message' => "Data tidak ditemukan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }

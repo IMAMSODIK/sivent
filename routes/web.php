@@ -163,6 +163,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/kunci-kamar/daftar-kamar/edit", [KunciKamarController::class, 'edit']);
     Route::post("/kunci-kamar/daftar-kamar/update", [KunciKamarController::class, 'update']);
     Route::post("/kunci-kamar/daftar-kamar/store", [KunciKamarController::class, 'store']);
+    Route::post("/kunci-kamar/daftar-kamar/delete", [KunciKamarController::class, 'delete']);
 
     Route::get("/registrasi-peserta", [PesertaController::class, 'registrasi']);
     Route::get("/registrasi-peserta/daftar-peserta", [PesertaController::class, 'daftarRegistrasiPeserta']);
@@ -213,6 +214,8 @@ Route::middleware('auth')->group(function(){
     Route::post("/seminar-kit-peserta/daftar-peserta/seminar-kit", [PesertaController::class, 'seminarKitAksi']);
 
     Route::get('/event/export-laporan', [ExportController::class, 'exportLaporan']);
+    Route::post('/event/format-laporan/store', [ExportController::class, 'formatLaporan']);
+    Route::get('/event/format-laporan/check', [ExportController::class, 'checkExportLaporan']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

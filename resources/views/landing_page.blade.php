@@ -177,9 +177,12 @@
                             data-navigation="false">
                             @foreach ($meeting as $r)
                                 <div class="shop-item" style="margin-right: 10px">
-                                    <div class="shop-item-image"><img
-                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
-                                            alt="flayer" />
+                                    @php
+                                        $flayerPath = 'storage/flayer/' . $r->flayer;
+                                        $defaultFlayerPath = 'storage/flayer/sample_flayer.jpg';
+                                    @endphp
+                                    <div class="shop-item-image">
+                                        <img src="{{ file_exists(public_path($flayerPath)) ? asset($flayerPath) : asset($defaultFlayerPath) }}" alt="Flayer">
                                         <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-info">Detail</span></a></div>
                                     </div>
@@ -199,9 +202,12 @@
                             data-navigation="false">
                             @foreach ($lembur as $r)
                                 <div class="shop-item" style="margin-right: 10px">
-                                    <div class="shop-item-image"><img
-                                            src="{{ asset('storage/flayer') . '/' . $r->flayer }}"
-                                            alt="flayer" />
+                                    @php
+                                        $flayerPath = 'storage/flayer/' . $r->flayer;
+                                        $defaultFlayerPath = 'storage/flayer/sample_flayer.jpg';
+                                    @endphp
+                                    <div class="shop-item-image">
+                                        <img src="{{ file_exists(public_path($flayerPath)) ? asset($flayerPath) : asset($defaultFlayerPath) }}" alt="Flayer">
                                         <div class="shop-item-detail"><a class="btn btn-round btn-b" href="/detail?id={{$r->event_id}}" target="_blank"><span
                                                     class="icon-info">Detail</span></a></div>
                                     </div>

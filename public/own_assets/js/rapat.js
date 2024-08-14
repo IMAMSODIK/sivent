@@ -32,6 +32,10 @@ $("#tambah-rapat").on("click", function(){
     $("#tambah-rapat-modal").modal("show");
 })
 
+$("#close-download").on("click", function(){
+    $("#laporan-rapat-modal").modal("hide");
+})
+
 $("#store").on("click", function(){
     $("#tambah-rapat-modal").modal("hide");
     let formData = new FormData();
@@ -354,3 +358,58 @@ $("#submit-filter").on("click", function(){
         }
     })
 })
+
+$(document).on("click", ".download_laporan", function(){
+    let id = $(this).data('id');
+    $("#submit-laporan").attr("data-id", id);
+    $('#laporan').summernote('code', "");
+
+    $.ajax({
+        url: '/event/format-laporan/check',
+        method: 'GET',
+        data: {
+            "_token": $("meta[name='csrf-token']").attr('content'),
+            "event_id": id
+        },
+        success: function(response){
+            if(response.status){
+                if(response.data){
+                    $('#laporan').summernote('code', response.data);
+                }
+                $("#laporan-rapat-modal").modal("show");          
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+});
+
+$("#submit-laporan").on("click", function(){
+    $("#laporan-rapat-modal").modal("hide");
+    let formData = new FormData();
+
+    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+    formData.append("format_laporan", $("#laporan").val());
+    formData.append("event_id", $(this).data('id'));
+
+    $.ajax({
+        url: '/event/format-laporan/store',
+        method: 'POST',
+        processData: false,
+        contentType: false, 
+        data: formData,
+        success: function(response){
+            if(response.status){
+                location.href = "/event/export-laporan?id=" + response.event_id
+            }else{
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+});
