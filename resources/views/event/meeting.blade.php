@@ -80,7 +80,7 @@
                         </ul>
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
-                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="{{$d->event_id}}" class="btn btn-primary mb-4">Download Laporan</button>
+                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="{{$d->event_id}}" class="btn btn-primary mb-4">Cetak Laporan</button>
                       </div>
                     </div>
                   </div>

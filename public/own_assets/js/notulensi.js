@@ -14,29 +14,26 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
-$(document).on("click", ".registrasi", function(){
-    $("#id_pegawai").val($(this).data('id'));
-    $("#registrasi-modal").modal("show");
-});
-
-$("#submit_registrasi").on("click", function(){
-    $("#registrasi-modal").modal("hide");
-    let id = $("#id_pegawai").val();
+$(".registrasi").on("click", function(){
+    let id = $(this).data('id');
 
     $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/register',
-        method: 'POST',
+        url: '/registrasi-peserta/daftar-peserta/detail',
+        method: 'GET',
         data: {
-            "_token": $("meta[name='csrf-token']").attr("content"),
-            "tanggal": $("#tanggal").val(),
             'id': id
         },
         success: function(response){
             if(response.status){
-                alertModal(true, "Registrasi berhasil");
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
+                $("#id").val(response.data.id);
+                $("#nama").val(response.data.nama);
+                $("#nip").val(response.data.nip);
+                $("#asal_instansi").val(response.data.asal_instansi);
+                $("#golongan").val(response.data.golongan);
+                $("#jabatan").val(response.data.jabatan);
+                $("#jenis_kelamin").val(response.data.jenis_kelamin);
+
+                $("#edit-data-modal").modal("show");
             }else{
                 alertModal(false, response.message);
             }
@@ -47,29 +44,26 @@ $("#submit_registrasi").on("click", function(){
     })
 })
 
-$(document).on("click", ".absensi", function(){
-    $("#id_pegawai").val($(this).data('id'));
-    $("#absensi-modal").modal("show");
-});
-
-$("#submit_absensi").on("click", function(){
-    $("#absensi-modal").modal("hide");
-    let id = $("#id_pegawai").val();
+$(".absensi").on("click", function(){
+    let id = $(this).data('id');
 
     $.ajax({
-        url: '/absensi-peserta/daftar-peserta/absensi-admin',
-        method: 'POST',
+        url: '/registrasi-peserta/daftar-peserta/detail',
+        method: 'GET',
         data: {
-            "_token": $("meta[name='csrf-token']").attr("content"),
-            'id': id,
-            'date': $("#tanggal").val()
+            'id': id
         },
         success: function(response){
             if(response.status){
-                alertModal(true, "Registrasi berhasil");
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
+                $("#id").val(response.data.id);
+                $("#nama").val(response.data.nama);
+                $("#nip").val(response.data.nip);
+                $("#asal_instansi").val(response.data.asal_instansi);
+                $("#golongan").val(response.data.golongan);
+                $("#jabatan").val(response.data.jabatan);
+                $("#jenis_kelamin").val(response.data.jenis_kelamin);
+
+                $("#edit-data-modal").modal("show");
             }else{
                 alertModal(false, response.message);
             }
@@ -123,7 +117,7 @@ $("#submit-filter").on("click", function(){
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/registrasi-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Registrasi</button></a>
+                                                <a href="/kit-seminar/daftar-kit?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -157,7 +151,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/registrasi-peserta/daftar-peserta?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-4" type="button">Registrasi</button></a>
+                                        <a href="/kit-seminar/daftar-kit?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
                                     </div>
                                     </div>
                                 </div>
@@ -237,126 +231,3 @@ $("#absensi").on("click", function(){
         }
     })
 })
-
-
-//aksi ttd
-
-$(document).on("click", '.ttd-aksi', function(){
-    $("#id").val($(this).data('id'));
-    $("#ttd-modal").modal("show");
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    var canvas = document.getElementById("signature-pad");
-    var context = canvas.getContext("2d");
-
-    var drawing = false;
-    var lastPos = null;
-
-    function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top,
-        };
-    }
-
-    function drawLine(context, x1, y1, x2, y2) {
-        context.beginPath();
-        context.moveTo(x1, y1);
-        context.lineTo(x2, y2);
-        context.stroke();
-    }
-
-    function mouseDownHandler(e) {
-        drawing = true;
-        lastPos = getMousePos(canvas, e);
-    }
-
-    function mouseMoveHandler(e) {
-        if (drawing) {
-            var mousePos = getMousePos(canvas, e);
-            drawLine(context, lastPos.x, lastPos.y, mousePos.x, mousePos.y);
-            lastPos = mousePos;
-        }
-    }
-
-    function endDrawing() {
-        drawing = false;
-    }
-
-    canvas.addEventListener("mousedown", mouseDownHandler);
-    canvas.addEventListener("mousemove", mouseMoveHandler);
-    canvas.addEventListener("mouseup", endDrawing);
-    canvas.addEventListener("mouseleave", endDrawing);
-
-    canvas.addEventListener(
-        "touchstart",
-        function (e) {
-            mouseDownHandler(e.touches[0]);
-        },
-        false
-    );
-
-    canvas.addEventListener(
-        "touchmove",
-        function (e) {
-            mouseMoveHandler(e.touches[0]);
-            e.preventDefault();
-        },
-        false
-    );
-
-    canvas.addEventListener("touchend", endDrawing, false);
-
-    document
-        .getElementById("reset-canvas")
-        .addEventListener("click", function () {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-        });
-});
-
-// fungsi untuk mendapatkan tanda tangan
-function getSignatureData() {
-    var canvas = document.getElementById("signature-pad");
-    return canvas.toDataURL("image/png");
-}
-
-// fungsi untuk mengirim seluruh form beserta tanda tangan
-$("#simpan-ttd").click(function () {
-    $("#ttd-modal").modal("hide");
-    let btn = $(this);
-    btn.prop('disabled', true);
-    var signatureData = getSignatureData();
-
-    let formData = new FormData();
-    let token = $('meta[name="csrf-token"]').attr("content");
-
-    formData.append("_token", token);
-    formData.append("signature", signatureData);
-    formData.append("id", $("#id").val());
-
-    $.ajax({
-        url: "/absensi-peserta/daftar-peserta/ttd",
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if(response.status){
-                alertModal(true, "Berhasil mengubah data");
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            }else{
-                $('.modal-alert').on('hidden.bs.modal', function () {
-                    $("#ttd-modal").modal("show");
-                });
-                alertModal(false, response.message);
-            }
-        },
-        error: function (response) {
-            alertModal(false, response.message);
-        },
-    });
-});

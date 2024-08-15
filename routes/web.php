@@ -17,6 +17,7 @@ use App\Http\Controllers\LaporanEventController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NarasumberController;
+use App\Http\Controllers\NotulenRapatController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfileController;
@@ -139,6 +140,13 @@ Route::middleware('auth')->group(function(){
     Route::post("/laporan-event/daftar-laporan-event/update", [LaporanEventController::class, 'update']);
     Route::post("/laporan-event/daftar-laporan-event/delete", [LaporanEventController::class, 'delete']);
 
+    Route::get("/notulen-rapat", [NotulenRapatController::class, 'index']);
+    Route::get("/notulen-rapat/daftar-notulen-rapat", [NotulenRapatController::class, 'daftarLaporan']);
+    Route::post("/notulen-rapat/daftar-notulen-rapat/store", [NotulenRapatController::class, 'store']);
+    Route::get("/notulen-rapat/daftar-notulen-rapat/edit", [NotulenRapatController::class, 'edit']);
+    Route::post("/notulen-rapat/daftar-notulen-rapat/update", [NotulenRapatController::class, 'update']);
+    Route::post("/notulen-rapat/daftar-notulen-rapat/delete", [NotulenRapatController::class, 'delete']);
+
     Route::get("/foto-event", [FotoEventController::class, 'index']);
     Route::get("/foto-event/daftar-foto", [FotoEventController::class, 'daftarFoto']);
     Route::post("/foto-event/daftar-foto/store", [FotoEventController::class, 'store']);
@@ -217,6 +225,15 @@ Route::middleware('auth')->group(function(){
     Route::get('/event/export-laporan', [ExportController::class, 'exportLaporan']);
     Route::post('/event/format-laporan/store', [ExportController::class, 'formatLaporan']);
     Route::get('/event/format-laporan/check', [ExportController::class, 'checkExportLaporan']);
+    Route::post('/event/format-laporan/ketua-event', [ExportController::class, 'ketuaEvent']);
+
+
+    //user biasa
+    Route::get("/peserta-page/registrasi", [EventPesertaController::class, 'registrasiPage']);
+    Route::get("/peserta-page/status-registrasi", [EventPesertaController::class, 'statusRegistrasi']);
+    Route::get("/peserta-page/absensi", [EventPesertaController::class, 'absensiPage']);
+    Route::post("/absensi-peserta/daftar-peserta/ttd", [EventPesertaController::class, 'ttd']);
+    Route::get("/peserta-page/status-absensi", [EventPesertaController::class, 'statusAbsensi']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

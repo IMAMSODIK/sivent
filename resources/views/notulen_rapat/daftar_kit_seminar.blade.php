@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="page-title">
                 <div class="row mt-4">
                     <div class="col-6">
@@ -22,38 +22,27 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
                                             <th>Nama Peserta</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
                                             <th>Bank</th>
-                                            <th>Status Registrasi</th>
+                                            <th>Status Pengambilan Kit</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $index = 1; ?>
                                         @foreach ($pesertas as $p)
                                         <tr>
-                                            <td>{{$index++}}</td>
-                                            @if ($p->nama)
-                                                <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
-                                                <td>{{$p->jenis_kelamin}}</td>
-                                                <td>{{$p->golongan}}</td>
-                                                <td>{{$p->jabatan}}</td>
-                                                <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
-                                            @else
-                                                <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
-                                                <td>{{$p->pegawai->jenis_kelamin}}</td>
-                                                <td>{{$p->pegawai->golongan}}</td>
-                                                <td>{{$p->pegawai->jabatan}}</td>
-                                                <td>{{$p->pegawai->no_rek}} <br> <small>({{$p->pegawai->bank}})</small></td>
-                                            @endif
-                                            <td>{{($p->status_registrasi) ? "Sudah Registrasi" : "Belum Registrasi"}} <br> ({{$p->tanggal_registrasi}})</td>
+                                            <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
+                                            <td>{{$p->jenis_kelamin}}</td>
+                                            <td>{{$p->golongan}}</td>
+                                            <td>{{$p->jabatan}}</td>
+                                            <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                            <td>{{($p->status_kit) ? "Sudah Diambil" : "Belum Diambil"}}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li><button class="btn btn-primary registrasi" data-id="{{$p->id}}"><i class="fa fa-sign-in"></i></button></li>
+                                                    <li class="registrasi" data-id="{{$p->id}}" style="margin-left: 5px"><a href="#"><i class="fa fa-sign-in"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -73,21 +62,21 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Status Registrasi Peserta</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Status Pengambilan Kit</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body dark-modal">
                     <div class="card">
                         <form class="form theme-form dark-inputs">
                             <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
-                            <input type="hidden" id="id"_pegawai>
+                            <input type="hidden" id="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="nama">Nama Peserta</label>
                                             <input class="form-control input-air-primary" id="nama"
-                                                type="text" placeholder="Nama Peserta">
+                                                type="text" placeholder="Nama Peserta" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +85,7 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="nip">NIP Peserta</label>
                                             <input class="form-control input-air-primary" id="nip"
-                                                type="text" placeholder="NIP Peserta">
+                                                type="text" placeholder="NIP Peserta" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -104,11 +93,8 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="golongan">Golongan</label>
-                                            <select name="" class="form-control input-air-primary" id="golongan">
-                                                <option value="I">I</option>
-                                                <option value="II">II</option>
-                                                <option value="III">III</option>
-                                            </select>
+                                            <input class="form-control input-air-primary" id="golongan"
+                                                type="text" placeholder="Golongan" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +103,7 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="jabatan">Jabatan Peserta</label>
                                             <input class="form-control input-air-primary" id="jabatan"
-                                                type="text" placeholder="Jabatan Peserta">
+                                                type="text" placeholder="Jabatan Peserta" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -125,9 +111,18 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                                            <select name="" class="form-control input-air-primary" id="jenis_kelamin">
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
+                                            <input class="form-control input-air-primary" id="jenis_kelamin"
+                                                type="text" placeholder="Jenis Kelamin" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="status_kit">Status Kit</label>
+                                            <select name="" class="form-control input-air-primary" id="status_kit">
+                                                <option value="1">Sudah Mengambil</option>
+                                                <option value="0">Belum Mengambil</option>
                                             </select>
                                         </div>
                                     </div>
@@ -135,41 +130,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <input class="btn btn-light" type="reset" value="Cancel">
-                                <button class="btn btn-primary me-3" type="button" id="registered">Registrasi</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade bd-example-modal-lg" id="registrasi-modal" tabindex="-1" role="dialog"
-        aria-labelledby="myExtraLargeModal" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Registrasi Peserta</h4>
-                    <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body dark-modal">
-                    <div class="card">
-                        <form class="form theme-form dark-inputs">
-                            <input type="hidden" id="id_kegiatan" value="{{$id_event}}">
-                            <input type="hidden" id="id_pegawai">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="tanggal">Tanggal Registrasi</label>
-                                            <input class="form-control input-air-primary" id="tanggal"
-                                                type="date">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-center">
-                                <button class="btn btn-primary" type="button" id="submit_registrasi">Registrasi</button>
+                                <button class="btn btn-primary me-3" type="button" id="update">Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -197,5 +158,5 @@
 @endsection
 
 @section('own_script')
-    <script src="{{asset('own_assets/js/registrasi.js')}}"></script>
+    <script src="{{asset('own_assets/js/seminar_kit.js')}}"></script>
 @endsection

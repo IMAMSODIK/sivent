@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\FotoEvent;
+use App\Models\KetuaRapat;
 use App\Models\LaporanEvent;
 use App\Models\LaporanTemplate;
 use App\Models\Peserta;
@@ -89,6 +90,34 @@ class ExportController extends Controller
                     'status' => true,
                     'data' => null
                 ]);
+            }
+
+            return response()->json([
+                'status' => false,
+                'message' => "Terjadi kesalahan"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function ketuaEvent(Request $r){
+        try{
+            $event = Event::where('event_id', $r->event_id)->first();
+
+            if($event){
+                KetuaRapat::create([
+                    'event_id' => $event->id,
+                    'pegawai_id' => $r->id_pegawai,
+                    'tanggal' => $r->tanggal,
+                ]);
+
+                return response()->json([
+                    'status' => true,
+                ]);    
             }
 
             return response()->json([

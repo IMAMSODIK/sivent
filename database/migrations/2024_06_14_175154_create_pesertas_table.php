@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('status_absensi')->default("Absen");
             $table->string('asal_instansi')->nullable();
             $table->string('bukti_transfer')->nullable();
+            $table->string('ttd_registrasi')->nullable();
+            $table->date('tanggal_registrasi')->nullable();
             $table->timestamps();
         });
     }

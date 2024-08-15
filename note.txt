@@ -152,3 +152,26 @@ ada masalah login dengan nip
 
 GOLONGAN SAMPAI 4
 absensi bisa lebih dari satu hari dan simpan data tanggal absensi
+
+
+
+
+
+
+absensi by admin bisa pilih tanggal (done)
+tolak absensi jika sudah dilakukan (done)
+
+materi rapat => deksripsi
+
+
+------ laporan --------
+
+download rapat diganti jadi cetak laporan (done)
+sewaktu cetak laporan diklik muncul field (nama, jabatan, nip dan tanggal) (done, tinggal penerapan ke laporan)
+
+buat menu baru notulen rapat => yang muncul rapat aja
+isinya entry rich text, isinya disimpan ditable
+
+buat laporan event (meeting dan lembur) => fiturnya udah pas
+
+download laporan dipisah per table jadi perfile pdf lalu digabungkan pdf

@@ -44,7 +44,19 @@
                         href="/peserta-page/daftar-event">
                         <i class="fa fa-cube text-white" aria-hidden="true"></i>
                         </svg><span class="">Event Anda</span></a>
-                </li>
+                    </li>
+
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                        href="/peserta-page/registrasi">
+                        <i class="fa fa-cube text-white" aria-hidden="true"></i>
+                        </svg><span class="">Registrasi Event</span></a>
+                    </li>
+
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                        href="/peserta-page/absensi">
+                        <i class="fa fa-cube text-white" aria-hidden="true"></i>
+                        </svg><span class="">Absensi Event</span></a>
+                    </li>
                 @else
                 <li class="sidebar-main-title">
                     <div>
@@ -139,6 +151,11 @@
                         <i class="fa fa-picture-o text-white" aria-hidden="true"></i>
                         </svg><span class="">Foto Event</span></a>
                 </li>
+
+                <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
+                    class="sidebar-link sidebar-title link-nav" href="/notulen-rapat">
+                    <i class="fa fa-file text-white" aria-hidden="true"></i>
+                    </svg><span class="">Notulen Rapat</span></a>
 
                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a
                     class="sidebar-link sidebar-title link-nav" href="/laporan-event">

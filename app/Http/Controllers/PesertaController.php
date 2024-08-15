@@ -384,6 +384,7 @@ class PesertaController extends Controller
 
             if($data){
                 $data->status_registrasi = 1;
+                $data->tanggal_registrasi = $r->tanggal;
                 $data->save();
 
                 return response()->json([
@@ -446,27 +447,39 @@ class PesertaController extends Controller
     public function absensiAct(Request $r){
         try{
             $status_absensi = 1; // Contoh nilai status_absensi
-$peserta_id = $r->id; // ID peserta yang ingin disertakan
-$newTime = Carbon::now(); // Mendapatkan waktu saat ini
-$newDate = $newTime->format('Y-m-d'); // Mengambil tanggal dari waktu saat ini
+            $peserta_id = $r->id;
+            $newDate = null;
+            $newTime = null;
+            
+            if($r->date){
+                $newTime = $r->date;
+                $newDate = $r->date;
+            }else{
+                $newTime = Carbon::now(); // Mendapatkan waktu saat ini
+                $newDate = $newTime->format('Y-m-d'); // Mengambil tanggal dari waktu saat ini
+            }
 
-// Periksa jika ada entri dengan tanggal dan peserta yang sama
-$existing = DB::table('absensis')
-    ->whereRaw('DATE(time) = ?', [$newDate])
-    ->where('peserta_id', $peserta_id)
-    ->orderBy('time', 'desc')
-    ->first();
+            // Periksa jika ada entri dengan tanggal dan peserta yang sama
+            $existing = DB::table('absensis')
+                ->whereRaw('DATE(time) = ?', [$newDate])
+                ->where('peserta_id', $peserta_id)
+                ->orderBy('time', 'desc')
+                ->first();
 
-if ($existing) {
-    // Jika ada, perbarui entri dengan waktu yang lebih baru
-    DB::table('absensis')
-        ->where('id', $existing->id) // Menggunakan ID dari entri yang ada
-        ->update(['status_absensi' => $status_absensi, 'time' => $newTime]);
-} else {
-    // Jika tidak ada, sisipkan data baru
-    DB::table('absensis')
-        ->insert(['status_absensi' => $status_absensi, 'time' => $newTime, 'peserta_id' => $peserta_id]);
-}
+            if ($existing) {
+                // // Jika ada, perbarui entri dengan waktu yang lebih baru
+                // DB::table('absensis')
+                //     ->where('id', $existing->id) // Menggunakan ID dari entri yang ada
+                //     ->update(['status_absensi' => $status_absensi, 'time' => $newTime]);
+                return response()->json([
+                    'status' => false,
+                    'message' => "Anda sudah mengisi absensi hari ini"
+                ]);
+            } else {
+                // Jika tidak ada, sisipkan data baru
+                DB::table('absensis')
+                    ->insert(['status_absensi' => $status_absensi, 'time' => $newTime, 'peserta_id' => $peserta_id]);
+            }
 
             return response()->json([
                 'status' => true,

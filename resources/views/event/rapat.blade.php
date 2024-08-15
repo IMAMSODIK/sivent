@@ -80,7 +80,7 @@
                         </ul>
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
-                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="{{$d->event_id}}" class="btn btn-primary mb-4">Download Laporan</button>
+                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="{{$d->event_id}}" class="btn btn-primary mb-4">Cetak Laporan</button>
                       </div>
                     </div>
                   </div>
@@ -469,6 +469,66 @@
               <div class="card-footer text-end">
                 <input class="btn btn-light close-modal" type="button" id="close-download" value="Cancel">
                 <button class="btn btn-primary" type="button" id="submit-laporan">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" id="ketua-rapat-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myExtraLargeModal">Data Rapat</h4>
+          <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body dark-modal"> 
+          <div class="card">
+            <form class="form theme-form dark-inputs">
+              <input type="hidden" id="edit_kategori" value="rapat">
+              <input type="hidden" id="id_event_ketua">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label" for="ketua_kegiatan">Ketua Event</label>
+                      <select name="" id="ketua_kegiatan" class="form-control h-100">
+                        @foreach ($pegawais as $p)
+                          <option value="{{$p->id}}" data-nip="{{$p->nip}}" data-jabatan="{{$p->jabatan}}">{{$p->nama}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label" for="jabatan_ketua">Jabatan</label>
+                      <input class="form-control input-air-primary" id="jabatan_ketua" type="text" placeholder="Jabatan" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label" for="nip_ketua">NIP</label>
+                      <input class="form-control input-air-primary" id="nip_ketua" type="text" placeholder="NIP" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label" for="tanggal">Tanggal</label>
+                      <input class="form-control input-air-primary" id="tanggal" type="date">
+                    </div>
+                  </div>
+                </div>
+              <div class="card-footer text-end">
+                <input class="btn btn-light close-modal" type="button" id="cancel-ketua" value="Cancel">
+                <button class="btn btn-primary me-3" type="button" id="submit-ketua">Submit</button>
               </div>
             </form>
           </div>

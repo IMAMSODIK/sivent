@@ -36,6 +36,10 @@ $("#close-download").on("click", function(){
     $("#laporan-rapat-modal").modal("hide");
 })
 
+$("#cancel-ketua").on("click", function(){
+    $("#ketua-rapat-modal").modal("hide");
+})
+
 $("#store").on("click", function(){
     $("#tambah-rapat-modal").modal("hide");
     let formData = new FormData();
@@ -111,7 +115,7 @@ $("#store").on("click", function(){
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${response.data.nama_kegiatan}</h6>
-                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${response.data.event_id}" class="btn btn-primary mb-4">Download Laporan</button>
+                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${response.data.event_id}" class="btn btn-primary mb-4">Cetak Laporan</button>
                                     </div>
                                     </div>
                                 </div>
@@ -332,7 +336,7 @@ $("#submit-filter").on("click", function(){
                                         </ul>
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
-                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${element.event_id}" class="btn btn-primary mb-4">Download Laporan</button>
+                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${element.event_id}" class="btn btn-primary mb-4">Cetak Laporan</button>
                                     </div>
                                     </div>
                                 </div>
@@ -351,51 +355,39 @@ $("#submit-filter").on("click", function(){
     })
 })
 
-$(document).on("click", ".download_laporan", function(){
-    let id = $(this).data('id');
-    $("#submit-laporan").attr("data-id", id);
-    $('#laporan').summernote('code', "");
 
-    $.ajax({
-        url: '/event/format-laporan/check',
-        method: 'GET',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr('content'),
-            "event_id": id
-        },
-        success: function(response){
-            if(response.status){
-                if(response.data){
-                    $('#laporan').summernote('code', response.data);
-                }
-                $("#laporan-rapat-modal").modal("show");          
-            }else{
-                alertModal(false, response.message);
-            }
-        },
-        error: function(response){
-            alertModal(false, response.message);
-        }
-    })
+$(document).on("click", ".download_laporan", function(){
+    $("#id_event_ketua").val($(this).data('id'));
+    $("#ketua-rapat-modal").modal('show');
 });
 
-$("#submit-laporan").on("click", function(){
-    $("#laporan-rapat-modal").modal("hide");
+$("#ketua_kegiatan").on("change", function(){
+    var selectedOption = $(this).find('option:selected');
+    var jabatan = selectedOption.data('jabatan');
+    var nip = selectedOption.data('nip');
+
+    $("#jabatan_ketua").val(jabatan);
+    $("#nip_ketua").val(nip);
+})
+
+$("#submit-ketua").on("click", function(){
+    $("#ketua-rapat-modal").modal("hide");
     let formData = new FormData();
 
     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
-    formData.append("format_laporan", $("#laporan").val());
-    formData.append("event_id", $(this).data('id'));
+    formData.append("event_id", $("#id_event_ketua").val());
+    formData.append("id_pegawai", $("#ketua_kegiatan").val());
+    formData.append("tanggal", $("#tanggal").val());
 
     $.ajax({
-        url: '/event/format-laporan/store',
+        url: '/event/format-laporan/ketua-event',
         method: 'POST',
         processData: false,
         contentType: false, 
         data: formData,
         success: function(response){
             if(response.status){
-                location.href = "/event/export-laporan?id=" + response.event_id
+                alertModal(true);
             }else{
                 alertModal(false, response.message);
             }
@@ -404,4 +396,59 @@ $("#submit-laporan").on("click", function(){
             alertModal(false, response.message);
         }
     })
-});
+})
+
+// $(document).on("click", ".download_laporan", function(){
+//     let id = $(this).data('id');
+//     $("#submit-laporan").attr("data-id", id);
+//     $('#laporan').summernote('code', "");
+
+//     $.ajax({
+//         url: '/event/format-laporan/check',
+//         method: 'GET',
+//         data: {
+//             "_token": $("meta[name='csrf-token']").attr('content'),
+//             "event_id": id
+//         },
+//         success: function(response){
+//             if(response.status){
+//                 if(response.data){
+//                     $('#laporan').summernote('code', response.data);
+//                 }
+//                 $("#laporan-rapat-modal").modal("show");          
+//             }else{
+//                 alertModal(false, response.message);
+//             }
+//         },
+//         error: function(response){
+//             alertModal(false, response.message);
+//         }
+//     })
+// });
+
+// $("#submit-laporan").on("click", function(){
+//     $("#laporan-rapat-modal").modal("hide");
+//     let formData = new FormData();
+
+//     formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+//     formData.append("format_laporan", $("#laporan").val());
+//     formData.append("event_id", $(this).data('id'));
+
+//     $.ajax({
+//         url: '/event/format-laporan/store',
+//         method: 'POST',
+//         processData: false,
+//         contentType: false, 
+//         data: formData,
+//         success: function(response){
+//             if(response.status){
+//                 location.href = "/event/export-laporan?id=" + response.event_id
+//             }else{
+//                 alertModal(false, response.message);
+//             }
+//         },
+//         error: function(response){
+//             alertModal(false, response.message);
+//         }
+//     })
+// });
