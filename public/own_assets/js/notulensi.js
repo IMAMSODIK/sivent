@@ -14,66 +14,6 @@ function alertModal(status, message = null){
     $("#alert").modal('show');
 }
 
-$(".registrasi").on("click", function(){
-    let id = $(this).data('id');
-
-    $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/detail',
-        method: 'GET',
-        data: {
-            'id': id
-        },
-        success: function(response){
-            if(response.status){
-                $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#asal_instansi").val(response.data.asal_instansi);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
-
-                $("#edit-data-modal").modal("show");
-            }else{
-                alertModal(false, response.message);
-            }
-        },
-        error: function(response){
-            alertModal(false, response.message);
-        }
-    })
-})
-
-$(".absensi").on("click", function(){
-    let id = $(this).data('id');
-
-    $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/detail',
-        method: 'GET',
-        data: {
-            'id': id
-        },
-        success: function(response){
-            if(response.status){
-                $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#asal_instansi").val(response.data.asal_instansi);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
-
-                $("#edit-data-modal").modal("show");
-            }else{
-                alertModal(false, response.message);
-            }
-        },
-        error: function(response){
-            alertModal(false, response.message);
-        }
-    })
-})
-
 $("#submit-filter").on("click", function(){
     var unitKerjaSelected = [];
     var statusEventSelected = $('.status_event_filter:checked').val();
@@ -117,7 +57,7 @@ $("#submit-filter").on("click", function(){
                                                 </ul>
                                             </div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <a href="/kit-seminar/daftar-kit?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
+                                                <a href="/notulen-rapat/daftar-notulen-rapat?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
                                             </div>
                                         </div>
                                         <hr>
@@ -151,7 +91,7 @@ $("#submit-filter").on("click", function(){
                                         <hr>
                                         <h6 class="blog-bottom-details">${element.nama_kegiatan}</h6>
                                         <p class="px-3">${element.deskripsi_kegiatan}</p>
-                                        <a href="/kit-seminar/daftar-kit?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
+                                        <a href="/notulen-rapat/daftar-notulen-rapat?kegiatan_id=${element.event_id}"><button class="btn btn-secondary d-flex m-auto mb-2" type="button">Notulensi Rapat</button></a>
                                     </div>
                                     </div>
                                 </div>
@@ -175,25 +115,55 @@ $(".detail-flayer").on("click", function(){
     $("#detail-flayer-modal").modal("show");
 })
 
-$("#registered").on("click", function(){
-    $("#edit-data-modal").modal("hide");
+$("#tambah-data").on("click", function(){
+    $("#tambah-data-modal").modal("show");
+})
+
+$("#store").on("click", function(){
+    $("#tambah-data-modal").modal("hide");
+    let formData = new FormData();
+
+    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+    formData.append("notulensi", $("#notulensi").val());
+    formData.append("event_id", $("#id_kegiatan").val());
+
     $.ajax({
-        url: '/registrasi-peserta/daftar-peserta/registrasi',
+        url: '/notulen-rapat/daftar-notulen-rapat/store',
         method: 'POST',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr("content"),
-            "id": $("#id").val()
-        },
+        processData: false,
+        contentType: false, 
+        data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true, "Berhasil mengubah data");
+                alertModal(true, "Berhasil menghapus data!");
                 setTimeout(() => {
                     location.reload();
                 }, 2000);
             }else{
-                $('.modal-alert').on('hidden.bs.modal', function () {
-                    $("#edit-data-modal").modal("show");
-                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+});
+
+$(document).on("click", ".edit", function(){
+    let id = $(this).data('id');
+
+    $.ajax({
+        url: '/notulen-rapat/daftar-notulen-rapat/edit',
+        method: 'GET',
+        data: {
+            'id': id
+        },
+        success: function(response){
+            if(response.status){
+                $("#id").val(response.data.id);
+                $('#edit_notulensi').summernote('code', response.data.deskripsi);
+                $("#edit-data-modal").modal("show");
+            }else{
                 alertModal(false, response.message);
             }
         },
@@ -203,26 +173,59 @@ $("#registered").on("click", function(){
     })
 })
 
-$("#absensi").on("click", function(){
+$("#update").on("click", function(){
     $("#edit-data-modal").modal("hide");
+    let formData = new FormData();
+
+    formData.append("_token", $("meta[name='csrf-token']").attr('content'));
+    formData.append("notulensi", $("#edit_notulensi").val());
+    formData.append("id", $("#id").val());
+
     $.ajax({
-        url: '/absensi-peserta/daftar-peserta/absensi',
+        url: '/notulen-rapat/daftar-notulen-rapat/update',
         method: 'POST',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr("content"),
-            "id": $("#id").val(),
-            "status_absensi": $("#status_absensi").val()
-        },
+        processData: false,
+        contentType: false, 
+        data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true, "Berhasil mengubah data");
+                alertModal(true, "Berhasil menghapus data!");
                 setTimeout(() => {
                     location.reload();
                 }, 2000);
             }else{
-                $('.modal-alert').on('hidden.bs.modal', function () {
-                    $("#edit-data-modal").modal("show");
-                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+});
+
+$(document).on("click", ".delete", function(){
+    $("#delete-confirmed").attr("data-id", $(this).data('id'));
+    $("#confirm").modal("show");
+})
+
+$("#delete-confirmed").on("click", function(){
+    let id = $(this).data('id');
+
+    $.ajax({
+        url: '/notulen-rapat/daftar-notulen-rapat/delete',
+        method: 'POST',
+        data: {
+            "_token": $("meta[name='csrf-token']").attr('content'),
+            "id": id,
+        },
+        success: function(response){
+            if(response.status){
+                alertModal(true, "Berhasil menghapus data!");
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
                 alertModal(false, response.message);
             }
         },

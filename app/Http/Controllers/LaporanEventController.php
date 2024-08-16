@@ -18,11 +18,10 @@ class LaporanEventController extends Controller
         $tanggalSekarang = Carbon::now()->subDay();
 
         $data = [
-            'count_rapat' => Event::where('kategori', 'rapat')->count(),
             'count_meeting' => Event::where('kategori', 'meeting')->count(),
             'count_lembur' => Event::where('kategori', 'lembur')->count(),
-            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->get(),
-            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->get(),
+            'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', '!=', 'rapat')->get(),
+            'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', '!=', 'rapat')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
             'pageTitle' => "Laporan Event"
         ];

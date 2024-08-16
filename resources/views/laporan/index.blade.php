@@ -15,7 +15,7 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-xl-4 col-sm-6 rapat" style="cursor: pointer">
+            {{-- <div class="col-xl-4 col-sm-6 rapat" style="cursor: pointer">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-primary border-2">
                         <span class="f-light f-w-500 f-14">Rapat</span>
@@ -45,8 +45,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 meeting" style="cursor: pointer">
+            </div> --}}
+            <div class="col-xl-6 col-sm-6 meeting" style="cursor: pointer">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-Progress border-b-warning border-2">
                         <span class="f-light f-w-500 f-14">Meeting</span>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-sm-6 lembur" style="cursor: pointer">
+            <div class="col-xl-6 col-sm-6 lembur" style="cursor: pointer">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-Complete border-b-secondary border-2">
                         <span class="f-light f-w-500 f-14">Lembur</span>

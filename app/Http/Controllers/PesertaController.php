@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -379,12 +380,37 @@ class PesertaController extends Controller
     }
 
     public function register(Request $r){
+        $newDate = null;
+            
+        if($r->tanggal){
+            $newDate = $r->tanggal;
+        }else{
+            $newTime = Carbon::now();
+            $newDate = $newTime->format('Y-m-d');
+        }
+
         try{
             $data = Peserta::where('id', $r->id)->first();
 
             if($data){
+                if ($r->signature) {
+                    $signature = $r->signature;
+                    $decodedData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signature));
+                    $filename = Str::random(8) . '.png';
+        
+                    // Pastikan folder ada atau buat folder
+                    $folderPath = 'tanda_tangan';
+                    if (!Storage::disk('public')->exists($folderPath)) {
+                        Storage::disk('public')->makeDirectory($folderPath);
+                    }
+        
+                    Storage::disk('public')->put($folderPath . '/' . $filename, $decodedData);
+    
+                    $data->ttd_registrasi = $filename;
+                }
+
                 $data->status_registrasi = 1;
-                $data->tanggal_registrasi = $r->tanggal;
+                $data->tanggal_registrasi = $newDate;
                 $data->save();
 
                 return response()->json([

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('notulen_rapats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

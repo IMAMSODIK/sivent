@@ -1,5 +1,14 @@
 @extends('template')
 
+@section('own_style')
+<style>
+    .border-canvas {
+        border: 2px solid #000;
+        border-radius: 5px;
+    }
+</style>
+@endsection
+
 @section('content')
     <div class="page-body">
         <div class="container-fluid">
@@ -27,7 +36,7 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            <th>Bank</th>
+                                            <th>Tanda Tangan</th>
                                             <th>Status Registrasi</th>
                                             <th>Action</th>
                                         </tr>
@@ -42,14 +51,17 @@
                                                 <td>{{$p->jenis_kelamin}}</td>
                                                 <td>{{$p->golongan}}</td>
                                                 <td>{{$p->jabatan}}</td>
-                                                <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
                                             @else
                                                 <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
                                                 <td>{{$p->pegawai->jenis_kelamin}}</td>
                                                 <td>{{$p->pegawai->golongan}}</td>
                                                 <td>{{$p->pegawai->jabatan}}</td>
-                                                <td>{{$p->pegawai->no_rek}} <br> <small>({{$p->pegawai->bank}})</small></td>
                                             @endif
+                                            <td>
+                                                @if ($p->ttd_registrasi)
+                                                <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $p->ttd_registrasi}}" alt="tandan tangan peserta">
+                                                @endif
+                                            </td>
                                             <td>{{($p->status_registrasi) ? "Sudah Registrasi" : "Belum Registrasi"}} <br> ({{$p->tanggal_registrasi}})</td>
                                             <td>
                                                 <ul class="action">
@@ -146,7 +158,7 @@
 
     <div class="modal fade bd-example-modal-lg" id="registrasi-modal" tabindex="-1" role="dialog"
         aria-labelledby="myExtraLargeModal" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myExtraLargeModal">Registrasi Peserta</h4>
@@ -164,6 +176,18 @@
                                             <label class="form-label" for="tanggal">Tanggal Registrasi</label>
                                             <input class="form-control input-air-primary" id="tanggal"
                                                 type="date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="signature-pad">Tanda Tangan</label>
+                                            <div class="border-canvas">
+                                                <canvas width="850" height="400" id="signature-pad"
+                                                    class="signature-pad"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

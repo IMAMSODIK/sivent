@@ -141,7 +141,7 @@ Route::middleware('auth')->group(function(){
     Route::post("/laporan-event/daftar-laporan-event/delete", [LaporanEventController::class, 'delete']);
 
     Route::get("/notulen-rapat", [NotulenRapatController::class, 'index']);
-    Route::get("/notulen-rapat/daftar-notulen-rapat", [NotulenRapatController::class, 'daftarLaporan']);
+    Route::get("/notulen-rapat/daftar-notulen-rapat", [NotulenRapatController::class, 'daftarNotulensi']);
     Route::post("/notulen-rapat/daftar-notulen-rapat/store", [NotulenRapatController::class, 'store']);
     Route::get("/notulen-rapat/daftar-notulen-rapat/edit", [NotulenRapatController::class, 'edit']);
     Route::post("/notulen-rapat/daftar-notulen-rapat/update", [NotulenRapatController::class, 'update']);

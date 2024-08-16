@@ -21,16 +21,24 @@ $(document).on("click", ".registrasi", function(){
 
 $("#submit_registrasi").on("click", function(){
     $("#registrasi-modal").modal("hide");
-    let id = $("#id_pegawai").val();
+    let btn = $(this);
+    btn.prop('disabled', true);
+    var signatureData = getSignatureData();
+
+    let formData = new FormData();
+    let token = $('meta[name="csrf-token"]').attr("content");
+
+    formData.append("_token", token);
+    formData.append("signature", signatureData);
+    formData.append("id", $("#id_pegawai").val());
+    formData.append("tanggal", $("#tanggal").val());
 
     $.ajax({
         url: '/registrasi-peserta/daftar-peserta/register',
         method: 'POST',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr("content"),
-            "tanggal": $("#tanggal").val(),
-            'id': id
-        },
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function(response){
             if(response.status){
                 alertModal(true, "Registrasi berhasil");

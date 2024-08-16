@@ -49,18 +49,17 @@
                                                 <td>{{$pesertas->jenis_kelamin}}</td>
                                                 <td>{{$pesertas->golongan}}</td>
                                                 <td>{{$pesertas->jabatan}}</td>
-                                                <td>
-                                                    <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $pesertas->ttd_registrasi}}" alt="tandan tangan peserta">
-                                                </td>
                                             @else
                                                 <td>{{$pesertas->pegawai->nama}} <br> <small>({{$pesertas->pegawai->nip}})</small></td>
                                                 <td>{{$pesertas->pegawai->jenis_kelamin}}</td>
                                                 <td>{{$pesertas->pegawai->golongan}}</td>
                                                 <td>{{$pesertas->pegawai->jabatan}}</td>
-                                                <td>
-                                                    <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $pesertas->ttd_registrasi}}" alt="tandan tangan peserta">
-                                                </td>
                                             @endif
+                                            <td>
+                                                @if ($p->ttd_registrasi)
+                                                    <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $p->ttd_registrasi}}" alt="tandan tangan peserta">
+                                                @endif
+                                            </td>
                                             <td>{{($pesertas->status_registrasi) ? "Sudah Registrasi" : "Belum Registrasi"}}</td>
                                             <td>
                                                 <ul class="action">

@@ -158,20 +158,73 @@ absensi bisa lebih dari satu hari dan simpan data tanggal absensi
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+revisi (15 agustus 2024)
+
+notes : 
+- materi rapat => deksripsi
+- download laporan dipisah per table jadi perfile pdf lalu digabungkan pdf
+
+
+revisi :
+------ registrasi dan absensi -------
 absensi by admin bisa pilih tanggal (done)
 tolak absensi jika sudah dilakukan (done)
-
-materi rapat => deksripsi
-
+fitur ttd registrasi di halaman admin (done)
+fitur ttd absensi di halaman admin
 
 ------ laporan --------
 
 download rapat diganti jadi cetak laporan (done)
 sewaktu cetak laporan diklik muncul field (nama, jabatan, nip dan tanggal) (done, tinggal penerapan ke laporan)
 
-buat menu baru notulen rapat => yang muncul rapat aja
-isinya entry rich text, isinya disimpan ditable
+buat menu baru notulen rapat => yang muncul rapat aja (done)
+isinya entry rich text, isinya disimpan ditable (done)
 
-buat laporan event (meeting dan lembur) => fiturnya udah pas
+buat laporan event (meeting dan lembur) => fiturnya udah pas (done)
 
-download laporan dipisah per table jadi perfile pdf lalu digabungkan pdf
+
+doing
+fitur ttd absensi di halaman user
+cetak laporan
