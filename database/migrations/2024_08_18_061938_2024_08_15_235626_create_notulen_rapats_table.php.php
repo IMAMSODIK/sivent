@@ -11,12 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notulen_rapats', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('event_id');
-            $table->text('deskripsi');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -24,6 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notulen_rapats');
+        //
     }
 };

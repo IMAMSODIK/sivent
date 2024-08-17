@@ -155,17 +155,13 @@ class EventPesertaController extends Controller
 
     public function statusRegistrasi(Request $r){
         $event = Event::where('event_id', $r->kegiatan_id)->first();
-        $nip = Auth::user()->nip;
+        $nip = Auth::user()->username;
 
-        $peserta = Peserta::where('event_id', $event->id)
-            ->where(function ($query) use ($nip) {
-                $query->where('nip', $nip)
-                    ->orWhereNull('nip');
-            })
-            ->with('pegawai')
-            ->first();
+        $peserta = Peserta::with('absensi')->where('event_id', $event->id)
+                        ->where('nip', $nip)
+                        ->first();
 
-        if (!$peserta) {
+        if(empty($peserta->nama)){
             $peserta = Peserta::where('event_id', $event->id)
                 ->whereHas('pegawai', function ($query) use ($nip) {
                     $query->where('nip', $nip);
@@ -211,7 +207,7 @@ class EventPesertaController extends Controller
     }
 
     public function checkAbsensi(Request $r){
-        $peserta = Peserta::with('event')->where('id', $r->id)->first();
+        $peserta = Peserta::with(['event', 'pegawai'])->where('id', $r->id)->first();
         
         if($peserta->event->kategori == 'meeting'){
             if($peserta->status_registrasi == 0){

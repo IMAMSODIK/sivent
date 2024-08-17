@@ -60,7 +60,7 @@ class KitSeminarController extends Controller
 
     public function edit(Request $r){
         try{
-            $data = Peserta::where('id', $r->id)->first();
+            $data = Peserta::with('pegawai')->where('id', $r->id)->first();
 
             if($data){
                 return response()->json([

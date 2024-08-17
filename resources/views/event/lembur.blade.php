@@ -1,21 +1,21 @@
 @extends('template')
 
 @section('content')
-<div class="page-body">
-    <div class="container-fluid mt-5">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-6">
-            <h4>Lembur Akan Datang</h4>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="page-body" style="margin-top: 150px">
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-xl-9 xl-60 order-xl-0 order-1 box-col-12">
           <div class="row">
+            <div class="container-fluid">
+              <div class="page-title">
+                <div class="row">
+                  <div class="col-6">
+                    <h4>Lembur Akan Datang</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="incoming">
               @foreach ($event_incoming as $done)
                 <div class="col-xl-12 incoming-card" data-id="{{$done->event_id}}">
@@ -229,7 +229,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="nama_kegiatan">Nama Kegiatan</label>
-                      <input class="form-control input-air-primary" id="nama_kegiatan" type="text" placeholder="Nama Kegiatan">
+                      <input class="form-control input-air-primary h-100" id="nama_kegiatan" type="text" placeholder="Nama Kegiatan">
                     </div>
                   </div>
                 </div>
@@ -237,7 +237,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="unit_kerja">Unit Kerja</label>
-                      <select class="form-control input-air-primary" id="unit_kerja">
+                      <select class="form-control input-air-primary h-100" id="unit_kerja">
                           @foreach ($unit_kerja as $u)
                               <option value="{{$u->id}}">{{$u->nama_unit}}</option>
                           @endforeach
@@ -249,7 +249,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="lokasi_kegiatan">Lokasi Kegiatan</label>
-                      <input class="form-control input-air-primary" id="lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
+                      <input class="form-control input-air-primary h-100" id="lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
                     </div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="deskripsi_kegiatan">Deskripsi Kegiatan</label>
-                      <textarea class="form-control input-air-primary" id="deskripsi_kegiatan" rows="3"></textarea>
+                      <textarea class="form-control input-air-primary h-100" id="deskripsi_kegiatan" rows="3"></textarea>
                     </div>
                   </div>
                 </div>
@@ -280,7 +280,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="no_surat">Nomor Surat Undangan</label>
-                      <input class="form-control input-air-primary" id="no_surat" type="text" placeholder="Nomor Surat Undangan">
+                      <input class="form-control input-air-primary h-100" id="no_surat" type="text" placeholder="Nomor Surat Undangan">
                     </div>
                   </div>
                 </div>
@@ -288,7 +288,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="flayer">File Flayer Kegiatan</label>
-                      <input class="form-control input-air-primary" id="flayer" type="file">
+                      <input class="form-control input-air-primary h-100" id="flayer" type="file">
                     </div>
                   </div>
                 </div>
@@ -321,7 +321,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_nama_kegiatan">Nama Kegiatan</label>
-                      <input class="form-control input-air-primary" id="edit_nama_kegiatan" type="text" placeholder="Nama Kegiatan">
+                      <input class="form-control input-air-primary h-100" id="edit_nama_kegiatan" type="text" placeholder="Nama Kegiatan">
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_unit_kerja">Unit Kerja</label>
-                      <select class="form-control input-air-primary" id="edit_unit_kerja">
+                      <select class="form-control input-air-primary h-100" id="edit_unit_kerja">
                           @foreach ($unit_kerja as $u)
                               <option value="{{$u->id}}">{{$u->nama_unit}}</option>
                           @endforeach
@@ -341,7 +341,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_lokasi_kegiatan">Lokasi Kegiatan</label>
-                      <input class="form-control input-air-primary" id="edit_lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
+                      <input class="form-control input-air-primary h-100" id="edit_lokasi_kegiatan" type="text" placeholder="Lokasi Kegiatan">
                     </div>
                   </div>
                 </div>
@@ -364,7 +364,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_deskripsi_kegiatan">Deskripsi Kegiatan</label>
-                      <textarea class="form-control input-air-primary" id="edit_deskripsi_kegiatan" rows="3"></textarea>
+                      <textarea class="form-control input-air-primary h-100" id="edit_deskripsi_kegiatan" rows="3"></textarea>
                     </div>
                   </div>
                 </div>
@@ -372,7 +372,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_no_surat">Nomor Surat Undangan</label>
-                      <input class="form-control input-air-primary" id="edit_no_surat" type="text" placeholder="Nomor Surat Undangan">
+                      <input class="form-control input-air-primary h-100" id="edit_no_surat" type="text" placeholder="Nomor Surat Undangan">
                     </div>
                   </div>
                 </div>
@@ -380,7 +380,7 @@
                   <div class="col">
                     <div class="mb-3">
                       <label class="form-label" for="edit_flayer">File Flayer Kegiatan</label>
-                      <input class="form-control input-air-primary" id="edit_flayer" type="file">
+                      <input class="form-control input-air-primary h-100" id="edit_flayer" type="file">
                     </div>
                   </div>
                 </div>

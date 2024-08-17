@@ -1,16 +1,7 @@
 @extends('template')
 
 @section('content')
-<div class="page-body">
-    <div class="container-fluid mt-5">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-6">
-            <h4>Daftar Kegiatan</h4>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="page-body" style="margin-top: 120px">
     <!-- Container-fluid starts-->
     <div class="container-fluid">
 
@@ -114,6 +105,15 @@
         <div class="col-xl-9 xl-60 order-xl-0 order-1 box-col-12">
 
           <div class="row">
+            <div class="container-fluid">
+              <div class="page-title">
+                <div class="row">
+                  <div class="col-6">
+                    <h4>Event Mendatang</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="incoming">
               @foreach ($event_incoming as $incoming)
                 <div class="col-xl-12 incoming-card" data-id="{{$incoming->event_id}}">
@@ -195,7 +195,7 @@
                         <hr>
                         <h6 class="blog-bottom-details">{{$d->nama_kegiatan}}</h6>
                         <p class="px-3">{{$d->deskripsi_kegiatan}}</p>
-                        <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Laporan</button></a>
+                        {{-- <a href="/laporan-event/daftar-laporan-event?kegiatan_id={{$d->event_id}}"><button class="btn btn-secondary d-flex m-auto mb-4***" type="button">Laporan</button></a> --}}
                       </div>
                     </div>
                   </div>

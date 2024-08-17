@@ -63,77 +63,80 @@ $("#store").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                const givenDate = new Date(response.data.tanggal_kegiatan);
-                const currentDate = new Date();
-                currentDate.setDate(currentDate.getDate() - 1);
+                // const givenDate = new Date(response.data.tanggal_kegiatan);
+                // const currentDate = new Date();
+                // currentDate.setDate(currentDate.getDate() - 1);
                 
-                if(givenDate >= currentDate){
-                    let event = `
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="blog-box blog-list row">
-                                <div class="col-sm-5"><img class="img-fluid sm-100-w" src="../../storage/flayer/${response.data.flayer}" alt="" style="width: 600px; height: 350px"></div>
-                                <div class="col-sm-7">
-                                    <div class="blog-details">
-                                    <div class="blog-date"><span>${response.data.nama_kegiatan}</span></div>
-                                    <h6>${response.data.lokasi_kegiatan} </h6>
+                // if(givenDate >= currentDate){
+                //     let event = `
+                //         <div class="col-xl-12">
+                //             <div class="card">
+                //                 <div class="blog-box blog-list row">
+                //                 <div class="col-sm-5"><img class="img-fluid sm-100-w" src="../../storage/flayer/${response.data.flayer}" alt="" style="width: 600px; height: 350px"></div>
+                //                 <div class="col-sm-7">
+                //                     <div class="blog-details">
+                //                     <div class="blog-date"><span>${response.data.nama_kegiatan}</span></div>
+                //                     <h6>${response.data.lokasi_kegiatan} </h6>
 
-                                    <div class="row">
-                                        <div class="blog-bottom-content col-md-10 d-flex align-items-center">
-                                            <ul class="blog-social">
-                                                <li>${response.data.tanggal_kegiatan}, ${response.data.waktu_kegiatan}</li>
-                                                <li>${response.data.no_surat} </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-2 d-flex justify-content-end">
-                                            <button class="btn btn-danger delete-event" data-id="{{$done->event_id}}" style="margin-right: 5px"><i class="fa fa-trash text-white"></i></button>
-                                            <button class="btn btn-info edit-event" data-id="{{$done->event_id}}"><i class="fa fa-pencil text-white"></i></button>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <p class="mt-0">${response.data.deskripsi_kegiatan}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    $(".incoming").prepend(event);
-                }else{
-                    let event = `
-                            <div class="col-xl-4 xl-50 col-sm-6 box-col-6">
-                                <div class="card">
-                                    <div class="blog-box blog-grid text-center product-box">
-                                    <div class="product-img"><img class="img-fluid top-radius-blog" src="../../storage/flayer/${response.data.flayer}" alt="" style="height: 300px">
+                //                     <div class="row">
+                //                         <div class="blog-bottom-content col-md-10 d-flex align-items-center">
+                //                             <ul class="blog-social">
+                //                                 <li>${response.data.tanggal_kegiatan}, ${response.data.waktu_kegiatan}</li>
+                //                                 <li>${response.data.no_surat} </li>
+                //                             </ul>
+                //                         </div>
+                //                         <div class="col-md-2 d-flex justify-content-end">
+                //                             <button class="btn btn-danger delete-event" data-id="{{$done->event_id}}" style="margin-right: 5px"><i class="fa fa-trash text-white"></i></button>
+                //                             <button class="btn btn-info edit-event" data-id="{{$done->event_id}}"><i class="fa fa-pencil text-white"></i></button>
+                //                         </div>
+                //                     </div>
+                //                     <hr>
+                //                     <p class="mt-0">${response.data.deskripsi_kegiatan}</p>
+                //                     </div>
+                //                 </div>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     `;
+                //     $(".incoming").prepend(event);
+                // }else{
+                //     let event = `
+                //             <div class="col-xl-4 xl-50 col-sm-6 box-col-6">
+                //                 <div class="card">
+                //                     <div class="blog-box blog-grid text-center product-box">
+                //                     <div class="product-img"><img class="img-fluid top-radius-blog" src="../../storage/flayer/${response.data.flayer}" alt="" style="height: 300px">
                                         
-                                    </div>
-                                    <div class="blog-details-main">
-                                        <ul class="blog-social">
-                                        <li>${response.data.tanggal_kegiatan}</li>
-                                        <li>${response.data.waktu_kegiatan}</li>
-                                        <li>${response.data.lokasi_kegiatan}</li>
-                                        </ul>
-                                        <hr>
-                                        <h6 class="blog-bottom-details">${response.data.nama_kegiatan}</h6>
-                                        <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${response.data.event_id}" class="btn btn-primary mb-4">Cetak Laporan</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    $(".done").prepend(event);
-                }
+                //                     </div>
+                //                     <div class="blog-details-main">
+                //                         <ul class="blog-social">
+                //                         <li>${response.data.tanggal_kegiatan}</li>
+                //                         <li>${response.data.waktu_kegiatan}</li>
+                //                         <li>${response.data.lokasi_kegiatan}</li>
+                //                         </ul>
+                //                         <hr>
+                //                         <h6 class="blog-bottom-details">${response.data.nama_kegiatan}</h6>
+                //                         <button type="button" class="download_laporan btn btn-primary mb-4" data-id="${response.data.event_id}" class="btn btn-primary mb-4">Cetak Laporan</button>
+                //                     </div>
+                //                     </div>
+                //                 </div>
+                //             </div>
+                //         `;
+                //     $(".done").prepend(event);
+                // }
 
-                $("#nama_kegiatan").val("");
-                $("#lokasi_kegiatan").val("");
-                $("#tanggal_kegiatan").val(today());
-                $("#waktu_kegiatan").val("00:00:00");
-                $("#deskripsi_kegiatan").val("");
-                $("#no_surat").val("");
-                $("#unit_kerja").prop("selectedIndex", 0);
-                $("#flayer").val("");
+                // $("#nama_kegiatan").val("");
+                // $("#lokasi_kegiatan").val("");
+                // $("#tanggal_kegiatan").val(today());
+                // $("#waktu_kegiatan").val("00:00:00");
+                // $("#deskripsi_kegiatan").val("");
+                // $("#no_surat").val("");
+                // $("#unit_kerja").prop("selectedIndex", 0);
+                // $("#flayer").val("");
 
                 alertModal(true, "Berhasil menambahkan data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 $('.modal-alert').on('hidden.bs.modal', function () {
                     $("#tambah-rapat-modal").modal("show");
@@ -203,17 +206,20 @@ $("#update").on("click", function(){
         success: function(response){
             if(response.status){
                 
-                let incoming_card = $(`.incoming-card[data-id="${response.data.event_id}"]`);
+                // let incoming_card = $(`.incoming-card[data-id="${response.data.event_id}"]`);
 
-                if(incoming_card.length){
-                    incoming_card.find('.flayer-incoming').attr('src', FLAYER + response.data.flayer);
-                    incoming_card.find('.nama-incoming').text(response.data.nama_kegiatan);
-                    incoming_card.find('.lokasi-incoming').text(response.data.lokasi_kegiatan);
-                    incoming_card.find('.tanggal-incoming').text(`${response.data.tanggal_kegiatan}, ${response.data.waktu_kegiatan}`);
-                    incoming_card.find('.no_surat-incoming').text(response.data.no_surat);
-                    incoming_card.find('.deskripsi-incoming').text(response.data.deskripsi_kegiatan);
-                }
+                // if(incoming_card.length){
+                //     incoming_card.find('.flayer-incoming').attr('src', FLAYER + response.data.flayer);
+                //     incoming_card.find('.nama-incoming').text(response.data.nama_kegiatan);
+                //     incoming_card.find('.lokasi-incoming').text(response.data.lokasi_kegiatan);
+                //     incoming_card.find('.tanggal-incoming').text(`${response.data.tanggal_kegiatan}, ${response.data.waktu_kegiatan}`);
+                //     incoming_card.find('.no_surat-incoming').text(response.data.no_surat);
+                //     incoming_card.find('.deskripsi-incoming').text(response.data.deskripsi_kegiatan);
+                // }
                 alertModal(true)
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }else{
                 alertModal(false, response.message);
             }
@@ -284,7 +290,7 @@ $("#submit-filter").on("click", function(){
                 $(".incoming").empty();
                 $(".done").empty();
                 const currentDate = new Date();
-                currentDate.setDate(currentDate.getDate() - 1);
+                currentDate.setDate(currentDate.getDate());
 
                 response.data.forEach(element => {
                     let eventDate = new Date(element.tanggal_kegiatan);

@@ -55,11 +55,21 @@ $(".registrasi").on("click", function(){
         success: function(response){
             if(response.status){
                 $("#id").val(response.data.id);
-                $("#nama").val(response.data.nama);
-                $("#nip").val(response.data.nip);
-                $("#golongan").val(response.data.golongan);
-                $("#jabatan").val(response.data.jabatan);
-                $("#jenis_kelamin").val(response.data.jenis_kelamin);
+                console.log(response.data);
+                if(response.data.nama){
+                    $("#nama").val(response.data.nama);
+                    $("#nip").val(response.data.nip);
+                    $("#golongan").val(response.data.golongan);
+                    $("#jabatan").val(response.data.jabatan);
+                    $("#jenis_kelamin").val(response.data.jenis_kelamin);
+                }else{
+                    $("#nama").val(response.data.pegawai.nama);
+                    $("#nip").val(response.data.pegawai.nip);
+                    $("#golongan").val(response.data.pegawai.golongan);
+                    $("#jabatan").val(response.data.pegawai.jabatan);
+                    $("#jenis_kelamin").val(response.data.pegawai.jenis_kelamin);
+                }
+                
                 $("#status_kit").val(response.data.status_kit);
 
                 $("#edit-data-modal").modal("show");

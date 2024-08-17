@@ -135,7 +135,7 @@ $("#store").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true, "Berhasil menghapus data!");
+                alertModal(true, "Berhasil menambahkan data!");
                 setTimeout(() => {
                     location.reload();
                 }, 2000);
@@ -189,7 +189,7 @@ $("#update").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true, "Berhasil menghapus data!");
+                alertModal(true, "Berhasil memperbaharui data!");
                 setTimeout(() => {
                     location.reload();
                 }, 2000);

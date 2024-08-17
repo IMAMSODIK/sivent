@@ -26,7 +26,6 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            <th>Bank</th>
                                             <th>Status Pengambilan Kit</th>
                                             <th>Action</th>
                                         </tr>
@@ -34,11 +33,17 @@
                                     <tbody>
                                         @foreach ($pesertas as $p)
                                         <tr>
-                                            <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
-                                            <td>{{$p->jenis_kelamin}}</td>
-                                            <td>{{$p->golongan}}</td>
-                                            <td>{{$p->jabatan}}</td>
-                                            <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
+                                            @if ($p->nama)
+                                                <td>{{$p->nama}} <br> <small>({{$p->nip}})</small></td>
+                                                <td>{{$p->jenis_kelamin}}</td>
+                                                <td>{{$p->golongan}}</td>
+                                                <td>{{$p->jabatan}}</td>
+                                            @else
+                                                <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
+                                                <td>{{$p->pegawai->jenis_kelamin}}</td>
+                                                <td>{{$p->pegawai->golongan}}</td>
+                                                <td>{{$p->pegawai->jabatan}}</td>
+                                            @endif
                                             <td>{{($p->status_kit) ? "Sudah Diambil" : "Belum Diambil"}}</td>
                                             <td>
                                                 <ul class="action">
