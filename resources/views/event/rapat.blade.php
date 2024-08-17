@@ -495,6 +495,7 @@
                     <div class="mb-3">
                       <label class="form-label" for="ketua_kegiatan">Ketua Event</label>
                       <select name="" id="ketua_kegiatan" class="form-control h-100">
+                        <option value="0" data-nip="NIP" data-jabatan="Jabatan">:: Pilih Pegawai ::</option>
                         @foreach ($pegawais as $p)
                           <option value="{{$p->id}}" data-nip="{{$p->nip}}" data-jabatan="{{$p->jabatan}}">{{$p->nama}}</option>
                         @endforeach

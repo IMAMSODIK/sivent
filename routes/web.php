@@ -233,7 +233,9 @@ Route::middleware('auth')->group(function(){
     Route::get("/peserta-page/status-registrasi", [EventPesertaController::class, 'statusRegistrasi']);
     Route::get("/peserta-page/absensi", [EventPesertaController::class, 'absensiPage']);
     Route::post("/absensi-peserta/daftar-peserta/ttd", [EventPesertaController::class, 'ttd']);
+    Route::post("/absensi-peserta/daftar-peserta/ttd-absensi", [EventPesertaController::class, 'ttdAbsensi']);
     Route::get("/peserta-page/status-absensi", [EventPesertaController::class, 'statusAbsensi']);
+    Route::get("/absensi-peserta/daftar-peserta/check-absensi", [EventPesertaController::class, 'checkAbsensi']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

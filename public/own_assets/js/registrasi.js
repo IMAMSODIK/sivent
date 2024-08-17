@@ -254,6 +254,55 @@ $(document).on("click", '.ttd-aksi', function(){
     $("#ttd-modal").modal("show");
 });
 
+$(document).on("click", '.ttd-aksi-absensi', function(){
+    let id = $(this).data("id");
+    $.ajax({
+        url: '/absensi-peserta/daftar-peserta/check-absensi',
+        method: 'GET',
+        data: {
+            "_token": $("meta[name='csrf-token']").attr("content"),
+            "id": id
+        },
+        success: function(response){
+            if(response.status == 1){
+                $("#id").val(id);
+                $("#ttd-modal").modal("show");
+            }else if(response.status == 2){
+                $("#id").val(id);
+                $.ajax({
+                    url: "/absensi-peserta/daftar-peserta/ttd-absensi",
+                    method: "POST",
+                    data: {
+                        "_token": $('meta[name="csrf-token"]').attr("content"),
+                        "id": $("#id").val()
+                    },
+                    success: function (response) {
+                        if(response.status){
+                            alertModal(true, "Berhasil mengubah data");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }else{
+                            alertModal(false, response.message);
+                        }
+                    },
+                    error: function (response) {
+                        alertModal(false, response.message);
+                    },
+                });
+            }else{
+                $('.modal-alert').on('hidden.bs.modal', function () {
+                    $("#edit-data-modal").modal("show");
+                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function(response){
+            alertModal(false, response.message);
+        }
+    })
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     var canvas = document.getElementById("signature-pad");
     var context = canvas.getContext("2d");
@@ -368,3 +417,41 @@ $("#simpan-ttd").click(function () {
         },
     });
 });
+
+$("#simpan-ttd-absensi").click(function(){
+    $("#ttd-modal").modal("hide");
+    let btn = $(this);
+    btn.prop('disabled', true);
+    var signatureData = getSignatureData();
+
+    let formData = new FormData();
+    let token = $('meta[name="csrf-token"]').attr("content");
+
+    formData.append("_token", token);
+    formData.append("signature", signatureData);
+    formData.append("id", $("#id").val());
+
+    $.ajax({
+        url: "/absensi-peserta/daftar-peserta/ttd-absensi",
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if(response.status){
+                alertModal(true, "Berhasil mengubah data");
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }else{
+                $('.modal-alert').on('hidden.bs.modal', function () {
+                    $("#ttd-modal").modal("show");
+                });
+                alertModal(false, response.message);
+            }
+        },
+        error: function (response) {
+            alertModal(false, response.message);
+        },
+    });
+})

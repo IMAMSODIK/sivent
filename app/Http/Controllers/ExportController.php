@@ -7,6 +7,7 @@ use App\Models\FotoEvent;
 use App\Models\KetuaRapat;
 use App\Models\LaporanEvent;
 use App\Models\LaporanTemplate;
+use App\Models\NotulenRapat;
 use App\Models\Peserta;
 use App\Models\Rundown;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -16,9 +17,9 @@ use Illuminate\Http\Request;
 class ExportController extends Controller
 {
     public function exportLaporan(Request $r){
-        $event = Event::where('event_id', $r->id)->first();
+        $event = Event::with(['notulensi', 'ketua'])->where('event_id', $r->id)->first();
         $rundown = Rundown::where('event_id', $event->id)->get();
-        $peserta = Peserta::with('pegawai')->where('event_id', $event->id)->where('is_narsum', 0)->get();
+        $peserta = Peserta::with(['pegawai', 'absensi'])->where('event_id', $event->id)->where('is_narsum', 0)->get();
         $fotos = FotoEvent::where('event_id', $event->id)->get();
         $laporan = LaporanTemplate::where('event_id', $event->id)->first();
 
@@ -105,6 +106,20 @@ class ExportController extends Controller
     }
 
     public function ketuaEvent(Request $r){
+        if($r->id_pegawai == '0'){
+            return response()->json([
+                'status' => false,
+                'message' => "Pilih ketua rapat terlebih dahulu"
+            ]);
+        }
+
+        if(!$r->tanggal){
+            return response()->json([
+                'status' => false,
+                'message' => "Tanggal harus diisikan"
+            ]);
+        }
+
         try{
             $event = Event::where('event_id', $r->event_id)->first();
 

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('asal_instansi')->nullable();
             $table->string('bukti_transfer')->nullable();
             $table->string('ttd_registrasi')->nullable();
+            $table->string('ttd_absensi')->nullable();
             $table->date('tanggal_registrasi')->nullable();
             $table->timestamps();
         });

@@ -29,4 +29,12 @@ class Event extends Model
     public function laporanTemplate(): HasOne{
         return $this->hasOne(LaporanTemplate::class);
     }
+
+    public function notulensi(): HasOne{
+        return $this->hasOne(NotulenRapat::class);
+    }
+
+    public function ketua(): HasOne{
+        return $this->hasOne(KetuaRapat::class);
+    }
 }

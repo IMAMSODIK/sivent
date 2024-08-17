@@ -36,7 +36,7 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            {{-- <th>Status Absensi</th> --}}
+                                            <th width="15%">Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -54,10 +54,14 @@
                                                 <td>{{$pesertas->pegawai->golongan}}</td>
                                                 <td>{{$pesertas->pegawai->jabatan}}</td>
                                             @endif
-                                            <td>{{($pesertas->status_registrasi) ? "Sudah Registrasi" : "Belum Registrasi"}}</td>
+                                            <td>
+                                                @foreach ($pesertas->absensi as $abs)
+                                                    <p>Hadir <br> ({{$abs->time}})</p>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <ul class="action">
-                                                    <li><button class="btn btn-primary ttd-aksi" data-id="{{$pesertas->id}}"><i class="fa fa-sign-in"></i></button></li>
+                                                    <li><button class="btn btn-primary ttd-aksi-absensi" data-id="{{$pesertas->id}}"><i class="fa fa-sign-in"></i></button></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -95,7 +99,7 @@
                             <div class="card-footer text-end">
                                 <button id="reset-canvas" class="btn btn-danger mr-1" type="button">Hapus
                                     TTD</button>
-                                <button class="btn btn-primary me-3" type="button" id="simpan-ttd">Simpan</button>
+                                <button class="btn btn-primary me-3" type="button" id="simpan-ttd-absensi">Simpan</button>
                             </div>
                         </form>
                     </div>

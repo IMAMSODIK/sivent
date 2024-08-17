@@ -387,7 +387,7 @@ $("#submit-ketua").on("click", function(){
         data: formData,
         success: function(response){
             if(response.status){
-                alertModal(true);
+                location.href = "/event/export-laporan?id=" + $("#id_event_ketua").val()
             }else{
                 alertModal(false, response.message);
             }

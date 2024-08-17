@@ -59,7 +59,7 @@
                                             @endif
                                             <td>
                                                 @if ($p->ttd_registrasi)
-                                                <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $p->ttd_registrasi}}" alt="tandan tangan peserta">
+                                                    <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $p->ttd_registrasi}}" alt="tandan tangan peserta">
                                                 @endif
                                             </td>
                                             <td>{{($p->status_registrasi) ? "Sudah Registrasi" : "Belum Registrasi"}} <br> ({{$p->tanggal_registrasi}})</td>

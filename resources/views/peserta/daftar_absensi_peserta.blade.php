@@ -27,7 +27,6 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Golongan</th>
                                             <th>Jabatan</th>
-                                            <th>Bank</th>
                                             <th width="15%">Status Absensi</th>
                                             <th>Action</th>
                                         </tr>
@@ -42,13 +41,11 @@
                                                 <td>{{$p->jenis_kelamin}}</td>
                                                 <td>{{$p->golongan}}</td>
                                                 <td>{{$p->jabatan}}</td>
-                                                <td>{{$p->no_rek}} <br> <small>({{$p->bank}})</small></td>
                                             @else
                                                 <td>{{$p->pegawai->nama}} <br> <small>({{$p->pegawai->nip}})</small></td>
                                                 <td>{{$p->pegawai->jenis_kelamin}}</td>
                                                 <td>{{$p->pegawai->golongan}}</td>
                                                 <td>{{$p->pegawai->jabatan}}</td>
-                                                <td>{{$p->pegawai->no_rek}} <br> <small>({{$p->pegawai->bank}})</small></td>
                                             @endif
                                             <td>
                                                 @foreach ($p->absensi as $abs)

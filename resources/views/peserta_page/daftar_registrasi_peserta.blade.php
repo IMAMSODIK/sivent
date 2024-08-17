@@ -56,7 +56,7 @@
                                                 <td>{{$pesertas->pegawai->jabatan}}</td>
                                             @endif
                                             <td>
-                                                @if ($p->ttd_registrasi)
+                                                @if ($pesertas->ttd_registrasi)
                                                     <img width="200px" src="{{asset('storage/tanda_tangan') . '/' . $p->ttd_registrasi}}" alt="tandan tangan peserta">
                                                 @endif
                                             </td>
