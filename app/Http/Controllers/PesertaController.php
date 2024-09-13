@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
+use App\Models\Bank;
 use App\Models\Event;
 use App\Models\Pegawai;
 use App\Models\Peserta;
@@ -75,6 +76,7 @@ class PesertaController extends Controller
             'id_event' => $r->kegiatan_id,
             'kategori_event' => $event->kategori,
             'pesertas' => $peserta,
+            'banks' => DB::table('mst_bank')->get(),
             'pageTitle' => "Daftar Peserta"
         ];
         return view('peserta.daftar_peserta', $data);
@@ -562,6 +564,10 @@ class PesertaController extends Controller
     public function absensiAksi(Request $r){
         try{
             $data = Peserta::where('nip', Auth::user()->username)->where('event_id', $r->event_id)->first();
+            if(!$data){
+                $pegawai = Pegawai::where('nip', Auth::user()->username)->select('id')->first();
+                $data = Peserta::where('pegawai_id', $pegawai->id)->where('event_id', $r->event_id)->first();
+            }
             if(!$data->status_registrasi){
                 return response()->json([
                     'status' => false,

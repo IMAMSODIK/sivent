@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -29,6 +30,7 @@ class NarasumberController extends Controller
             'event_incoming' => Event::where('tanggal_kegiatan', '>=', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'event_done' => Event::where('tanggal_kegiatan', '<', $tanggalSekarang)->where('kategori', 'meeting')->get(),
             'unit_kerja' => UnitKerja::select('id', 'nama_unit')->get(),
+            'banks' => DB::table('mst_bank')->get(),
             'pageTitle' => "Narasumber"
         ];
         return view('narasumber.index', $data);
@@ -40,7 +42,7 @@ class NarasumberController extends Controller
             'id_event' => $r->kegiatan_id,
             'narasumbers' => Peserta::where('event_id', $event->id)->where('is_narsum', 1)->get(),
             'jabatan' => Jabatan::all(),
-            'bank' => Bank::all(),
+            'banks' => DB::table('mst_bank')->get(),
             'pageTitle' => "Daftar Narasumber"
         ];
         return view('narasumber.daftar_narasumber', $data);

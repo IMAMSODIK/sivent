@@ -197,9 +197,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="bank">Bank</label>
                                             <select name="" class="form-control input-air-primary" id="bank">
-                                                <option value="MEGA">MEGA</option>
-                                                <option value="BRI">BRI</option>
-                                                <option value="BCA">BCA</option>
+                                                @foreach ($banks as $bank)
+                                                    <option value="{{$bank->nama_bank}}">{{$bank->nama_bank}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -293,9 +293,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="edit_bank">Bank</label>
                                             <select name="" class="form-control input-air-primary" id="edit_bank">
-                                                <option value="MEGA">MEGA</option>
-                                                <option value="BRI">BRI</option>
-                                                <option value="BCA">BCA</option>
+                                                @foreach ($banks as $bank)
+                                                    <option value="{{$bank->nama_bank}}">{{$bank->nama_bank}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

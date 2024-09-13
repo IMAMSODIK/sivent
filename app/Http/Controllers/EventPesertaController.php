@@ -352,4 +352,24 @@ class EventPesertaController extends Controller
             ]);
         }
     }
+
+    // public function checkTtd(Request $r){
+    //     try{
+    //         $data = Peserta::with('event')->where('id', $r->id)->first();
+    //         if($data->event->kategori != 'meeting' && $data->ttd_absensi == null){
+    //             return response()->json([
+    //                 'status' => 1
+    //             ]);
+    //         }
+
+    //         return response()->json([
+    //             'status' => 2
+    //         ]);
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             'status' => 0,
+    //             'message' => 'an erro occured : ' . $e->getMessage(),
+    //         ]);
+    //     }
+    // }
 }

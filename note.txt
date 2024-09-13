@@ -173,8 +173,13 @@ absensi bisa lebih dari satu hari dan simpan data tanggal absensi
 
 
 
+pilih peserta
+laporan bisa download
+absensi dan registrasi masih gagal
+tambahkan barcode ke suatu kegiatan
+tambahkan text nip di samping nip laporan
 
-
+foto selfie
 
 
 
@@ -228,3 +233,8 @@ buat laporan event (meeting dan lembur) => fiturnya udah pas (done)
 doing
 fitur ttd absensi di halaman user
 cetak laporan
+
+
+
+ukuran ttd terlalu besar dengan juga hurufnya
+flayer di depan masih default
