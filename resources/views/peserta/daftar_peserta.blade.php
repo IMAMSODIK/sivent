@@ -1,5 +1,4 @@
 @extends('template')
-
 @section('own_style')
     <style>
         .modal-body-export {

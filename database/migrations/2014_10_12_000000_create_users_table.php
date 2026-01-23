@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        $path = public_path('assets/mst_bank.sql');
+        $path = public_path('assets/bank.sql');
         if (File::exists($path)) {
             $sql = File::get($path);
             DB::unprepared($sql);
