@@ -224,7 +224,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6">
-                            <p class="copyright font-alt">&copy; 2017&nbsp;<a href="index.html">TitaN</a>, All Rights
+                            <p class="copyright font-alt">&copy; 2026&nbsp;<a href="/">Aplikasi Sivent FEBI UINSU</a>, All Rights
                                 Reserved</p>
                         </div>
                         <div class="col-sm-6">
